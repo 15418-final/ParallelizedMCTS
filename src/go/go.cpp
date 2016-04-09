@@ -56,21 +56,27 @@ bool Board::isSuicide(int i, int j, COLOR color) {
 			if (board[ni][nj] == color) {
 				Q.push(new Pair(ni, nj));
 			} else if (board[ni][nj] == EMPTY) {
-				return true;
+				return false;
 			}
 		}
 	}
-	return false;
+	return true;
 }
 
 std::vector<Pair*> Board::get_next_moves(COLOR color) {
 	std::vector<Pair*> moves;
-	for (int i = 1; i < BSIZE - 1; i++) {
-		for (int j = 1; j < BSIZE - 1; j++) {
-			if (board[i][j] == 0) { //This is position is empty
+	for (int i = 1; i < BSIZE + 1; i++) {
+		for (int j = 1; j < BSIZE + 1; j++) {
+			if (board[i][j] == EMPTY) { //This is position is empty
 				//TODO: Check whether it can eat other stones
 				//If not, check whether it's a suicide, which is forbidden.
-				if (!canEat(i, j, color) && isSuicide(i, j, color))continue;
+				std::cout << "check" << std::endl;
+
+				if (!canEat(i, j, color) && isSuicide(i, j, color)) {
+					if (!canEat(i, j, color))std::cout << "can not eat" << std::endl;
+					if (isSuicide(i, j, color)) std::cout << "is suicide" << std::endl;
+					continue;
+				}
 				moves.push_back(new Pair(i, j));
 			}
 		}
@@ -127,17 +133,21 @@ int Board::update_board(Pair* pos, COLOR color) {
 	return total;
 }
 
-void Board::print_board(){
-	for(int i = 1; i < BSIZE-1 ;i++){
-		for(int j = 1; j < BSIZE - 1; j++){
-			if(board[i][j] == WHITE){
-				std::cout<<"W";
-			}else if(board[i][j]==BLACK){
-				std::cout<<"B";
-			}else{
-				std::cout<<".";
+void Board::print_board() {
+	for (int i = 1; i < BSIZE + 1 ; i++) {
+		for (int j = 1; j < BSIZE + 1; j++) {
+			if (board[i][j] == WHITE) {
+				std::cout << "W";
+			} else if (board[i][j] == BLACK) {
+				std::cout << "B";
+			} else {
+				std::cout << ".";
 			}
 		}
-		std::cout<<std::endl;		
+		std::cout << std::endl;
 	}
+}
+
+COLOR Board::find_winner() {
+	return WHITE;
 }
