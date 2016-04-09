@@ -1,9 +1,10 @@
 all: main
 
-CXXFLAGS+=-g -Wall -I./utils -I./mcts -I./go -I./test -std=c++11
-main : ./go/go.o ./mcts/mcts.o ./test/test
+CXX=g++
+CXXFLAGS+=-Wall -Iutils -Imcts -I./go -Itest -std=c++11 
+LDLIBS+=-lstdc++
+main : 
+	$(CXX) -o run test/test.cpp go/go.cpp mcts/mcts.cpp $(CXXFLAGS)
 
 clean:
-	rm -f ./go/*.o ./mcts/*.o ./test/*.o
-	rm -f ./test/test -r 
-	rm -r ./test/*.dSYM
+	rm -f run
