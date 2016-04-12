@@ -7,15 +7,15 @@ class TreeNode {
 private:
 	Board* state;
 	std::vector<TreeNode*> children;
-	bool visited;
+	bool expandable;   // un expaned
 public:
 	int wins; // Number of wins so far
 	int sims; // Number of simulations so far
 	bool is_leaf;
 	TreeNode* parent;
-	TreeNode(): state(NULL), visited(false), wins(0), sims(0), is_leaf(false), parent(NULL) {
+	TreeNode(): state(NULL), expandable(true), wins(0), sims(0), is_leaf(false), parent(NULL) {
 	}
-	TreeNode(Board *b): state(b), visited(false), wins(0), sims(0), is_leaf(false), parent(NULL) {
+	TreeNode(Board *b): state(b), expandable(true), wins(0), sims(0), is_leaf(false), parent(NULL) {
 	}
 	~TreeNode() {
 		delete []state;
@@ -24,11 +24,11 @@ public:
 		}
 		delete parent;
 	}
-	bool is_visited() {
-		return visited;
+	bool is_expandable() {
+		return expandable;
 	}
-	void set_visited() {
-		visited = true;
+	void set_expandable(bool b) {
+		expandable = b;
 	}
 	void add_children(TreeNode* child){
 		children.push_back(child);
@@ -62,6 +62,7 @@ public:
 	void run_iteration(TreeNode* node, COLOR color);
 
 	TreeNode *selection(TreeNode* node);
+	void expand(TreeNode* node, Board* cur_state, COLOR color);
 	void back_propagation(TreeNode* node);
 	void run_simulation(TreeNode* node, COLOR color);
 };

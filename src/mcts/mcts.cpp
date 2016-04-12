@@ -27,7 +27,7 @@ TreeNode* Mcts::selection(TreeNode* node) {
 void Mcts::run_simulation(TreeNode* node, COLOR color) {
 	Board* cur_state = node->get_state();
 	COLOR sim_color = color;
-	//IN MCTS, max_trail is 1
+	// TODO: parallel this part
 	for (int i = 0; i < MAX_TRIAL; i++) {
 		while (true) {
 			std::vector<Pair*> moves = cur_state->get_next_moves(color);
@@ -60,33 +60,36 @@ void Mcts::back_propagation(TreeNode* node){
 	}
 }
 
+void Mcts::expand(TreeNode* node, Board* cur_state, COLOR color) {
+	std::vector<Pair*> moves = cur_state->get_next_moves(color);
+	while (moves.size() > 0) {
+		Pair* nxt_move = moves.back();
+		cur_state->update_board(nxt_move, color);
+		node->add_children(new TreeNode(cur_state));
+		moves.pop_back();
+	}
+}
+
 void Mcts::run_iteration(TreeNode* node, COLOR color) {
 	std::stack<TreeNode*> S;
 	S.push(node);
 	while (!S.empty()) {
 		TreeNode* f = S.top();
 		S.pop();
-		if (f->is_visited()) {
-			//If node is visited, run selection
+		if (!f->is_expandable()) {
 			S.push(selection(node));
 		} else {
-			//If node is not visited yet, run expansion and simulation
-			f->set_visited();
+			// expand current node, run expansion and simulation
+			f->set_expandable(false);
 			Board* cur_state = new Board(*(f->get_state()));
-			std::vector<Pair*> moves = cur_state->get_next_moves(color);
-			for (int i = 0; i < std::min<unsigned int>(5, moves.size()); i++) {
-				int chosen = rand() % moves.size();
-				Pair* nxt_move = moves[chosen];
-				moves.erase(moves.begin() + chosen);
-				cur_state->update_board(nxt_move, color);
-				if (dict.find(cur_state) == dict.end()) {
-					dict[cur_state] = new TreeNode(cur_state);
-					run_simulation(dict[cur_state],color);
-					back_propagation(dict[cur_state]);
-				}
-				f->add_children(dict[cur_state]);
-				delete cur_state;
-				cur_state = new Board(*(f->get_state()));
+			expand(node, cur_state, color);
+
+			// TODO: parallel simulation of all expanded children
+			COLOR cur_color = static_cast<COLOR>(color ^ 3);
+			std::vector<TreeNode*> children = node->get_children();
+			for (size_t i = 0; i < children.size(); i++) {
+				run_simulation(children[i], cur_color);
+				back_propagation(children[i]);
 			}
 			delete cur_state;
 		}
