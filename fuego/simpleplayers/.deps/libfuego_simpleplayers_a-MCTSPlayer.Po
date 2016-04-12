@@ -407,7 +407,8 @@ libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp \
   /Users/patrick/Downloads/igo/boost/include/boost/random/detail/generator_bits.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/random/detail/generator_seed_seq.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/random/uniform_01.hpp \
-  ../go/GoPlayer.h ../go/GoBoardSynchronizer.h SpMoveGenerator.h
+  ../go/GoPlayer.h ../go/GoBoardSynchronizer.h SpMoveGenerator.h \
+  ../../mcts/mcts.h
 
 ../smartgame/SgSystem.h:
 
@@ -1384,3 +1385,5 @@ SpSimplePlayer.h:
 ../go/GoBoardSynchronizer.h:
 
 SpMoveGenerator.h:
+
+../../mcts/mcts.h:

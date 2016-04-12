@@ -3,6 +3,7 @@
 
 #include "SpSimplePlayer.h"
 #include "SpMoveGenerator.h"
+#include "../mcts/mcts.h"
 
 
 //----------------------------------------------------------------------------
@@ -35,11 +36,15 @@ public:
         return "MCTS";
     }
 
+    SgPoint GenMove(const SgTimeRecord& time, SgBlackWhite toPlay);
+
 protected:
     bool UseFilter() const
     {
         return true;
     }
+private:
+    Mcts* mcts;
 };
 
 //----------------------------------------------------------------------------

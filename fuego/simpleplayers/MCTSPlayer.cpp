@@ -11,3 +11,9 @@ int MCTSMoveGenerator::Evaluate()
     return 0;
 }
 
+SgPoint MCTSPlayer::GenMove(const SgTimeRecord& time, SgBlackWhite toPlay) {
+	SG_UNUSED(time);
+    
+    return NULL;
+}
+
