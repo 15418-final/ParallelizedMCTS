@@ -1,8 +1,0 @@
-libfuego_smartgame_a-SgTimeSettings.o: SgTimeSettings.cpp SgSystem.h \
-  ../config.h SgTimeSettings.h
-
-SgSystem.h:
-
-../config.h:
-
-SgTimeSettings.h:

@@ -3,19 +3,19 @@
 
 class TreeNode {
 private:
+	GoBoard& board;
 	std::vector<TreeNode*> children;
 	bool expandable;   // un expaned
 public:
 	int wins; // Number of wins so far
 	int sims; // Number of simulations so far
-	bool is_leaf;
 	TreeNode* parent;
-	TreeNode(): expandable(true), wins(0), sims(0), is_leaf(false), parent(NULL) {
+	TreeNode(Goboard& b): board(b), expandable(true), wins(0), sims(0), parent(NULL) {
 	}
 	
 	~TreeNode() {
-		for (TreeNode* tn : children) {
-			delete tn;
+		for (std::vector<TreeNode*>::iterator it = children.begin(); it != children.end(); it++) {
+			delete *it;
 		}
 		delete parent;
 	}
@@ -30,6 +30,9 @@ public:
 	}
 	std::vector<TreeNode*> get_children() {
 		return children;
+	}
+	GoBoard& get_board(){
+		return board;
 	}
 };
 
