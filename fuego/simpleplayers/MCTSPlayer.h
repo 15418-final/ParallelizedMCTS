@@ -1,35 +1,34 @@
 #ifndef MCTS_PLAYER_H
 #define MCTS_PLAYER_H
 
-#include "SpSimplePlayer.h"
-#include "SpMoveGenerator.h"
+#include <boost/scoped_ptr.hpp>
+#include <vector>
+#include "GoBoard.h"
+#include "GoBoardRestorer.h"
+#include "GoPlayer.h"
+#include "GoTimeControl.h"
+#include "SgArrayList.h"
+#include "SgNbIterator.h"
+#include "SgNode.h"
+#include "SgPointArray.h"
+#include "SgRestorer.h"
+#include "SgMpiSynchronizer.h"
+#include "SgTime.h"
+#include "SgTimer.h"
+
 #include "../mcts/mcts.h"
 
 
-//----------------------------------------------------------------------------
-
-/** Plays moves by using MCTS */
-class MCTSMoveGenerator
-    : public Sp1PlyMoveGenerator
-{
-public:
-    explicit MCTSMoveGenerator(const GoBoard& board)
-        : Sp1PlyMoveGenerator(board)
-    { }
-
-    int Evaluate();
-};
-
-//----------------------------------------------------------------------------
-
-/** Simple player using MCTSMoveGenerator */
 class MCTSPlayer
-    : public SpSimplePlayer
+    : public GoPlayer,
+      public SgObjectWithDefaultTimeControl
 {
 public:
     MCTSPlayer(const GoBoard& board)
-        : SpSimplePlayer(board, new MCTSMoveGenerator(board))
-    { }
+        : GoPlayer(board), timeControl(Board())
+    { 
+        
+    }
 
     std::string Name() const
     {
@@ -38,13 +37,19 @@ public:
 
     SgPoint GenMove(const SgTimeRecord& time, SgBlackWhite toPlay);
 
-protected:
-    bool UseFilter() const
+    SgDefaultTimeControl& TimeControl()
     {
-        return true;
+        return timeControl;
     }
+
+    const SgDefaultTimeControl& TimeControl() const
+    {
+        return timeControl;
+    }
+
 private:
     Mcts* mcts;
+    GoTimeControl timeControl;
 };
 
 //----------------------------------------------------------------------------

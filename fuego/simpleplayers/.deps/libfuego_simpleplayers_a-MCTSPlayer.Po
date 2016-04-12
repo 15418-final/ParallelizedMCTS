@@ -1,7 +1,13 @@
 libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp \
-  ../smartgame/SgSystem.h ../config.h MCTSPlayer.h SpSimplePlayer.h \
-  ../go/GoBoard.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/bitset \
+  ../smartgame/SgSystem.h ../config.h MCTSPlayer.h \
+  /Users/patrick/Downloads/igo/boost/include/boost/scoped_ptr.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/scoped_ptr.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/user.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/select_compiler_config.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/compiler/clang.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/select_stdlib_config.hpp \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstddef \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config \
   /usr/include/unistd.h /usr/include/_types.h /usr/include/sys/_types.h \
   /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h \
@@ -26,29 +32,46 @@ libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp \
   /usr/include/sys/_types/_fd_copy.h /usr/include/sys/_select.h \
   /usr/include/sys/_types/_dev_t.h /usr/include/sys/_types/_mode_t.h \
   /usr/include/sys/_types/_uuid_t.h /usr/include/gethostuuid.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__bit_reference \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/algorithm \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/initializer_list \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstddef \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stddef.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstring \
-  /usr/include/string.h /usr/include/sys/_types/_rsize_t.h \
-  /usr/include/sys/_types/_errno_t.h /usr/include/strings.h \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/no_tr1/utility.hpp \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tuple \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tuple_03 \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/typeinfo \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/exception \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstdint \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/stdlib/libcpp.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/select_platform_config.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/platform/macos.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/posix_features.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/suffix.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/assert.hpp \
+  /usr/include/assert.h /usr/include/stdlib.h /usr/include/sys/wait.h \
+  /usr/include/sys/_types/_id_t.h /usr/include/sys/signal.h \
+  /usr/include/machine/signal.h /usr/include/i386/signal.h \
+  /usr/include/machine/_mcontext.h /usr/include/i386/_mcontext.h \
+  /usr/include/mach/i386/_structs.h \
+  /usr/include/sys/_pthread/_pthread_attr_t.h \
+  /usr/include/sys/_types/_sigaltstack.h \
+  /usr/include/sys/_types/_ucontext.h /usr/include/sys/resource.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stdint.h \
   /usr/include/stdint.h /usr/include/sys/_types/_int8_t.h \
   /usr/include/sys/_types/_int16_t.h /usr/include/sys/_types/_int32_t.h \
   /usr/include/sys/_types/_int64_t.h /usr/include/_types/_uint8_t.h \
   /usr/include/_types/_uint16_t.h /usr/include/_types/_uint32_t.h \
   /usr/include/sys/_types/_uintptr_t.h /usr/include/_types/_intmax_t.h \
-  /usr/include/_types/_uintmax_t.h \
+  /usr/include/_types/_uintmax_t.h /usr/include/machine/endian.h \
+  /usr/include/i386/endian.h /usr/include/sys/_endian.h \
+  /usr/include/libkern/_OSByteOrder.h \
+  /usr/include/libkern/i386/_OSByteOrder.h /usr/include/alloca.h \
+  /usr/include/sys/_types/_ct_rune_t.h /usr/include/sys/_types/_rune_t.h \
+  /usr/include/sys/_types/_wchar_t.h /usr/include/machine/types.h \
+  /usr/include/i386/types.h \
+  /Users/patrick/Downloads/igo/boost/include/boost/checked_delete.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/sp_nullptr_t.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/detail/workaround.hpp \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/typeinfo \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/exception \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstdint \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/new \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/limits \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__undef_min_max \
@@ -57,56 +80,41 @@ libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__functional_base_03 \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iosfwd \
   /usr/include/wchar.h /usr/include/sys/_types/_mbstate_t.h \
-  /usr/include/sys/_types/_ct_rune_t.h /usr/include/sys/_types/_rune_t.h \
-  /usr/include/sys/_types/_wchar_t.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stdarg.h \
   /usr/include/stdio.h /usr/include/sys/_types/_va_list.h \
   /usr/include/sys/stdio.h /usr/include/time.h \
   /usr/include/sys/_types/_clock_t.h /usr/include/_wctype.h \
   /usr/include/sys/_types/_wint_t.h /usr/include/_types/_wctype_t.h \
   /usr/include/ctype.h /usr/include/runetype.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/initializer_list \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__debug \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/tuple \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstring \
+  /usr/include/string.h /usr/include/sys/_types/_rsize_t.h \
+  /usr/include/sys/_types/_errno_t.h /usr/include/strings.h \
+  /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/operator_bool.hpp \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__bit_reference \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/algorithm \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/climits \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/limits.h \
   /usr/include/limits.h /usr/include/machine/limits.h \
   /usr/include/i386/limits.h /usr/include/i386/_limits.h \
   /usr/include/sys/syslimits.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stdexcept \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__split_buffer \
+  ../go/GoBoard.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/bitset \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstdio \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cwchar \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cwctype \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cctype \
   /usr/include/wctype.h /usr/include/_types/_wctrans_t.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stdexcept \
   /Users/patrick/Downloads/igo/boost/include/boost/static_assert.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config/user.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config/select_compiler_config.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config/compiler/clang.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config/select_stdlib_config.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config/no_tr1/utility.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config/stdlib/libcpp.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config/select_platform_config.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config/platform/macos.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config/posix_features.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/config/suffix.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/detail/workaround.hpp \
   ../go/GoPlayerMove.h ../smartgame/SgBlackWhite.h \
   ../smartgame/SgPoint.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstdlib \
-  /usr/include/stdlib.h /usr/include/sys/wait.h \
-  /usr/include/sys/_types/_id_t.h /usr/include/sys/signal.h \
-  /usr/include/machine/signal.h /usr/include/i386/signal.h \
-  /usr/include/machine/_mcontext.h /usr/include/i386/_mcontext.h \
-  /usr/include/mach/i386/_structs.h \
-  /usr/include/sys/_pthread/_pthread_attr_t.h \
-  /usr/include/sys/_types/_sigaltstack.h \
-  /usr/include/sys/_types/_ucontext.h /usr/include/sys/resource.h \
-  /usr/include/machine/endian.h /usr/include/i386/endian.h \
-  /usr/include/sys/_endian.h /usr/include/libkern/_OSByteOrder.h \
-  /usr/include/libkern/i386/_OSByteOrder.h /usr/include/alloca.h \
-  /usr/include/machine/types.h /usr/include/i386/types.h \
   ../smartgame/SgArray.h ../smartgame/SgMove.h ../smartgame/SgUtil.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/ios \
@@ -154,8 +162,6 @@ libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp \
   ../smartgame/SgBWArray.h ../go/GoRules.h ../go/GoKomi.h \
   ../smartgame/SgException.h \
   /Users/patrick/Downloads/igo/boost/include/boost/format.hpp \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__split_buffer \
   /Users/patrick/Downloads/igo/boost/include/boost/format/detail/compat_workarounds.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/format/detail/config_macros.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/format/detail/workarounds_gcc-2_95.hpp \
@@ -163,8 +169,6 @@ libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp \
   /Users/patrick/Downloads/igo/boost/include/boost/format/format_fwd.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/format/internals_fwd.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/format/internals.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/assert.hpp \
-  /usr/include/assert.h \
   /Users/patrick/Downloads/igo/boost/include/boost/optional.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/optional/optional.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/type.hpp \
@@ -336,7 +340,6 @@ libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp \
   /Users/patrick/Downloads/igo/boost/include/boost/shared_ptr.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/shared_ptr.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/config/no_tr1/memory.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/checked_delete.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/throw_exception.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/exception/detail/attribute_noreturn.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/exception/exception.hpp \
@@ -349,13 +352,11 @@ libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp \
   /Users/patrick/Downloads/igo/boost/include/boost/detail/sp_typeinfo.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/sp_counted_impl.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/sp_convertible.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/sp_nullptr_t.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/spinlock_pool.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/spinlock.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/spinlock_sync.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/yield_k.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/memory_order.hpp \
-  /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/operator_bool.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/format/alt_sstream_impl.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/format/format_class.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/format/exceptions.hpp \
@@ -407,8 +408,216 @@ libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp \
   /Users/patrick/Downloads/igo/boost/include/boost/random/detail/generator_bits.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/random/detail/generator_seed_seq.hpp \
   /Users/patrick/Downloads/igo/boost/include/boost/random/uniform_01.hpp \
-  ../go/GoPlayer.h ../go/GoBoardSynchronizer.h SpMoveGenerator.h \
-  ../../mcts/mcts.h
+  ../go/GoBoardRestorer.h ../go/GoPlayer.h ../go/GoBoardSynchronizer.h \
+  ../go/GoTimeControl.h ../smartgame/SgTimeControl.h \
+  ../smartgame/SgNode.h ../smartgame/SgProp.h ../smartgame/SgRestorer.h \
+  ../smartgame/SgMpiSynchronizer.h ../smartgame/SgUctValue.h \
+  ../smartgame/SgStatistics.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree \
+  ../smartgame/SgWrite.h ../smartgame/SgStatisticsVlt.h \
+  ../smartgame/SgUctSearch.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/fstream \
+  /Users/patrick/Downloads/igo/boost/include/boost/scoped_array.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/scoped_array.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/barrier.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/config.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/platform.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/requires_threads.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/auto_link.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/delete.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/mutex.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/mutex.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/exceptions.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/system/system_error.hpp \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cassert \
+  /Users/patrick/Downloads/igo/boost/include/boost/system/error_code.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/system/config.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/system/api_config.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/operators.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/iterator.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/noncopyable.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/cerrno.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/abi_prefix.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/config/abi_suffix.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/lock_types.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/move.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_convertible.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/decay.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_array.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_function.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/detail/false_result.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/remove_bounds.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/add_pointer.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/eval_if.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/identity.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/move/utility.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/move/detail/config_begin.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/move/core.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/move/detail/meta_utils.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/move/detail/config_end.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/move/traits.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/has_trivial_destructor.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/lock_options.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/lockable_traits.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_class.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/thread_time.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/time_clock.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/c_time.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/compiler_config.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/locale_config.hpp \
+  /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/microsec_time_clock.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/filetime_functions.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/posix_time_types.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/ptime.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/posix_time_system.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/posix_time_config.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/time_duration.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/time_defs.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/special_defs.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/time_resolution_traits.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/int_adapter.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/gregorian_types.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/date.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/year_month_day.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/period.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_calendar.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_weekday.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/constrained_value.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_base_of.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_base_and_derived.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/date_defs.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_day_of_year.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian_calendar.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian_calendar.ipp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_ymd.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_day.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_year.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_month.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_duration.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/date_duration.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/date_duration_types.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_duration_types.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_date.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/adjust_functors.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/wrapping_int.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/date_generators.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/date_clock_device.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/date_iterator.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/time_system_split.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/time_system_counted.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/time.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/date_duration_operators.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/posix_time_duration.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/time_period.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/time_iterator.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/dst_rules.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/chrono/time_point.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/chrono/duration.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/chrono/config.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/chrono/detail/static_assert.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/logical.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/or.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/config/compiler.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/preprocessor/stringize.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/and.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/ratio/ratio.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/ratio/config.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/ratio/detail/mpl/abs.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/ratio/detail/mpl/sign.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/ratio/detail/mpl/gcd.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/largest_int.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/config/dependent_nttp.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/ratio/detail/mpl/lcm.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/ratio/ratio_fwd.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/ratio/detail/overflow_helpers.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/common_type.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/typeof/typeof.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/typeof/message.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/typeof/native.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/utility/declval.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/add_rvalue_reference.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_floating_point.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/chrono/detail/is_evenly_divisible_by.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/xtime.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/conversion.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/conversion.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/timespec.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/pthread_mutex_scoped_lock.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/chrono/system_clocks.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/chrono/detail/system.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/version.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/chrono/clock_string.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/chrono/ceil.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/condition_variable.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/condition_variable.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/thread_data.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/lock_guard.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/lockable_wrapper.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/condition_variable_fwd.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/cv_status.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/detail/scoped_enum_emulation.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/enable_shared_from_this.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/enable_shared_from_this.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/weak_ptr.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/condition.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/recursive_mutex.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/recursive_mutex.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/thread.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/thread_only.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/thread.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/thread_heap_alloc.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/thread_heap_alloc.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/make_tuple_indices.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/invoke.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/is_convertible.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/ref.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/bind.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/mem_fn.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/mem_fn.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/get_pointer.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/mem_fn_template.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/mem_fn_cc.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/is_placeholder.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/arg.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/visit_each.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/storage.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/bind_template.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/bind_cc.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/bind_mf_cc.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/bind_mf2_cc.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/bind/placeholders.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/io/ios_state.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/io_fwd.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/functional/hash.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/functional/hash/hash.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/functional/hash/hash_fwd.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/functional/hash/detail/hash_float.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/functional/hash/detail/float_functions.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/functional/hash/detail/limits.hpp \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/typeindex \
+  /Users/patrick/Downloads/igo/boost/include/boost/functional/hash/extensions.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/detail/container_fwd.hpp \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/deque \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/complex \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/array \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/thread_interruption.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/v2/thread.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/detail/thread_group.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/shared_mutex.hpp \
+  /Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/shared_mutex.hpp \
+  ../smartgame/SgAdditiveKnowledge.h ../smartgame/SgTimer.h \
+  ../smartgame/SgTime.h ../smartgame/SgUctTree.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stack \
+  ../smartgame/SgFastLog.h ../../mcts/mcts.h
 
 ../smartgame/SgSystem.h:
 
@@ -416,11 +625,21 @@ libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp \
 
 MCTSPlayer.h:
 
-SpSimplePlayer.h:
+/Users/patrick/Downloads/igo/boost/include/boost/scoped_ptr.hpp:
 
-../go/GoBoard.h:
+/Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/scoped_ptr.hpp:
 
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/bitset:
+/Users/patrick/Downloads/igo/boost/include/boost/config.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/config/user.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/config/select_compiler_config.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/config/compiler/clang.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/config/select_stdlib_config.hpp:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstddef:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:
 
@@ -510,159 +729,17 @@ SpSimplePlayer.h:
 
 /usr/include/gethostuuid.h:
 
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__bit_reference:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/algorithm:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/initializer_list:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstddef:
-
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stddef.h:
 
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstring:
-
-/usr/include/string.h:
-
-/usr/include/sys/_types/_rsize_t.h:
-
-/usr/include/sys/_types/_errno_t.h:
-
-/usr/include/strings.h:
+/Users/patrick/Downloads/igo/boost/include/boost/config/no_tr1/utility.hpp:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tuple:
 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits:
+
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tuple_03:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/typeinfo:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/exception:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstdint:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stdint.h:
-
-/usr/include/stdint.h:
-
-/usr/include/sys/_types/_int8_t.h:
-
-/usr/include/sys/_types/_int16_t.h:
-
-/usr/include/sys/_types/_int32_t.h:
-
-/usr/include/sys/_types/_int64_t.h:
-
-/usr/include/_types/_uint8_t.h:
-
-/usr/include/_types/_uint16_t.h:
-
-/usr/include/_types/_uint32_t.h:
-
-/usr/include/sys/_types/_uintptr_t.h:
-
-/usr/include/_types/_intmax_t.h:
-
-/usr/include/_types/_uintmax_t.h:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/new:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/limits:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__undef_min_max:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__functional_base:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__functional_base_03:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iosfwd:
-
-/usr/include/wchar.h:
-
-/usr/include/sys/_types/_mbstate_t.h:
-
-/usr/include/sys/_types/_ct_rune_t.h:
-
-/usr/include/sys/_types/_rune_t.h:
-
-/usr/include/sys/_types/_wchar_t.h:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stdarg.h:
-
-/usr/include/stdio.h:
-
-/usr/include/sys/_types/_va_list.h:
-
-/usr/include/sys/stdio.h:
-
-/usr/include/time.h:
-
-/usr/include/sys/_types/_clock_t.h:
-
-/usr/include/_wctype.h:
-
-/usr/include/sys/_types/_wint_t.h:
-
-/usr/include/_types/_wctype_t.h:
-
-/usr/include/ctype.h:
-
-/usr/include/runetype.h:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__debug:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/tuple:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/climits:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/limits.h:
-
-/usr/include/limits.h:
-
-/usr/include/machine/limits.h:
-
-/usr/include/i386/limits.h:
-
-/usr/include/i386/_limits.h:
-
-/usr/include/sys/syslimits.h:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstdio:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cwchar:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cwctype:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cctype:
-
-/usr/include/wctype.h:
-
-/usr/include/_types/_wctrans_t.h:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stdexcept:
-
-/Users/patrick/Downloads/igo/boost/include/boost/static_assert.hpp:
-
-/Users/patrick/Downloads/igo/boost/include/boost/config.hpp:
-
-/Users/patrick/Downloads/igo/boost/include/boost/config/user.hpp:
-
-/Users/patrick/Downloads/igo/boost/include/boost/config/select_compiler_config.hpp:
-
-/Users/patrick/Downloads/igo/boost/include/boost/config/compiler/clang.hpp:
-
-/Users/patrick/Downloads/igo/boost/include/boost/config/select_stdlib_config.hpp:
-
-/Users/patrick/Downloads/igo/boost/include/boost/config/no_tr1/utility.hpp:
 
 /Users/patrick/Downloads/igo/boost/include/boost/config/stdlib/libcpp.hpp:
 
@@ -674,15 +751,9 @@ SpSimplePlayer.h:
 
 /Users/patrick/Downloads/igo/boost/include/boost/config/suffix.hpp:
 
-/Users/patrick/Downloads/igo/boost/include/boost/detail/workaround.hpp:
+/Users/patrick/Downloads/igo/boost/include/boost/assert.hpp:
 
-../go/GoPlayerMove.h:
-
-../smartgame/SgBlackWhite.h:
-
-../smartgame/SgPoint.h:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstdlib:
+/usr/include/assert.h:
 
 /usr/include/stdlib.h:
 
@@ -710,6 +781,30 @@ SpSimplePlayer.h:
 
 /usr/include/sys/resource.h:
 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/sys/_types/_int8_t.h:
+
+/usr/include/sys/_types/_int16_t.h:
+
+/usr/include/sys/_types/_int32_t.h:
+
+/usr/include/sys/_types/_int64_t.h:
+
+/usr/include/_types/_uint8_t.h:
+
+/usr/include/_types/_uint16_t.h:
+
+/usr/include/_types/_uint32_t.h:
+
+/usr/include/sys/_types/_uintptr_t.h:
+
+/usr/include/_types/_intmax_t.h:
+
+/usr/include/_types/_uintmax_t.h:
+
 /usr/include/machine/endian.h:
 
 /usr/include/i386/endian.h:
@@ -722,9 +817,139 @@ SpSimplePlayer.h:
 
 /usr/include/alloca.h:
 
+/usr/include/sys/_types/_ct_rune_t.h:
+
+/usr/include/sys/_types/_rune_t.h:
+
+/usr/include/sys/_types/_wchar_t.h:
+
 /usr/include/machine/types.h:
 
 /usr/include/i386/types.h:
+
+/Users/patrick/Downloads/igo/boost/include/boost/checked_delete.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/sp_nullptr_t.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/detail/workaround.hpp:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/typeinfo:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/exception:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstdint:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/new:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/limits:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__undef_min_max:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__functional_base:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__functional_base_03:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iosfwd:
+
+/usr/include/wchar.h:
+
+/usr/include/sys/_types/_mbstate_t.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stdarg.h:
+
+/usr/include/stdio.h:
+
+/usr/include/sys/_types/_va_list.h:
+
+/usr/include/sys/stdio.h:
+
+/usr/include/time.h:
+
+/usr/include/sys/_types/_clock_t.h:
+
+/usr/include/_wctype.h:
+
+/usr/include/sys/_types/_wint_t.h:
+
+/usr/include/_types/_wctype_t.h:
+
+/usr/include/ctype.h:
+
+/usr/include/runetype.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/initializer_list:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__debug:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/tuple:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstring:
+
+/usr/include/string.h:
+
+/usr/include/sys/_types/_rsize_t.h:
+
+/usr/include/sys/_types/_errno_t.h:
+
+/usr/include/strings.h:
+
+/Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/operator_bool.hpp:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__bit_reference:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/algorithm:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/climits:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/limits.h:
+
+/usr/include/limits.h:
+
+/usr/include/machine/limits.h:
+
+/usr/include/i386/limits.h:
+
+/usr/include/i386/_limits.h:
+
+/usr/include/sys/syslimits.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stdexcept:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__split_buffer:
+
+../go/GoBoard.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/bitset:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstdio:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cwchar:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cwctype:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cctype:
+
+/usr/include/wctype.h:
+
+/usr/include/_types/_wctrans_t.h:
+
+/Users/patrick/Downloads/igo/boost/include/boost/static_assert.hpp:
+
+../go/GoPlayerMove.h:
+
+../smartgame/SgBlackWhite.h:
+
+../smartgame/SgPoint.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstdlib:
 
 ../smartgame/SgArray.h:
 
@@ -858,10 +1083,6 @@ SpSimplePlayer.h:
 
 /Users/patrick/Downloads/igo/boost/include/boost/format.hpp:
 
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__split_buffer:
-
 /Users/patrick/Downloads/igo/boost/include/boost/format/detail/compat_workarounds.hpp:
 
 /Users/patrick/Downloads/igo/boost/include/boost/format/detail/config_macros.hpp:
@@ -875,10 +1096,6 @@ SpSimplePlayer.h:
 /Users/patrick/Downloads/igo/boost/include/boost/format/internals_fwd.hpp:
 
 /Users/patrick/Downloads/igo/boost/include/boost/format/internals.hpp:
-
-/Users/patrick/Downloads/igo/boost/include/boost/assert.hpp:
-
-/usr/include/assert.h:
 
 /Users/patrick/Downloads/igo/boost/include/boost/optional.hpp:
 
@@ -1222,8 +1439,6 @@ SpSimplePlayer.h:
 
 /Users/patrick/Downloads/igo/boost/include/boost/config/no_tr1/memory.hpp:
 
-/Users/patrick/Downloads/igo/boost/include/boost/checked_delete.hpp:
-
 /Users/patrick/Downloads/igo/boost/include/boost/throw_exception.hpp:
 
 /Users/patrick/Downloads/igo/boost/include/boost/exception/detail/attribute_noreturn.hpp:
@@ -1248,8 +1463,6 @@ SpSimplePlayer.h:
 
 /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/sp_convertible.hpp:
 
-/Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/sp_nullptr_t.hpp:
-
 /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/spinlock_pool.hpp:
 
 /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/spinlock.hpp:
@@ -1259,8 +1472,6 @@ SpSimplePlayer.h:
 /Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/yield_k.hpp:
 
 /Users/patrick/Downloads/igo/boost/include/boost/memory_order.hpp:
-
-/Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/detail/operator_bool.hpp:
 
 /Users/patrick/Downloads/igo/boost/include/boost/format/alt_sstream_impl.hpp:
 
@@ -1380,10 +1591,444 @@ SpSimplePlayer.h:
 
 /Users/patrick/Downloads/igo/boost/include/boost/random/uniform_01.hpp:
 
+../go/GoBoardRestorer.h:
+
 ../go/GoPlayer.h:
 
 ../go/GoBoardSynchronizer.h:
 
-SpMoveGenerator.h:
+../go/GoTimeControl.h:
+
+../smartgame/SgTimeControl.h:
+
+../smartgame/SgNode.h:
+
+../smartgame/SgProp.h:
+
+../smartgame/SgRestorer.h:
+
+../smartgame/SgMpiSynchronizer.h:
+
+../smartgame/SgUctValue.h:
+
+../smartgame/SgStatistics.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:
+
+../smartgame/SgWrite.h:
+
+../smartgame/SgStatisticsVlt.h:
+
+../smartgame/SgUctSearch.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/fstream:
+
+/Users/patrick/Downloads/igo/boost/include/boost/scoped_array.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/scoped_array.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/barrier.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/config.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/platform.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/config/requires_threads.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/config/auto_link.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/delete.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/mutex.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/mutex.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/exceptions.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/system/system_error.hpp:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cassert:
+
+/Users/patrick/Downloads/igo/boost/include/boost/system/error_code.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/system/config.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/system/api_config.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/operators.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/iterator.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/noncopyable.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/cerrno.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/config/abi_prefix.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/config/abi_suffix.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/lock_types.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/move.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_convertible.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/decay.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_array.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_function.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/detail/false_result.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/detail/is_function_ptr_helper.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/remove_bounds.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/add_pointer.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/eval_if.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/identity.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/move/utility.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/move/detail/config_begin.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/move/core.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/move/detail/meta_utils.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/move/detail/config_end.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/move/traits.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/has_trivial_destructor.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/lock_options.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/lockable_traits.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_class.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/thread_time.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/time_clock.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/c_time.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/compiler_config.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/locale_config.hpp:
+
+/usr/include/sys/time.h:
+
+/usr/include/sys/_types/_timeval64.h:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/microsec_time_clock.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/filetime_functions.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/posix_time_types.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/ptime.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/posix_time_system.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/posix_time_config.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/time_duration.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/time_defs.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/special_defs.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/time_resolution_traits.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/int_adapter.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/gregorian_types.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/date.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/year_month_day.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/period.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_calendar.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_weekday.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/constrained_value.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_base_of.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_base_and_derived.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/date_defs.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_day_of_year.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian_calendar.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian_calendar.ipp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_ymd.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_day.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_year.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_month.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_duration.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/date_duration.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/date_duration_types.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_duration_types.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/greg_date.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/adjust_functors.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/wrapping_int.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/date_generators.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/date_clock_device.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/date_iterator.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/time_system_split.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/time_system_counted.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/time.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/date_duration_operators.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/posix_time_duration.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/time_period.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/time_iterator.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/dst_rules.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/chrono/time_point.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/chrono/duration.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/chrono/config.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/chrono/detail/static_assert.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/logical.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/or.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/config/use_preprocessed.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/include_preprocessed.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/config/compiler.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/preprocessor/stringize.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/preprocessed/gcc/or.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/and.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/preprocessed/gcc/and.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/ratio/ratio.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/ratio/config.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/ratio/detail/mpl/abs.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/ratio/detail/mpl/sign.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/ratio/detail/mpl/gcd.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/largest_int.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mpl/aux_/config/dependent_nttp.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/ratio/detail/mpl/lcm.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/ratio/ratio_fwd.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/ratio/detail/overflow_helpers.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/common_type.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/typeof/typeof.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/typeof/message.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/typeof/native.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/utility/declval.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/add_rvalue_reference.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/type_traits/is_floating_point.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/chrono/detail/is_evenly_divisible_by.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/xtime.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/posix_time/conversion.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/date_time/gregorian/conversion.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/timespec.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/pthread_mutex_scoped_lock.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/chrono/system_clocks.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/chrono/detail/system.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/version.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/chrono/clock_string.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/chrono/ceil.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/condition_variable.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/condition_variable.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/thread_data.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/lock_guard.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/lockable_wrapper.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/condition_variable_fwd.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/cv_status.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/detail/scoped_enum_emulation.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/enable_shared_from_this.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/enable_shared_from_this.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/smart_ptr/weak_ptr.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/condition.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/recursive_mutex.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/recursive_mutex.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/thread.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/thread_only.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/thread.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/thread_heap_alloc.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/thread_heap_alloc.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/make_tuple_indices.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/invoke.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/is_convertible.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/ref.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/bind.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/mem_fn.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/mem_fn.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/get_pointer.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/mem_fn_template.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/mem_fn_cc.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/is_placeholder.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/arg.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/visit_each.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/storage.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/bind_template.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/bind_cc.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/bind_mf_cc.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/bind_mf2_cc.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/bind/placeholders.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/io/ios_state.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/io_fwd.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/functional/hash.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/functional/hash/hash.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/functional/hash/hash_fwd.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/functional/hash/detail/hash_float.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/functional/hash/detail/float_functions.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/functional/hash/detail/limits.hpp:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/typeindex:
+
+/Users/patrick/Downloads/igo/boost/include/boost/functional/hash/extensions.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/detail/container_fwd.hpp:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/deque:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/complex:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/array:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/thread_interruption.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/v2/thread.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/detail/thread_group.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/shared_mutex.hpp:
+
+/Users/patrick/Downloads/igo/boost/include/boost/thread/pthread/shared_mutex.hpp:
+
+../smartgame/SgAdditiveKnowledge.h:
+
+../smartgame/SgTimer.h:
+
+../smartgame/SgTime.h:
+
+../smartgame/SgUctTree.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stack:
+
+../smartgame/SgFastLog.h:
 
 ../../mcts/mcts.h:

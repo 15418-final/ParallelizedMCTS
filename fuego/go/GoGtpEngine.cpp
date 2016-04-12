@@ -1362,7 +1362,7 @@ SgPoint GoGtpEngine::GenMove(SgBlackWhite color, bool ignoreClock)
     AddStatistics("GAME", m_autoSaveFileName);
     AddStatistics("MOVE", m_game.CurrentMoveNumber() + 1);
     /* don't use book move in our experiment */
-    SgPoint move;
+    SgPoint move = SG_NULLMOVE;
     // SgPoint move = GenBookMove(color);
     // m_mpiSynchronizer->SynchronizeMove(move);
     // if (move != SG_NULLMOVE)

@@ -840,7 +840,9 @@ fuego_test-FuegoTestEngine.o: FuegoTestEngine.cpp ../smartgame/SgSystem.h \
   ../simpleplayers/SpLadderPlayer.h ../simpleplayers/SpLibertyPlayer.h \
   ../simpleplayers/SpMaxEyePlayer.h ../simpleplayers/SpMinLibPlayer.h \
   ../simpleplayers/SpRandomPlayer.h ../simpleplayers/SpSafePlayer.h \
-  ../simpleplayers/MCTSPlayer.h
+  ../simpleplayers/MCTSPlayer.h ../go/GoBoardRestorer.h \
+  ../go/GoTimeControl.h ../smartgame/SgTimeControl.h \
+  ../smartgame/SgRestorer.h ../../mcts/mcts.h
 
 ../smartgame/SgSystem.h:
 
@@ -2731,3 +2733,13 @@ FuegoTestEngine.h:
 ../simpleplayers/SpSafePlayer.h:
 
 ../simpleplayers/MCTSPlayer.h:
+
+../go/GoBoardRestorer.h:
+
+../go/GoTimeControl.h:
+
+../smartgame/SgTimeControl.h:
+
+../smartgame/SgRestorer.h:
+
+../../mcts/mcts.h:

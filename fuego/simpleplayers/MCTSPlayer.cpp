@@ -2,18 +2,16 @@
 #include "SgSystem.h"
 #include "MCTSPlayer.h"
 
-
-int MCTSMoveGenerator::Evaluate()
-{
-    // We are Opponent since this is after executing our move
-    SgBlackWhite player = m_board.Opponent();
-    
-    return 0;
-}
-
 SgPoint MCTSPlayer::GenMove(const SgTimeRecord& time, SgBlackWhite toPlay) {
-	SG_UNUSED(time);
-    
-    return NULL;
+	SgPoint move = SG_NULLMOVE;
+	double maxTime = timeControl.TimeForCurrentMove(time, false);
+
+    // run mcts and get the best move
+ /*
+    mcts = new mcts(board, toPlay, maxTime);
+    mcts.run();
+    move = mcts.getBestMove();
+ */
+    return move;
 }
 
