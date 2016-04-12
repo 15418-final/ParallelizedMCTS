@@ -1,0 +1,8 @@
+libfuego_smartgame_a-SgSearchControl.o: SgSearchControl.cpp SgSystem.h \
+  ../config.h SgSearchControl.h
+
+SgSystem.h:
+
+../config.h:
+
+SgSearchControl.h:

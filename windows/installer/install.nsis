@@ -1,0 +1,88 @@
+!define UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\Fuego" 
+
+SetCompressor /SOLID lzma
+
+!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
+!define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\orange-uninstall.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange.bmp"
+!define MUI_COMPONENTSPAGE_NODESC
+!include "MUI.nsh"
+!insertmacro MUI_PAGE_WELCOME
+!define MUI_LICENSEPAGE_CHECKBOX
+!insertmacro MUI_PAGE_LICENSE "License.txt"
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+!insertmacro MUI_PAGE_FINISH
+!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_INSTFILES
+!insertmacro MUI_LANGUAGE "English"
+
+Name "Fuego"
+Caption "Fuego Installer"
+OutFile "install.exe"
+InstallDir "$PROGRAMFILES\Fuego"
+InstallDirRegKey HKLM "Software\Fuego" ""
+; Set admin level, needed for shortcut removal on Vista
+; (http://nsis.sourceforge.net/Shortcuts_removal_fails_on_Windows_Vista)
+RequestExecutionLevel admin
+
+Section
+
+IfFileExists "$INSTDIR\Uninstall.exe" 0 +2
+ExecWait '"$INSTDIR\Uninstall.exe" /S _?=$INSTDIR'
+
+SetOutPath "$INSTDIR"
+File "fuego.exe"
+File "book.dat"
+File "GoGui.exe"
+File "gogui.ico"
+File "Readme.txt"
+File "License.txt"
+File "index.html"
+
+WriteRegStr HKLM "Software\Fuego" "" $INSTDIR
+
+WriteUninstaller $INSTDIR\Uninstall.exe
+WriteRegStr HKLM "${UNINST_KEY}" "DisplayName" "Fuego"
+WriteRegStr HKLM "${UNINST_KEY}" "DisplayIcon" "$INSTDIR\gogui.ico"
+WriteRegStr HKLM "${UNINST_KEY}" "URLInfoAbout" "http://fuego.sourceforge.net/"
+WriteRegStr HKLM "${UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
+
+SectionEnd
+
+Section "Add start menu entry"
+
+SetShellVarContext all
+CreateDirectory "$SMPROGRAMS\Games"
+CreateShortCut "$SMPROGRAMS\Games\Fuego.lnk" "$INSTDIR\GoGui.exe" "-program $\"\$\"$INSTDIR\fuego.exe\$\"$\" -register" "$INSTDIR\gogui.ico"
+
+SectionEnd
+
+Section "Create desktop shortcut"
+
+SetShellVarContext all
+CreateShortCut "$DESKTOP\Fuego.lnk" "$INSTDIR\GoGui.exe" "-program $\"\$\"$INSTDIR\fuego.exe\$\"$\" -register" "$INSTDIR\gogui.ico"
+
+SectionEnd
+ 
+Section "Uninstall"
+ 
+Delete "$INSTDIR\Uninstall.exe"
+Delete "$INSTDIR\GoGui.exe"
+Delete "$INSTDIR\gogui.ico"
+Delete "$INSTDIR\fuego.exe"
+Delete "$INSTDIR\book.dat"
+Delete "$INSTDIR\License.txt"
+Delete "$INSTDIR\Readme.txt"
+Delete "$INSTDIR\index.html"
+RmDir "$INSTDIR"
+
+SetShellVarContext all
+Delete "$SMPROGRAMS\Games\Fuego.lnk"
+Delete "$DESKTOP\Fuego.lnk"
+
+DeleteRegKey HKLM "Software\Fuego"
+DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Fuego"
+
+SectionEnd

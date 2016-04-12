@@ -1,0 +1,43 @@
+#-----------------------------------------------------------------------------
+# Tests related to final moves in a game such as capturing dead stones,
+# approach moves, inside connection moves, filling neutral points etc.
+#-----------------------------------------------------------------------------
+
+# CGOS rules (Tromp-Taylor scoring)
+go_rules cgos
+
+loadsgf sgf/games/2010/CGOS/1005347.sgf
+
+10 reg_genmove b
+#? [A6|B6|H1|J1]*
+# Fuego resigned here because the search gets stuck on the sequence PASS PASS
+# root filter prunes all black non-pass moves
+
+loadsgf sgf/final_moves/play-in-benson-safe.1.sgf
+
+20 reg_genmove b
+#? [B1|E1|J1|D2|F2|F5|F8]*
+# Black must fill own eye since passing loses and no other moves exist
+
+loadsgf sgf/final_moves/play-in-benson-safe.2.sgf 2
+
+30 reg_genmove b
+#? [J1|F5|F8]*
+# Black must fill own eye since passing and other moves lose
+
+loadsgf sgf/games/2011/CGOS/Fuego-Amigo-loss-bug.sgf 81
+40 reg_genmove b
+#? [A9|A8|G1|G2|H1|H2]*
+# Black must not pass, must play somewhere in own territory since pass loses.
+# to do: make a similar but harder test case where B has no such free moves 
+# and must play differently earlier on.
+
+loadsgf sgf/games/2013/FX175-29.sgf 259
+50 reg_genmove b
+#? [C1]*
+# Black should not pass even though the ko is his privilege.
+
+loadsgf sgf/games/2013/FX175-29.sgf 260
+60 reg_genmove w
+#? [A4]
+# White should backfill to make progress on the ko.

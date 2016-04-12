@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>Fuego</title>
+<link rel="shortcut icon" href="favicon.ico" />
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="purple">
+
+<h1>Fuego</h1>
+
+<a href="fuego-screenshot.html">
+<img src="fuego-screenshot-thumb.jpg" width="585" height="369" border="0" />
+</a>
+
+<p>
+Fuego is a collection of C++ libraries for developing software for 
+two player board games. 
+It includes a Go player using Monte Carlo tree search.
+The initial version of the code was released by the
+<a href="http://www.cs.ualberta.ca/~games/go/">Computer Go Group</a> at
+the University of Alberta and is based in parts on the previous projects
+<a href="http://www.cs.ualberta.ca/~mmueller/cgo/sgb.html">
+Smart Game Board</a> and
+<a href="http://www.cs.ualberta.ca/~mmueller/cgo/explorer.html">
+Explorer</a>.
+Fuego is available under the terms of the
+<a href="http://www.gnu.org/copyleft/lgpl.html" target="_blank">
+GNU&nbsp;Lesser&nbsp;General&nbsp;Public&nbsp;License</a>.
+</p>
+
+<ul>
+<li>
+<a href="http://sourceforge.net/projects/fuego/">Fuego project site</a>
+on sourceforge and 
+<a href="https://github.com/svn2github/fuego">git mirror</a> on github.
+</li>
+<li>
+<a href="http://gogui.sourceforge.net">GoGui</a> - recommended GUI
+</li>
+<li>
+The
+<a href="https://lists.sourceforge.net/lists/listinfo/fuego-devel">fuego-devel</a>
+mailing list discusses everything of interest to current and future Fuego developers.
+</li>
+<li>
+A list of 
+<a href="fuego-programs.html">Fuego-based programs</a>
+for Go and other games, which use the Fuego libraries.
+</li>
+<li>
+Big <a href="http://gnugo.baduk.org/fuegoob.htm">19x19 opening books</a> for Fuego
+created by Ben Lambrechts
+</li>
+</ul>
+
+<h2>Documentation</h2>
+<ul>
+<li>
+Developer documentation: <a href="fuego-doc-1.1/index.html">1.1 - current release</a>
+</li>
+<!-- disabled, currently not up to date 
+<li>
+Interested in the current ongoing Fuego development? 
+The <a href="https://sourceforge.net/p/fuego/tickets/">Fuego bug tracker</a> has many suggested 
+<i>tickets</i> describing work that would improve Fuego.
+</li>
+-->
+<li>
+A <a href="https://sourceforge.net/p/fuego/wiki/">Fuego wiki</a> 
+contains additional useful information
+which is not contained in the release documentation. Examples are: frequently
+asked questions (FAQ), description
+and documentation of experiments, games played by Fuego, useful scripts.
+</li>
+<li>
+<a href="http://users.soe.ucsc.edu/~glin/go.html">Fuego Go: the missing manual</a>
+by Grace Lin contains a detailed 
+study of what happens on the code level when Fuego is run.
+</li>
+<li>
+<a href="mac-install.html">Fuego Installation Instructions for Mac OS X</a>
+contributed by Erik Steinmetz.
+
+</li>
+</ul>
+
+<h2>Publications and Fuego Games</h2>
+<ul>
+<li>Fuego-related
+<a href="publications.html">publications</a>
+</li>
+<li>
+<a href="exhibition-games.html">Exhibition games</a> against humans
+</li>
+<li>
+Fuego's
+<a href="competitions.html">competitions</a>
+against other Go programs
+</li>
+</ul>
+
+<h2>Bug reports</h2>
+
+<p>
+Please report bugs in the release and development versions of Fuego 
+to the
+<a href="https://lists.sourceforge.net/lists/listinfo/fuego-devel">fuego-devel</a>
+mailing list, or
+submit a ticket to the 
+<a href="https://sourceforge.net/p/fuego/tickets/">Fuego bug tracking system</a>.
+</p>
+
+
+
+<hr />
+
+<!-- SourceForge requires to add this logo if the website is hosted there -->
+<a href="http://sourceforge.net/projects/fuego">
+<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=228611&amp;type=10"
+ width="80" height="15" border="0"
+ alt="Get Fuego at SourceForge.net. Fast, secure and Free Open Source software downloads" />
+</a>
+
+</body>
+</html>

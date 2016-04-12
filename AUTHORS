@@ -1,0 +1,24 @@
+Fuego authors
+=============
+
+Martin Mueller
+Markus Enzenberger
+Fan Xie
+
+Previous authors
+================
+
+Anders Kierulf (original Smart Game Board code)
+
+Contributors
+============
+
+David Silver (SpDumbTactic player, improvements to SgHash)
+Xiaozhen Niu (parts of GoRegionUtil, GoSafetyUtil)
+Broderick Arneson (autobook; many enhancements)
+Richard Segal (improvements to parallel search)
+Chris Rosin (additive knowledge, Greenpeep-style patterns)
+Timothy Yau (Greenpeep-style patterns)
+Saradha Sankaran (deterministic mode; build improvements)
+Aja Huang
+Jakub Pawlewicz (better hash table; df-pn code)

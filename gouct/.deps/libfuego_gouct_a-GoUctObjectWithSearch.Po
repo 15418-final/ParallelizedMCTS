@@ -1,0 +1,8 @@
+libfuego_gouct_a-GoUctObjectWithSearch.o: GoUctObjectWithSearch.cpp \
+  ../smartgame/SgSystem.h ../config.h GoUctObjectWithSearch.h
+
+../smartgame/SgSystem.h:
+
+../config.h:
+
+GoUctObjectWithSearch.h:
