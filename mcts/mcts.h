@@ -10,7 +10,7 @@ public:
 	int wins; // Number of wins so far
 	int sims; // Number of simulations so far
 	TreeNode* parent;
-	TreeNode(Goboard& b): board(b), expandable(true), wins(0), sims(0), parent(NULL) {
+	TreeNode(GoBoard& b): board(b), expandable(true), wins(0), sims(0), parent(NULL) {
 	}
 	
 	~TreeNode() {
@@ -40,14 +40,14 @@ public:
 class Mcts {
 private:
 	TreeNode* root;
+	double maxTime;
 	//std::unordered_map<Board*, TreeNode*, BoardHasher> dict;
 public:
-	Mcts() {
-		root = new TreeNode();
-
-		// White first
-		//cur_color = WHITE;
+	Mcts(GoBoard bd, double maxTime) {
+		root = new TreeNode(bd);
+		this->maxTime = maxTime;
 	}
+
 	~Mcts() {
 		delete(root);
 	}
@@ -55,10 +55,10 @@ public:
 	//Doing selection using UCT(Upper Confidence bound applied to Trees)
 	void run_iteration();
 
-	TreeNode *selection();
-	void expand();
+	TreeNode *selection(TreeNode* node);
+	void expand(TreeNode* node);
 	void back_propagation();
-	void run_simulation();
+	void run_simulation(TreeNode* node);
 };
 
 #endif

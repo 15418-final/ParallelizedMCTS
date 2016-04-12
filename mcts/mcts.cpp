@@ -26,6 +26,7 @@ TreeNode* Mcts::selection(TreeNode* node) {
 	}
 	return maxn;
 }
+
 // Typical Monte Carlo Simulation
 void Mcts::run_simulation(TreeNode* node) {
 	GoBoard& cur_board = node->get_board();
@@ -58,8 +59,8 @@ void Mcts::back_propagation() {
 
 }
 
-void Mcts::expand() {
-
+void Mcts::expand(TreeNode* node) {
+	
 }
 
 void Mcts::run_iteration() {
