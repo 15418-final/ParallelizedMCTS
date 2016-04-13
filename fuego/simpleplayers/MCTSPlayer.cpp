@@ -7,11 +7,8 @@ SgPoint MCTSPlayer::GenMove(const SgTimeRecord& time, SgBlackWhite toPlay) {
 	double maxTime = timeControl.TimeForCurrentMove(time, false);
 
     // run mcts and get the best move
- /*
-    mcts = new mcts(board, maxTime);
-    mcts.run();
-    move = mcts.getBestMove();
- */
-    return move;
+    Mcts* mcts = new Mcts(Board(), maxTime);
+    return mcts->run();
+    // return move;
 }
 

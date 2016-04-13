@@ -46,6 +46,62 @@ GoBoard::GoBoard(int size, const GoSetup& setup, const GoRules& rules)
     Init(size, rules, setup);
 }
 
+GoBoard::GoBoard(const GoBoard& bd)
+    : m_snapshot(new Snapshot()),
+      m_const(bd.Size()),
+      m_blockList(new SgArrayList<Block,GO_MAX_NUM_MOVES>()),
+      m_moves(new SgArrayList<StackEntry,GO_MAX_NUM_MOVES>())
+    {
+        m_rules = bd.Rules();
+        m_size = bd.Size();
+        m_const = SgBoardConst(m_size);
+        m_state.m_hash.Clear();
+        m_moves->Clear();
+        m_state.m_prisoners[SG_BLACK] = bd.NumPrisoners(SG_BLACK);
+        m_state.m_prisoners[SG_WHITE] = bd.NumPrisoners(SG_WHITE);
+        m_state.m_numStones[SG_BLACK] = bd.NumStones(SG_BLACK);
+        m_state.m_numStones[SG_WHITE] = bd.NumStones(SG_WHITE);
+        m_countPlay = bd.CountPlay();
+        m_state.m_koPoint = bd.KoPoint();
+        m_allowAnyRepetition = bd.AnyRepetitionAllowed();
+        m_allowKoRepetition = bd.KoRepetitionAllowed();
+        m_koColor = bd.KoColor();
+        m_koLoser = bd.KoLoser();
+        m_state.m_koLevel = bd.KoLevel();
+        m_koModifiesHash = bd.KoModifiesHash();
+        m_state.m_toPlay = bd.ToPlay();
+        m_setup = bd.Setup();
+        m_state.m_isNewPosition = bd.IsNewPosition();
+
+        for (GoBoard::Iterator it(bd); it; ++it)
+        {
+            const SgPoint p = *it;
+            const SgBoardColor c = bd.GetColor(p);
+            m_state.m_color[p] = c;
+            m_state.m_nuNeighbors[SG_BLACK][p] = bd.NumNeighbors(p, SG_BLACK);
+            m_state.m_nuNeighbors[SG_WHITE][p] = bd.NumNeighbors(p, SG_WHITE);
+            m_state.m_nuNeighborsEmpty[p] = bd.NumEmptyNeighbors(p);
+            m_state.m_isFirst[p] = bd.IsFirst(p);
+            if (bd.IsEmpty(p))
+                m_state.m_block[p] = 0;
+            else if (bd.Anchor(p) == p)
+            {
+                SG_ASSERT(c == m_color[p]);
+                Block& block = CreateNewBlock();
+                InitBlock(block, c, p);
+                for (GoBoard::StoneIterator it2(bd, p); it2; ++it2)
+                {
+                    block.AppendStone(*it2);
+                    m_state.m_block[*it2] = &block;
+                }
+                for (GoBoard::LibertyIterator it2(bd, p); it2; ++it2)
+                    block.AppendLiberty(*it2);
+            }
+        }
+
+        CheckConsistency();
+    }
+
 GoBoard::~GoBoard()
 {
     delete m_blockList;

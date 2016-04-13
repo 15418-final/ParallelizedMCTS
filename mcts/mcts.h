@@ -41,6 +41,8 @@ class Mcts {
 private:
 	TreeNode* root;
 	double maxTime;
+	SgTimer mcts_timer;
+
 	//std::unordered_map<Board*, TreeNode*, BoardHasher> dict;
 public:
 	Mcts(GoBoard bd, double maxTime) {
@@ -51,6 +53,9 @@ public:
 	~Mcts() {
 		delete(root);
 	}
+
+	//Run MCTS and get 
+	SgPoint run();
 
 	//Doing selection using UCT(Upper Confidence bound applied to Trees)
 	void run_iteration();

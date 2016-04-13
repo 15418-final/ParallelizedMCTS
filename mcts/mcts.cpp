@@ -13,6 +13,30 @@ const double C = 1.4;
 const double EPSILON = 10e-6;
 const int MAX_TRIAL = 1;
 
+
+SgPoint Mcts::run(){
+	TreeNode* root = new TreeNode(board);
+	mcts_timer.Start();
+	while(mcts_timer.GetTime() < maxTime){
+		run_iteration(root);
+	}
+	double maxv = 0;
+	TreeNode* best = NULL;
+	
+	int n = node->parent->sims;
+	for (TreeNode* c : node->get_children()) {
+		double v = (double)c->wins / (c->sims + EPSILON);
+		if (v > maxv) {
+			maxv = v;
+			best = c; 
+		}
+	}
+	if(best == NULL){
+		return SG_NULLMOVE;
+	}
+	return best->get_board().GetLastMove();
+}
+
 TreeNode* Mcts::selection(TreeNode* node) {
 	double maxv = -1;
 	TreeNode* maxn = NULL;
@@ -26,7 +50,6 @@ TreeNode* Mcts::selection(TreeNode* node) {
 	}
 	return maxn;
 }
-
 // Typical Monte Carlo Simulation
 void Mcts::run_simulation(TreeNode* node) {
 	GoBoard cur_board = node->get_board();//Make a copy of GoBoard
@@ -39,7 +62,7 @@ void Mcts::run_simulation(TreeNode* node) {
 			if (GoBoardUtil::EndOfGame(cur_board))break;
 
 			SgPointSet moves = SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), true); //UseFilter() set to true
-			SgVector<SgPoint>* moves_vec; //Init or not?
+			SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>(); //Init or not?
 			moves.ToVector(moves_vec);
 
 			SgPoint nxt_move = moves_vec[rand() % moves_vec.Length()];
@@ -71,7 +94,7 @@ void Mcts::back_propagation(TreeNode* node) {
 
 void Mcts::expand(TreeNode* node) {
 	GoBoard& cur_board = node->get_board();
-	SgVector<SgPoint>* moves_vec; //Init or not?
+	SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>(); //Init or not?
 	SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), true).ToVector(moves_vec);
 
 	while (moves_vec.Length() > 0) {
@@ -82,6 +105,7 @@ void Mcts::expand(TreeNode* node) {
 		newBoard.Play(nxt_move);
 		node->add_children(new TreeNode(newBoard));
 	}
+	delete moves_vec;
 }
 
 void Mcts::run_iteration(TreeNode* node) {
