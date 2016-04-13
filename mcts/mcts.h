@@ -10,7 +10,7 @@ public:
 	int wins; // Number of wins so far
 	int sims; // Number of simulations so far
 	TreeNode* parent;
-	TreeNode(Goboard& b): board(b), expandable(true), wins(0), sims(0), parent(NULL) {
+	TreeNode(GoBoard& b): board(b), expandable(true), wins(0), sims(0), parent(NULL) {
 	}
 	
 	~TreeNode() {
@@ -55,10 +55,10 @@ public:
 	//Doing selection using UCT(Upper Confidence bound applied to Trees)
 	void run_iteration();
 
-	TreeNode *selection();
+	TreeNode* selection();
 	void expand();
 	void back_propagation();
-	void run_simulation();
+	void run_simulation(TreeNode* node);
 };
 
 #endif
