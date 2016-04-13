@@ -40,14 +40,14 @@ public:
 class Mcts {
 private:
 	TreeNode* root;
+	double maxTime;
 	//std::unordered_map<Board*, TreeNode*, BoardHasher> dict;
 public:
-	Mcts() {
-		root = new TreeNode();
-
-		// White first
-		//cur_color = WHITE;
+	Mcts(GoBoard bd, double maxTime) {
+		root = new TreeNode(bd);
+		this->maxTime = maxTime;
 	}
+
 	~Mcts() {
 		delete(root);
 	}
@@ -55,8 +55,8 @@ public:
 	//Doing selection using UCT(Upper Confidence bound applied to Trees)
 	void run_iteration();
 
-	TreeNode* selection();
-	void expand();
+	TreeNode *selection(TreeNode* node);
+	void expand(TreeNode* node);
 	void back_propagation();
 	void run_simulation(TreeNode* node);
 };
