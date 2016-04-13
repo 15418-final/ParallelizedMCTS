@@ -16,7 +16,7 @@
 #include "SgTime.h"
 #include "SgTimer.h"
 
-#include "../mcts/mcts.h"
+#include "mcts.h"
 
 
 class MCTSPlayer
@@ -48,7 +48,6 @@ public:
     }
 
 private:
-    Mcts* mcts;
     GoTimeControl timeControl;
 };
 

@@ -7,8 +7,12 @@
 #include <stack>
 #include <cmath>
 #include <algorithm>
+
+#include "SgTimer.h"
+#include "GoBoard.h"
+#include "GoBoardUtil.h"
 //#include <omp.h>
-#include "../fuego/simpleplayers/SpUtil.h"
+
 
 class TreeNode {
 private:
@@ -67,7 +71,7 @@ public:
 	SgPoint run();
 
 	//Doing selection using UCT(Upper Confidence bound applied to Trees)
-	void run_iteration();
+	void run_iteration(TreeNode* node);
 
 	TreeNode *selection(TreeNode* node);
 	void expand(TreeNode* node);

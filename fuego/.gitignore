@@ -1,3 +1,5 @@
 *.o
 *.Po
 *.a
+Makefile*
+config*

@@ -1,4 +1,9 @@
+
+#include "SgSystem.h"
+#include "SpUtil.h"
+#include "GoBoardUtil.h"
 #include "mcts.h"
+
 
 //Exploration parameter
 const double C = 1.4;
@@ -7,7 +12,6 @@ const int MAX_TRIAL = 1;
 
 
 SgPoint Mcts::run(){
-	TreeNode* root = new TreeNode(board);
 	mcts_timer.Start();
 	while(mcts_timer.GetTime() < maxTime){
 		run_iteration(root);
@@ -15,8 +19,7 @@ SgPoint Mcts::run(){
 	double maxv = 0;
 	TreeNode* best = NULL;
 	
-	int n = node->parent->sims;
-	for (TreeNode* c : node->get_children()) {
+	for (TreeNode* c : root->get_children()) {
 		double v = (double)c->wins / (c->sims + EPSILON);
 		if (v > maxv) {
 			maxv = v;
@@ -57,11 +60,11 @@ void Mcts::run_simulation(TreeNode* node) {
 			SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>(); //Init or not?
 			moves.ToVector(moves_vec);
 
-			SgPoint nxt_move = moves_vec[rand() % moves_vec.Length()];
+			SgPoint nxt_move = (*moves_vec)[rand() % moves_vec->Length()];
 			cur_board.Play(nxt_move);
 			delete moves_vec;
 		}
-		float socre = cur_board.Score(cur_board, 0); // Komi set to 0
+		float score = GoBoardUtil::Score(cur_board, 0); // Komi set to 0
 		if ((score > 0 && cur_player == SG_BLACK)
 		        || (score < 0 && cur_player == SG_WHITE)) {
 			node->wins++;
@@ -89,11 +92,11 @@ void Mcts::expand(TreeNode* node) {
 	SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>(); //Init or not?
 	SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), true).ToVector(moves_vec);
 
-	while (moves_vec.Length() > 0) {
+	while (moves_vec->Length() > 0) {
 		//Copy board
 		GoBoard newBoard = cur_board;
 
-		SgPoint& nxt_move = moves.PopFront();
+		SgPoint nxt_move = moves_vec->PopFront();
 		newBoard.Play(nxt_move);
 		node->add_children(new TreeNode(newBoard));
 	}
@@ -118,7 +121,6 @@ void Mcts::run_iteration(TreeNode* node) {
 				run_simulation(children[i]);
 				back_propagation(children[i]);
 			}
-			delete cur_state;
 		}
 	}
 }
