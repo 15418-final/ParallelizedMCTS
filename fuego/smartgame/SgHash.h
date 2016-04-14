@@ -26,6 +26,7 @@ template<int N>
 class SgHash
 {
 public:
+    std::bitset<N> m_code;
     /** Construct hash code initialized with zero. */
     SgHash()
     { }
@@ -82,13 +83,16 @@ public:
 
     static int Size();
 
-private:
+    void copyFrom(std::bitset<N> m_code_o) {
+        m_code = m_code_o;
+    }
+
     /** Thomas Wang's 32 bit mix function */
     unsigned int Mix32(int key) const;
 
     unsigned int GetWord() const;
 
-    std::bitset<N> m_code;
+    
 };
 
 /** For backwards compatibility */

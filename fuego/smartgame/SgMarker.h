@@ -31,7 +31,7 @@ public:
 
     void GetPoints(SgPointSet* points) const;
 
-private:
+
     void Init();
 
     /** Current marker number */
@@ -47,11 +47,17 @@ private:
     friend class SgReserveMarker;
 #endif
 
-    /** Not implemented. */
-    SgMarker(const SgMarker&);
+    SgMarker(const SgMarker& other) {
+        m_thisMark = other.m_thisMark;
+        m_mark = other.m_mark;
+    }
 
     /** Not implemented. */
-    SgMarker& operator=(const SgMarker&);
+    SgMarker& operator=(const SgMarker& other) {
+        m_thisMark = other.m_thisMark;
+       m_mark = other.m_mark;
+       return *this;
+    }
 };
 
 inline SgMarker::SgMarker()

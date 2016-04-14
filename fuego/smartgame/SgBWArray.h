@@ -32,6 +32,12 @@ public:
 
     SgBWArray(const T& black, const T& white);
 
+    SgBWArray(const SgBWArray& bwArray) {
+         m_array[SG_BLACK] = bwArray.m_array[SG_BLACK];
+         m_array[SG_WHITE] = bwArray.m_array[SG_WHITE];
+    }
+
+
     bool operator==(const SgBWArray& bwArray) const;
 
     bool operator!=(const SgBWArray& bwArray) const;
@@ -40,7 +46,6 @@ public:
 
     const T& operator[](SgBlackWhite color) const;
 
-private:
     BOOST_STATIC_ASSERT(SG_BLACK == 0);
     BOOST_STATIC_ASSERT(SG_WHITE == 1);
 

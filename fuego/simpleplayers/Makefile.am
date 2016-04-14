@@ -14,6 +14,7 @@ SpMoveGenerator.cpp \
 SpRandomPlayer.cpp \
 SpSafePlayer.cpp \
 MCTSPlayer.cpp \
+mcts.cpp \
 SpSimplePlayer.cpp \
 SpUtil.cpp
 
@@ -32,6 +33,7 @@ SpRandomPlayer.h \
 MCTSPlayer.h \
 SpSafePlayer.h \
 SpSimplePlayer.h \
+mcts.h \
 SpUtil.h
 
 libfuego_simpleplayers_a_CPPFLAGS = \

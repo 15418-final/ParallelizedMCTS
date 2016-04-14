@@ -35,7 +35,7 @@ SgPoint Mcts::run(){
 TreeNode* Mcts::selection(TreeNode* node) {
 	double maxv = -1;
 	TreeNode* maxn = NULL;
-	int n = node->parent->sims;
+	int n = node->sims;
 	for (TreeNode* c : node->get_children()) {
 		double v = (double)c->wins / (c->sims + EPSILON) + C * sqrt(log(n + EPSILON) / (c->sims + EPSILON));
 		if (v > maxv) {
@@ -90,14 +90,16 @@ void Mcts::back_propagation(TreeNode* node) {
 void Mcts::expand(TreeNode* node) {
 	GoBoard& cur_board = node->get_board();
 	SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>(); //Init or not?
-	SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), true).ToVector(moves_vec);
+	SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), false).ToVector(moves_vec);
 
 	while (moves_vec->Length() > 0) {
 		//Copy board
-		GoBoard newBoard = cur_board;
+		GoBoard newBoard = GoBoard(cur_board);
 
 		SgPoint nxt_move = moves_vec->PopFront();
+	
 		newBoard.Play(nxt_move);
+		
 		node->add_children(new TreeNode(newBoard));
 	}
 	delete moves_vec;
@@ -123,4 +125,11 @@ void Mcts::run_iteration(TreeNode* node) {
 			}
 		}
 	}
+}
+
+bool Mcts::checkAbort() {
+	if (!abort) {
+		abort = mcts_timer.GetTime() > maxTime;
+	}
+	return abort;
 }

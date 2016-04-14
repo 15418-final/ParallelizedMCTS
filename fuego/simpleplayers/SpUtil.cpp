@@ -16,9 +16,11 @@ SgPointSet SpUtil::GetRelevantMoves(GoBoard& bd, SgBlackWhite toPlay,
                                     bool useFilter)
 {
     SgPointSet legal;
-    for (SgSetIterator it(bd.AllEmpty()); it; ++it)
+    for (SgSetIterator it(bd.AllEmpty()); it; ++it) {
+        printf("%d\n",*it );
         if (bd.IsLegal(*it))
             legal.Include(*it);
+    }
     if (! useFilter)
         return legal;
     GoSafetySolver safetySolver(bd);

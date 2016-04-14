@@ -10,7 +10,7 @@
 
 #include "SgTimer.h"
 #include "GoBoard.h"
-#include "GoBoardUtil.h"
+
 //#include <omp.h>
 
 
@@ -55,6 +55,7 @@ private:
 	TreeNode* root;
 	double maxTime;
 	SgTimer mcts_timer;
+	bool abort;
 
 	//std::unordered_map<Board*, TreeNode*, BoardHasher> dict;
 public:
@@ -77,6 +78,8 @@ public:
 	void expand(TreeNode* node);
 	void back_propagation(TreeNode* node);
 	void run_simulation(TreeNode* node);
+
+	bool checkAbort();
 };
 
 #endif

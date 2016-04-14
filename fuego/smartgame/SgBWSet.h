@@ -23,6 +23,10 @@ public:
         : m_set(black, white)
     { }
 
+    SgBWSet(const SgBWSet& other) {
+        m_set = SgBWArray<SgPointSet>(other.m_set);
+    }
+
     const SgPointSet& operator[](SgBlackWhite c) const
     {
         return m_set[c];
@@ -36,6 +40,7 @@ public:
     bool operator==(const SgBWSet& other) const;
 
     bool operator!=(const SgBWSet& other) const;
+
 
     SgBWSet& operator|=(const SgBWSet& other);
 
@@ -79,7 +84,6 @@ public:
             && m_set[SG_WHITE].Contains(p);
     }
 
-private:
     SgBWArray<SgPointSet> m_set;
 };
 

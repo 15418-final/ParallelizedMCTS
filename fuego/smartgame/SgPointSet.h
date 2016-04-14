@@ -28,6 +28,10 @@ public:
 
     ~SgPointSet();
 
+    SgPointSet(const SgPointSet& other) {
+        m_a = other.m_a;
+    }
+
     explicit SgPointSet(const SgVector<SgPoint>& vector);
 
     SgPointSet& operator-=(const SgPointSet& other);
@@ -174,7 +178,6 @@ public:
         in implementation: const int MAX_CLOSE_DISTANCE = 3; */
     bool IsCloseTo(SgPoint p) const;
     
-private:
     /** Precomputed point sets with all points depending on board size. */
     class PrecompAllPoints
     {

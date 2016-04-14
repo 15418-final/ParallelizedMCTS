@@ -51,28 +51,41 @@ GoBoard::GoBoard(const GoBoard& bd)
       m_const(bd.Size()),
       m_blockList(new SgArrayList<Block,GO_MAX_NUM_MOVES>()),
       m_moves(new SgArrayList<StackEntry,GO_MAX_NUM_MOVES>())
-    {
-        m_rules = bd.Rules();
-        m_size = bd.Size();
-        m_const = SgBoardConst(m_size);
-        m_state.m_hash.Clear();
-        m_moves->Clear();
+    {   
+        m_state.m_koPoint = bd.KoPoint();
+        m_state.m_toPlay = bd.ToPlay();
+        m_state.m_hash.m_hash.m_code = bd.m_state.m_hash.m_hash.m_code;
+        m_state.m_all = SgBWSet(bd.m_state.m_all);
+        m_state.m_empty = SgPointSet(bd.m_state.m_empty);
         m_state.m_prisoners[SG_BLACK] = bd.NumPrisoners(SG_BLACK);
         m_state.m_prisoners[SG_WHITE] = bd.NumPrisoners(SG_WHITE);
-        m_state.m_numStones[SG_BLACK] = bd.NumStones(SG_BLACK);
-        m_state.m_numStones[SG_WHITE] = bd.NumStones(SG_WHITE);
-        m_countPlay = bd.CountPlay();
-        m_state.m_koPoint = bd.KoPoint();
-        m_allowAnyRepetition = bd.AnyRepetitionAllowed();
-        m_allowKoRepetition = bd.KoRepetitionAllowed();
-        m_koColor = bd.KoColor();
-        m_koLoser = bd.KoLoser();
-        m_state.m_koLevel = bd.KoLevel();
-        m_koModifiesHash = bd.KoModifiesHash();
-        m_state.m_toPlay = bd.ToPlay();
-        m_setup = bd.Setup();
-        m_state.m_isNewPosition = bd.IsNewPosition();
+        m_state.m_numStones[SG_BLACK] = bd.TotalNumStones(SG_BLACK);
+        m_state.m_numStones[SG_WHITE] = bd.TotalNumStones(SG_WHITE);
 
+        m_state.m_koLevel = bd.KoLevel();
+        m_state.m_isNewPosition = bd.IsNewPosition();
+         
+        m_countPlay = bd.CountPlay();
+        m_const = bd.m_const;
+        m_size = bd.Size();
+
+        m_rules = bd.Rules();
+        m_setup = bd.Setup();
+
+        m_moveInfo = bd.GetLastMoveInfo();
+                           
+        m_blockList = bd.m_blockList;
+                        
+        m_marker = SgMarker(bd.m_marker);
+        m_capturedStones = bd.m_capturedStones;
+        m_allowAnyRepetition = bd.m_allowAnyRepetition;
+        m_allowKoRepetition = bd.m_allowKoRepetition;
+        m_koModifiesHash = bd.m_koModifiesHash;
+        m_koColor = bd.m_koColor;
+        m_koLoser = bd.m_koLoser;
+        m_isBorder = bd.m_isBorder;
+        m_moves = bd.m_moves;
+ 
         for (GoBoard::Iterator it(bd); it; ++it)
         {
             const SgPoint p = *it;

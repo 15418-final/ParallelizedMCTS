@@ -509,7 +509,7 @@ public:
         @see TakeSnapshot() */
     void RestoreSnapshot();
 
-private:
+
     /** Data related to a block of stones on the board. */
     class Block
     {
@@ -604,7 +604,7 @@ private:
         	return m_stones;
         }
 
-    private:
+    
         SgPoint m_anchor;
 
         SgBlackWhite m_color;
@@ -631,7 +631,6 @@ private:
 
         void XorWinKo(int level, SgBlackWhite c);
 
-    private:
         // Index ranges used in global Zobrist table
         static const int START_INDEX_TOPLAY = 1;
         static const int END_INDEX_TOPLAY = 2;
@@ -734,11 +733,11 @@ private:
         SgBlackWhite m_toPlay;
 
         /** Hash code for this board position. */
-        HashCode m_hash;
+        HashCode m_hash; 
 
-        SgBWSet m_all;
+        SgBWSet m_all; 
 
-        SgPointSet m_empty;
+        SgPointSet m_empty; 
 
         SgArray<Block*, SG_MAXPOINT> m_block;
 
@@ -927,7 +926,7 @@ public:
         /** Return true if iteration is valid, otherwise false. */
         operator bool() const;
 
-    private:
+    
         /** Iterator over original list in GoBoard::Block::StoneList.
             No copy of list is necessary, even if moves are played and undone
             while iterating over the list, since the implementation of GoBoard
@@ -981,7 +980,7 @@ public:
         /** Return true if iteration is valid, otherwise false. */
         operator bool() const;
 
-    private:
+    
         Block::LibertyList::Iterator m_it;
 
         const GoBoard& m_board;
@@ -1023,7 +1022,7 @@ public:
         /** Return true if iteration is valid, otherwise false. */
         operator bool() const;
 
-    private:
+    
         /** Copy of liberty list.
             Necessary, because if moves are played and undone while iterating
             over liberty list, the implementation of GoBoard does not

@@ -122,6 +122,7 @@ am_libfuego_simpleplayers_a_OBJECTS =  \
 	libfuego_simpleplayers_a-SpRandomPlayer.$(OBJEXT) \
 	libfuego_simpleplayers_a-SpSafePlayer.$(OBJEXT) \
 	libfuego_simpleplayers_a-MCTSPlayer.$(OBJEXT) \
+	libfuego_simpleplayers_a-mcts.$(OBJEXT) \
 	libfuego_simpleplayers_a-SpSimplePlayer.$(OBJEXT) \
 	libfuego_simpleplayers_a-SpUtil.$(OBJEXT)
 libfuego_simpleplayers_a_OBJECTS =  \
@@ -311,6 +312,7 @@ SpMoveGenerator.cpp \
 SpRandomPlayer.cpp \
 SpSafePlayer.cpp \
 MCTSPlayer.cpp \
+mcts.cpp \
 SpSimplePlayer.cpp \
 SpUtil.cpp
 
@@ -329,6 +331,7 @@ SpRandomPlayer.h \
 MCTSPlayer.h \
 SpSafePlayer.h \
 SpSimplePlayer.h \
+mcts.h \
 SpUtil.h
 
 libfuego_simpleplayers_a_CPPFLAGS = \
@@ -402,6 +405,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfuego_simpleplayers_a-SpSafePlayer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfuego_simpleplayers_a-SpSimplePlayer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfuego_simpleplayers_a-SpUtil.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfuego_simpleplayers_a-mcts.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -598,6 +602,20 @@ libfuego_simpleplayers_a-MCTSPlayer.obj: MCTSPlayer.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='MCTSPlayer.cpp' object='libfuego_simpleplayers_a-MCTSPlayer.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-MCTSPlayer.obj `if test -f 'MCTSPlayer.cpp'; then $(CYGPATH_W) 'MCTSPlayer.cpp'; else $(CYGPATH_W) '$(srcdir)/MCTSPlayer.cpp'; fi`
+
+libfuego_simpleplayers_a-mcts.o: mcts.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-mcts.o -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-mcts.Tpo -c -o libfuego_simpleplayers_a-mcts.o `test -f 'mcts.cpp' || echo '$(srcdir)/'`mcts.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfuego_simpleplayers_a-mcts.Tpo $(DEPDIR)/libfuego_simpleplayers_a-mcts.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='mcts.cpp' object='libfuego_simpleplayers_a-mcts.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-mcts.o `test -f 'mcts.cpp' || echo '$(srcdir)/'`mcts.cpp
+
+libfuego_simpleplayers_a-mcts.obj: mcts.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-mcts.obj -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-mcts.Tpo -c -o libfuego_simpleplayers_a-mcts.obj `if test -f 'mcts.cpp'; then $(CYGPATH_W) 'mcts.cpp'; else $(CYGPATH_W) '$(srcdir)/mcts.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfuego_simpleplayers_a-mcts.Tpo $(DEPDIR)/libfuego_simpleplayers_a-mcts.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='mcts.cpp' object='libfuego_simpleplayers_a-mcts.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-mcts.obj `if test -f 'mcts.cpp'; then $(CYGPATH_W) 'mcts.cpp'; else $(CYGPATH_W) '$(srcdir)/mcts.cpp'; fi`
 
 libfuego_simpleplayers_a-SpSimplePlayer.o: SpSimplePlayer.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-SpSimplePlayer.o -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-SpSimplePlayer.Tpo -c -o libfuego_simpleplayers_a-SpSimplePlayer.o `test -f 'SpSimplePlayer.cpp' || echo '$(srcdir)/'`SpSimplePlayer.cpp
