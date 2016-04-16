@@ -1,0 +1,2625 @@
+New board init
+In init m_moves is not NULL
+MCTS Player
+New board init
+In init m_moves is not NULL
+= 
+
+Mcts constructor, copied GoBoard
+In copy constructor m_moves is not NULL
+iter
+need expand
+expand begin
+nxt move Num:81
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:21
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:21
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:22
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:22
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:23
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:23
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:24
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:24
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:25
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:25
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:26
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:26
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:27
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:27
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:28
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:28
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:29
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:29
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:41
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:41
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:42
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:42
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:43
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:43
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:44
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:44
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:45
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:45
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:46
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:46
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:47
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:47
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:48
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:48
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:49
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:49
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:61
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:61
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:62
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:62
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:63
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:63
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:64
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:64
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:65
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:65
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:66
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:66
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:67
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:67
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:68
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:68
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:69
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:69
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:81
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:81
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:82
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:82
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:83
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:83
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:84
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:84
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:85
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:85
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:86
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:86
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:87
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:87
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:88
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:88
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:89
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:89
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:101
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:101
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:102
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:102
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:103
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:103
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:104
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:104
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:105
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:105
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:106
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:106
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:107
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:107
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:108
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:108
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:109
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:109
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:121
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:121
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:122
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:122
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:123
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:123
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:124
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:124
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:125
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:125
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:126
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:126
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:127
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:127
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:128
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:128
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:129
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:129
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:141
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:141
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:142
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:142
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:143
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:143
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:144
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:144
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:145
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:145
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:146
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:146
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:147
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:147
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:148
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:148
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:149
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:149
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:161
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:161
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:162
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:162
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:163
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:163
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:164
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:164
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:165
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:165
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:166
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:166
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:167
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:167
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:168
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:168
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:169
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:169
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:181
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:181
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:182
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:182
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:183
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:183
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:184
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:184
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:185
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:185
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:186
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:186
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:187
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:187
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:188
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:188
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+In copy constructor m_moves is not NULL
+Copy goboard over
+In expand:nxt_move get:189
+In expand:nxt color:0
+play check passed
+m_moves->Length():0
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:189
+here 1
+play check point 7
+play check point 8
+play check point 9
+In expand:nxt move played
+In copy constructor m_moves is not NULL
+children added
+GoBoard deconstructor called
+expand end with children num:81
+In simu:nxt_move get:62
+In simu:nxt color:1
+play check passed
+m_moves->Length():1
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:62
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:27
+In simu:nxt color:0
+play check passed
+m_moves->Length():2
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:27
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:44
+In simu:nxt color:1
+play check passed
+m_moves->Length():3
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:44
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:82
+In simu:nxt color:0
+play check passed
+m_moves->Length():4
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:82
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:167
+In simu:nxt color:1
+play check passed
+m_moves->Length():5
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:167
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:182
+In simu:nxt color:0
+play check passed
+m_moves->Length():6
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:182
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:185
+In simu:nxt color:1
+play check passed
+m_moves->Length():7
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:185
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:48
+In simu:nxt color:0
+play check passed
+m_moves->Length():8
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:48
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:109
+In simu:nxt color:1
+play check passed
+m_moves->Length():9
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:109
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:147
+In simu:nxt color:0
+play check passed
+m_moves->Length():10
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:147
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:143
+In simu:nxt color:1
+play check passed
+m_moves->Length():11
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:143
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:189
+In simu:nxt color:0
+play check passed
+m_moves->Length():12
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:189
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:64
+In simu:nxt color:1
+play check passed
+m_moves->Length():13
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:64
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:184
+In simu:nxt color:0
+play check passed
+m_moves->Length():14
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:184
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:103
+In simu:nxt color:1
+play check passed
+m_moves->Length():15
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:103
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:67
+In simu:nxt color:0
+play check passed
+m_moves->Length():16
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:67
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:169
+In simu:nxt color:1
+play check passed
+m_moves->Length():17
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:169
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:165
+In simu:nxt color:0
+play check passed
+m_moves->Length():18
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:165
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:46
+In simu:nxt color:1
+play check passed
+m_moves->Length():19
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:46
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:61
+In simu:nxt color:0
+play check passed
+m_moves->Length():20
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:61
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:24
+In simu:nxt color:1
+play check passed
+m_moves->Length():21
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:24
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:145
+In simu:nxt color:0
+play check passed
+m_moves->Length():22
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:145
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:25
+In simu:nxt color:1
+play check passed
+m_moves->Length():23
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:25
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:161
+In simu:nxt color:0
+play check passed
+m_moves->Length():24
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:161
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:22
+In simu:nxt color:1
+play check passed
+m_moves->Length():25
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:22
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:162
+In simu:nxt color:0
+play check passed
+m_moves->Length():26
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:162
+here 2
+here 3
+here 6
+MergeBlocks cp 1
+MergeBlocks cp 2
+it is not NULL:1
+MergeBlocks cp 2.5
+MergeBlocks cp 2
+it is not NULL:1
+MergeBlocks cp 2.5
+MergeBlocks cp 3
+here 7
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:146
+In simu:nxt color:1
+play check passed
+m_moves->Length():27
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:146
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:87
+In simu:nxt color:0
+play check passed
+m_moves->Length():28
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:87
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:43
+In simu:nxt color:1
+play check passed
+m_moves->Length():29
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:43
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:88
+In simu:nxt color:0
+play check passed
+m_moves->Length():30
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:88
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:149
+In simu:nxt color:1
+play check passed
+m_moves->Length():31
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:149
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:121
+In simu:nxt color:0
+play check passed
+m_moves->Length():32
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:121
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:66
+In simu:nxt color:1
+play check passed
+m_moves->Length():33
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:66
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:127
+In simu:nxt color:0
+play check passed
+m_moves->Length():34
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:127
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:81
+In simu:nxt color:1
+play check passed
+m_moves->Length():35
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:81
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:29
+In simu:nxt color:0
+play check passed
+m_moves->Length():36
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:29
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:63
+In simu:nxt color:1
+play check passed
+m_moves->Length():37
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:63
+here 2
+here 3
+here 6
+MergeBlocks cp 1
+MergeBlocks cp 2
+it is not NULL:1
+MergeBlocks cp 2.5
+MergeBlocks cp 2
+it is not NULL:1
+MergeBlocks cp 2.5
+MergeBlocks cp 3
+here 7
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:85
+In simu:nxt color:0
+play check passed
+m_moves->Length():38
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:85
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:129
+In simu:nxt color:1
+play check passed
+m_moves->Length():39
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:129
+here 2
+here 3
+here 6
+MergeBlocks cp 1
+MergeBlocks cp 2
+it is not NULL:1
+MergeBlocks cp 2.5
+MergeBlocks cp 2
+it is not NULL:1
+MergeBlocks cp 2.5
+MergeBlocks cp 3
+here 7
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:104
+In simu:nxt color:0
+play check passed
+m_moves->Length():40
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:104
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:107
+In simu:nxt color:1
+play check passed
+m_moves->Length():41
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:107
+here 1
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:164
+In simu:nxt color:0
+play check passed
+m_moves->Length():42
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:164
+here 2
+here 3
+here 6
+MergeBlocks cp 1
+MergeBlocks cp 2
+it is not NULL:1
+MergeBlocks cp 2.5
+MergeBlocks cp 2
+it is not NULL:1
+MergeBlocks cp 2.5
+MergeBlocks cp 3
+here 7
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:47
+In simu:nxt color:1
+play check passed
+m_moves->Length():43
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:47
+here 2
+here 3
+here 4
+here 5
+play check point 7
+play check point 8
+play check point 9
+In simu:nxt move played
+In simu:nxt_move get:89
+In simu:nxt color:0
+play check passed
+m_moves->Length():44
+play check point 1
+play check point 2
+play check point 3
+play check point 4
+play check point 5
+play check point 6
+play check point 6.5
+enter update blocks after add stone p:89
+here 2
+here 3
+here 6
+MergeBlocks cp 1
+MergeBlocks cp 2
+it is not NULL:1
+MergeBlocks cp 2.5
+MergeBlocks cp 2
+it is not NULL:1

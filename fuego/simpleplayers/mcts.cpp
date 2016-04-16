@@ -11,73 +11,90 @@ const double EPSILON = 10e-6;
 const int MAX_TRIAL = 1;
 
 
-SgPoint Mcts::run(){
+SgPoint Mcts::run() {
+	std::cout<<"maxTime:"<<maxTime<<std::endl;
 	mcts_timer.Start();
-	while(mcts_timer.GetTime() < maxTime){
+	while (mcts_timer.GetTime() < maxTime) {
+		// std::cout << "iter" << std::endl;
 		run_iteration(root);
 	}
 	double maxv = 0;
 	TreeNode* best = NULL;
-	
-	for (TreeNode* c : root->get_children()) {
+	std::vector<TreeNode*> children = root->get_children();
+	for (std::vector<TreeNode*>::iterator it = children.begin(); it != children.end(); it++) {
+		TreeNode* c = *it;
 		double v = (double)c->wins / (c->sims + EPSILON);
 		if (v > maxv) {
 			maxv = v;
-			best = c; 
+			best = c;
 		}
 	}
-	if(best == NULL){
+	if (best == NULL) {
 		return SG_NULLMOVE;
 	}
-	return best->get_board().GetLastMove();
+	return best->get_board()->GetLastMove();
 }
 
 TreeNode* Mcts::selection(TreeNode* node) {
-	double maxv = -1;
+	std::cout << "selection begin" << std::endl;
+	double maxv = -10000000;
 	TreeNode* maxn = NULL;
 	int n = node->sims;
-	for (TreeNode* c : node->get_children()) {
+	std::vector<TreeNode*> children = node->get_children();
+	for (std::vector<TreeNode*>::iterator it = children.begin(); it != children.end(); it++) {
+		TreeNode* c = *it;
+		// std::cout<<"c-wins:"<<(double)c->wins<<std::endl;
+		// std::cout<<"c-sims:"<<(double)c->sims<<std::endl;
+		// std::cout<<"n:"<<(double)n<<std::endl;
 		double v = (double)c->wins / (c->sims + EPSILON) + C * sqrt(log(n + EPSILON) / (c->sims + EPSILON));
+		// std::cout<<"uct value calculated:"<<v<<std::endl;
 		if (v > maxv) {
 			maxv = v;
 			maxn = c;
 		}
 	}
+	std::cout << "selection end" << std::endl;
 	return maxn;
 }
 // Typical Monte Carlo Simulation
-void Mcts::run_simulation(TreeNode* node) {
-	GoBoard cur_board = node->get_board();//Make a copy of GoBoard
+int Mcts::run_simulation(GoBoard cur_board) {//Pass by value. Make a copy of GoBoard
+	// std::cout<<"run simulation begin"<<std::endl;
+	// GoBoard* cur_board = node->get_board();
 	SgBlackWhite cur_player = cur_board.ToPlay();
+	int wins = 0;
 
 	// TODO: parallel this part (leaf parallelization)
 	//#pragma omp parallel for private(cur_board)
 	for (int i = 0; i < MAX_TRIAL; i++) {
 		while (true) {
-			if (GoBoardUtil::EndOfGame(cur_board))break;
-
 			SgPointSet moves = SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), true); //UseFilter() set to true
-			SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>(); //Init or not?
+			SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>();
 			moves.ToVector(moves_vec);
+			if (GoBoardUtil::EndOfGame(cur_board) || moves_vec->Length() == 0){
+				// std::cout<<"simulation reach end"<<std::endl;
+				break;
+			}
 
+			//why nxt_move length can be zero? what does endofgame do above?
+			// std::cout<<"moves_vec length:"<<moves_vec->Length()<<std::endl;
 			SgPoint nxt_move = (*moves_vec)[rand() % moves_vec->Length()];
+			// std::cout << "In simu:nxt_move get:" << nxt_move << std::endl;
+			// std::cout << "In simu:nxt color:" << cur_board.ToPlay() << std::endl;
 			cur_board.Play(nxt_move);
 			delete moves_vec;
 		}
 		float score = GoBoardUtil::Score(cur_board, 0); // Komi set to 0
+		// std::cout<<"score calculated:"<<score<<std::endl;
 		if ((score > 0 && cur_player == SG_BLACK)
 		        || (score < 0 && cur_player == SG_WHITE)) {
-			node->wins++;
+			wins++;
 		}
-		node->sims++;
-
-		//
 	}
+	return wins;
+	// std::cout << "run_simulation end" << std::endl;
 }
 
-void Mcts::back_propagation(TreeNode* node) {
-	int sim_increase = node->sims;
-	int win_increase = node->wins;
+void Mcts::back_propagation(TreeNode* node, int win_increase, int sim_increase) {
 	bool lv = false;
 	while (node->parent != NULL) {
 		node = node->parent;
@@ -88,21 +105,27 @@ void Mcts::back_propagation(TreeNode* node) {
 }
 
 void Mcts::expand(TreeNode* node) {
-	GoBoard& cur_board = node->get_board();
-	SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>(); //Init or not?
-	SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), false).ToVector(moves_vec);
-
+	std::cout << "expand begin" << std::endl;
+	GoBoard* cur_board = node->get_board();
+	std::cout<<"cur_board:"<<cur_board<<std::endl;
+	SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>();
+	SpUtil::GetRelevantMoves(*cur_board, cur_board->ToPlay(), true).ToVector(moves_vec);
+	std::cout<<"expand: nxt moves num:"<<moves_vec->Length()<<std::endl;
 	while (moves_vec->Length() > 0) {
 		//Copy board
-		GoBoard newBoard = GoBoard(cur_board);
-
+		GoBoard* newBoard = new GoBoard(*cur_board);
 		SgPoint nxt_move = moves_vec->PopFront();
-	
-		newBoard.Play(nxt_move);
-		
-		node->add_children(new TreeNode(newBoard));
+		// std::cout << "In expand:nxt_move get:" << nxt_move << std::endl;
+		std::cout << "In expand:nxt color:" << newBoard->ToPlay() << std::endl;
+		newBoard->Play(nxt_move);
+		std::cout << "after play" << std::endl;
+		node->add_children(new TreeNode(*newBoard));
+		std::cout << "after add children" << std::endl;
+		delete newBoard;
 	}
 	delete moves_vec;
+
+	std::cout << "expand end with children num:" << node->get_children().size() << std::endl;
 }
 
 void Mcts::run_iteration(TreeNode* node) {
@@ -112,19 +135,24 @@ void Mcts::run_iteration(TreeNode* node) {
 		TreeNode* f = S.top();
 		S.pop();
 		if (!f->is_expandable()) {
-			S.push(selection(node));
+			std::cout<<"select f:"<<f<<std::endl;
+			S.push(selection(f));
 		} else {
 			// expand current node, run expansion and simulation
 			f->set_expandable(false);
-			expand(node);
+			expand(f);
+			std::cout<<"expand f end:"<<f<<std::endl;
 
-			std::vector<TreeNode*> children = node->get_children();
+			std::vector<TreeNode*> children = f->get_children();
 			for (size_t i = 0; i < children.size(); i++) {
-				run_simulation(children[i]);
-				back_propagation(children[i]);
+				int win_increase = run_simulation(*(children[i]->get_board()));
+				children[i]->wins += win_increase;
+				children[i]->sims += MAX_TRIAL;
+				back_propagation(children[i], win_increase, MAX_TRIAL);
 			}
 		}
 	}
+	std::cout << "run_iteration end" << std::endl;
 }
 
 bool Mcts::checkAbort() {

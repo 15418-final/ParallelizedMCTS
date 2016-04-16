@@ -16,14 +16,15 @@
 
 class TreeNode {
 private:
-	GoBoard& board;
+	GoBoard* board;
 	std::vector<TreeNode*> children;
 	bool expandable;   // un expaned
 public:
 	int wins; // Number of wins so far
 	int sims; // Number of simulations so far
 	TreeNode* parent;
-	TreeNode(GoBoard& b): board(b), expandable(true), wins(0), sims(0), parent(NULL) {
+	TreeNode(GoBoard& b):  expandable(true), wins(0), sims(0), parent(NULL) {
+		board = new GoBoard(b);		
 	}
 	
 	~TreeNode() {
@@ -31,6 +32,7 @@ public:
 			delete *it;
 		}
 		delete parent;
+		delete board;
 	}
 	bool is_expandable() {
 		return expandable;
@@ -40,11 +42,12 @@ public:
 	}
 	void add_children(TreeNode* child){
 		children.push_back(child);
+		child->parent = this;
 	}
 	std::vector<TreeNode*> get_children() {
 		return children;
 	}
-	GoBoard& get_board(){
+	GoBoard* get_board(){
 		return board;
 	}
 };
@@ -59,13 +62,15 @@ private:
 
 	//std::unordered_map<Board*, TreeNode*, BoardHasher> dict;
 public:
-	Mcts(GoBoard bd, double maxTime) {
+	Mcts(GoBoard& bd, double maxTime) {
+		std::cout<<"Mcts constructor, copied GoBoard"<<std::endl;
+		
 		root = new TreeNode(bd);
 		this->maxTime = maxTime;
 	}
 
 	~Mcts() {
-		delete(root);
+		delete root;
 	}
 
 	//Run MCTS and get 
@@ -76,8 +81,8 @@ public:
 
 	TreeNode *selection(TreeNode* node);
 	void expand(TreeNode* node);
-	void back_propagation(TreeNode* node);
-	void run_simulation(TreeNode* node);
+	void back_propagation(TreeNode* node, int win_increase, int sim_increase);
+	int run_simulation(GoBoard node);
 
 	bool checkAbort();
 };

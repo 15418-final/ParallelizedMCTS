@@ -17,7 +17,6 @@ SgPointSet SpUtil::GetRelevantMoves(GoBoard& bd, SgBlackWhite toPlay,
 {
     SgPointSet legal;
     for (SgSetIterator it(bd.AllEmpty()); it; ++it) {
-        printf("%d\n",*it );
         if (bd.IsLegal(*it))
             legal.Include(*it);
     }
