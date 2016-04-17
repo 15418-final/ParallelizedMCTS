@@ -722,6 +722,17 @@ void GoBoardUtil::UndoAll(GoBoard& bd)
         bd.Undo();
 }
 
+std::vector<SgPoint> GoBoardUtil::GetSequence(GoBoard& bd) {
+    int len = bd.m_moves->Length();
+    std::vector<SgPoint> sequence;
+
+    for (int i = 0; i < len; i++) {
+        sequence.push_back((*bd.m_moves)[i].m_point);
+    }
+
+    return sequence;
+}
+
 bool GoBoardUtil::AtLeastTwoSharedLibs(const GoBoard& bd, SgPoint block1,
                                        SgPoint block2)
 {

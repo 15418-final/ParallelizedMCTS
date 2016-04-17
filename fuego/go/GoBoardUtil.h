@@ -490,6 +490,8 @@ namespace GoBoardUtil
     /** Undo all moves or setup stones. */
     void UndoAll(GoBoard& bd);
 
+    std::vector<SgPoint> GetSequence(GoBoard& bd);
+
 } // namespace GoBoardUtil
 
 //----------------------------------------------------------------------------

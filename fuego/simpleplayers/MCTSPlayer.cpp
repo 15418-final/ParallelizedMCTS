@@ -9,7 +9,7 @@ SgPoint MCTSPlayer::GenMove(const SgTimeRecord& time, SgBlackWhite toPlay) {
     // run mcts and get the best move
     Mcts* mcts = new Mcts(Board(), maxTime);
     move =  mcts->run();
-
+std::cout << SgPointUtil::PointToString(move) << std::endl;
  	delete mcts;
     return move;
 }
