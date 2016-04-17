@@ -58,6 +58,7 @@ GoBoard::GoBoard(const GoBoard& bd)
       m_blockList(new SgArrayList<Block, GO_MAX_NUM_MOVES>()),
       m_moves(new SgArrayList<StackEntry, GO_MAX_NUM_MOVES>())
 {
+    Init(bd.Size(), bd.Rules(),  bd.Setup());
     m_state.m_koPoint = bd.KoPoint();
     m_state.m_toPlay = bd.ToPlay();
     m_state.m_hash.m_hash.m_code = bd.m_state.m_hash.m_hash.m_code;
@@ -80,8 +81,7 @@ GoBoard::GoBoard(const GoBoard& bd)
 
     m_moveInfo = bd.GetLastMoveInfo();
 
-    // *(m_blockList) = *(bd.m_blockList);
-
+    
     m_marker = SgMarker(bd.m_marker);
     m_capturedStones = bd.m_capturedStones;
     m_allowAnyRepetition = bd.m_allowAnyRepetition;

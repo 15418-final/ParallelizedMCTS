@@ -11,14 +11,19 @@
 #include "SgDebug.h"
 #include "SgException.h"
 #include "SgInit.h"
+#include "SgPlatform.h"
+#include "FuegoTestUtil.h"
 
 #include <boost/utility.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/cmdline.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/parsers.hpp>
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem.hpp>
 
 using std::string;
+using boost::filesystem::path;
 namespace po = boost::program_options;
 
 //----------------------------------------------------------------------------
@@ -39,9 +44,28 @@ const char* g_programPath;
 
 // @} // @name
 
+path GetProgramDir(const char* programPath)
+{
+    if (programPath == 0)
+        return "";
+    return path(programPath).branch_path();
+}
+
+path GetTopSourceDir()
+{
+    #ifdef ABS_TOP_SRCDIR
+        return path(ABS_TOP_SRCDIR);
+    #else
+        return "";
+    #endif
+}
+
 void MainLoop()
 {
     FuegoTestEngine engine(0, g_programPath, g_player);
+    
+            FuegoTestUtil::LoadBook(engine.Book(), 
+                                    SgPlatform::GetProgramDir());
     GoGtpAssertionHandler assertionHandler(engine);
     if (g_config != "")
         engine.ExecuteFile(g_config);
@@ -97,7 +121,9 @@ void ParseOptions(int argc, char** argv)
 int main(int argc, char** argv)
 {
     if (argc > 0 && argv != 0)
-    {
+    {   
+        SgPlatform::SetProgramDir(GetProgramDir(argv[0]));
+        SgPlatform::SetTopSourceDir(GetTopSourceDir());
         g_programPath = argv[0];
         try
         {

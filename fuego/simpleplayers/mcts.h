@@ -31,8 +31,8 @@ public:
 		for (std::vector<TreeNode*>::iterator it = children.begin(); it != children.end(); it++) {
 			delete *it;
 		}
-		delete parent;
 		delete board;
+		parent = NULL;
 	}
 	bool is_expandable() {
 		return expandable;
@@ -85,6 +85,7 @@ public:
 	int run_simulation(GoBoard node);
 
 	bool checkAbort();
+	SgVector<SgPoint>* generateAllMoves(GoBoard& cur_board);
 };
 
 #endif

@@ -1337,7 +1337,7 @@ void GoGtpEngine::GameFinished()
 
 SgPoint GoGtpEngine::GenBookMove(SgBlackWhite toPlay)
 {
-    if (! m_useBook || toPlay != Board().ToPlay())
+    if (! m_useBook || toPlay != Board().ToPlay()) 
         return SG_NULLMOVE;
     if (m_autoBook.get() != 0)
         return m_autoBook->LookupMove(Board());
@@ -1362,7 +1362,7 @@ SgPoint GoGtpEngine::GenMove(SgBlackWhite color, bool ignoreClock)
     AddStatistics("GAME", m_autoSaveFileName);
     AddStatistics("MOVE", m_game.CurrentMoveNumber() + 1);
     /* don't use book move in our experiment */
-    SgPoint move = SG_NULLMOVE;
+SgPoint move =SG_NULLMOVE;
     // SgPoint move = GenBookMove(color);
     // m_mpiSynchronizer->SynchronizeMove(move);
     // if (move != SG_NULLMOVE)
@@ -1372,14 +1372,17 @@ SgPoint GoGtpEngine::GenMove(SgBlackWhite color, bool ignoreClock)
     // }
     // else
     //     AddStatistics("BOOK", 0);
-    // if (move == SG_NULLMOVE)
-    // {
+
+   
+    if (move == SG_NULLMOVE)
+    {
+         std::cout << "player run"<<std::endl;
         player.ClearSearchTraces();
         move = player.GenMove(time, color);
         SgNode* searchTraces = player.TransferSearchTraces();
         if (searchTraces != 0)
             m_game.AppendChild(searchTraces);
-   // }
+   }
     m_mpiSynchronizer->SynchronizeMove(move);
     m_timeLastMove = SgTime::Get() - startTime;
     AddStatistics("TIME", m_timeLastMove);

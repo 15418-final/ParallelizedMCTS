@@ -273,6 +273,10 @@ public:
     {
         return m_vec;
     }
+
+    void swap(int i, int j) {
+        std::swap(m_vec[i], m_vec[j]);
+    }
     
 private:
     std::vector<T> m_vec;

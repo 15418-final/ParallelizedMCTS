@@ -3,20 +3,22 @@
 #include "SpUtil.h"
 #include "GoBoardUtil.h"
 #include "mcts.h"
+#include <stdlib.h>
 
 
 //Exploration parameter
 const double C = 1.4;
 const double EPSILON = 10e-6;
-const int MAX_TRIAL = 1;
+const int MAX_TRIAL = 100;
 
 
 SgPoint Mcts::run() {
 	std::cout<<"maxTime:"<<maxTime<<std::endl;
 	mcts_timer.Start();
-	while (mcts_timer.GetTime() < maxTime) {
+	while (true) {
 		// std::cout << "iter" << std::endl;
 		run_iteration(root);
+		if (checkAbort()) break;
 	}
 	double maxv = 0;
 	TreeNode* best = NULL;
@@ -67,9 +69,11 @@ int Mcts::run_simulation(GoBoard cur_board) {//Pass by value. Make a copy of GoB
 	//#pragma omp parallel for private(cur_board)
 	for (int i = 0; i < MAX_TRIAL; i++) {
 		while (true) {
-			SgPointSet moves = SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), true); //UseFilter() set to true
-			SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>();
-			moves.ToVector(moves_vec);
+			// SgPointSet moves = SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), true); //UseFilter() set to true
+			// // std::cout<<"releveant move:" << moves.Size() <<std::endl;
+			// SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>();
+			// moves.ToVector(moves_vec);
+			SgVector<SgPoint>* moves_vec = generateAllMoves(cur_board);
 			if (GoBoardUtil::EndOfGame(cur_board) || moves_vec->Length() == 0){
 				// std::cout<<"simulation reach end"<<std::endl;
 				break;
@@ -80,7 +84,11 @@ int Mcts::run_simulation(GoBoard cur_board) {//Pass by value. Make a copy of GoB
 			SgPoint nxt_move = (*moves_vec)[rand() % moves_vec->Length()];
 			// std::cout << "In simu:nxt_move get:" << nxt_move << std::endl;
 			// std::cout << "In simu:nxt color:" << cur_board.ToPlay() << std::endl;
+			// std::cout<<"before play"<<std::endl;
+			 // std::cout<<nxt_move<<std::endl;
 			cur_board.Play(nxt_move);
+			 //std::cout<<"after play"<<std::endl;
+			if (checkAbort()) break;
 			delete moves_vec;
 		}
 		float score = GoBoardUtil::Score(cur_board, 0); // Komi set to 0
@@ -105,43 +113,44 @@ void Mcts::back_propagation(TreeNode* node, int win_increase, int sim_increase) 
 }
 
 void Mcts::expand(TreeNode* node) {
-	std::cout << "expand begin" << std::endl;
+	//std::cout << "expand begin" << std::endl;
 	GoBoard* cur_board = node->get_board();
-	std::cout<<"cur_board:"<<cur_board<<std::endl;
-	SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>();
-	SpUtil::GetRelevantMoves(*cur_board, cur_board->ToPlay(), true).ToVector(moves_vec);
-	std::cout<<"expand: nxt moves num:"<<moves_vec->Length()<<std::endl;
+	//std::cout<<"cur_board:"<<cur_board<<std::endl;
+	SgVector<SgPoint>* moves_vec = generateAllMoves(*cur_board);
+	//SpUtil::GetRelevantMoves(*cur_board, cur_board->ToPlay(), true).ToVector(moves_vec);
+	//std::cout<<"expand: nxt moves num:"<<moves_vec->Length()<<std::endl;
 	while (moves_vec->Length() > 0) {
 		//Copy board
 		GoBoard* newBoard = new GoBoard(*cur_board);
 		SgPoint nxt_move = moves_vec->PopFront();
 		// std::cout << "In expand:nxt_move get:" << nxt_move << std::endl;
-		std::cout << "In expand:nxt color:" << newBoard->ToPlay() << std::endl;
+		//std::cout << "In expand:nxt color:" << newBoard->ToPlay() << std::endl;
 		newBoard->Play(nxt_move);
-		std::cout << "after play" << std::endl;
+		//std::cout << "after play" << std::endl;
 		node->add_children(new TreeNode(*newBoard));
-		std::cout << "after add children" << std::endl;
+		//std::cout << "after add children" << std::endl;
 		delete newBoard;
 	}
 	delete moves_vec;
 
-	std::cout << "expand end with children num:" << node->get_children().size() << std::endl;
+	//std::cout << "expand end with children num:" << node->get_children().size() << std::endl;
 }
 
 void Mcts::run_iteration(TreeNode* node) {
 	std::stack<TreeNode*> S;
 	S.push(node);
+
 	while (!S.empty()) {
 		TreeNode* f = S.top();
 		S.pop();
 		if (!f->is_expandable()) {
-			std::cout<<"select f:"<<f<<std::endl;
+		//	std::cout<<"select f:"<<f<<std::endl;
 			S.push(selection(f));
 		} else {
 			// expand current node, run expansion and simulation
 			f->set_expandable(false);
 			expand(f);
-			std::cout<<"expand f end:"<<f<<std::endl;
+			//std::cout<<"expand f end:"<<f<<std::endl;
 
 			std::vector<TreeNode*> children = f->get_children();
 			for (size_t i = 0; i < children.size(); i++) {
@@ -151,8 +160,11 @@ void Mcts::run_iteration(TreeNode* node) {
 				back_propagation(children[i], win_increase, MAX_TRIAL);
 			}
 		}
+
+		if (checkAbort()) break;
 	}
-	std::cout << "run_iteration end" << std::endl;
+
+	std::cout << "run_iteration end"<< std::endl;
 }
 
 bool Mcts::checkAbort() {
@@ -161,3 +173,19 @@ bool Mcts::checkAbort() {
 	}
 	return abort;
 }
+
+SgVector<SgPoint>* Mcts::generateAllMoves(GoBoard& cur_board) {
+	SgPointSet moves = SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), true);
+	SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>();
+    moves.ToVector(moves_vec);
+    int len = moves_vec->Length();
+    if (len != 0) {
+    //	std::cout<<"swap"<<std::endl;
+	    srand (time(NULL));
+	    int swapIndex = rand() % len;
+	    moves_vec->swap(0, swapIndex);
+	}
+    return moves_vec;
+}
+
+
