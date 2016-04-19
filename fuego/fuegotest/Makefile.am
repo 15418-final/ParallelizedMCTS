@@ -9,7 +9,9 @@ noinst_HEADERS = \
 FuegoTestEngine.h \
 FuegoTestUtil.h
 
-fuego_test_LDFLAGS = $(BOOST_LDFLAGS)
+AM_CXXFLAGS = -fopenmp
+
+fuego_test_LDFLAGS = $(BOOST_LDFLAGS) -fopenmp
 
 fuego_test_LDADD = \
 ../gouct/libfuego_gouct.a \
@@ -33,6 +35,7 @@ fuego_test_CPPFLAGS = \
 -DDATADIR='"@datadir@"' \
 -DABS_TOP_SRCDIR='"@abs_top_srcdir@"' \
 $(BOOST_CPPFLAGS) \
+-fopenmp \
 -I@top_srcdir@/gtpengine \
 -I@top_srcdir@/smartgame \
 -I@top_srcdir@/go \

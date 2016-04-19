@@ -37,7 +37,7 @@
 const int GO_DEFAULT_SIZE = (SG_MAX_SIZE >= 19 ? 19 : SG_MAX_SIZE);
 
 /** Maximum allowed number of moves in game. Heuristic only.
-    3 * SG_MAX_SIZE * SG_MAX_SIZE was reached in several CGOS games. 
+    3 * SG_MAX_SIZE * SG_MAX_SIZE was reached in several CGOS games.
 */
 const int GO_MAX_NUM_MOVES = (4 * SG_MAX_SIZE * SG_MAX_SIZE);
 
@@ -67,11 +67,11 @@ typedef std::bitset<_GO_NU_MOVEFLAG> GoMoveInfo;
 //----------------------------------------------------------------------------
 
 /** Static list having enough room for all points on board and SG_PASS. */
-typedef SgArrayList<SgPoint,SG_MAX_ONBOARD + 1> GoPointList;
+typedef SgArrayList < SgPoint, SG_MAX_ONBOARD + 1 > GoPointList;
 
 /** Static list having enough room for longest move sequence supported by
     GoBoard. */
-typedef SgArrayList<SgPoint,GO_MAX_NUM_MOVES> GoSequence;
+typedef SgArrayList<SgPoint, GO_MAX_NUM_MOVES> GoSequence;
 
 //----------------------------------------------------------------------------
 
@@ -112,10 +112,25 @@ public:
     explicit GoBoard(int size = GO_DEFAULT_SIZE,
                      const GoSetup& setup = GoSetup(),
                      const GoRules& rules = GoRules());
+    int getMySize() {
+        int num_of_bytes = 0;
+        num_of_bytes += sizeof(*this);
+        int moveNumber = MoveNumber();
+        for(int i = 0; i < moveNumber; i++){
+            const StackEntry& entry1 = (*m_moves)[i];
+            num_of_bytes += sizeof(entry1);
+        }
+        for(int i = 0; i < m_blockList->Length(); i++){
+            const Block& b1 = (*m_blockList)[i];
+            num_of_bytes += sizeof(b1);
+        }
+        return num_of_bytes;
+    }
+
 
     /** Implemented. */
     GoBoard(const GoBoard& bd);
-    
+
     ~GoBoard();
 
     const SgBoardConst& BoardConst() const;
@@ -517,7 +532,7 @@ public:
         /** Upper limit for liberties. @todo Proof? */
         static const int MAX_LIBERTIES = (SG_MAX_SIZE / 3) * 2 * SG_MAX_SIZE;
 
-        typedef SgArrayList<SgPoint,MAX_LIBERTIES> LibertyList;
+        typedef SgArrayList<SgPoint, MAX_LIBERTIES> LibertyList;
 
         typedef LibertyList::Iterator LibertyIterator;
 
@@ -530,28 +545,28 @@ public:
 
         void UpdateAnchor(SgPoint p)
         {
-        	if (p < m_anchor)
-            	m_anchor = p;
+            if (p < m_anchor)
+                m_anchor = p;
         }
 
         void AppendLiberty(SgPoint p)
         {
-        	m_liberties.PushBack(p);
+            m_liberties.PushBack(p);
         }
 
         void AppendStone(SgPoint p)
         {
-        	m_stones.PushBack(p);
+            m_stones.PushBack(p);
         }
 
         SgBlackWhite Color() const
         {
-        	return m_color;
+            return m_color;
         }
 
         void ExcludeLiberty(SgPoint p)
         {
-        	m_liberties.Exclude(p);
+            m_liberties.Exclude(p);
         }
 
         void Init(SgBlackWhite c, SgPoint anchor)
@@ -576,35 +591,35 @@ public:
 
         const LibertyList& Liberties() const
         {
-        	return m_liberties;
+            return m_liberties;
         }
 
         int NumLiberties() const
         {
-        	return m_liberties.Length();
+            return m_liberties.Length();
         }
 
         int NumStones() const
         {
-        	return m_stones.Length();
+            return m_stones.Length();
         }
 
         void PopStone()
         {
-        	m_stones.PopBack();
+            m_stones.PopBack();
         }
 
         void SetAnchor(SgPoint p)
         {
-        	m_anchor = p;
+            m_anchor = p;
         }
 
         const GoPointList& Stones() const
         {
-        	return m_stones;
+            return m_stones;
         }
 
-    
+
         SgPoint m_anchor;
 
         SgBlackWhite m_color;
@@ -639,7 +654,7 @@ public:
         static const int START_INDEX_WINKO = 2 * SG_MAXPOINT + 1;
         static const int END_INDEX_WINKO = 2 * SG_MAXPOINT + SG_MAX_SIZE + 1;
         static const int START_INDEX_CAPTURES
-        = 2 * SG_MAXPOINT + SG_MAX_SIZE + 2;
+            = 2 * SG_MAXPOINT + SG_MAX_SIZE + 2;
         static const int END_INDEX_CAPTURES = 3 * SG_MAXPOINT + 63;
 
         // Certain values for SG_MAX_SIZE and WIN_KO_LEVEL can break the
@@ -654,7 +669,7 @@ public:
         BOOST_STATIC_ASSERT(START_INDEX_WINKO + MAX_KOLEVEL * 3 - 1
                             <= END_INDEX_WINKO);
         BOOST_STATIC_ASSERT(END_INDEX_CAPTURES
-                        < SgHashZobristTable::MAX_HASH_INDEX);
+                            < SgHashZobristTable::MAX_HASH_INDEX);
 
         SgHashCode m_hash;
     };
@@ -733,11 +748,11 @@ public:
         SgBlackWhite m_toPlay;
 
         /** Hash code for this board position. */
-        HashCode m_hash; 
+        HashCode m_hash;
 
-        SgBWSet m_all; 
+        SgBWSet m_all;
 
-        SgPointSet m_empty; 
+        SgPointSet m_empty;
 
         SgArray<Block*, SG_MAXPOINT> m_block;
 
@@ -751,7 +766,7 @@ public:
         int m_koLevel;
 
         /** The current board position. */
-        SgArray<int,SG_MAXPOINT> m_color;
+        SgArray<int, SG_MAXPOINT> m_color;
 
         /** Number of black and white neighbors. */
         SgArray<int, SG_MAXPOINT> m_nuNeighborsEmpty;
@@ -864,7 +879,7 @@ public:
     bool IsAdjacentTo(SgPoint p, const Block* block) const;
 
     void MergeBlocks(SgPoint p, SgBlackWhite c,
-                     const SgArrayList<Block*,4>& adjBlocks);
+                     const SgArrayList<Block*, 4>& adjBlocks);
 
     void RemoveLibAndKill(SgPoint p, SgBlackWhite opp, StackEntry& entry);
 
@@ -926,7 +941,7 @@ public:
         /** Return true if iteration is valid, otherwise false. */
         operator bool() const;
 
-    
+
         /** Iterator over original list in GoBoard::Block::StoneList.
             No copy of list is necessary, even if moves are played and undone
             while iterating over the list, since the implementation of GoBoard
@@ -942,7 +957,7 @@ public:
 
         /** Not implemented.
             Prevent unintended usage of operator bool() as an int.
-            Detects bug of forgetting to dereference iterator - 
+            Detects bug of forgetting to dereference iterator -
             it instead of *it
         */
         operator int() const;
@@ -980,7 +995,7 @@ public:
         /** Return true if iteration is valid, otherwise false. */
         operator bool() const;
 
-    
+
         Block::LibertyList::Iterator m_it;
 
         const GoBoard& m_board;
@@ -991,7 +1006,7 @@ public:
 
         /** Not implemented.
             Prevent unintended usage of operator bool() as an int.
-            Detects bug of forgetting to dereference iterator - 
+            Detects bug of forgetting to dereference iterator -
             it instead of *it
         */
         operator int() const;
@@ -1022,7 +1037,7 @@ public:
         /** Return true if iteration is valid, otherwise false. */
         operator bool() const;
 
-    
+
         /** Copy of liberty list.
             Necessary, because if moves are played and undone while iterating
             over liberty list, the implementation of GoBoard does not
@@ -1040,7 +1055,7 @@ public:
 
         /** Not implemented.
             Prevent unintended usage of operator bool() as an int.
-            Detects bug of forgetting to dereference iterator - 
+            Detects bug of forgetting to dereference iterator -
             it instead of *it
         */
         operator int() const;
@@ -1060,7 +1075,7 @@ public:
  */
 template<class BOARD>
 class GoNb4Iterator
-: public SgNbIterator
+    : public SgNbIterator
 {
 public:
     GoNb4Iterator(const BOARD& bd, SgPoint p);
@@ -1068,7 +1083,7 @@ public:
 
 template<class BOARD>
 inline GoNb4Iterator<BOARD>::GoNb4Iterator(const BOARD& bd, SgPoint p)
-: SgNbIterator(bd.BoardConst(), p)
+    : SgNbIterator(bd.BoardConst(), p)
 { }
 
 typedef GoNb4Iterator<GoBoard> GoNbIterator;
@@ -1132,7 +1147,7 @@ inline GoBoard::LibertyIterator::operator bool() const
 }
 
 inline GoBoard::LibertyCopyIterator::LibertyCopyIterator(const GoBoard& bd,
-                                                         SgPoint p)
+        SgPoint p)
     : m_liberties(bd.m_state.m_block[p]->Liberties()),
       m_it(m_liberties),
       m_board(bd)
@@ -1181,7 +1196,7 @@ inline SgHashCode GoBoard::HashCode::GetInclToPlay(SgBlackWhite toPlay) const
 }
 
 inline void GoBoard::HashCode::XorCaptured(int moveNumber,
-                                           SgPoint firstCapturedStone)
+        SgPoint firstCapturedStone)
 {
     int index = 2 * SG_MAXPOINT + moveNumber % 64 + firstCapturedStone;
     SG_ASSERTRANGE(index, START_INDEX_CAPTURES, END_INDEX_CAPTURES);
@@ -1407,9 +1422,9 @@ inline bool GoBoard::IsLibertyOfBlock(SgPoint p, SgPoint anchor) const
     if (m_state.m_nuNeighbors[b->Color()][p] == 0)
         return false;
     return (   m_state.m_block[p - SG_NS] == b
-            || m_state.m_block[p - SG_WE] == b
-            || m_state.m_block[p + SG_WE] == b
-            || m_state.m_block[p + SG_NS] == b);
+               || m_state.m_block[p - SG_WE] == b
+               || m_state.m_block[p + SG_WE] == b
+               || m_state.m_block[p + SG_NS] == b);
 }
 
 inline bool GoBoard::CanCapture(SgPoint p, SgBlackWhite c) const

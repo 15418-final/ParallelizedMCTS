@@ -36,6 +36,8 @@ MCTSPlayer.h \
 mcts.h \
 SpUtil.h
 
+AM_CXXFLAGS = -fopenmp
+
 libfuego_simpleplayers_a_CPPFLAGS = \
 $(BOOST_CPPFLAGS) \
 -I@top_srcdir@/gtpengine \
