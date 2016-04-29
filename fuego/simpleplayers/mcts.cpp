@@ -8,7 +8,7 @@ const double C = 1.4;
 const double EPSILON = 10e-6;
 const int MAX_TRIAL = 500;
 
-const int THREAD_NUM = 1; //ghc41:12*6
+const int THREAD_NUM = 10; //ghc41:12*6
 
 static int totalSimu = 0;
 
@@ -16,7 +16,7 @@ SgPoint Mcts::run() {
 	std::cout << "maxTime:" << maxTime << std::endl;
 	mcts_timer.Start();
 	while (true) {
-		std::cout << "iter" << std::endl;
+//		std::cout << "iter" << std::endl;
 		run_iteration(root);
 		if (checkAbort()) break;
 	}
@@ -39,7 +39,7 @@ SgPoint Mcts::run() {
 }
 
 TreeNode* Mcts::selection(TreeNode* node) {
-	std::cout << "selection begin" << std::endl;
+	//std::cout << "selection begin" << std::endl;
 	double maxv = -10000000;
 	TreeNode* maxn = NULL;
 	int n = node->sims;
@@ -56,12 +56,12 @@ TreeNode* Mcts::selection(TreeNode* node) {
 			maxn = c;
 		}
 	}
-	std::cout << "selection end" << std::endl;
+//	std::cout << "selection end" << std::endl;
 	return maxn;
 }
 // Typical Monte Carlo Simulation
 int Mcts::run_simulation(TreeNode* node) {
-	// std::cout << "run simulation in parallel begin" << std::endl;
+//	 std::cout << "run simulation in parallel begin" << std::endl;
 	GoBoard* board = get_board(node->get_sequence());
 	SgBlackWhite cur_player = board->ToPlay();
 	int wins = 0;
@@ -100,7 +100,7 @@ int Mcts::run_simulation(TreeNode* node) {
 		if (!timeout) {
 			// std::cout << "Time :" <<  1000.0 * double(clock() - start) / CLOCKS_PER_SEC << std::endl;
 			float score = GoBoardUtil::Score(*cur_board, 0); // Komi set to 0
-			// std::cout<<"score calculated:"<<score<<std::endl;
+			//std::cout<<"score calculated:"<<score<<std::endl;
 			if ((score > 0 && cur_player == SG_BLACK)
 			        || (score < 0 && cur_player == SG_WHITE)) {
 				#pragma omp atomic
@@ -113,7 +113,7 @@ int Mcts::run_simulation(TreeNode* node) {
 		// std::cout<<"Board size at end of game(in bytes):"<<cur_board->getMySize()<<std::endl;
 		delete cur_board;
 	}
-	std::cout << "run_simulation end with wins:" << wins << std::endl;
+//std::cout << "run_simulation end with wins:" << wins << std::endl;
 	delete board;
 	return wins;
 }
@@ -129,7 +129,7 @@ void Mcts::back_propagation(TreeNode* node, int win_increase, int sim_increase) 
 }
 
 void Mcts::expand(TreeNode* node) {
-	std::cout << "expand begin" << std::endl;
+//std::cout << "expand begin" << std::endl;
 	GoBoard* cur_board = get_board(node->get_sequence());
 
 	//std::cout<<"cur_board:"<<cur_board<<std::endl;
@@ -147,7 +147,7 @@ void Mcts::expand(TreeNode* node) {
 	delete moves_vec;
 	delete cur_board;
 
-	std::cout << "expand end with children num:" << node->get_children().size() << std::endl;
+//std::cout << "expand end with children num:" << node->get_children().size() << std::endl;
 }
 
 void Mcts::run_iteration(TreeNode* node) {
@@ -158,13 +158,13 @@ void Mcts::run_iteration(TreeNode* node) {
 		TreeNode* f = S.top();
 		S.pop();
 		if (!f->is_expandable()) {
-			//	std::cout<<"select f:"<<f<<std::endl;
+//			std::cout<<"select f:"<<f<<std::endl;
 			S.push(selection(f));
 		} else {
 			// expand current node, run expansion and simulation
 			f->set_expandable(false);
 			expand(f);
-			//std::cout<<"expand f end:"<<f<<std::endl;
+//			std::cout<<"expand f end:"<<f<<std::endl;
 
 			std::vector<TreeNode*> children = f->get_children();
 			for (size_t i = 0; i < children.size(); i++) {
@@ -172,13 +172,14 @@ void Mcts::run_iteration(TreeNode* node) {
 				children[i]->wins += win_increase;
 				children[i]->sims += MAX_TRIAL;
 				back_propagation(children[i], win_increase, MAX_TRIAL);
+                                if (checkAbort()) break;
 			}
 		}
 
 		if (checkAbort()) break;
 	}
 
-	std::cout << "run_iteration end:" << std::endl;
+//	std::cout << "run_iteration end:" << std::endl;
 }
 
 bool Mcts::checkAbort() {
@@ -189,7 +190,6 @@ bool Mcts::checkAbort() {
 }
 
 SgVector<SgPoint>* Mcts::generateAllMoves(GoBoard& cur_board) {
-	//std::cout<<cur_board.m_size<<std::endl;
 	SgPointSet moves = SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), true);
 
 	SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>();
@@ -197,7 +197,6 @@ SgVector<SgPoint>* Mcts::generateAllMoves(GoBoard& cur_board) {
 	int len = moves_vec->Length();
 
 	if (len != 0) {
-		//	std::cout<<"swap"<<std::endl;
 		srand (time(NULL));
 		int swapIndex = rand() % len;
 		moves_vec->swap(0, swapIndex);
