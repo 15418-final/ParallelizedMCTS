@@ -15,7 +15,8 @@ SpRandomPlayer.cpp \
 SpSafePlayer.cpp \
 SpSimplePlayer.cpp \
 MCTSPlayer.cpp \
-mcts.cpp \
+mcts_simulation.cu \
+go_cuda_helper.cu \
 SpUtil.cpp
 
 noinst_HEADERS = \
@@ -37,6 +38,9 @@ mcts.h \
 SpUtil.h
 
 AM_CXXFLAGS = -fopenmp
+
+.cu.o:
+    $(NVCC) $(NVCCFLAGS)  -c -o $@ $<
 
 libfuego_simpleplayers_a_CPPFLAGS = \
 $(BOOST_CPPFLAGS) \

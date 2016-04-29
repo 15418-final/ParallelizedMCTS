@@ -25,6 +25,9 @@
 /* define if the Boost::Unit_Test_Framework library is available */
 #define HAVE_BOOST_UNIT_TEST_FRAMEWORK /**/
 
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#define HAVE_DLFCN_H 1
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
@@ -61,6 +64,13 @@
 /* Define the canonical host CPU type. */
 #define HOST_CPU "x86_64"
 
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#define LT_OBJDIR ".libs/"
+
+/* Define to 1 if your C compiler doesn't accept -c and -o together. */
+/* #undef NO_MINUS_C_MINUS_O */
+
 /* Name of package */
 #define PACKAGE "fuego"
 
@@ -95,3 +105,6 @@
 
 /* Version number of package */
 #define VERSION "1.1.SVN"
+
+/* Defined if CUDA should be used */
+#define _CUDA 1

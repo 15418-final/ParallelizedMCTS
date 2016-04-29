@@ -16,44 +16,44 @@ class SgVector
 {
 public:
     /** Construct empty vector. */
-    SgVector()
+    __host__ __device__ SgVector()
         : m_vec()
     { }
     
     /** Return reference to element.
         @param index Position of element in range <code>0..length-1</code>. */
-    T& operator[](int index)
+    __host__ __device__ T& operator[](int index)
     {
         return m_vec[index];
     }
 
     /** Return const reference to element.
         @param index Position of element in range <code>0..length-1</code>. */
-    const T& operator[](int index) const
+    __host__ __device__  const T& operator[](int index) const
     {
         return m_vec[index];
     }
 
     /** Assignment operator.
         Copy content of other vector. */
-    SgVector<T>& operator=(const SgVector<T>& v);
+    __host__ __device__ SgVector<T>& operator=(const SgVector<T>& v);
 
     /** Compare whether the contents of two vectors are identical.
         Same length, and the same elements in the same sequence. */
-    bool operator==(const SgVector<T>& rhs) const
+    __host__ __device__  bool operator==(const SgVector<T>& rhs) const
     {
         return m_vec == rhs.m_vec;
     }
 
     /** Compare whether the contents of two vectors are not identical. */
-    bool operator!=(const SgVector& rhs) const
+    __host__ __device__ bool operator!=(const SgVector& rhs) const
     {
         return ! (*this == rhs);
     }
             
     /** Returns the last element of the vector.
         Asserts if the vector is empty. */
-    const T& Back() const
+    __host__ __device__  const T& Back() const
     {
         SG_ASSERT(NonEmpty());
         return m_vec.back();
@@ -264,17 +264,17 @@ public:
         @todo speed it up */
     bool UniqueElements() const;
 
-    std::vector<T>& Vector()
+    __host__ __device__  std::vector<T>& Vector()
     {
         return m_vec;
     }
     
-    const std::vector<T>& Vector() const
+    __host__ __device__ const std::vector<T>& Vector() const
     {
         return m_vec;
     }
 
-    void swap(int i, int j) {
+    __host__ __device__ void swap(int i, int j) {
         std::swap(m_vec[i], m_vec[j]);
     }
     

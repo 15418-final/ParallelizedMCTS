@@ -188,7 +188,7 @@ public:
     SgBlackWhite GetStone(SgPoint p) const;
 
     /** %Player whose turn it is to play. */
-    SgBlackWhite ToPlay() const;
+    __host__ __device__ SgBlackWhite ToPlay() const;
 
     /** Opponent of player whose turn it is to play. */
     SgBlackWhite Opponent() const;

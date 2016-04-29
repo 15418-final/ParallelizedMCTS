@@ -24,6 +24,9 @@
 /* define if the Boost::Unit_Test_Framework library is available */
 #undef HAVE_BOOST_UNIT_TEST_FRAMEWORK
 
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
@@ -60,6 +63,13 @@
 /* Define the canonical host CPU type. */
 #undef HOST_CPU
 
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#undef LT_OBJDIR
+
+/* Define to 1 if your C compiler doesn't accept -c and -o together. */
+#undef NO_MINUS_C_MINUS_O
+
 /* Name of package */
 #undef PACKAGE
 
@@ -94,3 +104,6 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Defined if CUDA should be used */
+#undef _CUDA

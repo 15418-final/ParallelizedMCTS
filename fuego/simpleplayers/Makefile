@@ -92,7 +92,9 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_boost_base.m4 \
 	$(top_srcdir)/m4/ax_boost_unit_test_framework.m4 \
 	$(top_srcdir)/m4/ax_cflags_gcc_option.m4 \
 	$(top_srcdir)/m4/ax_cflags_warn_all.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
+	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
+	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
@@ -100,7 +102,6 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LIBRARIES = $(noinst_LIBRARIES)
-AR = ar
 ARFLAGS = cru
 AM_V_AR = $(am__v_AR_$(V))
 am__v_AR_ = $(am__v_AR_$(AM_DEFAULT_VERBOSITY))
@@ -123,7 +124,6 @@ am_libfuego_simpleplayers_a_OBJECTS =  \
 	libfuego_simpleplayers_a-SpSafePlayer.$(OBJEXT) \
 	libfuego_simpleplayers_a-SpSimplePlayer.$(OBJEXT) \
 	libfuego_simpleplayers_a-MCTSPlayer.$(OBJEXT) \
-	libfuego_simpleplayers_a-mcts.$(OBJEXT) \
 	libfuego_simpleplayers_a-SpUtil.$(OBJEXT)
 libfuego_simpleplayers_a_OBJECTS =  \
 	$(am_libfuego_simpleplayers_a_OBJECTS)
@@ -149,13 +149,18 @@ am__v_lt_0 = --silent
 am__v_lt_1 = 
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+LTCXXCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CXXFLAGS) $(CXXFLAGS)
 AM_V_CXX = $(am__v_CXX_$(V))
 am__v_CXX_ = $(am__v_CXX_$(AM_DEFAULT_VERBOSITY))
 am__v_CXX_0 = @echo "  CXX     " $@;
 am__v_CXX_1 = 
 CXXLD = $(CXX)
-CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
-	-o $@
+CXXLINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_CXXLD = $(am__v_CXXLD_$(V))
 am__v_CXXLD_ = $(am__v_CXXLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
@@ -191,6 +196,7 @@ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing aclocal-1.13
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
+AR = ar
 AUTOCONF = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing autoconf
 AUTOHEADER = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing autoheader
 AUTOMAKE = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing automake-1.13
@@ -208,32 +214,52 @@ CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
+CUDA_CFLAGS =  -I/usr/local/depot/cuda-6.5/C/common/inc/ -I/usr/local/depot/cuda-6.5/include
+CUDA_LDFLAGS = -L/usr/local/depot/cuda-6.5/lib64
+CUDA_LIBS = -lcuda -lcudart -lcufft
 CXX = g++
+CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2 -DNDEBUG -Wall -Wextra
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
+DLLTOOL = false
+DSYMUTIL = 
+DUMPBIN = 
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
 EGREP = /usr/bin/grep -E
 EXEEXT = 
+FGREP = /usr/bin/grep -F
 GREP = /usr/bin/grep
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
+LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = 
 LIBOBJS = 
 LIBS = 
+LIBTOOL = $(SHELL) $(top_builddir)/libtool
+LIPO = 
+LN_S = ln -s
 LTLIBOBJS = 
 MAINT = #
 MAKEINFO = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing makeinfo
+MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
+NM = /usr/bin/nm -B
+NMEDIT = 
+NVCC = nvcc
+NVCCFLAGS =   -I/usr/local/depot/cuda-6.5/C/common/inc/ -I/usr/local/depot/cuda-6.5/include -L/usr/local/depot/cuda-6.5/lib64 -lcuda -lcudart -lcufft
+OBJDUMP = objdump
 OBJEXT = o
 OPENMP_CFLAGS = -fopenmp
+OTOOL = 
+OTOOL64 = 
 PACKAGE = fuego
 PACKAGE_BUGREPORT = 
 PACKAGE_NAME = fuego
@@ -243,16 +269,19 @@ PACKAGE_URL =
 PACKAGE_VERSION = 1.1.SVN
 PATH_SEPARATOR = :
 RANLIB = ranlib
+SED = /usr/bin/sed
 SET_MAKE = 
 SHELL = /bin/sh
-STRIP = 
+STRIP = strip
 VERSION = 1.1.SVN
 abs_builddir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/simpleplayers
 abs_srcdir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/simpleplayers
 abs_top_builddir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego
 abs_top_srcdir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego
+ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
+ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .
 am__quote = 
@@ -314,7 +343,8 @@ SpRandomPlayer.cpp \
 SpSafePlayer.cpp \
 SpSimplePlayer.cpp \
 MCTSPlayer.cpp \
-mcts.cpp \
+mcts_simulation.cu \
+go_cuda_helper.cu \
 SpUtil.cpp
 
 noinst_HEADERS = \
@@ -346,7 +376,7 @@ DISTCLEANFILES = *~
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cpp .o .obj
+.SUFFIXES: .cpp .lo .o .obj
 $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -407,7 +437,6 @@ include ./$(DEPDIR)/libfuego_simpleplayers_a-SpRandomPlayer.Po
 include ./$(DEPDIR)/libfuego_simpleplayers_a-SpSafePlayer.Po
 include ./$(DEPDIR)/libfuego_simpleplayers_a-SpSimplePlayer.Po
 include ./$(DEPDIR)/libfuego_simpleplayers_a-SpUtil.Po
-include ./$(DEPDIR)/libfuego_simpleplayers_a-mcts.Po
 
 .cpp.o:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -422,6 +451,13 @@ include ./$(DEPDIR)/libfuego_simpleplayers_a-mcts.Po
 #	$(AM_V_CXX)source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
+	$(AM_V_CXX)$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+#	$(AM_V_CXX)source='$<' object='$@' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(LTCXXCOMPILE) -c -o $@ $<
 
 libfuego_simpleplayers_a-SpAveragePlayer.o: SpAveragePlayer.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-SpAveragePlayer.o -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-SpAveragePlayer.Tpo -c -o libfuego_simpleplayers_a-SpAveragePlayer.o `test -f 'SpAveragePlayer.cpp' || echo '$(srcdir)/'`SpAveragePlayer.cpp
@@ -619,20 +655,6 @@ libfuego_simpleplayers_a-MCTSPlayer.obj: MCTSPlayer.cpp
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-MCTSPlayer.obj `if test -f 'MCTSPlayer.cpp'; then $(CYGPATH_W) 'MCTSPlayer.cpp'; else $(CYGPATH_W) '$(srcdir)/MCTSPlayer.cpp'; fi`
 
-libfuego_simpleplayers_a-mcts.o: mcts.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-mcts.o -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-mcts.Tpo -c -o libfuego_simpleplayers_a-mcts.o `test -f 'mcts.cpp' || echo '$(srcdir)/'`mcts.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libfuego_simpleplayers_a-mcts.Tpo $(DEPDIR)/libfuego_simpleplayers_a-mcts.Po
-#	$(AM_V_CXX)source='mcts.cpp' object='libfuego_simpleplayers_a-mcts.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-mcts.o `test -f 'mcts.cpp' || echo '$(srcdir)/'`mcts.cpp
-
-libfuego_simpleplayers_a-mcts.obj: mcts.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-mcts.obj -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-mcts.Tpo -c -o libfuego_simpleplayers_a-mcts.obj `if test -f 'mcts.cpp'; then $(CYGPATH_W) 'mcts.cpp'; else $(CYGPATH_W) '$(srcdir)/mcts.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libfuego_simpleplayers_a-mcts.Tpo $(DEPDIR)/libfuego_simpleplayers_a-mcts.Po
-#	$(AM_V_CXX)source='mcts.cpp' object='libfuego_simpleplayers_a-mcts.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-mcts.obj `if test -f 'mcts.cpp'; then $(CYGPATH_W) 'mcts.cpp'; else $(CYGPATH_W) '$(srcdir)/mcts.cpp'; fi`
-
 libfuego_simpleplayers_a-SpUtil.o: SpUtil.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-SpUtil.o -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-SpUtil.Tpo -c -o libfuego_simpleplayers_a-SpUtil.o `test -f 'SpUtil.cpp' || echo '$(srcdir)/'`SpUtil.cpp
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libfuego_simpleplayers_a-SpUtil.Tpo $(DEPDIR)/libfuego_simpleplayers_a-SpUtil.Po
@@ -646,6 +668,12 @@ libfuego_simpleplayers_a-SpUtil.obj: SpUtil.cpp
 #	$(AM_V_CXX)source='SpUtil.cpp' object='libfuego_simpleplayers_a-SpUtil.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-SpUtil.obj `if test -f 'SpUtil.cpp'; then $(CYGPATH_W) 'SpUtil.cpp'; else $(CYGPATH_W) '$(srcdir)/SpUtil.cpp'; fi`
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -766,7 +794,8 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
+clean-am: clean-generic clean-libtool clean-noinstLIBRARIES \
+	mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
@@ -821,7 +850,8 @@ maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-am
 
-mostlyclean-am: mostlyclean-compile mostlyclean-generic
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
 
 pdf: pdf-am
 
@@ -836,17 +866,18 @@ uninstall-am:
 .MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
-	clean-noinstLIBRARIES cscopelist-am ctags ctags-am distclean \
-	distclean-compile distclean-generic distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
+	clean-libtool clean-noinstLIBRARIES cscopelist-am ctags \
+	ctags-am distclean distclean-compile distclean-generic \
+	distclean-libtool distclean-tags distdir dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic pdf pdf-am ps ps-am tags tags-am uninstall \
-	uninstall-am
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-am uninstall uninstall-am
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

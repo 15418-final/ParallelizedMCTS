@@ -93,18 +93,19 @@ public:
 
 	//Run MCTS and get 
 	SgPoint run();
-
+	int getBoardSize(){
+		return bd_size;
+	}
 	//Doing selection using UCT(Upper Confidence bound applied to Trees)
 	void run_iteration(TreeNode* node);
 
 	TreeNode *selection(TreeNode* node);
 	void expand(TreeNode* node);
 	void back_propagation(TreeNode* node, int win_increase, int sim_increase);
-	int run_simulation(TreeNode* node);
 
 	bool checkAbort();
-	SgVector<SgPoint>* generateAllMoves(GoBoard& cur_board);
-	GoBoard* get_board(std::vector<SgPoint> sequence);
+	// SgVector<SgPoint>* generateAllMoves(GoBoard& cur_board);
+	// __device__ GoBoard* get_board(std::vector<SgPoint> sequence);
 };
 
 #endif
