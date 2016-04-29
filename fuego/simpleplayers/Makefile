@@ -124,6 +124,7 @@ am_libfuego_simpleplayers_a_OBJECTS =  \
 	libfuego_simpleplayers_a-SpSafePlayer.$(OBJEXT) \
 	libfuego_simpleplayers_a-SpSimplePlayer.$(OBJEXT) \
 	libfuego_simpleplayers_a-MCTSPlayer.$(OBJEXT) \
+	mcts_simulation.$(OBJEXT) go_cuda_helper.$(OBJEXT) \
 	libfuego_simpleplayers_a-SpUtil.$(OBJEXT)
 libfuego_simpleplayers_a_OBJECTS =  \
 	$(am_libfuego_simpleplayers_a_OBJECTS)
@@ -193,18 +194,18 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing aclocal-1.13
+ACLOCAL = ${SHELL} /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/missing aclocal-1.13
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing autoconf
-AUTOHEADER = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing autoheader
-AUTOMAKE = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing automake-1.13
+AUTOCONF = ${SHELL} /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/missing autoconf
+AUTOHEADER = ${SHELL} /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/missing autoheader
+AUTOMAKE = ${SHELL} /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/missing automake-1.13
 AWK = gawk
-BOOST_CPPFLAGS = -pthread -I/afs/andrew.cmu.edu/usr18/qzhuang/private/boost/include
+BOOST_CPPFLAGS = -pthread -I/afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/boost/include
 BOOST_DATE_TIME_LIB = -lboost_date_time
 BOOST_FILESYSTEM_LIB = -lboost_filesystem
-BOOST_LDFLAGS = -L/afs/andrew.cmu.edu/usr18/qzhuang/private/boost/lib
+BOOST_LDFLAGS = -L/afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/boost/lib
 BOOST_PROGRAM_OPTIONS_LIB = -lboost_program_options
 BOOST_SYSTEM_LIB = -lboost_system
 BOOST_THREAD_LIB = -lboost_thread
@@ -214,9 +215,9 @@ CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
-CUDA_CFLAGS =  -I/usr/local/depot/cuda-6.5/C/common/inc/ -I/usr/local/depot/cuda-6.5/include
-CUDA_LDFLAGS = -L/usr/local/depot/cuda-6.5/lib64
-CUDA_LIBS = -lcuda -lcudart -lcufft
+CUDA_CFLAGS = 
+CUDA_LDFLAGS = 
+CUDA_LIBS = 
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
@@ -248,13 +249,13 @@ LIPO =
 LN_S = ln -s
 LTLIBOBJS = 
 MAINT = #
-MAKEINFO = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing makeinfo
+MAKEINFO = ${SHELL} /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
 NMEDIT = 
-NVCC = nvcc
-NVCCFLAGS =   -I/usr/local/depot/cuda-6.5/C/common/inc/ -I/usr/local/depot/cuda-6.5/include -L/usr/local/depot/cuda-6.5/lib64 -lcuda -lcudart -lcufft
+NVCC = 
+NVCCFLAGS = 
 OBJDUMP = objdump
 OBJEXT = o
 OPENMP_CFLAGS = -fopenmp
@@ -274,10 +275,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 VERSION = 1.1.SVN
-abs_builddir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/simpleplayers
-abs_srcdir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/simpleplayers
-abs_top_builddir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego
-abs_top_srcdir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego
+abs_builddir = /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/simpleplayers
+abs_srcdir = /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/simpleplayers
+abs_top_builddir = /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego
+abs_top_srcdir = /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -307,7 +308,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/install-sh
+install_sh = ${SHELL} /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -376,7 +377,7 @@ DISTCLEANFILES = *~
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cpp .lo .o .obj
+.SUFFIXES: .cpp .cu .lo .o .obj
 $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -879,6 +880,9 @@ uninstall-am:
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags tags-am uninstall uninstall-am
 
+
+.cu.o:
+    $(NVCC) $(NVCCFLAGS)  -c -o $@ $<
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

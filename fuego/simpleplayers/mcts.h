@@ -16,6 +16,8 @@
 #include "SgBlackWhite.h"
 #include "GoBoard.h"
 #include "GoBoardUtil.h"
+#include "point.h"
+#include "CudaGo.h"
 
 
 class TreeNode {
@@ -31,10 +33,12 @@ public:
 	TreeNode(std::vector<Point> parent_sequence, Point move)
 			:  expandable(true), wins(0), sims(0), parent(NULL) {
 		sequence = parent_sequence;
-		if (move != SG_NULLMOVE) {
-			sequence.push_back(move);
-		}
-		
+		sequence.push_back(move);		
+	}
+
+	TreeNode(std::vector<Point> parent_sequence)
+			:  expandable(true), wins(0), sims(0), parent(NULL) {
+		sequence = parent_sequence;
 	}
 
 	~TreeNode() {
@@ -78,16 +82,16 @@ private:
 
 	//std::unordered_map<Board*, TreeNode*, BoardHasher> dict;
 public:
-	Mcts(CudaBoard& bd, double maxTime) {
+	Mcts(GoBoard& bd, double maxTime) {
 		//std::cout<<"Mcts constructor, copied GoBoard"<<std::endl;
 		std::vector<Point> seq;
 		std::vector<SgPoint> sgseq = GoBoardUtil::GetSequence(bd);
-		for(SgPoint sp : sgseq){
-			Point* np = new Point(sp)
+		for(std::vector<SgPoint>::iterator it = sgseq.begin(); it != sgseq.end(); it++) {
+			Point* np = new Point(*it);
 			seq.push_back(*np);
 			delete np;
 		}
-		root = new TreeNode(seq, SG_NULLMOVE);
+		root = new TreeNode(seq);
 		this->maxTime = maxTime;
 		abort = false;
 
@@ -110,8 +114,9 @@ public:
 	void expand(TreeNode* node);
 	void back_propagation(TreeNode* node, int win_increase, int sim_increase);
 
+	CudaBoard* get_board(std::vector<Point> sequence, int bd_size);
 	bool checkAbort();
-	// SgVector<SgPoint>* generateAllMoves(GoBoard& cur_board);
+	std::vector<Point*> generateAllMoves(CudaBoard* cur_board);
 	// __device__ GoBoard* get_board(std::vector<SgPoint> sequence);
 };
 

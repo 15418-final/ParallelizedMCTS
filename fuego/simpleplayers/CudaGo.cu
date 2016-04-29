@@ -1,15 +1,13 @@
 #include <iostream>
 #include "CudaGo.h"
+__device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color) {
+	int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
 
-int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
-
-bool CudaBoard::canEat(int i, int j, COLOR color) {
 	board[i][j] = color;
 	bool result = false;
 	COLOR op_color = static_cast<COLOR>(color ^ 3);
 	thrust::device_vector<Point*> Q;
-	bool visited[BSIZE + 2][BSIZE + 2];
-	memset(visited, 0 , (BSIZE + 2) * (BSIZE + 2));
+	clearVisited();
 	for (int d = 0 ; d < 4; d++) {
 		int ni = i + dir[d][0];
 		int nj = j + dir[d][1];
@@ -45,10 +43,11 @@ bool CudaBoard::canEat(int i, int j, COLOR color) {
 	return result;
 }
 
-bool CudaBoard::isSuicide(int i, int j, COLOR color) {
+__device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color) {
+	int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
+
 	thrust::device_vector<Point*> Q;
-	bool visited[BSIZE + 2][BSIZE + 2];
-	memset(visited, 0 , (BSIZE + 2) * (BSIZE + 2));
+	clearVisited();
 	Q.push_back(new Point(i, j));
 	while (Q.size() != 0)  {
 		Point* f = Q.front();
@@ -69,7 +68,8 @@ bool CudaBoard::isSuicide(int i, int j, COLOR color) {
 	return true;
 }
 
-thrust::device_vector<Point*> CudaBoard::get_next_moves(COLOR color) {
+__device__  thrust::device_vector<Point*> CudaBoard::get_next_moves_device() {
+    COLOR color = currentPlayer;
 	thrust::device_vector<Point*> moves;
 	for (int i = 1; i < BSIZE + 1; i++) {
 		for (int j = 1; j < BSIZE + 1; j++) {
@@ -89,14 +89,39 @@ thrust::device_vector<Point*> CudaBoard::get_next_moves(COLOR color) {
 	}
 	return moves;
 }
+
+std::vector<Point*> CudaBoard::get_next_moves_host() {
+    COLOR color = currentPlayer;
+	std::vector<Point*> moves;
+	for (int i = 1; i < BSIZE + 1; i++) {
+		for (int j = 1; j < BSIZE + 1; j++) {
+			if (board[i][j] == EMPTY) { //This is position is empty
+				//TODO: Check whether it can eat other stones
+				//If not, check whether it's a suicide, which is forbidden.
+			//	std::cout << "check" << i << ", " << j <<std::endl;
+
+				if (!canEat(i, j, color) && isSuicide(i, j, color)) {
+				//	if (!canEat(i, j, color))std::cout << "can not eat" << std::endl;
+				//	if (isSuicide(i, j, color)) std::cout << "is suicide" << std::endl;
+					continue;
+				}
+				moves.push_back(new Point(i, j));
+			}
+		}
+	}
+	return moves;
+}
+
 //return the number of stones that are killed.
-int CudaBoard::update_board(Point* pos, COLOR color) {
+__device__  int CudaBoard::update_board(Point* pos) {
+	int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
+
+	COLOR color = currentPlayer;
 	board[pos->i][pos->j] = color;
 	//TODO: Remove stones if necessary
 	COLOR op_color = static_cast<COLOR>(color ^ 3);
 	thrust::device_vector<Point*> Q;
-	bool visited[BSIZE + 2][BSIZE + 2];
-	memset(visited, 0 , (BSIZE + 2) * (BSIZE + 2));
+	clearVisited();
 	thrust::device_vector<Point*> temp_stone;
 	int total = 0;
 	for (int d = 0 ; d < 4; d++) {
@@ -159,7 +184,7 @@ void CudaBoard::print_board() {
 	}
 }
 
-bool CudaBoard::EndOfGame() {
+__device__ bool CudaBoard::EndOfGame() {
 	COLOR color = currentPlayer;
 	for (int i = 1; i < BSIZE + 1; i++) {
 		for (int j = 1; j < BSIZE + 1; j++) {
@@ -174,7 +199,7 @@ bool CudaBoard::EndOfGame() {
 	return true;
 }
 
-int CudaBoard::score() {
+__device__  int CudaBoard::score() {
 	int black = 0;
 	int white = 0;
 
