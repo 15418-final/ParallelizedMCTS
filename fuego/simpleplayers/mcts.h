@@ -20,7 +20,7 @@
 
 class TreeNode {
 private:
-	std::vector<SgPoint> sequence;
+	std::vector<Point> sequence;
 	std::vector<TreeNode*> children;
 	bool expandable;     // unexpaned
 
@@ -28,7 +28,7 @@ public:
 	int wins; // Number of wins so far
 	int sims; // Number of simulations so far
 	TreeNode* parent;
-	TreeNode(std::vector<SgPoint> parent_sequence, SgPoint move)
+	TreeNode(std::vector<Point> parent_sequence, Point move)
 			:  expandable(true), wins(0), sims(0), parent(NULL) {
 		sequence = parent_sequence;
 		if (move != SG_NULLMOVE) {
@@ -41,7 +41,7 @@ public:
 		for (std::vector<TreeNode*>::iterator it = children.begin(); it != children.end(); it++) {
 			delete *it;
 		}
-		std::vector<SgPoint>().swap(sequence);
+		std::vector<Point>().swap(sequence);
 		parent = NULL;
 	}
 
@@ -60,7 +60,7 @@ public:
 		return children;
 	}
 
-	std::vector<SgPoint> get_sequence(){
+	std::vector<Point> get_sequence(){
 		return sequence;
 	}
 };
@@ -78,9 +78,16 @@ private:
 
 	//std::unordered_map<Board*, TreeNode*, BoardHasher> dict;
 public:
-	Mcts(GoBoard& bd, double maxTime) {
+	Mcts(CudaBoard& bd, double maxTime) {
 		//std::cout<<"Mcts constructor, copied GoBoard"<<std::endl;
-		root = new TreeNode(GoBoardUtil::GetSequence(bd), SG_NULLMOVE);
+		std::vector<Point> seq;
+		std::vector<SgPoint> sgseq = GoBoardUtil::GetSequence(bd);
+		for(SgPoint sp : sgseq){
+			Point* np = new Point(sp)
+			seq.push_back(*np);
+			delete np;
+		}
+		root = new TreeNode(seq, SG_NULLMOVE);
 		this->maxTime = maxTime;
 		abort = false;
 

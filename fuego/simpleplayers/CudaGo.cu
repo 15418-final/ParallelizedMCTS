@@ -127,12 +127,13 @@ int CudaBoard::update_board(Point* pos, COLOR color) {
 			}
 			if (liberty == 0) {
 				total += temp_stone.size();
-				for (Point* p : temp_stone) {
+				for (thrust::device_vector<Point*>::iterator it = temp_stone.begin(); it != temp_stone.end(); it++) {
+					Point* p = *it;
 					board[p->i][p->j] = EMPTY;
 				}
 			}
-			for (Point* p : temp_stone) {
-				delete p;
+			for (thrust::device_vector<Point*>::iterator it = temp_stone.begin(); it != temp_stone.end(); it++) {
+				delete *it;
 			}
 			temp_stone.clear();
 		}

@@ -9,6 +9,7 @@
 #include <thrust/device_malloc.h>
 #include <thrust/device_free.h>
 #include "mcts.h"
+#include "CudaGo.h"
 
 //Exploration parameter
 __constant__ double C = 1.4;
@@ -18,8 +19,8 @@ __constant__ int THREAD_NUM = 32;
 
 
 __device__ bool checkAbort();
-__device__ SgVector<SgPoint>* generateAllMoves(GoBoard& cur_board);
-__device__ GoBoard* get_board(std::vector<SgPoint> sequence, int bd_size);
+__device__ SgVector<SgPoint>* generateAllMoves(CudaBoard& cur_board);
+__device__ CudaBoard* get_board(std::vector<Point> sequence, int bd_size);
 __global__ void run_simulation(TreeNode* node, int* win_increase);
 
 SgPoint Mcts::run() {
@@ -43,7 +44,7 @@ SgPoint Mcts::run() {
 		return SG_NULLMOVE;
 	}
 	// std::cout << "Total simulation runs:" << totalSimu << std::endl;
-	return best->get_sequence().back();
+	return best->get_sequence().back().ToSgPoint();
 }
 
 TreeNode* Mcts::selection(TreeNode* node) {
@@ -65,23 +66,23 @@ TreeNode* Mcts::selection(TreeNode* node) {
 }
 // Typical Monte Carlo Simulation
 __global__ void run_simulation(Mcts* m, TreeNode* node, int* win_increase) {
-	GoBoard* board = get_board(node->get_sequence(), m->getBoardSize());
-	SgBlackWhite cur_player = board->ToPlay();
+	CudaBoard* board = get_board(node->get_sequence(), m->getBoardSize());
+	COLOR cur_player = board->ToPlay();
 	int wins = 0;
 	for (int i = 0; i < MAX_TRIAL; i++) {
 		bool timeout = false;
-		GoBoard* cur_board = new GoBoard(*board);
+		CudaBoard* cur_board = new CudaBoard(*board);
 		clock_t start = clock();
 		while (true) {
-			SgVector<SgPoint>* moves_vec = generateAllMoves(*cur_board);
-			if (GoBoardUtil::EndOfGame(*cur_board) || moves_vec->Length() == 0) {
+			std::vector<Point> moves_vec = cur_board->get_next_moves();
+			if (cur_board->EndOfGame(*cur_board) || moves_vec.size() == 0) {
 				break;
 			}
 			//why nxt_move length can be zero? what does endofgame do above?
 			// std::cout << "moves_vec length:" << moves_vec->Length() << std::endl;
-			SgPoint nxt_move = (*moves_vec)[rand() % moves_vec->Length()];
+			Point nxt_move = (*moves_vec)[rand() % moves_vec.size()];
 			
-			cur_board->Play(nxt_move);
+			cur_board->update_board(nxt_move);
 			delete moves_vec;
 			// if (checkAbort()) {
 			// 	timeout = true;
@@ -89,9 +90,9 @@ __global__ void run_simulation(Mcts* m, TreeNode* node, int* win_increase) {
 			// }
 		}
 		if (!timeout) {
-			float score = GoBoardUtil::Score(*cur_board, 0); // Komi set to 0
-			if ((score > 0 && cur_player == SG_BLACK)
-			        || (score < 0 && cur_player == SG_WHITE)) {
+			float score = cur_board->score(); // Komi set to 0
+			if ((score > 0 && cur_player == BLACK)
+			        || (score < 0 && cur_player == WHITE)) {
 				wins++;
 			}
 			// totalSimu ++;
@@ -114,19 +115,12 @@ void Mcts::back_propagation(TreeNode* node, int win_increase, int sim_increase) 
 
 void Mcts::expand(TreeNode* node) {
 	std::cout << "expand begin" << std::endl;
-	GoBoard* cur_board = get_board(node->get_sequence(),bd_size);
+	CudaBoard* cur_board = get_board(node->get_sequence(),bd_size);
 
-	//std::cout<<"cur_board:"<<cur_board<<std::endl;
-	SgVector<SgPoint>* moves_vec = generateAllMoves(*cur_board);
-	//SpUtil::GetRelevantMoves(*cur_board, cur_board->ToPlay(), true).ToVector(moves_vec);
-	//std::cout<<"expand: nxt moves num:"<<moves_vec->Length()<<std::endl;
+	std::vector<Point> moves_vec = cur_board->get_next_moves();
 	while (moves_vec->Length() > 0) {
-		SgPoint nxt_move = moves_vec->PopFront();
-		// std::cout << "In expand:nxt_move get:" << nxt_move << std::endl;
-		//std::cout << "In expand:nxt color:" << newBoard->ToPlay() << std::endl;
-		//std::cout << "after play" << std::endl;
+		Point nxt_move = moves_vec->front();
 		node->add_children(new TreeNode(node->get_sequence(), nxt_move));
-		//std::cout << "after add children" << std::endl;
 	}
 	delete moves_vec;
 	delete cur_board;
@@ -173,7 +167,6 @@ void Mcts::run_iteration(TreeNode* node) {
 				if(checkAbort())break;
 			}
 		}
-
 		if (checkAbort()) break;
 	}
 
@@ -187,13 +180,9 @@ bool Mcts::checkAbort() {
 	return abort;
 }
 
-__device__ SgVector<SgPoint>* generateAllMoves(GoBoard& cur_board) {
-	//std::cout<<cur_board.m_size<<std::endl;
-	SgPointSet moves = SpUtil::GetRelevantMoves(cur_board, cur_board.ToPlay(), true);
-
-	SgVector<SgPoint>* moves_vec = new SgVector<SgPoint>();
-	moves.ToVector(moves_vec);
-	int len = moves_vec->Length();
+__device__ SgVector<Point>* generateAllMoves(CudaBoard& cur_board) {
+	std::std::vector<Point> moves = cur_board->get_next_moves();
+	int len = moves_vec.size();
 
 	if (len != 0) {
 		srand (time(NULL));
@@ -203,10 +192,10 @@ __device__ SgVector<SgPoint>* generateAllMoves(GoBoard& cur_board) {
 	return moves_vec;
 }
 
-__device__ GoBoard* get_board(std::vector<SgPoint> sequence, int bd_size) {
-	GoBoard* bd = new GoBoard(bd_size);
-	for (std::vector<SgPoint>::iterator it = sequence.begin(); it != sequence.end(); it++) {
-		bd->Play(*it);
+__device__ CudaBoard* get_board(std::vector<Point> sequence, int bd_size) {
+	CudaBoard* bd = new CudaBoard(bd_size);
+	for (std::vector<Point>::iterator it = sequence.begin(); it != sequence.end(); it++) {
+		bd->update_board(*it);
 	}
 	return bd;
 }
