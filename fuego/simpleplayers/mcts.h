@@ -11,6 +11,7 @@
 #include <omp.h>
 
 #include "SgSystem.h"
+#include "SgRandom.h"
 #include "SgTimer.h"
 #include "SpUtil.h"
 #include "SgBlackWhite.h"

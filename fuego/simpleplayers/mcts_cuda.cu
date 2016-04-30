@@ -3,7 +3,7 @@
 #include <cuda_runtime.h>
 #include <driver_functions.h>
 #include <cstdio>
-#include <ctime>
+// #include <ctime>
 #include <thrust/scan.h>
 #include <thrust/device_ptr.h>
 #include <thrust/device_malloc.h>
@@ -38,7 +38,7 @@ template <typename T>
 KernelArray<T> convertToKernel(thrust::device_vector<T>& dVec);
 
 SgPoint Mcts::run() {
-	mcts_timer.Start();
+	// mcts_timer.Start();
 	while (true) {
 		run_iteration(root);
 		if (checkAbort()) break;
@@ -87,7 +87,7 @@ __global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd
 	
 	int wins = 0;
 	for (int i = 0; i < MAX_TRIAL; i++) {
-		bool timeout = false;
+		// bool timeout = false;
 		CudaBoard* cur_board = new CudaBoard(*board);
 		clock_t start = clock();
 		while (true) {
@@ -106,7 +106,7 @@ __global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd
 			// 	break;
 			// }
 		}
-		if (!timeout) {
+		if (true) {
 			int score = cur_board->score(); // Komi set to 0
 			if ((score > 0 && cur_player == BLACK)
 			        || (score < 0 && cur_player == WHITE)) {
@@ -198,7 +198,7 @@ void Mcts::run_iteration(TreeNode* node) {
 
 bool Mcts::checkAbort() {
 	if (!abort) {
-		abort = mcts_timer.GetTime() > maxTime;
+		// abort = mcts_timer.GetTime() > maxTime;
 	}
 	return abort;
 }
@@ -223,13 +223,13 @@ std::vector<Point*> Mcts::generateAllMoves(CudaBoard* cur_board) {
 	std::vector<Point*> moves_vec = cur_board->get_next_moves_host();
 	int len = moves_vec.size();
 
-	if (len != 0) {
-		srand (time(NULL));
-		int swapIndex = rand() % len;
-		Point* temp = moves_vec[0];
-		moves_vec[0] = moves_vec[swapIndex];
-		moves_vec[swapIndex] = temp;
-	}
+	// if (len != 0) {
+	// 	srand (time(NULL));
+	// 	int swapIndex = rand() % len;
+	// 	Point* temp = moves_vec[0];
+	// 	moves_vec[0] = moves_vec[swapIndex];
+	// 	moves_vec[swapIndex] = temp;
+	// }
 	return moves_vec;
 }
 

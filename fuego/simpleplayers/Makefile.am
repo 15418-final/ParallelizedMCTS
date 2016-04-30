@@ -15,8 +15,8 @@ SpRandomPlayer.cpp \
 SpSafePlayer.cpp \
 SpSimplePlayer.cpp \
 MCTSPlayer.cpp \
-mcts_simulation.cu \
-go_cuda_helper.cu \
+mcts_cuda.cu \
+CudaGo.cu \
 SpUtil.cpp
 
 noinst_HEADERS = \
@@ -35,6 +35,10 @@ SpSafePlayer.h \
 SpSimplePlayer.h \
 MCTSPlayer.h \
 mcts.h \
+CudaGo.h \
+point.h \
+deque.h \
+CudaDequeue.h \
 SpUtil.h
 
 AM_CXXFLAGS = -fopenmp

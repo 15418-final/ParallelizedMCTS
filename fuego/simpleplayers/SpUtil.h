@@ -18,7 +18,7 @@ namespace SpUtil
     /** Get all legal moves.
         Filters out moves into own safe territory with no opponent stones
         adjacent if useFilter. */
-    __device__ __host__ SgPointSet GetRelevantMoves(GoBoard& bd, SgBlackWhite toPlay,
+    SgPointSet GetRelevantMoves(GoBoard& bd, SgBlackWhite toPlay,
                                 bool useFilter);
 }
 
