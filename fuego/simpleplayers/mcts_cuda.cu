@@ -10,6 +10,7 @@
 #include <thrust/device_free.h>
 #include "mcts.h"
 #include "CudaGo.h"
+#include "deque.h"
 
 template <typename T>
 struct KernelArray
@@ -19,15 +20,17 @@ struct KernelArray
 };
 
 //Exploration parameter
-__constant__ double C = 1.4;
-__constant__ double EPSILON = 10e-6;
+double C = 1.4;
+double EPSILON = 10e-6;
 __constant__ int MAX_TRIAL = 500;
 __constant__ int THREAD_NUM = 32;
 
+int MAX_TRIAL_H = 500;
+
 
 __device__ bool checkAbort();
-__device__ thrust::device_vector<Point*> generateAllMoves(CudaBoard* cur_board);
-__device__ void deleteAllMoves(thrust::device_vector<Point*> moves);
+__device__ Deque<Point*>* generateAllMoves(CudaBoard* cur_board);
+__device__ void deleteAllMoves(Deque<Point*>* moves);
 __global__ void run_simulation(KernelArray<Point>, int* win_increase, int bd_size);
 __device__ CudaBoard* get_board(KernelArray<Point> seq, int bd_size);
 
@@ -80,19 +83,21 @@ TreeNode* Mcts::selection(TreeNode* node) {
 __global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd_size) {
 	CudaBoard* board = get_board(seq, bd_size);
 	COLOR cur_player = board->ToPlay();
+
+	
 	int wins = 0;
 	for (int i = 0; i < MAX_TRIAL; i++) {
 		bool timeout = false;
 		CudaBoard* cur_board = new CudaBoard(*board);
 		clock_t start = clock();
 		while (true) {
-			thrust::device_vector<Point*> moves_vec = generateAllMoves(cur_board);
-			if (cur_board->EndOfGame() || moves_vec.size() == 0) {
+			Deque<Point*>* moves_vec = generateAllMoves(cur_board);
+			if (cur_board->EndOfGame() || moves_vec->size() == 0) {
 				break;
 			}
 			//why nxt_move length can be zero? what does endofgame do above?
 			// std::cout << "moves_vec length:" << moves_vec->Length() << std::endl;
-			Point* nxt_move = moves_vec[rand() % moves_vec.size()];
+			Point* nxt_move = (*moves_vec)[moves_vec->begin()];
 			
 			cur_board->update_board(nxt_move);
 			deleteAllMoves(moves_vec);
@@ -178,8 +183,8 @@ void Mcts::run_iteration(TreeNode* node) {
 				cudaMemcpy(win_increase, cuda_win_increase, sizeof(int), cudaMemcpyDeviceToHost);
 
 				children[i]->wins += *win_increase;
-				children[i]->sims += MAX_TRIAL;
-				back_propagation(children[i], *win_increase, MAX_TRIAL);
+				children[i]->sims += MAX_TRIAL_H;
+				back_propagation(children[i], *win_increase, MAX_TRIAL_H);
 				delete cuda_win_increase;
 				delete win_increase;
 				if(checkAbort())break;
@@ -198,22 +203,24 @@ bool Mcts::checkAbort() {
 	return abort;
 }
 
-__device__ thrust::device_vector<Point*> generateAllMoves(CudaBoard* cur_board) {
-	thrust::device_vector<Point*> moves_vec = cur_board->get_next_moves();
-	int len = moves_vec.size();
+__device__ Deque<Point*>* generateAllMoves(CudaBoard* cur_board) {
+	Deque<Point*>* moves_vec = cur_board->get_next_moves_device();
+	int len = moves_vec->size();
 
-	if (len != 0) {
-		srand (time(NULL));
-		int swapIndex = rand() % len;
-		Point* temp = moves_vec[0];
-		moves_vec[0] = moves_vec[swapIndex];
-		moves_vec[swapIndex] = temp;
-	}
+	// TODO : rand in cuda
+	// if (len != 0) {
+	// 	srand (time(NULL));
+	// 	int swapIndex = rand() % len;
+	// 	Point* temp = (*moves_vec)[moves_vec->begin()];
+	// 	(*moves_vec)[moves_vec->begin()] = (*moves_vec)[moves_vec->begin() + swapIndex];
+	// 	(*moves_vec)[moves_vec->begin() + swapIndex] = temp;
+	// }
+
 	return moves_vec;
 }
 
 std::vector<Point*> Mcts::generateAllMoves(CudaBoard* cur_board) {
-	std::vector<Point*> moves_vec = cur_board->get_next_moves();
+	std::vector<Point*> moves_vec = cur_board->get_next_moves_host();
 	int len = moves_vec.size();
 
 	if (len != 0) {
@@ -234,19 +241,26 @@ CudaBoard* Mcts::get_board(std::vector<Point> sequence, int bd_size) {
 	return bd;
 }
 
-__device__ CudaBoard* get_board(KernelArray<Point> seq, int bd_size) {
+__device__ CudaBoard* get_board(KernelArray<Point> sequence, int bd_size) {
 	CudaBoard *bd = new CudaBoard(bd_size);
-	for (int i = 0; i < seq._size; i++) {
-		bd->update_board(&seq._array[i]);
+	for (int i = 0; i < sequence._size; i++) {
+		bd->update_board(&sequence._array[i]);
 	}
 
 	return bd;
 }
 
-__device__ void deleteAllMoves(thrust::device_vector<Point*> moves) {
-	for (thrust::device_vector<Point*>::iterator it = moves.begin(); it != moves.end(); it++) {
-		delete *it;
+__device__ void deleteAllMoves(Deque<Point*>* moves) {
+	for (int i = moves->begin(); i <= moves->end(); i++) {
+		Point* p = (*moves)[i];
+		delete p;
 	} 
+}
+
+void Mcts::deleteAllMoves(std::vector<Point*> moves) {
+	for (std::vector<Point*>::iterator it = moves.begin(); it != moves.end(); it++) {
+		delete *it;
+	}
 }
 
 template <typename T>
