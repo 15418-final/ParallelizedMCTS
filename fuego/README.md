@@ -1,2 +1,2 @@
 # Parallelized MCTS for Go
-## 15440 final project
+## 15618 final project
