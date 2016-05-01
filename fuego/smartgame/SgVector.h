@@ -16,44 +16,44 @@ class SgVector
 {
 public:
     /** Construct empty vector. */
-    __host__ __device__ SgVector()
+    SgVector()
         : m_vec()
     { }
-    
+
     /** Return reference to element.
         @param index Position of element in range <code>0..length-1</code>. */
-    __host__ __device__ T& operator[](int index)
+    T& operator[](int index)
     {
         return m_vec[index];
     }
 
     /** Return const reference to element.
         @param index Position of element in range <code>0..length-1</code>. */
-    __host__ __device__  const T& operator[](int index) const
+    const T& operator[](int index) const
     {
         return m_vec[index];
     }
 
     /** Assignment operator.
         Copy content of other vector. */
-    __host__ __device__ SgVector<T>& operator=(const SgVector<T>& v);
+    SgVector<T>& operator=(const SgVector<T>& v);
 
     /** Compare whether the contents of two vectors are identical.
         Same length, and the same elements in the same sequence. */
-    __host__ __device__  bool operator==(const SgVector<T>& rhs) const
+    bool operator==(const SgVector<T>& rhs) const
     {
         return m_vec == rhs.m_vec;
     }
 
     /** Compare whether the contents of two vectors are not identical. */
-    __host__ __device__ bool operator!=(const SgVector& rhs) const
+    bool operator!=(const SgVector& rhs) const
     {
         return ! (*this == rhs);
     }
-            
+
     /** Returns the last element of the vector.
         Asserts if the vector is empty. */
-    __host__ __device__  const T& Back() const
+    const T& Back() const
     {
         SG_ASSERT(NonEmpty());
         return m_vec.back();
@@ -84,7 +84,7 @@ public:
         @return <code>true</code> if <code>elt</code> is included in this
         vector, <code>false</code> if not. */
     bool Contains(const T& elt) const;
-    
+
     /** delete element at specified index */
     void DeleteAt(int index);
 
@@ -151,11 +151,11 @@ public:
     {
         return static_cast<int>(m_vec.size());
     }
-    
+
     /** Cut off vector after at most <code>length</code> elements. */
     void LimitListLength (int limit);
 
-    /** Test whether a vector is shorter than or equal to a given length. */ 
+    /** Test whether a vector is shorter than or equal to a given length. */
     bool MaxLength(int length) const
     {
         return Length() <= length;
@@ -168,7 +168,7 @@ public:
         </pre> */
     void Merge(const SgVector<T>& vector);
 
-    /** Test whether a vector is as long as or longer than a given length. */ 
+    /** Test whether a vector is as long as or longer than a given length. */
     bool MinLength(int length) const
     {
         return Length() >= length;
@@ -183,7 +183,7 @@ public:
     /** Remove element[0] of the vector.
         The vector must not be empty.
         @return The element[0] of the original vector before removal.
-        @deprecated Don't use this function; it is slow. 
+        @deprecated Don't use this function; it is slow.
         Only exists for SgList compatibility. */
     T PopFront();
 
@@ -211,12 +211,12 @@ public:
         After calling @c RemoveDuplicates(), @c UniqueElements() is @c true.
         @return true, if at least one duplicate was removed */
     bool RemoveDuplicates();
-    
+
     void Reverse()
     {
         reverse(m_vec.begin(), m_vec.end());
     }
-    
+
     /** Clear this vector and set it to contain only <code>elt</code>. */
     void SetTo(const T& elt)
     {
@@ -234,7 +234,7 @@ public:
     void SetTo(const T* array, int count);
 
     void Sort();
-    
+
     /** remove duplicates in a sorted vector */
     void SortedRemoveDuplicates();
 
@@ -264,20 +264,20 @@ public:
         @todo speed it up */
     bool UniqueElements() const;
 
-    __host__ __device__  std::vector<T>& Vector()
-    {
-        return m_vec;
-    }
-    
-    __host__ __device__ const std::vector<T>& Vector() const
+    std::vector<T>& Vector()
     {
         return m_vec;
     }
 
-    __host__ __device__ void swap(int i, int j) {
+    const std::vector<T>& Vector() const
+    {
+        return m_vec;
+    }
+
+    void swap(int i, int j) {
         std::swap(m_vec[i], m_vec[j]);
     }
-    
+
 private:
     std::vector<T> m_vec;
 };
@@ -336,10 +336,10 @@ private:
     const SgVector<T>& m_vec;
 
     typename std::vector<T>::const_iterator m_it;
-    
+
     /** Not implemented.
         Prevent unintended usage of operator bool() as an int.
-        Detects bug of forgetting to dereference iterator - 
+        Detects bug of forgetting to dereference iterator -
         it instead of *it
     */
     operator int() const;
@@ -472,7 +472,7 @@ public:
 private:
     /** Not implemented.
         Prevent unintended usage of operator bool() as an int.
-        Detects bug of forgetting to dereference iterator - 
+        Detects bug of forgetting to dereference iterator -
         it instead of *it
     */
     operator int() const;
@@ -495,7 +495,7 @@ void SgVector<T>::PushBackList(const SgVector<T>& v)
 {
     copy(v.m_vec.begin(), v.m_vec.end(), back_inserter(m_vec));
 }
-    
+
 template<typename T>
 void SgVector<T>::Concat(SgVector<T>* tail)
 {
@@ -508,7 +508,7 @@ bool SgVector<T>::Contains(const T& elt) const
 {
     typename std::vector<T>::const_iterator end = m_vec.end();
     typename std::vector<T>::const_iterator pos = find(m_vec.begin(),
-                                                       end, elt);
+            end, elt);
     return pos != end;
 }
 
@@ -556,10 +556,10 @@ bool SgVector<T>::Insert(const T& elt)
 {
     SG_ASSERT(IsSorted());
     typename std::vector<T>::iterator location =
-    lower_bound(m_vec.begin(), m_vec.end(), elt);
+        lower_bound(m_vec.begin(), m_vec.end(), elt);
 
     if (   location != m_vec.end()
-        && *location == elt
+            && *location == elt
        )
         return false;
     else
@@ -586,7 +586,7 @@ bool SgVector<T>::IsSortedAndUnique(bool ascending) const
 {
     typename std::vector<T>::const_iterator result;
     if (ascending)
-        result = adjacent_find(m_vec.begin(), m_vec.end(), 
+        result = adjacent_find(m_vec.begin(), m_vec.end(),
                                std::greater_equal<T>());
     else
         result = adjacent_find(m_vec.begin(), m_vec.end(),

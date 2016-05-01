@@ -107,4 +107,4 @@
 #define VERSION "1.1.SVN"
 
 /* Defined if CUDA should be used */
-/* #undef _CUDA */
+#define _CUDA 1

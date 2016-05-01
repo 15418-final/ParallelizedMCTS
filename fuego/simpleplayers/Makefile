@@ -255,7 +255,7 @@ MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
 NMEDIT = 
 NVCC = nvcc
-NVCCFLAGS = -I/usr/local/depot/cuda-6.5/include -L/usr/local/depot/cuda-6.5/lib64 -lcuda -lcudart -lcufft
+NVCCFLAGS = -I/usr/local/depot/cuda-6.5/include -L/usr/local/depot/cuda-6.5/lib64 -lGL -lglut -lcudart
 OBJDUMP = objdump
 OBJEXT = o
 OPENMP_CFLAGS = -fopenmp
@@ -418,8 +418,9 @@ clean-noinstLIBRARIES:
 
 libfuego_simpleplayers.a: $(libfuego_simpleplayers_a_OBJECTS) $(libfuego_simpleplayers_a_DEPENDENCIES) $(EXTRA_libfuego_simpleplayers_a_DEPENDENCIES) 
 	$(AM_V_at)-rm -f libfuego_simpleplayers.a
-	$(AM_V_AR)$(libfuego_simpleplayers_a_AR) libfuego_simpleplayers.a $(libfuego_simpleplayers_a_OBJECTS) $(libfuego_simpleplayers_a_LIBADD)
-	$(AM_V_at)$(RANLIB) libfuego_simpleplayers.a
+	$(AM_V_AR)$(libfuego_simpleplayers_a_AR) libfuego_simpleplayers.a $(libfuego_simpleplayers_a_OBJECTS) $(libfuego_simpleplayers_a_LIBADD) dlink.o
+	$(AM_V_at)$(RANLIB) libfuego_simpleplayers.a 
+	
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -647,14 +648,14 @@ libfuego_simpleplayers_a-SpSimplePlayer.obj: SpSimplePlayer.cpp
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-SpSimplePlayer.obj `if test -f 'SpSimplePlayer.cpp'; then $(CYGPATH_W) 'SpSimplePlayer.cpp'; else $(CYGPATH_W) '$(srcdir)/SpSimplePlayer.cpp'; fi`
 
 libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp
-	$(AM_V_CXX)$(CXX) $(NVCCFLAGS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-MCTSPlayer.o -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo -c -o libfuego_simpleplayers_a-MCTSPlayer.o `test -f 'MCTSPlayer.cpp' || echo '$(srcdir)/'`MCTSPlayer.cpp
+	$(AM_V_CXX)$(CXX)  $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-MCTSPlayer.o -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo $(NVCCFLAGS) -c -o libfuego_simpleplayers_a-MCTSPlayer.o `test -f 'MCTSPlayer.cpp' || echo '$(srcdir)/'`MCTSPlayer.cpp
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Po
 #	$(AM_V_CXX)source='MCTSPlayer.cpp' object='libfuego_simpleplayers_a-MCTSPlayer.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-MCTSPlayer.o `test -f 'MCTSPlayer.cpp' || echo '$(srcdir)/'`MCTSPlayer.cpp
 
 libfuego_simpleplayers_a-MCTSPlayer.obj: MCTSPlayer.cpp
-	$(AM_V_CXX)$(CXX)$(NVCCFLAGS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-MCTSPlayer.obj -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo -c -o libfuego_simpleplayers_a-MCTSPlayer.obj `if test -f 'MCTSPlayer.cpp'; then $(CYGPATH_W) 'MCTSPlayer.cpp'; else $(CYGPATH_W) '$(srcdir)/MCTSPlayer.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-MCTSPlayer.obj -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo $(NVCCFLAGS) -c -o libfuego_simpleplayers_a-MCTSPlayer.obj `if test -f 'MCTSPlayer.cpp'; then $(CYGPATH_W) 'MCTSPlayer.cpp'; else $(CYGPATH_W) '$(srcdir)/MCTSPlayer.cpp'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Po
 #	$(AM_V_CXX)source='MCTSPlayer.cpp' object='libfuego_simpleplayers_a-MCTSPlayer.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
@@ -893,8 +894,19 @@ uninstall-am:
 #BOOST_THREAD_LIB = -lboost_thread
 #BOOST_UNIT_TEST_FRAMEWORK_LIB = -lboost_unit_test_framework
 
-.cu.o:
-	$(NVCC) CudaGo.cu mcts_cuda.cu ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go  -O3 -m64 -arch compute_20 -L../smartgame -L/afs/andrew.cmu.edu/usr18/qzhuang/private/boost/lib $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -o $@ 
+
+
+.cu.o: dlink.o
+
+dlink.o: CudaGo.o mcts_cuda.o
+	$(NVCC) —dlink CudaGo.o mcts_cuda.o -o dlink.o
+
+CudaGo.o:
+	$(NVCC) -O3 -m64 -arch compute_20 -dc CudaGo.cu -DNDEBUG ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go  -L../smartgame  $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -dc -c
+	$(NVCC) -dlink CudaGo.o mcts_cuda.o -o dlink.o
+
+mcts_cuda.o:
+	$(NVCC) -O3 -m64 -arch compute_20 -dc mcts_cuda.cu -DNDEBUG ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go   -L../smartgame  $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -c
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

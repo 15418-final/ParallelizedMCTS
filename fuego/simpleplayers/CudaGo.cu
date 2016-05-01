@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 #include "CudaGo.h"
 
 __device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color) {
@@ -120,50 +121,70 @@ __device__  __host__ int CudaBoard::update_board(Point* pos) {
 	Deque<Point*>* temp_stone = new Deque<Point*>();
 
 	clearVisited();
-
+	printf("ready to play\n");
 	int total = 0;
 	for (int d = 0 ; d < 4; d++) {
+		printf("direction:%d\n", d);
 		int ni = pos->i + dir[d][0];
 		int nj = pos->j + dir[d][1];
 		if (board[ni][nj] == op_color) {
 			int liberty = 0;
 			Q->push_back(new Point(ni, nj));
-			temp_stone->push_back(Q->pop_front());
+			temp_stone->push_back(Q->front());
+			printf("Q size:%d, temp_stone size:%d\n",Q->size(), temp_stone->size());
 			while (Q->size() != 0) {
+				printf("Q size:%d, temp_stone size:%d\n",Q->size(), temp_stone->size());
 				Point* f = Q->pop_front();
+				printf("f1\n");
 				visited[f->i][f->j] = true;
+				printf("f2\n");
 				for (int dd = 0; dd < 4; dd++) {
 					ni = f->i + dir[dd][0];
 					nj = f->j + dir[dd][1];
 					if (visited[ni][nj] == true)continue;
 					if (board[ni][nj] == op_color) {
+						printf("f3\n");
 						Point* tp = new Point(ni, nj);
 						Q->push_back(tp);
 						temp_stone->push_back(tp);
+						printf("f4\n");
 					} else if (board[ni][nj] == EMPTY) {
 						liberty++;
 					} else if (board[ni][nj] == OUT || board[ni][nj] == color) {
 
 					}
 				}
-
-				delete f;
 			}
-
+			printf("f5\n");
 			if (liberty == 0) {
 				total += temp_stone->size();
-				for (int begin = temp_stone->begin(); begin <= temp_stone->end(); begin++) {
-					Point* p = (*temp_stone)[begin];
+				for (Deque<Point*>::iterator it = temp_stone->begin(); it != temp_stone->end(); it++) {
+					Point* p = *it;
 					board[p->i][p->j] = EMPTY;
 					delete p;
+				}
+			}else{
+				for (Deque<Point*>::iterator it = temp_stone->begin(); it != temp_stone->end(); it++) {
+					delete *it;
 				}
 			}
 			temp_stone->clear();
 		}
 	}
-
+	printf("play done\n");
 	currentPlayer = static_cast<COLOR>(color ^ 3);
-
+	for (int i = 1; i < BSIZE + 1 ; i++) {
+		for (int j = 1; j < BSIZE + 1; j++) {
+			if (board[i][j] == WHITE) {
+				printf("W");
+			} else if (board[i][j] == BLACK) {
+				printf("B");
+			} else {
+				printf(".");
+			}
+		}
+		printf("\n");
+	}
 	return total;
 }
 
@@ -211,5 +232,5 @@ __device__  int CudaBoard::score() {
 		}
 	}
 
-	return white - black;
+	return black - white;
 }
