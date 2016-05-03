@@ -15,8 +15,8 @@ SpRandomPlayer.cpp \
 SpSafePlayer.cpp \
 SpSimplePlayer.cpp \
 MCTSPlayer.cpp \
-mcts_cuda.cu \
-CudaGo.cu \
+mcts_cuda.cpp \
+CudaGo.cpp \
 SpUtil.cpp
 
 noinst_HEADERS = \

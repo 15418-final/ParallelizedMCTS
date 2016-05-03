@@ -6,13 +6,11 @@
 #include "SpUtil.h"
 #include "SgBlackWhite.h"
 
-#include <cuda.h>
-#include <cuda_runtime.h>
 
 class Point{
 public:
 	int i,j;
-	__device__ __host__ Point(int a, int b):i(a),j(b){}
+	Point(int a, int b):i(a),j(b){}
 	
 	Point(SgPoint p){
 		i = SgPointUtil::Row(p);

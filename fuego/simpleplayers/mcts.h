@@ -8,7 +8,6 @@
 #include <cmath>
 #include <algorithm>
 #include <stdlib.h>
-#include <omp.h>
 
 #include "SgSystem.h"
 #include "SgRandom.h"

@@ -115,7 +115,7 @@ am__v_lt_0 = --silent
 am__v_lt_1 = 
 fuego_test_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS)  $(fuego_test_LDFLAGS) -lcudart $(LDFLAGS) -o $@
+	$(CXXFLAGS) $(fuego_test_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -199,9 +199,9 @@ CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
-CUDA_CFLAGS =  -I/usr/local/depot/cuda-6.5/C/common/inc/ -I/usr/local/depot/cuda-6.5/include
-CUDA_LDFLAGS = -L/usr/local/depot/cuda-6.5/lib64
-CUDA_LIBS = -lcuda -lcudart -lcufft
+CUDA_CFLAGS = 
+CUDA_LDFLAGS = 
+CUDA_LIBS = 
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
@@ -238,8 +238,8 @@ MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
 NMEDIT = 
-NVCC = nvcc
-NVCCFLAGS =   -I/usr/local/depot/cuda-6.5/C/common/inc/ -I/usr/local/depot/cuda-6.5/include -L/usr/local/depot/cuda-6.5/lib64 -lcuda -lcudart -lcufft
+NVCC = 
+NVCCFLAGS = 
 OBJDUMP = objdump
 OBJEXT = o
 OPENMP_CFLAGS = -fopenmp
@@ -439,7 +439,7 @@ clean-binPROGRAMS:
 
 fuego_test$(EXEEXT): $(fuego_test_OBJECTS) $(fuego_test_DEPENDENCIES) $(EXTRA_fuego_test_DEPENDENCIES) 
 	@rm -f fuego_test$(EXEEXT)
-	$(AM_V_CXXLD)$(fuego_test_LINK) $(fuego_test_OBJECTS) $(fuego_test_LDADD) $(LIBS) -L/usr/local/depot/cuda-6.5/lib64 -I/usr/local/depot/cuda-6.5/include
+	$(AM_V_CXXLD)$(fuego_test_LINK) $(fuego_test_OBJECTS) $(fuego_test_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -473,42 +473,42 @@ include ./$(DEPDIR)/fuego_test-FuegoTestUtil.Po
 #	$(AM_V_CXX_no)$(LTCXXCOMPILE) -c -o $@ $<
 
 fuego_test-FuegoTestEngine.o: FuegoTestEngine.cpp
-	$(AM_V_CXX)$(CXX)  $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestEngine.o -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestEngine.Tpo  $(NVCCFLAGS) -c -o fuego_test-FuegoTestEngine.o `test -f 'FuegoTestEngine.cpp' || echo '$(srcdir)/'`FuegoTestEngine.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestEngine.o -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestEngine.Tpo -c -o fuego_test-FuegoTestEngine.o `test -f 'FuegoTestEngine.cpp' || echo '$(srcdir)/'`FuegoTestEngine.cpp
 	$(AM_V_at)$(am__mv) $(DEPDIR)/fuego_test-FuegoTestEngine.Tpo $(DEPDIR)/fuego_test-FuegoTestEngine.Po
 #	$(AM_V_CXX)source='FuegoTestEngine.cpp' object='fuego_test-FuegoTestEngine.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fuego_test-FuegoTestEngine.o `test -f 'FuegoTestEngine.cpp' || echo '$(srcdir)/'`FuegoTestEngine.cpp
 
 fuego_test-FuegoTestEngine.obj: FuegoTestEngine.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestEngine.obj -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestEngine.Tpo  $(NVCCFLAGS)  -c -o fuego_test-FuegoTestEngine.obj `if test -f 'FuegoTestEngine.cpp'; then $(CYGPATH_W) 'FuegoTestEngine.cpp'; else $(CYGPATH_W) '$(srcdir)/FuegoTestEngine.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestEngine.obj -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestEngine.Tpo -c -o fuego_test-FuegoTestEngine.obj `if test -f 'FuegoTestEngine.cpp'; then $(CYGPATH_W) 'FuegoTestEngine.cpp'; else $(CYGPATH_W) '$(srcdir)/FuegoTestEngine.cpp'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/fuego_test-FuegoTestEngine.Tpo $(DEPDIR)/fuego_test-FuegoTestEngine.Po
 #	$(AM_V_CXX)source='FuegoTestEngine.cpp' object='fuego_test-FuegoTestEngine.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fuego_test-FuegoTestEngine.obj `if test -f 'FuegoTestEngine.cpp'; then $(CYGPATH_W) 'FuegoTestEngine.cpp'; else $(CYGPATH_W) '$(srcdir)/FuegoTestEngine.cpp'; fi`
 
 fuego_test-FuegoTestMain.o: FuegoTestMain.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestMain.o -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestMain.Tpo $(NVCCFLAGS) -c -o fuego_test-FuegoTestMain.o `test -f 'FuegoTestMain.cpp' || echo '$(srcdir)/'`FuegoTestMain.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestMain.o -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestMain.Tpo -c -o fuego_test-FuegoTestMain.o `test -f 'FuegoTestMain.cpp' || echo '$(srcdir)/'`FuegoTestMain.cpp
 	$(AM_V_at)$(am__mv) $(DEPDIR)/fuego_test-FuegoTestMain.Tpo $(DEPDIR)/fuego_test-FuegoTestMain.Po
 #	$(AM_V_CXX)source='FuegoTestMain.cpp' object='fuego_test-FuegoTestMain.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fuego_test-FuegoTestMain.o `test -f 'FuegoTestMain.cpp' || echo '$(srcdir)/'`FuegoTestMain.cpp
 
 fuego_test-FuegoTestMain.obj: FuegoTestMain.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestMain.obj -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestMain.Tpo $(NVCCFLAGS) -c -o fuego_test-FuegoTestMain.obj `if test -f 'FuegoTestMain.cpp'; then $(CYGPATH_W) 'FuegoTestMain.cpp'; else $(CYGPATH_W) '$(srcdir)/FuegoTestMain.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestMain.obj -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestMain.Tpo -c -o fuego_test-FuegoTestMain.obj `if test -f 'FuegoTestMain.cpp'; then $(CYGPATH_W) 'FuegoTestMain.cpp'; else $(CYGPATH_W) '$(srcdir)/FuegoTestMain.cpp'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/fuego_test-FuegoTestMain.Tpo $(DEPDIR)/fuego_test-FuegoTestMain.Po
 #	$(AM_V_CXX)source='FuegoTestMain.cpp' object='fuego_test-FuegoTestMain.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fuego_test-FuegoTestMain.obj `if test -f 'FuegoTestMain.cpp'; then $(CYGPATH_W) 'FuegoTestMain.cpp'; else $(CYGPATH_W) '$(srcdir)/FuegoTestMain.cpp'; fi`
 
 fuego_test-FuegoTestUtil.o: FuegoTestUtil.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestUtil.o -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestUtil.Tpo $(NVCCFLAGS) -c -o fuego_test-FuegoTestUtil.o `test -f 'FuegoTestUtil.cpp' || echo '$(srcdir)/'`FuegoTestUtil.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestUtil.o -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestUtil.Tpo -c -o fuego_test-FuegoTestUtil.o `test -f 'FuegoTestUtil.cpp' || echo '$(srcdir)/'`FuegoTestUtil.cpp
 	$(AM_V_at)$(am__mv) $(DEPDIR)/fuego_test-FuegoTestUtil.Tpo $(DEPDIR)/fuego_test-FuegoTestUtil.Po
 #	$(AM_V_CXX)source='FuegoTestUtil.cpp' object='fuego_test-FuegoTestUtil.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fuego_test-FuegoTestUtil.o `test -f 'FuegoTestUtil.cpp' || echo '$(srcdir)/'`FuegoTestUtil.cpp
 
 fuego_test-FuegoTestUtil.obj: FuegoTestUtil.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestUtil.obj -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestUtil.Tpo $(NVCCFLAGS) -c -o fuego_test-FuegoTestUtil.obj `if test -f 'FuegoTestUtil.cpp'; then $(CYGPATH_W) 'FuegoTestUtil.cpp'; else $(CYGPATH_W) '$(srcdir)/FuegoTestUtil.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fuego_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fuego_test-FuegoTestUtil.obj -MD -MP -MF $(DEPDIR)/fuego_test-FuegoTestUtil.Tpo -c -o fuego_test-FuegoTestUtil.obj `if test -f 'FuegoTestUtil.cpp'; then $(CYGPATH_W) 'FuegoTestUtil.cpp'; else $(CYGPATH_W) '$(srcdir)/FuegoTestUtil.cpp'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/fuego_test-FuegoTestUtil.Tpo $(DEPDIR)/fuego_test-FuegoTestUtil.Po
 #	$(AM_V_CXX)source='FuegoTestUtil.cpp' object='fuego_test-FuegoTestUtil.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
