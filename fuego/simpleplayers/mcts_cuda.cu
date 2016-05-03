@@ -26,6 +26,12 @@ __constant__ int MAX_TRIAL = 5;
 __constant__ int THREAD_NUM = 32;
 int MAX_TRIAL_H = 50;
 
+typedef struct cudaParam{
+	double timeLeft;
+	int* win_increase;
+}CudaParams;
+
+CudaParams params;
 
 __device__ bool checkAbort();
 __device__ Deque<Point*>* generateAllMoves(CudaBoard* cur_board);
@@ -37,7 +43,7 @@ template <typename T>
 KernelArray<T> convertToKernel(thrust::device_vector<T>& dVec);
 
 SgPoint Mcts::run() {
-	// mcts_timer.Start();
+	mcts_timer.Start();
 	while (true) {
 		run_iteration(root);
 		if (checkAbort()) break;
@@ -180,6 +186,10 @@ void Mcts::run_iteration(TreeNode* node) {
 				cudaMalloc((void **)&cuda_rand_nums, sizeof(int)*100);
 				cudaMemcpy(cuda_rand_nums, rand_nums, sizeof(int)*100, cudaMemcpyHostToDevice);
 				std::cout<<"rand_nums[10]:"<<rand_nums[10]<<std::endl;
+
+				CudaParams tp;
+				tp.timeLeft = maxTime - mcts_timer.GetTime();
+				tp.
 				int* cuda_win_increase = NULL;
 				cudaMalloc((void **)&cuda_win_increase, sizeof(int));
 				run_simulation<<<1,1>>>(convertToKernel(dec_seq), cuda_rand_nums, cuda_win_increase, bd_size);
@@ -206,7 +216,7 @@ void Mcts::run_iteration(TreeNode* node) {
 
 bool Mcts::checkAbort() {
 	if (!abort) {
-		// abort = mcts_timer.GetTime() > maxTime;
+		abort = mcts_timer.GetTime() > maxTime;
 	}
 	return abort;
 }
