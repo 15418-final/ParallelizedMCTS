@@ -186,10 +186,10 @@ AUTOCONF = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/f
 AUTOHEADER = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing autoheader
 AUTOMAKE = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing automake-1.13
 AWK = gawk
-BOOST_CPPFLAGS = -pthread -I/afs/andrew.cmu.edu/usr18/qzhuang/private/boost/include
+BOOST_CPPFLAGS = -pthread -I/afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/boost/include
 BOOST_DATE_TIME_LIB = -lboost_date_time
 BOOST_FILESYSTEM_LIB = -lboost_filesystem
-BOOST_LDFLAGS = -L/afs/andrew.cmu.edu/usr18/qzhuang/private/boost/lib
+BOOST_LDFLAGS = -L/afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/boost/lib
 BOOST_PROGRAM_OPTIONS_LIB = -lboost_program_options
 BOOST_SYSTEM_LIB = -lboost_system
 BOOST_THREAD_LIB = -lboost_thread
@@ -259,10 +259,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 VERSION = 1.1.SVN
-abs_builddir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/fuegotest
-abs_srcdir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/fuegotest
-abs_top_builddir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego
-abs_top_srcdir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego
+abs_builddir = /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/fuegotest
+abs_srcdir =/afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/fuegotest
+abs_top_builddir = /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego
+abs_top_srcdir = /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -292,7 +292,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/install-sh
+install_sh = ${SHELL} /afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -343,7 +343,7 @@ fuego_test_DEPENDENCIES = \
 
 fuego_test_CPPFLAGS = \
 -DDATADIR='"${datarootdir}"' \
--DABS_TOP_SRCDIR='"/afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego"' \
+-DABS_TOP_SRCDIR='"/afs/andrew.cmu.edu/usr15/yepengy/Downloads/ParallelizedMCTS/fuego"' \
 $(BOOST_CPPFLAGS) \
 -fopenmp \
 -I../gtpengine \

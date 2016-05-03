@@ -3,7 +3,7 @@
 #include <cuda_runtime.h>
 #include <driver_functions.h>
 #include <cstdio>
-// #include <ctime>
+#include <time.h>
 #include <thrust/scan.h>
 #include <thrust/device_ptr.h>
 #include <thrust/device_malloc.h>
@@ -22,7 +22,7 @@ struct KernelArray
 //Exploration parameter
 double C = 1.4;
 double EPSILON = 10e-6;
-__constant__ int MAX_TRIAL = 500;
+__constant__ int MAX_TRIAL = 1;
 __constant__ int THREAD_NUM = 32;
 
 int MAX_TRIAL_H = 50;
@@ -80,16 +80,22 @@ TreeNode* Mcts::selection(TreeNode* node) {
 }
 
 // Typical Monte Carlo Simulation
-__global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd_size) {
-	CudaBoard* board = get_board(seq, bd_size);
+__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, int bd_size) {
+	CudaBoard* board = new CudaBoard(bd_size);
+	for (int i = 0; i < len; i++) {
+		Point* p = new Point(iarray[i], jarray[i]);
+		board->update_board(p);
+		delete p;
+	}
 	COLOR cur_player = board->ToPlay();
-	
-	int wins = 0;
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+	*win_increase = 0;
 	for (int i = 0; i < MAX_TRIAL; i++) {
 		// bool timeout = false;
 		CudaBoard* cur_board = new CudaBoard(*board);
-		clock_t start = clock();
+		if (index == 0)
 		printf("Start a simulation\n");
+		int time = 0;
 		while (true) {
 			Deque<Point*>* moves_vec = generateAllMoves(cur_board);
 			if (cur_board->EndOfGame() || moves_vec->size() == 0) {
@@ -98,27 +104,26 @@ __global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd
 			//why nxt_move length can be zero? what does endofgame do above?
 			// std::cout << "moves_vec length:" << moves_vec->Length() << std::endl;
 			Point* nxt_move = *(moves_vec->begin());
-			printf("next move get:%d, %d\n",nxt_move->i, nxt_move->j);
 			cur_board->update_board(nxt_move);
-			printf("move made\n");
 			deleteAllMoves(moves_vec);
-			// if (checkAbort()) {
-			// 	timeout = true;
-			// 	break;
-			// }
+			delete moves_vec;
+			time++;
 		}
-		if (true) {
+		
 			int score = cur_board->score(); // Komi set to 0
 			if ((score > 0 && cur_player == BLACK)
 			        || (score < 0 && cur_player == WHITE)) {
-				wins++;
+				(*win_increase)++;
 			}
 			// totalSimu ++;
-		}
+		
+		if (index == 0)
+			printf("%d win\n", score > 0 ? 1: 2);
+		//printf("run simulation done\n");
 		delete cur_board;
 	}
-
-	return;
+	if (index == 0)
+	printf("run_simulation done\n");
 }
 
 void Mcts::back_propagation(TreeNode* node, int win_increase, int sim_increase) {
@@ -141,6 +146,7 @@ void Mcts::expand(TreeNode* node) {
 		Point* nxt_move = moves_vec.back();
 		node->add_children(new TreeNode(node->get_sequence(), *nxt_move));
 		moves_vec.pop_back();
+		delete nxt_move;
 	}
 	std::cout<<"children add done"<<std::endl;
 	deleteAllMoves(moves_vec);
@@ -174,23 +180,56 @@ void Mcts::run_iteration(TreeNode* node) {
 				// cudaMalloc((void **)&cuda_win_increase, sizeof(int));
 				// cudaMemcpy(cudaDeviceNode, children[i], sizeof(*children[i]), cudaMemcpyHostToDevice);
 
+				cudaEvent_t start, stop;
+				cudaEventCreate(&start);
+				cudaEventCreate(&stop);
+
 				int* cuda_win_increase = NULL;
 				cudaMalloc((void **)&cuda_win_increase, sizeof(int));
 				std::cout<<"Cuda malloc done"<<std::endl;
 
-				thrust::device_vector<Point> dec_seq(children[i]->get_sequence());
-				
-				std::cout<<"ready to run cuda code run_simulation()"<<std::endl;
-				run_simulation<<<1,1>>>(convertToKernel(dec_seq), cuda_win_increase, bd_size);
-				//cudaFree(cudaDeviceNode);
+				std::vector<Point> sequence = children[i]->get_sequence();
+				int len = sequence.size();
+				int* c_i = new int[len];
+				int* c_j = new int[len];
+				int* c_i_d; // device
+				int* c_j_d; // device
+				for (int it = 0; it < len; it++) {
+					c_i[it] = sequence[it].i;
+					c_j[it] = sequence[it].j;
+				}
 
+				cudaMalloc(&c_i_d, sizeof(int)*len);
+    			cudaMalloc(&c_j_d, sizeof(int)*len);
+    			cudaMemcpy(c_i_d, c_i, sizeof(int)*len, cudaMemcpyHostToDevice); 
+    			cudaMemcpy(c_j_d, c_j, sizeof(int)*len, cudaMemcpyHostToDevice); 
+				
+				CudaBoard* board = get_board(sequence, bd_size);
+				board->print_board();
+
+				std::cout<<"ready to run cuda code run_simulation()"<<std::endl;
+				cudaEventRecord(start);
+				run_simulation<<<10,1>>>(c_i_d, c_j_d, len, cuda_win_increase, bd_size);
+				cudaEventRecord(stop);
+				cudaDeviceSynchronize();
+				//cudaFree(cudaDeviceNode);
+				//cudaDeviceSynchronize();
 				int* win_increase = new int[1];
 				cudaMemcpy(win_increase, cuda_win_increase, sizeof(int), cudaMemcpyDeviceToHost);
+				cudaEventSynchronize(stop);
+				float milliseconds = 0;
+				cudaEventElapsedTime(&milliseconds, start, stop);
+
+				printf("time: %f\n", milliseconds);
+				printf("win: %d\n", *win_increase);
+
+				cudaFree(c_i_d);
+				cudaFree(c_j_d);
 
 				children[i]->wins += *win_increase;
 				children[i]->sims += MAX_TRIAL_H;
+				//printf("win:%d, sims:%d\n", children[i]->wins, children[i]->sims);
 				back_propagation(children[i], *win_increase, MAX_TRIAL_H);
-				delete cuda_win_increase;
 				delete win_increase;
 				if(checkAbort())break;
 			}
@@ -257,7 +296,6 @@ __device__ CudaBoard* get_board(KernelArray<Point> sequence, int bd_size) {
 
 __device__ void deleteAllMoves(Deque<Point*>* moves) {
 	Deque<Point*>::iterator it = moves->begin();
-
 	for (; it != moves->end(); it++) {
 		Point* p = *it;
 		delete p;

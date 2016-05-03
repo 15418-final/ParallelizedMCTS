@@ -50,7 +50,8 @@ public:
 	}
 
 	__device__ __host__ T& operator[] (const int index) {
-		return data[index];
+		if (head + index >= _capacity) return NULL; 
+		return data[head+index];
 	}
 
 	__device__ __host__ void push_back(const T& e) {
