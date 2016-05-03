@@ -14,28 +14,30 @@ __device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color) {
 		int ni = i + dir[d][0];
 		int nj = j + dir[d][1];
 		if (board[ni][nj] == op_color) {
-			int liberty = 0;
-			Q->push_back(new Point(ni, nj));
-			while (Q->size() != 0) {
-				Point* f = Q->pop_front();
-				visited[f->i][f->j] = true;
-				for (int dd = 0; dd < 4; dd++) {
-					ni = f->i + dir[dd][0];
-					nj = f->j + dir[dd][1];
-					if (visited[ni][nj] == true)continue;
-					if (board[ni][nj] == op_color) {
-						Q->push_back(new Point(ni, nj));
-					} else if (board[ni][nj] == EMPTY) {
-						liberty++;
-					} else if (board[ni][nj] == OUT || board[ni][nj] == color) {
+			if(!visited[ni][nj]){
+				int liberty = 0;
+				Q->push_back(new Point(ni, nj));
+				while (Q->size() != 0) {
+					Point* f = Q->pop_front();
+					visited[f->i][f->j] = true;
+					for (int dd = 0; dd < 4; dd++) {
+						ni = f->i + dir[dd][0];
+						nj = f->j + dir[dd][1];
+						if (visited[ni][nj] == true)continue;
+						if (board[ni][nj] == op_color) {
+							Q->push_back(new Point(ni, nj));
+						} else if (board[ni][nj] == EMPTY) {
+							liberty++;
+						} else if (board[ni][nj] == OUT || board[ni][nj] == color) {
 
+						}
 					}
+					delete f;
 				}
-				delete f;
-			}
-			if (liberty == 0) {
-				result = true;
-				break;
+				if (liberty == 0) {
+					result = true;
+					break;
+				}
 			}
 		}
 	}
@@ -49,13 +51,15 @@ __device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color) {
 	int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
 	printf("enter suicide\n");
 	Deque<Point*>* Q = new Deque<Point*>();
+	printf("isSuicide: f0\n");
 	clearVisited();
-	// printf("trying to push: %d, %d\n", i, j);
+	printf("trying to push: %d, %d\n", i, j);
+	printf("Q size:%d\n",Q->size());
 	Q->push_back(new Point(i, j));
-	// printf("isSuicide: f1\n");
+	printf("isSuicide: f1\n");
 	while (Q->size() != 0)  {
 		Point* f = Q->pop_front();
-		// printf("isSuicide: f1\n");
+		printf("isSuicide: f2\n");
 		visited[f->i][f->j] = true;
 		// printf("in isSuicide: f3\n");
 		for (int d = 0 ; d < 4; d++) {
@@ -65,7 +69,7 @@ __device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color) {
 			if (visited[ni][nj] == true)continue;
 			if (board[ni][nj] == color) {
 				Q->push_back(new Point(ni, nj));
-				// printf("isSuicide: f5\n");
+				printf("isSuicide: f5\n");
 			} else if (board[ni][nj] == EMPTY) {
 				// printf("isSuicide end with:false\n");
 				return false;
@@ -87,7 +91,7 @@ __device__  Deque<Point*>* CudaBoard::get_next_moves_device() {
 			if (board[i][j] == EMPTY) { //This is position is empty
 				//TODO: Check whether it can eat other stones
 				//If not, check whether it's a suicide, which is forbidden.
-			//	std::cout << "check" << i << ", " << j <<std::endl;
+
 				printf("checkpoint 0\n");
 				if (!canEat(i, j, color) && isSuicide(i, j, color)) {
 				//	if (!canEat(i, j, color))std::cout << "can not eat" << std::endl;
@@ -96,7 +100,7 @@ __device__  Deque<Point*>* CudaBoard::get_next_moves_device() {
 				}
 				printf("checkpoint 1\n");
 				moves->push_back(new Point(i, j));
-				printf("checkpoint 2\n");
+				// printf("checkpoint 2\n");
 				// printf("next move size:%d\n",moves->size());
 			}
 		}
@@ -140,41 +144,44 @@ __device__  __host__ int CudaBoard::update_board(Point* pos) {
 		int ni = pos->i + dir[d][0];
 		int nj = pos->j + dir[d][1];
 		if (board[ni][nj] == op_color) {
-			int liberty = 0;
-			Q->push_back(new Point(ni, nj));
-			temp_stone->push_back(Q->front());
-			while (Q->size() != 0) {
-				// printf("Q size:%d, temp_stone size:%d\n",Q->size(), temp_stone->size());
-				Point* f = Q->pop_front();
-				visited[f->i][f->j] = true;
-				for (int dd = 0; dd < 4; dd++) {
-					ni = f->i + dir[dd][0];
-					nj = f->j + dir[dd][1];
-					if (visited[ni][nj] == true)continue;
-					if (board[ni][nj] == op_color) {
-						Point* tp = new Point(ni, nj);
-						Q->push_back(tp);
-						temp_stone->push_back(tp);
-					} else if (board[ni][nj] == EMPTY) {
-						liberty++;
-					} else if (board[ni][nj] == OUT || board[ni][nj] == color) {
+			if(!visited[ni][nj]){
+				int liberty = 0;
+				Q->push_back(new Point(ni, nj));
+				temp_stone->push_back(Q->front());
 
+				while (Q->size() != 0) {
+					// printf("Q size:%d, temp_stone size:%d\n",Q->size(), temp_stone->size());
+					Point* f = Q->pop_front();
+					visited[f->i][f->j] = true;
+					for (int dd = 0; dd < 4; dd++) {
+						ni = f->i + dir[dd][0];
+						nj = f->j + dir[dd][1];
+						if (visited[ni][nj] == true)continue;
+						if (board[ni][nj] == op_color) {
+							Point* tp = new Point(ni, nj);
+							Q->push_back(tp);
+							temp_stone->push_back(tp);
+						} else if (board[ni][nj] == EMPTY) {
+							liberty++;
+						} else if (board[ni][nj] == OUT || board[ni][nj] == color) {
+
+						}
 					}
 				}
-			}
-			if (liberty == 0) {
-				total += temp_stone->size();
-				for (Deque<Point*>::iterator it = temp_stone->begin(); it != temp_stone->end(); it++) {
-					Point* p = *it;
-					board[p->i][p->j] = EMPTY;
-					delete p;
+				if (liberty == 0) {
+					total += temp_stone->size();
+					for (Deque<Point*>::iterator it = temp_stone->begin(); it != temp_stone->end(); it++) {
+						Point* p = *it;
+						board[p->i][p->j] = EMPTY;
+						delete p;
+					}
+				}else{
+					for (Deque<Point*>::iterator it = temp_stone->begin(); it != temp_stone->end(); it++) {
+						delete *it;
+					}
 				}
-			}else{
-				for (Deque<Point*>::iterator it = temp_stone->begin(); it != temp_stone->end(); it++) {
-					delete *it;
-				}
+				temp_stone->clear();
 			}
-			temp_stone->clear();
 		}
 	}
 	// printf("play done\n");

@@ -1,12 +1,1 @@
 MCTS Player
-= 
-
-player run
-expand begin
-moves generated:81
-children add done
-expand end with children num:81
-expand f end:0x1de6700
-Cuda malloc done
-ready to run cuda code run_simulation()
-................................................................

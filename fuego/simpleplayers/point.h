@@ -13,7 +13,7 @@ class Point{
 public:
 	int i,j;
 	__device__ __host__ Point(int a, int b):i(a),j(b){}
-	
+	__device__ __host__ Point(){}
 	Point(SgPoint p){
 		i = SgPointUtil::Row(p);
 		j = SgPointUtil::Col(p);

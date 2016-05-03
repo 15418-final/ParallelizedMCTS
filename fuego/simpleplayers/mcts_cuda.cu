@@ -28,15 +28,15 @@ int MAX_TRIAL_H = 50;
 
 typedef struct cudaParam{
 	double timeLeft;
-	int* win_increase;
+	int rand_nums[100];
 }CudaParams;
+__constant__ CudaParams cudaParamConst;
 
-CudaParams params;
-
+__device__ bool checkAbortCuda(double timeLeft, clock_t start);
 __device__ bool checkAbort();
 __device__ Deque<Point*>* generateAllMoves(CudaBoard* cur_board);
 __device__ void deleteAllMoves(Deque<Point*>* moves);
-__global__ void run_simulation(KernelArray<Point>, int* win_increase, int bd_size);
+__global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd_size);
 __device__ CudaBoard* get_board(KernelArray<Point> seq, int bd_size);
 
 template <typename T>
@@ -85,16 +85,15 @@ TreeNode* Mcts::selection(TreeNode* node) {
 }
 
 // Typical Monte Carlo Simulation
-__global__ void run_simulation(KernelArray<Point> seq, int* cuda_rand_nums, int* win_increase, int bd_size) {
+__global__ void run_simulation(KernelArray<Point> seq, int* cuda_win_increase, int bd_size) {
 	CudaBoard* board = get_board(seq, bd_size);
 	COLOR cur_player = board->ToPlay();
-	if(threadIdx.x == 0 && blockIdx.x == 0) printf("10th random number in array:%d\n", cuda_rand_nums[10]);
-	*win_increase = 0;
+	if(threadIdx.x == 0 && blockIdx.x == 0) printf("10th random number in array:%d\n", cudaParamConst.rand_nums[10]);
+	*cuda_win_increase = 0;
+	clock_t start = clock64();
+	printf("Start a simulation\n");
 	for (int i = 0; i < MAX_TRIAL; i++) {
-		// bool timeout = false;
 		CudaBoard* cur_board = new CudaBoard(*board);
-		clock_t start = clock();
-		printf("Start a simulation\n");
 		while (true) {
 			Deque<Point*>* moves_vec = generateAllMoves(cur_board);
 			printf("generate moves done:%d\n",moves_vec->size());
@@ -108,18 +107,15 @@ __global__ void run_simulation(KernelArray<Point> seq, int* cuda_rand_nums, int*
 			cur_board->update_board(nxt_move);
 			printf("move made\n");
 			deleteAllMoves(moves_vec);
-			// if (checkAbort()) {
-			// 	timeout = true;
-			// 	break;
-			// }
-		}
-		if (true) {
-			int score = cur_board->score();
-			if ((score > 0 && cur_player == BLACK)
-			        || (score < 0 && cur_player == WHITE)) {
-				*win_increase = *win_increase + 1;
+			if (checkAbortCuda(cudaParamConst.timeLeft, start)) {
+				// timeout = true;
+				break;
 			}
-			// totalSimu ++;
+		}
+		int score = cur_board->score();
+		if ((score > 0 && cur_player == BLACK)
+				|| (score < 0 && cur_player == WHITE)) {
+			*cuda_win_increase = *cuda_win_increase + 1;
 		}
 		delete cur_board;
 	}
@@ -177,26 +173,28 @@ void Mcts::run_iteration(TreeNode* node) {
 
 				thrust::device_vector<Point> dec_seq(children[i]->get_sequence());
 				
-				int* rand_nums = new int[100];
-				srand (time(NULL));
-				for(int r = 0; r < 100; r++){
-					rand_nums[r] = rand() % (bd_size*bd_size);
-				}
-				int* cuda_rand_nums;
-				cudaMalloc((void **)&cuda_rand_nums, sizeof(int)*100);
-				cudaMemcpy(cuda_rand_nums, rand_nums, sizeof(int)*100, cudaMemcpyHostToDevice);
-				std::cout<<"rand_nums[10]:"<<rand_nums[10]<<std::endl;
-
+				
 				CudaParams tp;
 				tp.timeLeft = maxTime - mcts_timer.GetTime();
-				tp.
-				int* cuda_win_increase = NULL;
-				cudaMalloc((void **)&cuda_win_increase, sizeof(int));
-				run_simulation<<<1,1>>>(convertToKernel(dec_seq), cuda_rand_nums, cuda_win_increase, bd_size);
+				srand (time(NULL));
+				for(int r = 0; r < 100; r++){
+					tp.rand_nums[r] = 1;//rand() % (bd_size*bd_size);
+				}
+
+				printf("malloc tp done\n");
+
+				cudaMemcpyToSymbol(cudaParamConst, &tp, sizeof(CudaParams), cudaMemcpyHostToDevice);
+				printf("sizeof cudaParam:%d\n",sizeof(CudaParams));
+				std::cout<<"rand_nums[10]:"<<tp.rand_nums[10]<<std::endl;
+
+
+				int* cuda_win_increase;
+				cudaMalloc((void **)&(cuda_win_increase), sizeof(int));
+
+				printf("ready to start device job:\n");
+				run_simulation<<<1, 1>>>(convertToKernel(dec_seq), cuda_win_increase, bd_size);
 				//cudaFree(cudaDeviceNode);
-				cudaFree(cuda_rand_nums);
-				delete rand_nums;
-				cudaFree(cuda_win_increase);
+				printf("device job done\n");
 
 				int* win_increase = new int[1];
 				cudaMemcpy(win_increase, cuda_win_increase, sizeof(int), cudaMemcpyDeviceToHost);
@@ -219,6 +217,13 @@ bool Mcts::checkAbort() {
 		abort = mcts_timer.GetTime() > maxTime;
 	}
 	return abort;
+}
+
+__device__ bool checkAbortCuda(double timeLeft, clock_t start){
+	if(timeLeft < clock64() - start){
+		return true;
+	}
+	return false;
 }
 
 __device__ Deque<Point*>* generateAllMoves(CudaBoard* cur_board) {

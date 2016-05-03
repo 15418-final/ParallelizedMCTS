@@ -18,24 +18,24 @@ public:
 	class iterator {
 	private:
 		int _ptr;
-		Deque& container;
+		Deque* container;
 	public:
-		__device__  __host__ iterator(int h, Deque& outer): _ptr(h), container(outer){}
+		__device__  __host__ iterator(int h, Deque* outer): _ptr(h), container(outer){}
 
 		__device__  __host__ iterator operator++() {
 			iterator old = *this;
-			_ptr = (_ptr + 1) % container._capacity;
+			_ptr = (_ptr + 1) % container->_capacity;
 			return old;
 		}
 		__device__  __host__ iterator operator++(int r) {
-			_ptr = (_ptr + 1) % container._capacity;
+			_ptr = (_ptr + 1) % container->_capacity;
 			return *this;
 		}
-		__device__  __host__ T& operator*() {
-			return container.data[_ptr];
+		__device__  __host__ T operator*() {
+			return container->data[_ptr];
 		}
-		__device__  __host__ bool operator==(const iterator& rhs) { return _ptr == rhs._ptr; }
-		__device__  __host__ bool operator!=(const iterator& rhs) { return _ptr != rhs._ptr; }
+		__device__  __host__ bool operator==(const iterator rhs) { return _ptr == rhs._ptr; }
+		__device__  __host__ bool operator!=(const iterator rhs) { return _ptr != rhs._ptr; }
 	};
 
 	__device__ __host__ Deque() {
@@ -49,18 +49,20 @@ public:
 		free(data);
 	}
 
-	__device__ __host__ T& operator[] (const int index) {
-		return data[index];
+	__device__ __host__ T operator[] (const int index) {
+		int pos = (head + index) % _capacity;
+		return data[pos];
 	}
 
-	__device__ __host__ void push_back(const T& e) {
+	__device__ __host__ void push_back(const T e) {
 		// Make sure head and tail won't point to same position. Good for implementing iterator
 		if (_size < BDSIZE * BDSIZE - 1) {
 			int tail = (head + _size) % _capacity;
-			// printf("tail:%d\n",tail);
+			printf("tail:%d\n",tail);
+			printf("_capacity:%d\n",_capacity);
 			data[tail] = e;
 			_size++;
-			// printf("size:%d\n",_size);
+			printf("size:%d\n",_size);
 		}
 	}
 
@@ -104,12 +106,12 @@ public:
 	}
 
 	__device__ __host__  iterator begin() {
-		return iterator(head, *this);
+		return iterator(head, this);
 	}
 
 	__device__ __host__  iterator end() {
 		int tail = (head + _size) % _capacity;
-		return iterator(tail, *this);
+		return iterator(tail, this);
 	}
 
 	__device__  __host__ void clear() {
