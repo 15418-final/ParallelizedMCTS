@@ -10,7 +10,20 @@ SgPoint MCTSPlayer::GenMove(const SgTimeRecord& time, SgBlackWhite toPlay) {
 	Mcts* mcts = new Mcts(Board(), maxTime);
 	move =  mcts->run();
 	std::cout << SgPointUtil::PointToString(move) << std::endl;
-	std::cout<<"Board() size:"<<Board().getMySize()<<std::endl;
+	std::cout << "Board() size:" << Board().getMySize() << std::endl;
+	size_t free_byte ;
+
+	size_t total_byte ;
+
+	cudaError cuda_status = cudaMemGetInfo( &free_byte, &total_byte ) ;
+
+	if ( cudaSuccess != cuda_status ) {
+
+		printf("Error: cudaMemGetInfo fails, %s \n", cudaGetErrorString(cuda_status) );
+
+		exit(1);
+
+	}
 	delete mcts;
 	return move;
 }

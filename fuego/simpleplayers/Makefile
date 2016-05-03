@@ -367,7 +367,6 @@ mcts.h \
 CudaGo.h \
 point.h \
 deque.h \
-CudaDequeue.h \
 SpUtil.h
 
 AM_CXXFLAGS = -fopenmp

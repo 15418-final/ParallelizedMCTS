@@ -22,9 +22,8 @@ struct KernelArray
 //Exploration parameter
 double C = 1.4;
 double EPSILON = 10e-6;
-__constant__ int MAX_TRIAL = 500;
+__constant__ int MAX_TRIAL = 5;
 __constant__ int THREAD_NUM = 32;
-
 int MAX_TRIAL_H = 50;
 
 
@@ -80,11 +79,11 @@ TreeNode* Mcts::selection(TreeNode* node) {
 }
 
 // Typical Monte Carlo Simulation
-__global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd_size) {
+__global__ void run_simulation(KernelArray<Point> seq, int* cuda_rand_nums, int* win_increase, int bd_size) {
 	CudaBoard* board = get_board(seq, bd_size);
 	COLOR cur_player = board->ToPlay();
-	
-	int wins = 0;
+	if(threadIdx.x == 0 && blockIdx.x == 0) printf("10th random number in array:%d\n", cuda_rand_nums[10]);
+	*win_increase = 0;
 	for (int i = 0; i < MAX_TRIAL; i++) {
 		// bool timeout = false;
 		CudaBoard* cur_board = new CudaBoard(*board);
@@ -92,6 +91,7 @@ __global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd
 		printf("Start a simulation\n");
 		while (true) {
 			Deque<Point*>* moves_vec = generateAllMoves(cur_board);
+			printf("generate moves done:%d\n",moves_vec->size());
 			if (cur_board->EndOfGame() || moves_vec->size() == 0) {
 				break;
 			}
@@ -108,10 +108,10 @@ __global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd
 			// }
 		}
 		if (true) {
-			int score = cur_board->score(); // Komi set to 0
+			int score = cur_board->score();
 			if ((score > 0 && cur_player == BLACK)
 			        || (score < 0 && cur_player == WHITE)) {
-				wins++;
+				*win_increase = *win_increase + 1;
 			}
 			// totalSimu ++;
 		}
@@ -167,22 +167,26 @@ void Mcts::run_iteration(TreeNode* node) {
 
 			std::vector<TreeNode*> children = f->get_children();
 			for (size_t i = 0; i < children.size(); i++) {
-				// TreeNode* cudaDeviceNode = NULL;
-				// int* cuda_win_increase = NULL;
-				// // Use cuda to parallelize
-				// cudaMalloc((void **)&cudaDeviceNode, sizeof(*children[i]));
-				// cudaMalloc((void **)&cuda_win_increase, sizeof(int));
-				// cudaMemcpy(cudaDeviceNode, children[i], sizeof(*children[i]), cudaMemcpyHostToDevice);
-
-				int* cuda_win_increase = NULL;
-				cudaMalloc((void **)&cuda_win_increase, sizeof(int));
 				std::cout<<"Cuda malloc done"<<std::endl;
 
 				thrust::device_vector<Point> dec_seq(children[i]->get_sequence());
 				
-				std::cout<<"ready to run cuda code run_simulation()"<<std::endl;
-				run_simulation<<<1,1>>>(convertToKernel(dec_seq), cuda_win_increase, bd_size);
+				int* rand_nums = new int[100];
+				srand (time(NULL));
+				for(int r = 0; r < 100; r++){
+					rand_nums[r] = rand() % (bd_size*bd_size);
+				}
+				int* cuda_rand_nums;
+				cudaMalloc((void **)&cuda_rand_nums, sizeof(int)*100);
+				cudaMemcpy(cuda_rand_nums, rand_nums, sizeof(int)*100, cudaMemcpyHostToDevice);
+				std::cout<<"rand_nums[10]:"<<rand_nums[10]<<std::endl;
+				int* cuda_win_increase = NULL;
+				cudaMalloc((void **)&cuda_win_increase, sizeof(int));
+				run_simulation<<<1,1>>>(convertToKernel(dec_seq), cuda_rand_nums, cuda_win_increase, bd_size);
 				//cudaFree(cudaDeviceNode);
+				cudaFree(cuda_rand_nums);
+				delete rand_nums;
+				cudaFree(cuda_win_increase);
 
 				int* win_increase = new int[1];
 				cudaMemcpy(win_increase, cuda_win_increase, sizeof(int), cudaMemcpyDeviceToHost);
@@ -190,7 +194,6 @@ void Mcts::run_iteration(TreeNode* node) {
 				children[i]->wins += *win_increase;
 				children[i]->sims += MAX_TRIAL_H;
 				back_propagation(children[i], *win_increase, MAX_TRIAL_H);
-				delete cuda_win_increase;
 				delete win_increase;
 				if(checkAbort())break;
 			}

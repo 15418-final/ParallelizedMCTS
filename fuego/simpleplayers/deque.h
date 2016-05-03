@@ -57,8 +57,10 @@ public:
 		// Make sure head and tail won't point to same position. Good for implementing iterator
 		if (_size < BDSIZE * BDSIZE - 1) {
 			int tail = (head + _size) % _capacity;
+			// printf("tail:%d\n",tail);
 			data[tail] = e;
 			_size++;
+			// printf("size:%d\n",_size);
 		}
 	}
 

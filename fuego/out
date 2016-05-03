@@ -1,22 +1,12 @@
 MCTS Player
 = 
 
-Mcts constructor, copied GoBoard
-maxTime:10
-expand f:0x12ba4d0
+player run
 expand begin
+moves generated:81
+children add done
 expand end with children num:81
-run_iteration end
-select f:0x12ba4d0
-selection begin
-selection end
-expand f:0x12c2f60
-expand begin
-expand end with children num:0ma
-run_iteration end
-select f:0x12ba4d0
-selection begin
-selection end
-select f:0x12c2f60
-selection begin
-selection end
+expand f end:0x1de6700
+Cuda malloc done
+ready to run cuda code run_simulation()
+................................................................

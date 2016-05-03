@@ -2,5 +2,5 @@
 *.Po
 *.a
 Makefile.in
-Makerfile
+Makefile
 config*
