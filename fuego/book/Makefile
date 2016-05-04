@@ -171,9 +171,9 @@ CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
-CUDA_CFLAGS =  -I/usr/local/depot/cuda-6.5/C/common/inc/ -I/usr/local/depot/cuda-6.5/include
-CUDA_LDFLAGS = -L/usr/local/depot/cuda-6.5/lib64
-CUDA_LIBS = -lcuda -lcudart -lcufft
+CUDA_CFLAGS = 
+CUDA_LDFLAGS = 
+CUDA_LIBS = 
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
@@ -210,8 +210,8 @@ MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
 NMEDIT = 
-NVCC = nvcc
-NVCCFLAGS =   -I/usr/local/depot/cuda-6.5/C/common/inc/ -I/usr/local/depot/cuda-6.5/include -L/usr/local/depot/cuda-6.5/lib64 -lcuda -lcudart -lcufft
+NVCC = 
+NVCCFLAGS = 
 OBJDUMP = objdump
 OBJEXT = o
 OPENMP_CFLAGS = -fopenmp

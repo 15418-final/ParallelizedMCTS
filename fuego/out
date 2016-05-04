@@ -1,1 +1,5732 @@
 MCTS Player
+= 
+
+player run
+expand begin
+isSuicide: f0
+trying to push: 1, 1
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 1, 2
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 1, 3
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 1, 4
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 1, 5
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 1, 6
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 1, 7
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 1, 8
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 1, 9
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 2, 1
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 2, 2
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 2, 3
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 2, 4
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 2, 5
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 2, 6
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 2, 7
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 2, 8
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 2, 9
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 3, 1
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 3, 2
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 3, 3
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 3, 4
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 3, 5
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 3, 6
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 3, 7
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 3, 8
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 3, 9
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 4, 1
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 4, 2
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 4, 3
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 4, 4
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 4, 5
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 4, 6
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 4, 7
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 4, 8
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 4, 9
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 5, 1
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 5, 2
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 5, 3
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 5, 4
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 5, 5
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 5, 6
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 5, 7
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 5, 8
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 5, 9
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 6, 1
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 6, 2
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 6, 3
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 6, 4
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 6, 5
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 6, 6
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 6, 7
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 6, 8
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 6, 9
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 7, 1
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 7, 2
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 7, 3
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 7, 4
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 7, 5
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 7, 6
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 7, 7
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 7, 8
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 7, 9
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 8, 1
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 8, 2
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 8, 3
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 8, 4
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 8, 5
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 8, 6
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 8, 7
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 8, 8
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 8, 9
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 9, 1
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 9, 2
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 9, 3
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 9, 4
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 9, 5
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 9, 6
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 9, 7
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 9, 8
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f0
+trying to push: 9, 9
+Q size:0
+tail:0
+_capacity:362
+size:1
+isSuicide: f2
+moves generated:81
+children add done
+expand end with children num:81
+expand f end:0xce85d0
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+........B
+ready to run cuda code run_simulation()
+trying to push: 4, 9
+size:35
+isSuicide: f2
+isSuicide: f2
+size:1
+Q size:0
+isSuicide: f2
+_capacity:362
+tail:36
+checkpoint 0
+isSuicide: f2
+_capacity:362
+size:1
+tail:0
+checkpoint 1
+checkpoint 1
+checkpoint 1
+isSuicide: f0
+isSuicide: f0
+size:37
+checkpoint 1
+isSuicide: f2
+_capacity:362
+tail:36
+tail:35
+trying to push: 4, 9
+tail:36
+trying to push: 5, 1
+checkpoint 0
+_capacity:362
+size:1
+Q size:0
+_capacity:362
+_capacity:362
+Q size:0
+checkpoint 1
+tail:36
+size:37
+size:36
+size:37
+isSuicide: f2
+_capacity:362
+isSuicide: f0
+tail:0
+tail:36
+tail:0
+checkpoint 0
+checkpoint 0
+checkpoint 0
+size:37
+_capacity:362
+_capacity:362
+_capacity:362
+trying to push: 4, 9
+checkpoint 1
+checkpoint 0
+size:1
+size:37
+size:1
+Q size:0
+isSuicide: f0
+tail:35
+isSuicide: f2
+checkpoint 0
+isSuicide: f2
+_capacity:362
+trying to push: 5, 2
+tail:0
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+Q size:0
+size:36
+_capacity:362
+isSuicide: f0
+trying to push: 5, 2
+trying to push: 5, 1
+checkpoint 1
+trying to push: 5, 2
+checkpoint 1
+Q size:0
+size:1
+Q size:0
+checkpoint 0
+Q size:0
+trying to push: 5, 2
+tail:0
+tail:35
+tail:36
+Q size:0
+_capacity:362
+isSuicide: f2
+_capacity:362
+_capacity:362
+isSuicide: f0
+tail:0
+tail:0
+tail:0
+size:1
+size:37
+size:36
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+trying to push: 5, 2
+tail:0
+isSuicide: f2
+checkpoint 0
+checkpoint 0
+size:1
+size:1
+Q size:0
+size:1
+tail:35
+_capacity:362
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+checkpoint 1
+isSuicide: f0
+tail:0
+_capacity:362
+size:1
+tail:37
+checkpoint 1
+_capacity:362
+checkpoint 1
+checkpoint 1
+trying to push: 5, 1
+_capacity:362
+isSuicide: f2
+size:36
+size:1
+Q size:0
+tail:37
+tail:36
+tail:37
+isSuicide: f0
+isSuicide: f0
+size:38
+_capacity:362
+_capacity:362
+checkpoint 0
+isSuicide: f2
+_capacity:362
+tail:0
+trying to push: 5, 1
+size:38
+checkpoint 0
+trying to push: 5, 2
+size:38
+checkpoint 1
+size:37
+checkpoint 1
+_capacity:362
+checkpoint 0
+Q size:0
+Q size:0
+checkpoint 0
+size:1
+checkpoint 0
+tail:37
+tail:0
+tail:37
+tail:0
+isSuicide: f0
+isSuicide: f0
+isSuicide: f2
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+trying to push: 5, 3
+trying to push: 5, 1
+isSuicide: f0
+isSuicide: f0
+size:38
+size:38
+size:1
+Q size:0
+size:1
+Q size:0
+trying to push: 5, 3
+isSuicide: f0
+trying to push: 5, 3
+checkpoint 0
+Q size:0
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+checkpoint 1
+trying to push: 5, 2
+tail:0
+tail:0
+Q size:0
+Q size:0
+_capacity:362
+tail:0
+checkpoint 1
+checkpoint 1
+tail:36
+_capacity:362
+size:1
+_capacity:362
+_capacity:362
+tail:0
+tail:36
+tail:37
+tail:0
+isSuicide: f2
+size:1
+size:1
+size:37
+isSuicide: f0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f2
+isSuicide: f2
+size:1
+size:1
+checkpoint 0
+size:38
+size:37
+trying to push: 5, 3
+checkpoint 1
+isSuicide: f2
+isSuicide: f2
+checkpoint 0
+checkpoint 0
+Q size:0
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+trying to push: 5, 3
+checkpoint 1
+tail:38
+checkpoint 1
+tail:0
+tail:36
+tail:38
+Q size:0
+isSuicide: f0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+tail:38
+isSuicide: f0
+tail:37
+size:39
+size:1
+size:39
+size:37
+_capacity:362
+trying to push: 5, 2
+trying to push: 5, 2
+trying to push: 5, 3
+tail:0
+_capacity:362
+checkpoint 0
+isSuicide: f2
+checkpoint 0
+size:39
+checkpoint 0
+Q size:0
+Q size:0
+Q size:0
+_capacity:362
+size:38
+size:1
+checkpoint 0
+checkpoint 1
+isSuicide: f0
+tail:0
+tail:0
+checkpoint 0
+isSuicide: f2
+tail:0
+_capacity:362
+_capacity:362
+tail:38
+isSuicide: f0
+trying to push: 5, 4
+isSuicide: f0
+size:1
+size:1
+_capacity:362
+_capacity:362
+Q size:0
+trying to push: 5, 4
+trying to push: 5, 2
+checkpoint 1
+isSuicide: f0
+isSuicide: f2
+size:39
+size:1
+Q size:0
+isSuicide: f2
+tail:0
+Q size:0
+trying to push: 5, 4
+tail:38
+isSuicide: f0
+checkpoint 0
+isSuicide: f2
+_capacity:362
+Q size:0
+_capacity:362
+checkpoint 1
+checkpoint 1
+tail:0
+tail:0
+trying to push: 5, 3
+size:1
+size:39
+tail:0
+_capacity:362
+checkpoint 1
+tail:38
+_capacity:362
+size:1
+Q size:0
+checkpoint 0
+_capacity:362
+isSuicide: f2
+tail:37
+tail:37
+_capacity:362
+isSuicide: f2
+size:1
+size:1
+isSuicide: f0
+checkpoint 1
+tail:0
+_capacity:362
+_capacity:362
+size:39
+isSuicide: f2
+isSuicide: f2
+size:38
+_capacity:362
+trying to push: 5, 4
+checkpoint 1
+size:38
+checkpoint 0
+size:1
+Q size:0
+checkpoint 0
+tail:39
+tail:39
+checkpoint 1
+checkpoint 1
+checkpoint 0
+_capacity:362
+_capacity:362
+isSuicide: f2
+isSuicide: f0
+tail:39
+tail:37
+tail:0
+size:40
+size:40
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+trying to push: 5, 4
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+size:40
+size:1
+size:38
+Q size:0
+trying to push: 5, 4
+tail:38
+checkpoint 0
+trying to push: 5, 3
+isSuicide: f2
+checkpoint 0
+Q size:0
+tail:0
+isSuicide: f0
+_capacity:362
+Q size:0
+_capacity:362
+checkpoint 1
+tail:0
+trying to push: 5, 3
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+size:39
+size:1
+Q size:0
+_capacity:362
+trying to push: 5, 5
+trying to push: 5, 5
+tail:39
+tail:0
+checkpoint 0
+Q size:0
+isSuicide: f2
+isSuicide: f0
+trying to push: 5, 5
+size:1
+Q size:0
+tail:0
+_capacity:362
+_capacity:362
+Q size:0
+checkpoint 1
+isSuicide: f2
+tail:0
+_capacity:362
+tail:0
+trying to push: 5, 3
+size:40
+size:1
+Q size:0
+size:1
+tail:0
+_capacity:362
+_capacity:362
+tail:39
+checkpoint 1
+isSuicide: f2
+checkpoint 0
+size:1
+size:1
+_capacity:362
+isSuicide: f2
+_capacity:362
+isSuicide: f0
+tail:0
+size:1
+isSuicide: f2
+isSuicide: f2
+size:40
+_capacity:362
+tail:39
+checkpoint 1
+checkpoint 1
+trying to push: 5, 4
+checkpoint 0
+size:1
+isSuicide: f2
+_capacity:362
+Q size:0
+checkpoint 1
+checkpoint 1
+tail:38
+isSuicide: f2
+size:40
+_capacity:362
+tail:38
+checkpoint 1
+tail:40
+tail:40
+isSuicide: f0
+tail:0
+size:39
+checkpoint 0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 1
+trying to push: 5, 5
+tail:40
+size:41
+size:41
+checkpoint 0
+Q size:0
+size:1
+size:39
+trying to push: 5, 5
+_capacity:362
+checkpoint 0
+checkpoint 0
+Q size:0
+checkpoint 0
+isSuicide: f2
+tail:38
+tail:0
+size:41
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 1
+tail:0
+isSuicide: f0
+checkpoint 0
+size:1
+_capacity:362
+size:39
+tail:39
+isSuicide: f0
+isSuicide: f0
+trying to push: 5, 5
+isSuicide: f0
+isSuicide: f2
+size:1
+checkpoint 0
+_capacity:362
+Q size:0
+trying to push: 5, 4
+trying to push: 5, 6
+trying to push: 5, 6
+trying to push: 5, 4
+isSuicide: f2
+size:40
+Q size:0
+Q size:0
+Q size:0
+checkpoint 1
+tail:0
+Q size:0
+checkpoint 0
+_capacity:362
+checkpoint 1
+tail:0
+tail:40
+tail:0
+isSuicide: f0
+isSuicide: f0
+tail:0
+size:1
+tail:0
+_capacity:362
+_capacity:362
+_capacity:362
+trying to push: 5, 6
+trying to push: 5, 4
+tail:40
+_capacity:362
+_capacity:362
+isSuicide: f2
+Q size:0
+size:41
+size:1
+size:1
+Q size:0
+_capacity:362
+size:1
+size:1
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+checkpoint 1
+tail:0
+tail:0
+isSuicide: f2
+isSuicide: f2
+size:41
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+tail:40
+size:1
+checkpoint 0
+size:1
+_capacity:362
+checkpoint 1
+checkpoint 1
+tail:41
+trying to push: 5, 5
+tail:39
+isSuicide: f2
+size:41
+isSuicide: f2
+_capacity:362
+Q size:0
+tail:39
+tail:41
+size:42
+checkpoint 0
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+tail:0
+checkpoint 0
+size:42
+size:40
+size:40
+_capacity:362
+trying to push: 5, 6
+isSuicide: f0
+tail:41
+tail:39
+Q size:0
+checkpoint 0
+checkpoint 0
+checkpoint 0
+_capacity:362
+size:1
+_capacity:362
+trying to push: 5, 6
+isSuicide: f0
+size:42
+size:40
+isSuicide: f2
+tail:0
+Q size:0
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+_capacity:362
+checkpoint 1
+trying to push: 5, 6
+tail:0
+isSuicide: f0
+isSuicide: f0
+size:1
+Q size:0
+_capacity:362
+tail:40
+isSuicide: f0
+trying to push: 5, 7
+trying to push: 5, 7
+trying to push: 5, 5
+isSuicide: f2
+size:1
+Q size:0
+Q size:0
+_capacity:362
+Q size:0
+trying to push: 5, 5
+tail:0
+isSuicide: f0
+isSuicide: f0
+isSuicide: f2
+size:41
+_capacity:362
+Q size:0
+checkpoint 1
+tail:0
+tail:0
+trying to push: 5, 5
+tail:0
+_capacity:362
+size:1
+_capacity:362
+checkpoint 0
+Q size:0
+trying to push: 5, 7
+_capacity:362
+checkpoint 1
+tail:41
+size:1
+size:1
+isSuicide: f2
+Q size:0
+size:1
+tail:0
+tail:0
+tail:41
+_capacity:362
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+tail:0
+size:42
+size:42
+size:1
+size:1
+checkpoint 1
+checkpoint 1
+checkpoint 1
+tail:41
+_capacity:362
+isSuicide: f0
+checkpoint 0
+isSuicide: f2
+checkpoint 0
+isSuicide: f2
+_capacity:362
+tail:42
+tail:42
+tail:40
+size:1
+_capacity:362
+size:42
+_capacity:362
+checkpoint 1
+checkpoint 1
+trying to push: 5, 6
+isSuicide: f0
+isSuicide: f2
+_capacity:362
+size:43
+size:43
+checkpoint 0
+Q size:0
+tail:40
+trying to push: 5, 7
+tail:40
+size:41
+checkpoint 0
+checkpoint 0
+Q size:0
+_capacity:362
+_capacity:362
+tail:0
+checkpoint 1
+isSuicide: f0
+size:41
+size:41
+checkpoint 0
+_capacity:362
+tail:0
+tail:42
+size:1
+checkpoint 0
+trying to push: 5, 7
+checkpoint 0
+_capacity:362
+_capacity:362
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+size:1
+size:43
+Q size:0
+isSuicide: f2
+trying to push: 5, 8
+trying to push: 5, 8
+trying to push: 5, 7
+isSuicide: f0
+isSuicide: f2
+Q size:0
+Q size:0
+checkpoint 0
+Q size:0
+checkpoint 1
+tail:0
+isSuicide: f0
+isSuicide: f0
+_capacity:362
+tail:0
+tail:0
+checkpoint 1
+tail:0
+trying to push: 5, 6
+tail:41
+trying to push: 5, 6
+_capacity:362
+_capacity:362
+size:1
+_capacity:362
+Q size:0
+_capacity:362
+Q size:0
+trying to push: 5, 6
+size:1
+size:1
+size:1
+size:42
+Q size:0
+isSuicide: f2
+tail:42
+tail:0
+tail:0
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+checkpoint 0
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 1
+size:43
+size:1
+size:1
+tail:0
+tail:42
+checkpoint 1
+checkpoint 1
+checkpoint 1
+trying to push: 5, 8
+checkpoint 0
+Q size:0
+_capacity:362
+isSuicide: f2
+_capacity:362
+isSuicide: f2
+tail:43
+tail:42
+size:43
+size:1
+_capacity:362
+_capacity:362
+tail:43
+checkpoint 1
+checkpoint 1
+tail:0
+isSuicide: f0
+checkpoint 0
+size:43
+size:44
+_capacity:362
+_capacity:362
+isSuicide: f2
+trying to push: 5, 7
+tail:41
+tail:41
+checkpoint 0
+checkpoint 0
+size:44
+size:1
+Q size:0
+_capacity:362
+checkpoint 1
+isSuicide: f0
+_capacity:362
+size:42
+checkpoint 0
+isSuicide: f2
+tail:41
+tail:0
+isSuicide: f0
+size:42
+checkpoint 0
+_capacity:362
+_capacity:362
+trying to push: 5, 8
+trying to push: 5, 8
+checkpoint 1
+isSuicide: f0
+size:42
+size:1
+checkpoint 0
+Q size:0
+Q size:0
+trying to push: 5, 9
+tail:43
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+isSuicide: f2
+Q size:0
+_capacity:362
+trying to push: 5, 9
+trying to push: 5, 8
+tail:0
+tail:0
+size:44
+Q size:0
+_capacity:362
+_capacity:362
+Q size:0
+checkpoint 1
+tail:0
+isSuicide: f0
+checkpoint 0
+size:1
+size:1
+_capacity:362
+tail:0
+tail:0
+tail:42
+isSuicide: f0
+isSuicide: f2
+isSuicide: f2
+size:1
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+trying to push: 5, 7
+trying to push: 5, 7
+size:1
+size:43
+size:1
+isSuicide: f2
+Q size:0
+Q size:0
+trying to push: 5, 7
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+Q size:0
+checkpoint 1
+checkpoint 1
+checkpoint 1
+tail:0
+tail:0
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+tail:43
+tail:0
+tail:43
+tail:44
+size:1
+size:1
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+tail:43
+trying to push: 5, 9
+tail:44
+size:44
+size:44
+isSuicide: f2
+isSuicide: f2
+Q size:0
+_capacity:362
+size:1
+size:45
+_capacity:362
+checkpoint 0
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+size:44
+checkpoint 1
+isSuicide: f0
+checkpoint 1
+tail:0
+checkpoint 0
+size:45
+trying to push: 5, 8
+tail:42
+checkpoint 1
+tail:42
+isSuicide: f0
+isSuicide: f0
+_capacity:362
+checkpoint 0
+Q size:0
+isSuicide: f0
+_capacity:362
+tail:42
+_capacity:362
+size:1
+size:43
+trying to push: 6, 1
+trying to push: 5, 9
+trying to push: 5, 9
+tail:0
+isSuicide: f0
+_capacity:362
+Q size:0
+checkpoint 0
+Q size:0
+Q size:0
+isSuicide: f2
+size:43
+_capacity:362
+size:43
+isSuicide: f0
+checkpoint 0
+size:1
+checkpoint 1
+tail:0
+trying to push: 5, 9
+tail:0
+isSuicide: f0
+checkpoint 0
+isSuicide: f2
+_capacity:362
+_capacity:362
+trying to push: 6, 1
+Q size:0
+tail:0
+tail:44
+trying to push: 5, 8
+size:1
+Q size:0
+size:1
+_capacity:362
+_capacity:362
+checkpoint 1
+tail:0
+Q size:0
+isSuicide: f0
+isSuicide: f2
+size:1
+size:45
+isSuicide: f2
+_capacity:362
+tail:0
+tail:43
+checkpoint 0
+isSuicide: f2
+trying to push: 5, 8
+isSuicide: f0
+checkpoint 1
+tail:0
+size:1
+_capacity:362
+checkpoint 1
+_capacity:362
+Q size:0
+tail:45
+_capacity:362
+checkpoint 1
+trying to push: 5, 8
+size:44
+size:1
+size:1
+isSuicide: f2
+_capacity:362
+Q size:0
+tail:44
+tail:0
+tail:44
+size:46
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+_capacity:362
+checkpoint 1
+tail:0
+_capacity:362
+checkpoint 0
+size:45
+size:1
+_capacity:362
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+tail:44
+size:45
+size:1
+checkpoint 0
+isSuicide: f2
+_capacity:362
+tail:43
+tail:45
+trying to push: 6, 1
+isSuicide: f2
+checkpoint 0
+size:45
+Q size:0
+_capacity:362
+_capacity:362
+checkpoint 1
+isSuicide: f0
+checkpoint 0
+size:46
+isSuicide: f0
+checkpoint 1
+tail:0
+size:44
+trying to push: 5, 9
+isSuicide: f0
+tail:43
+checkpoint 0
+_capacity:362
+trying to push: 6, 2
+Q size:0
+checkpoint 0
+isSuicide: f0
+tail:43
+_capacity:362
+isSuicide: f0
+size:1
+size:44
+Q size:0
+trying to push: 6, 1
+_capacity:362
+trying to push: 6, 1
+tail:0
+size:44
+checkpoint 0
+Q size:0
+isSuicide: f2
+Q size:0
+_capacity:362
+trying to push: 6, 1
+tail:0
+isSuicide: f0
+Q size:0
+checkpoint 0
+size:1
+_capacity:362
+isSuicide: f0
+checkpoint 1
+tail:0
+tail:0
+trying to push: 6, 2
+isSuicide: f2
+size:1
+Q size:0
+_capacity:362
+_capacity:362
+tail:0
+tail:45
+trying to push: 5, 9
+size:1
+size:1
+_capacity:362
+_capacity:362
+isSuicide: f2
+Q size:0
+isSuicide: f0
+checkpoint 1
+isSuicide: f0
+size:46
+isSuicide: f2
+isSuicide: f2
+size:1
+checkpoint 1
+tail:0
+tail:0
+checkpoint 0
+trying to push: 5, 9
+_capacity:362
+trying to push: 5, 9
+isSuicide: f2
+_capacity:362
+tail:46
+checkpoint 1
+tail:44
+checkpoint 1
+Q size:0
+Q size:0
+checkpoint 1
+_capacity:362
+size:1
+size:1
+_capacity:362
+size:47
+isSuicide: f2
+isSuicide: f2
+tail:45
+tail:0
+tail:45
+tail:0
+tail:45
+checkpoint 0
+size:45
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+size:1
+size:46
+checkpoint 0
+size:46
+size:1
+size:46
+checkpoint 1
+checkpoint 1
+checkpoint 0
+isSuicide: f2
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+trying to push: 6, 2
+tail:44
+tail:46
+Q size:0
+isSuicide: f0
+_capacity:362
+checkpoint 1
+_capacity:362
+isSuicide: f0
+checkpoint 1
+size:45
+size:47
+trying to push: 6, 3
+trying to push: 6, 1
+tail:44
+isSuicide: f0
+tail:0
+tail:44
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+Q size:0
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+trying to push: 6, 2
+trying to push: 6, 2
+isSuicide: f0
+size:1
+tail:0
+size:45
+size:45
+Q size:0
+Q size:0
+tail:0
+trying to push: 6, 2
+checkpoint 0
+isSuicide: f2
+checkpoint 0
+_capacity:362
+Q size:0
+_capacity:362
+tail:0
+tail:0
+isSuicide: f0
+size:1
+size:1
+_capacity:362
+_capacity:362
+trying to push: 6, 3
+checkpoint 1
+tail:0
+isSuicide: f0
+isSuicide: f2
+Q size:0
+isSuicide: f2
+size:1
+size:1
+_capacity:362
+trying to push: 6, 1
+tail:46
+isSuicide: f2
+size:1
+isSuicide: f2
+Q size:0
+checkpoint 1
+isSuicide: f0
+checkpoint 1
+tail:0
+_capacity:362
+isSuicide: f2
+_capacity:362
+trying to push: 6, 1
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+tail:0
+tail:47
+tail:45
+size:47
+size:1
+Q size:0
+checkpoint 1
+_capacity:362
+tail:46
+trying to push: 6, 1
+_capacity:362
+_capacity:362
+tail:46
+isSuicide: f2
+checkpoint 0
+_capacity:362
+Q size:0
+size:48
+size:1
+tail:0
+_capacity:362
+size:46
+size:47
+checkpoint 0
+tail:46
+checkpoint 1
+tail:0
+_capacity:362
+isSuicide: f2
+checkpoint 0
+checkpoint 0
+size:47
+_capacity:362
+_capacity:362
+isSuicide: f0
+isSuicide: f0
+tail:47
+checkpoint 0
+size:47
+size:1
+size:1
+checkpoint 1
+_capacity:362
+trying to push: 6, 4
+trying to push: 6, 3
+isSuicide: f2
+checkpoint 0
+size:48
+Q size:0
+isSuicide: f2
+Q size:0
+tail:45
+isSuicide: f0
+checkpoint 0
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+tail:0
+tail:0
+_capacity:362
+isSuicide: f0
+_capacity:362
+_capacity:362
+tail:45
+tail:45
+trying to push: 6, 2
+trying to push: 6, 3
+isSuicide: f0
+size:46
+size:1
+size:1
+Q size:0
+_capacity:362
+_capacity:362
+Q size:0
+trying to push: 6, 3
+size:46
+size:46
+checkpoint 0
+Q size:0
+isSuicide: f2
+isSuicide: f2
+trying to push: 6, 3
+tail:0
+tail:0
+checkpoint 0
+checkpoint 0
+_capacity:362
+Q size:0
+_capacity:362
+isSuicide: f0
+checkpoint 1
+tail:0
+checkpoint 1
+size:1
+size:1
+_capacity:362
+trying to push: 6, 4
+tail:0
+tail:48
+size:1
+Q size:0
+isSuicide: f2
+_capacity:362
+_capacity:362
+isSuicide: f2
+tail:47
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+size:1
+size:49
+isSuicide: f2
+_capacity:362
+tail:0
+checkpoint 1
+trying to push: 6, 2
+trying to push: 6, 2
+checkpoint 1
+checkpoint 0
+isSuicide: f2
+size:48
+_capacity:362
+Q size:0
+Q size:0
+trying to push: 6, 2
+checkpoint 1
+tail:46
+size:1
+checkpoint 0
+Q size:0
+tail:47
+checkpoint 1
+tail:0
+_capacity:362
+isSuicide: f2
+tail:47
+_capacity:362
+tail:0
+_capacity:362
+tail:47
+tail:0
+size:48
+size:47
+_capacity:362
+size:1
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+checkpoint 0
+isSuicide: f2
+checkpoint 0
+size:48
+size:48
+size:1
+size:1
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+trying to push: 6, 5
+tail:48
+checkpoint 1
+Q size:0
+trying to push: 6, 4
+_capacity:362
+checkpoint 1
+checkpoint 1
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+Q size:0
+size:49
+trying to push: 6, 4
+trying to push: 6, 4
+trying to push: 6, 3
+tail:46
+trying to push: 6, 4
+tail:46
+tail:46
+tail:0
+Q size:0
+Q size:0
+Q size:0
+checkpoint 0
+_capacity:362
+Q size:0
+_capacity:362
+_capacity:362
+tail:0
+_capacity:362
+tail:0
+size:47
+tail:0
+tail:0
+size:47
+_capacity:362
+tail:0
+size:47
+size:1
+checkpoint 0
+_capacity:362
+_capacity:362
+size:1
+_capacity:362
+checkpoint 0
+_capacity:362
+checkpoint 0
+size:1
+isSuicide: f2
+size:1
+size:1
+size:1
+isSuicide: f2
+isSuicide: f0
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+checkpoint 1
+checkpoint 1
+isSuicide: f0
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+checkpoint 1
+checkpoint 1
+tail:48
+tail:49
+trying to push: 6, 5
+trying to push: 6, 3
+_capacity:362
+_capacity:362
+Q size:0
+Q size:0
+trying to push: 6, 3
+isSuicide: f0
+tail:48
+tail:47
+tail:48
+tail:48
+size:49
+size:50
+Q size:0
+_capacity:362
+_capacity:362
+trying to push: 6, 3
+_capacity:362
+tail:0
+_capacity:362
+checkpoint 0
+checkpoint 0
+size:49
+size:48
+Q size:0
+tail:0
+_capacity:362
+size:49
+size:49
+checkpoint 0
+checkpoint 0
+_capacity:362
+tail:0
+tail:0
+checkpoint 0
+size:1
+size:1
+checkpoint 0
+_capacity:362
+_capacity:362
+size:1
+isSuicide: f0
+isSuicide: f2
+isSuicide: f2
+isSuicide: f0
+size:1
+isSuicide: f0
+isSuicide: f2
+isSuicide: f2
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+trying to push: 6, 5
+trying to push: 6, 5
+trying to push: 6, 6
+Q size:0
+Q size:0
+Q size:0
+checkpoint 1
+tail:49
+checkpoint 1
+tail:47
+isSuicide: f0
+trying to push: 6, 4
+isSuicide: f0
+_capacity:362
+_capacity:362
+Q size:0
+trying to push: 6, 5
+trying to push: 6, 5
+tail:0
+tail:0
+tail:47
+tail:0
+size:50
+size:48
+Q size:0
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+tail:47
+checkpoint 0
+checkpoint 0
+size:1
+size:1
+size:48
+_capacity:362
+size:1
+tail:0
+tail:0
+isSuicide: f2
+size:48
+isSuicide: f2
+isSuicide: f2
+checkpoint 0
+_capacity:362
+_capacity:362
+tail:0
+size:1
+size:1
+checkpoint 0
+_capacity:362
+checkpoint 1
+checkpoint 1
+checkpoint 1
+isSuicide: f0
+isSuicide: f2
+size:1
+isSuicide: f2
+trying to push: 6, 4
+tail:49
+tail:50
+tail:49
+isSuicide: f0
+isSuicide: f2
+_capacity:362
+_capacity:362
+Q size:0
+_capacity:362
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+trying to push: 6, 6
+size:50
+size:50
+size:51
+isSuicide: f0
+Q size:0
+checkpoint 1
+tail:0
+tail:49
+trying to push: 6, 4
+tail:48
+checkpoint 0
+checkpoint 0
+checkpoint 0
+_capacity:362
+_capacity:362
+Q size:0
+tail:0
+trying to push: 6, 4
+tail:49
+_capacity:362
+size:50
+size:1
+_capacity:362
+Q size:0
+tail:0
+_capacity:362
+size:49
+size:1
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+isSuicide: f2
+size:50
+_capacity:362
+tail:0
+isSuicide: f2
+checkpoint 0
+checkpoint 0
+size:1
+trying to push: 6, 7
+trying to push: 6, 6
+checkpoint 1
+isSuicide: f0
+_capacity:362
+Q size:0
+isSuicide: f2
+Q size:0
+trying to push: 6, 6
+tail:48
+checkpoint 1
+size:1
+Q size:0
+_capacity:362
+isSuicide: f0
+tail:0
+tail:50
+isSuicide: f0
+tail:0
+checkpoint 1
+isSuicide: f2
+size:49
+_capacity:362
+_capacity:362
+_capacity:362
+trying to push: 6, 6
+trying to push: 6, 6
+isSuicide: f0
+tail:48
+tail:0
+checkpoint 0
+size:1
+Q size:0
+Q size:0
+size:1
+size:51
+_capacity:362
+_capacity:362
+trying to push: 6, 5
+isSuicide: f2
+checkpoint 0
+size:49
+isSuicide: f2
+Q size:0
+size:1
+checkpoint 1
+tail:0
+tail:0
+checkpoint 0
+isSuicide: f2
+_capacity:362
+_capacity:362
+checkpoint 1
+checkpoint 1
+tail:48
+tail:0
+size:1
+size:1
+_capacity:362
+_capacity:362
+checkpoint 1
+tail:50
+tail:51
+isSuicide: f0
+isSuicide: f2
+isSuicide: f2
+size:49
+size:1
+_capacity:362
+_capacity:362
+isSuicide: f0
+trying to push: 6, 7
+tail:50
+checkpoint 0
+isSuicide: f2
+size:52
+size:51
+trying to push: 6, 5
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+Q size:0
+_capacity:362
+checkpoint 0
+Q size:0
+checkpoint 0
+size:51
+trying to push: 6, 5
+checkpoint 1
+tail:0
+tail:50
+tail:50
+Q size:0
+checkpoint 0
+_capacity:362
+_capacity:362
+tail:0
+tail:49
+isSuicide: f0
+_capacity:362
+size:1
+_capacity:362
+_capacity:362
+size:51
+tail:0
+isSuicide: f0
+isSuicide: f0
+size:51
+size:1
+size:50
+checkpoint 0
+isSuicide: f2
+_capacity:362
+trying to push: 6, 5
+trying to push: 6, 8
+trying to push: 6, 7
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+Q size:0
+Q size:0
+size:1
+Q size:0
+checkpoint 1
+isSuicide: f0
+isSuicide: f2
+checkpoint 1
+tail:51
+tail:0
+tail:0
+tail:0
+isSuicide: f0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+tail:49
+trying to push: 6, 7
+trying to push: 6, 7
+size:1
+size:52
+size:1
+size:1
+Q size:0
+Q size:0
+_capacity:362
+isSuicide: f0
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+tail:49
+isSuicide: f0
+size:50
+tail:0
+tail:0
+trying to push: 6, 6
+_capacity:362
+checkpoint 1
+checkpoint 0
+checkpoint 1
+_capacity:362
+_capacity:362
+trying to push: 6, 7
+size:50
+Q size:0
+size:1
+size:1
+Q size:0
+checkpoint 1
+tail:51
+tail:52
+checkpoint 0
+isSuicide: f0
+isSuicide: f2
+isSuicide: f2
+tail:0
+tail:0
+_capacity:362
+_capacity:362
+isSuicide: f0
+size:53
+_capacity:362
+_capacity:362
+tail:49
+size:52
+trying to push: 6, 8
+checkpoint 1
+checkpoint 1
+trying to push: 6, 6
+checkpoint 0
+Q size:0
+checkpoint 0
+_capacity:362
+size:1
+size:1
+Q size:0
+size:50
+isSuicide: f2
+isSuicide: f2
+tail:51
+tail:0
+tail:51
+isSuicide: f0
+tail:0
+isSuicide: f0
+checkpoint 0
+_capacity:362
+_capacity:362
+checkpoint 1
+checkpoint 1
+_capacity:362
+size:1
+size:52
+trying to push: 6, 9
+trying to push: 6, 6
+_capacity:362
+tail:51
+size:52
+checkpoint 0
+isSuicide: f2
+Q size:0
+size:1
+Q size:0
+isSuicide: f0
+tail:50
+_capacity:362
+checkpoint 0
+isSuicide: f2
+tail:0
+size:52
+tail:0
+checkpoint 1
+_capacity:362
+trying to push: 6, 8
+isSuicide: f0
+checkpoint 0
+_capacity:362
+_capacity:362
+Q size:0
+checkpoint 1
+size:51
+tail:52
+size:1
+size:1
+isSuicide: f0
+checkpoint 0
+_capacity:362
+trying to push: 6, 6
+tail:0
+tail:50
+isSuicide: f2
+isSuicide: f2
+size:53
+Q size:0
+_capacity:362
+trying to push: 6, 8
+_capacity:362
+isSuicide: f0
+size:1
+Q size:0
+checkpoint 0
+size:51
+checkpoint 1
+checkpoint 1
+isSuicide: f0
+tail:0
+trying to push: 6, 8
+Q size:0
+isSuicide: f2
+checkpoint 0
+_capacity:362
+trying to push: 6, 8
+isSuicide: f0
+tail:0
+tail:53
+tail:50
+size:1
+_capacity:362
+Q size:0
+_capacity:362
+_capacity:362
+trying to push: 6, 7
+tail:0
+checkpoint 1
+size:1
+isSuicide: f2
+Q size:0
+size:54
+size:51
+_capacity:362
+tail:0
+size:1
+isSuicide: f2
+checkpoint 0
+checkpoint 0
+isSuicide: f0
+_capacity:362
+checkpoint 1
+tail:52
+tail:0
+size:1
+isSuicide: f2
+_capacity:362
+_capacity:362
+isSuicide: f0
+trying to push: 6, 9
+checkpoint 1
+tail:50
+size:53
+size:1
+Q size:0
+isSuicide: f2
+_capacity:362
+checkpoint 1
+tail:52
+trying to push: 6, 7
+isSuicide: f2
+checkpoint 0
+size:51
+_capacity:362
+Q size:0
+isSuicide: f0
+checkpoint 1
+tail:0
+tail:52
+checkpoint 0
+size:53
+_capacity:362
+_capacity:362
+checkpoint 1
+isSuicide: f0
+tail:0
+trying to push: 7, 1
+tail:52
+checkpoint 0
+size:1
+size:53
+Q size:0
+_capacity:362
+isSuicide: f0
+trying to push: 6, 7
+tail:51
+_capacity:362
+checkpoint 0
+isSuicide: f2
+size:1
+Q size:0
+trying to push: 6, 9
+isSuicide: f0
+_capacity:362
+size:53
+isSuicide: f2
+Q size:0
+checkpoint 1
+tail:0
+tail:0
+isSuicide: f0
+size:52
+trying to push: 6, 7
+checkpoint 0
+_capacity:362
+_capacity:362
+tail:53
+tail:0
+trying to push: 6, 9
+size:1
+Q size:0
+size:1
+checkpoint 0
+_capacity:362
+_capacity:362
+Q size:0
+checkpoint 1
+isSuicide: f0
+isSuicide: f2
+size:54
+size:1
+isSuicide: f2
+tail:0
+tail:0
+tail:51
+isSuicide: f0
+trying to push: 6, 9
+_capacity:362
+checkpoint 0
+_capacity:362
+isSuicide: f2
+_capacity:362
+trying to push: 6, 9
+checkpoint 1
+checkpoint 1
+isSuicide: f0
+size:1
+size:1
+Q size:0
+Q size:0
+checkpoint 1
+size:52
+tail:54
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+checkpoint 0
+trying to push: 6, 8
+tail:51
+tail:53
+tail:0
+tail:0
+Q size:0
+size:55
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+isSuicide: f0
+checkpoint 1
+size:54
+checkpoint 0
+size:1
+size:52
+size:1
+trying to push: 7, 1
+tail:53
+tail:0
+tail:51
+Q size:0
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+checkpoint 0
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+size:54
+size:52
+size:1
+checkpoint 1
+checkpoint 1
+tail:0
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+trying to push: 6, 8
+_capacity:362
+checkpoint 0
+isSuicide: f2
+trying to push: 7, 2
+tail:53
+tail:53
+isSuicide: f0
+size:1
+Q size:0
+Q size:0
+trying to push: 7, 1
+_capacity:362
+checkpoint 1
+_capacity:362
+size:54
+size:54
+Q size:0
+isSuicide: f2
+trying to push: 6, 8
+tail:52
+tail:0
+tail:0
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+isSuicide: f0
+checkpoint 1
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+trying to push: 6, 8
+trying to push: 7, 1
+tail:0
+tail:54
+size:53
+tail:0
+size:1
+size:1
+Q size:0
+Q size:0
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 0
+_capacity:362
+isSuicide: f2
+isSuicide: f2
+size:1
+size:55
+tail:0
+isSuicide: f0
+trying to push: 7, 1
+size:1
+isSuicide: f2
+checkpoint 0
+_capacity:362
+tail:0
+trying to push: 7, 1
+checkpoint 1
+checkpoint 1
+Q size:0
+size:1
+Q size:0
+_capacity:362
+isSuicide: f2
+checkpoint 1
+tail:55
+tail:52
+isSuicide: f2
+size:1
+isSuicide: f0
+tail:0
+checkpoint 1
+_capacity:362
+_capacity:362
+isSuicide: f2
+_capacity:362
+isSuicide: f0
+checkpoint 1
+tail:54
+tail:0
+trying to push: 6, 9
+size:56
+size:53
+size:1
+_capacity:362
+tail:52
+_capacity:362
+Q size:0
+checkpoint 1
+trying to push: 7, 2
+tail:52
+size:55
+checkpoint 0
+_capacity:362
+isSuicide: f2
+size:1
+checkpoint 0
+Q size:0
+tail:54
+tail:0
+_capacity:362
+checkpoint 0
+_capacity:362
+isSuicide: f2
+checkpoint 1
+size:53
+tail:0
+_capacity:362
+size:55
+size:53
+_capacity:362
+checkpoint 0
+checkpoint 1
+tail:54
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+size:1
+size:1
+_capacity:362
+trying to push: 7, 3
+tail:54
+isSuicide: f2
+isSuicide: f2
+trying to push: 6, 9
+size:55
+Q size:0
+isSuicide: f0
+_capacity:362
+Q size:0
+checkpoint 0
+size:55
+isSuicide: f0
+trying to push: 7, 2
+checkpoint 1
+checkpoint 1
+tail:0
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+Q size:0
+_capacity:362
+tail:0
+tail:53
+trying to push: 6, 9
+trying to push: 7, 2
+tail:55
+size:1
+Q size:0
+_capacity:362
+_capacity:362
+Q size:0
+trying to push: 6, 9
+tail:0
+isSuicide: f2
+_capacity:362
+size:54
+size:1
+Q size:0
+_capacity:362
+isSuicide: f0
+tail:0
+tail:0
+isSuicide: f2
+size:56
+size:1
+checkpoint 0
+_capacity:362
+_capacity:362
+isSuicide: f0
+trying to push: 7, 2
+tail:0
+size:1
+size:1
+checkpoint 1
+checkpoint 0
+isSuicide: f2
+Q size:0
+_capacity:362
+trying to push: 7, 2
+checkpoint 1
+isSuicide: f2
+isSuicide: f2
+size:1
+Q size:0
+checkpoint 1
+tail:0
+isSuicide: f0
+tail:56
+isSuicide: f2
+_capacity:362
+_capacity:362
+tail:53
+checkpoint 1
+tail:0
+checkpoint 1
+trying to push: 7, 1
+tail:55
+size:1
+size:57
+_capacity:362
+Q size:0
+checkpoint 1
+_capacity:362
+tail:55
+tail:53
+_capacity:362
+isSuicide: f2
+checkpoint 0
+size:1
+size:54
+_capacity:362
+_capacity:362
+tail:0
+tail:53
+isSuicide: f0
+size:56
+isSuicide: f2
+checkpoint 0
+size:56
+checkpoint 1
+_capacity:362
+size:54
+_capacity:362
+checkpoint 0
+checkpoint 0
+size:54
+checkpoint 0
+trying to push: 7, 3
+size:1
+checkpoint 1
+tail:55
+Q size:0
+checkpoint 0
+isSuicide: f2
+_capacity:362
+tail:55
+isSuicide: f0
+isSuicide: f0
+_capacity:362
+isSuicide: f0
+size:56
+isSuicide: f0
+isSuicide: f0
+tail:0
+checkpoint 1
+trying to push: 7, 4
+size:56
+Q size:0
+checkpoint 0
+_capacity:362
+trying to push: 7, 1
+trying to push: 7, 3
+trying to push: 7, 3
+trying to push: 7, 1
+tail:54
+checkpoint 0
+size:1
+Q size:0
+Q size:0
+Q size:0
+Q size:0
+isSuicide: f0
+tail:0
+_capacity:362
+isSuicide: f2
+_capacity:362
+trying to push: 7, 1
+tail:0
+tail:0
+tail:0
+tail:0
+size:55
+size:1
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+isSuicide: f0
+size:1
+size:1
+size:1
+size:1
+checkpoint 0
+isSuicide: f2
+isSuicide: f0
+tail:0
+tail:56
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+_capacity:362
+checkpoint 1
+trying to push: 7, 3
+trying to push: 7, 3
+size:57
+size:1
+Q size:0
+Q size:0
+checkpoint 1
+checkpoint 1
+checkpoint 1
+tail:57
+checkpoint 1
+checkpoint 0
+isSuicide: f2
+_capacity:362
+isSuicide: f0
+tail:0
+tail:0
+tail:56
+tail:54
+tail:56
+tail:54
+size:58
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+_capacity:362
+trying to push: 7, 2
+_capacity:362
+checkpoint 0
+size:57
+size:57
+size:1
+size:1
+Q size:0
+size:55
+tail:54
+size:55
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+checkpoint 0
+tail:0
+_capacity:362
+checkpoint 0
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+_capacity:362
+size:55
+isSuicide: f0
+isSuicide: f0
+size:1
+checkpoint 0
+isSuicide: f0
+isSuicide: f0
+tail:56
+tail:56
+trying to push: 7, 4
+Q size:0
+_capacity:362
+isSuicide: f2
+_capacity:362
+trying to push: 7, 5
+trying to push: 7, 4
+trying to push: 7, 2
+trying to push: 7, 4
+size:57
+size:57
+Q size:0
+Q size:0
+Q size:0
+Q size:0
+isSuicide: f0
+checkpoint 1
+tail:0
+checkpoint 0
+checkpoint 0
+_capacity:362
+trying to push: 7, 2
+isSuicide: f0
+tail:0
+tail:0
+tail:55
+tail:0
+tail:0
+size:1
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+trying to push: 7, 2
+_capacity:362
+size:1
+isSuicide: f2
+size:1
+size:56
+size:1
+Q size:0
+size:1
+tail:0
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+isSuicide: f0
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+isSuicide: f0
+tail:0
+checkpoint 1
+size:1
+checkpoint 1
+_capacity:362
+checkpoint 1
+checkpoint 1
+checkpoint 1
+trying to push: 7, 4
+trying to push: 7, 4
+size:1
+Q size:0
+isSuicide: f2
+tail:57
+Q size:0
+tail:57
+tail:58
+tail:55
+_capacity:362
+isSuicide: f2
+_capacity:362
+_capacity:362
+_capacity:362
+tail:57
+checkpoint 1
+tail:0
+tail:0
+size:59
+size:58
+size:58
+_capacity:362
+_capacity:362
+_capacity:362
+size:56
+isSuicide: f0
+checkpoint 1
+checkpoint 0
+checkpoint 0
+tail:55
+size:1
+size:58
+size:1
+checkpoint 0
+checkpoint 0
+trying to push: 7, 3
+tail:55
+checkpoint 0
+isSuicide: f2
+_capacity:362
+isSuicide: f2
+Q size:0
+_capacity:362
+size:56
+size:56
+checkpoint 1
+checkpoint 1
+tail:0
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+_capacity:362
+trying to push: 7, 5
+trying to push: 7, 5
+trying to push: 7, 3
+trying to push: 7, 5
+isSuicide: f0
+tail:57
+size:1
+Q size:0
+Q size:0
+Q size:0
+Q size:0
+_capacity:362
+trying to push: 7, 6
+tail:57
+isSuicide: f2
+size:58
+Q size:0
+_capacity:362
+tail:0
+tail:0
+tail:0
+tail:0
+checkpoint 0
+size:58
+isSuicide: f0
+_capacity:362
+_capacity:362
+tail:0
+_capacity:362
+checkpoint 1
+_capacity:362
+isSuicide: f0
+checkpoint 0
+size:1
+size:1
+_capacity:362
+trying to push: 7, 3
+size:1
+size:1
+tail:56
+size:1
+isSuicide: f2
+isSuicide: f2
+Q size:0
+isSuicide: f2
+trying to push: 7, 3
+isSuicide: f2
+_capacity:362
+isSuicide: f2
+Q size:0
+checkpoint 1
+checkpoint 1
+tail:0
+checkpoint 1
+checkpoint 1
+size:57
+_capacity:362
+isSuicide: f0
+checkpoint 1
+tail:0
+tail:58
+tail:58
+tail:56
+tail:58
+checkpoint 0
+size:1
+isSuicide: f0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f2
+tail:59
+trying to push: 7, 5
+trying to push: 7, 5
+size:59
+size:1
+size:59
+size:57
+size:59
+_capacity:362
+Q size:0
+Q size:0
+size:60
+isSuicide: f2
+checkpoint 0
+checkpoint 0
+checkpoint 0
+checkpoint 0
+checkpoint 1
+tail:0
+checkpoint 0
+tail:0
+isSuicide: f0
+checkpoint 1
+_capacity:362
+tail:56
+_capacity:362
+isSuicide: f0
+isSuicide: f0
+tail:56
+isSuicide: f0
+trying to push: 7, 4
+size:1
+size:1
+_capacity:362
+_capacity:362
+Q size:0
+isSuicide: f0
+trying to push: 7, 6
+trying to push: 7, 6
+trying to push: 7, 6
+size:57
+isSuicide: f2
+isSuicide: f2
+size:57
+Q size:0
+Q size:0
+Q size:0
+trying to push: 7, 4
+isSuicide: f0
+Q size:0
+checkpoint 0
+checkpoint 0
+tail:0
+checkpoint 1
+tail:0
+tail:0
+tail:0
+checkpoint 1
+trying to push: 7, 7
+_capacity:362
+_capacity:362
+_capacity:362
+tail:0
+tail:58
+_capacity:362
+Q size:0
+size:1
+size:1
+size:1
+size:1
+_capacity:362
+_capacity:362
+isSuicide: f0
+isSuicide: f0
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+size:59
+size:1
+trying to push: 7, 4
+trying to push: 7, 4
+tail:58
+tail:0
+Q size:0
+checkpoint 1
+checkpoint 0
+isSuicide: f2
+Q size:0
+checkpoint 1
+_capacity:362
+checkpoint 1
+_capacity:362
+checkpoint 1
+tail:59
+tail:0
+size:59
+size:1
+tail:0
+tail:59
+checkpoint 1
+checkpoint 0
+_capacity:362
+_capacity:362
+isSuicide: f2
+_capacity:362
+_capacity:362
+tail:59
+tail:57
+tail:57
+size:60
+isSuicide: f0
+size:60
+size:1
+size:1
+_capacity:362
+_capacity:362
+_capacity:362
+size:58
+size:58
+isSuicide: f2
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+size:60
+trying to push: 7, 6
+checkpoint 1
+checkpoint 0
+checkpoint 0
+checkpoint 0
+checkpoint 1
+checkpoint 1
+isSuicide: f0
+Q size:0
+trying to push: 7, 6
+tail:60
+tail:57
+isSuicide: f0
+tail:57
+tail:0
+isSuicide: f0
+isSuicide: f0
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+trying to push: 7, 7
+trying to push: 7, 7
+trying to push: 7, 5
+size:61
+size:58
+size:1
+size:58
+Q size:0
+Q size:0
+Q size:0
+trying to push: 7, 7
+tail:0
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+checkpoint 0
+isSuicide: f0
+Q size:0
+tail:0
+tail:0
+_capacity:362
+tail:0
+checkpoint 1
+size:1
+_capacity:362
+trying to push: 7, 5
+_capacity:362
+_capacity:362
+tail:0
+tail:59
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+isSuicide: f2
+Q size:0
+size:1
+size:1
+size:1
+_capacity:362
+_capacity:362
+trying to push: 7, 8
+trying to push: 7, 5
+isSuicide: f2
+size:1
+size:60
+isSuicide: f2
+isSuicide: f2
+Q size:0
+Q size:0
+tail:0
+trying to push: 7, 5
+checkpoint 0
+isSuicide: f2
+Q size:0
+checkpoint 1
+_capacity:362
+checkpoint 1
+tail:0
+checkpoint 1
+checkpoint 1
+size:1
+_capacity:362
+tail:0
+checkpoint 1
+tail:59
+tail:58
+tail:60
+isSuicide: f0
+tail:60
+size:1
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f2
+_capacity:362
+_capacity:362
+tail:0
+trying to push: 7, 7
+tail:60
+size:61
+size:61
+isSuicide: f2
+_capacity:362
+size:60
+size:1
+size:59
+Q size:0
+_capacity:362
+size:1
+checkpoint 0
+checkpoint 0
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+size:61
+checkpoint 1
+tail:0
+isSuicide: f2
+checkpoint 0
+_capacity:362
+checkpoint 1
+checkpoint 1
+tail:58
+size:1
+isSuicide: f0
+isSuicide: f0
+_capacity:362
+isSuicide: f0
+tail:61
+checkpoint 1
+tail:58
+isSuicide: f2
+size:59
+_capacity:362
+_capacity:362
+tail:58
+trying to push: 7, 8
+trying to push: 7, 7
+trying to push: 7, 6
+isSuicide: f0
+checkpoint 0
+size:62
+Q size:0
+size:59
+_capacity:362
+Q size:0
+Q size:0
+checkpoint 0
+size:59
+checkpoint 0
+trying to push: 7, 8
+checkpoint 1
+tail:0
+tail:0
+tail:0
+checkpoint 0
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+tail:60
+isSuicide: f0
+size:1
+size:1
+size:1
+_capacity:362
+trying to push: 7, 8
+isSuicide: f0
+tail:0
+isSuicide: f2
+isSuicide: f2
+Q size:0
+size:61
+isSuicide: f2
+_capacity:362
+trying to push: 7, 6
+trying to push: 7, 6
+isSuicide: f0
+size:1
+Q size:0
+checkpoint 0
+Q size:0
+checkpoint 1
+isSuicide: f0
+checkpoint 1
+tail:0
+checkpoint 1
+isSuicide: f2
+trying to push: 7, 9
+_capacity:362
+tail:60
+tail:0
+tail:0
+tail:61
+trying to push: 7, 6
+size:1
+Q size:0
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+size:61
+isSuicide: f2
+size:62
+size:1
+size:1
+tail:59
+tail:0
+tail:0
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+_capacity:362
+_capacity:362
+tail:61
+isSuicide: f0
+size:1
+size:1
+checkpoint 1
+checkpoint 1
+checkpoint 1
+size:60
+_capacity:362
+isSuicide: f2
+isSuicide: f2
+checkpoint 0
+size:62
+trying to push: 7, 8
+isSuicide: f0
+isSuicide: f0
+tail:59
+tail:59
+tail:61
+Q size:0
+checkpoint 0
+_capacity:362
+_capacity:362
+trying to push: 7, 8
+_capacity:362
+trying to push: 7, 9
+checkpoint 1
+checkpoint 1
+size:60
+size:60
+Q size:0
+Q size:0
+size:62
+tail:62
+tail:0
+checkpoint 0
+checkpoint 0
+checkpoint 0
+_capacity:362
+_capacity:362
+tail:0
+tail:0
+tail:59
+size:63
+size:1
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+isSuicide: f2
+checkpoint 0
+size:1
+size:1
+size:60
+isSuicide: f0
+trying to push: 7, 7
+isSuicide: f0
+isSuicide: f0
+isSuicide: f2
+isSuicide: f2
+checkpoint 0
+Q size:0
+isSuicide: f0
+checkpoint 1
+trying to push: 7, 9
+trying to push: 7, 9
+trying to push: 7, 7
+Q size:0
+Q size:0
+Q size:0
+trying to push: 7, 7
+checkpoint 1
+checkpoint 1
+tail:61
+tail:0
+Q size:0
+_capacity:362
+_capacity:362
+tail:61
+tail:0
+tail:62
+tail:0
+tail:0
+isSuicide: f0
+size:62
+size:1
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+size:63
+checkpoint 0
+isSuicide: f2
+trying to push: 8, 1
+size:1
+size:62
+size:1
+tail:0
+size:1
+checkpoint 0
+Q size:0
+checkpoint 0
+isSuicide: f2
+trying to push: 7, 7
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+checkpoint 1
+size:1
+Q size:0
+checkpoint 1
+checkpoint 1
+checkpoint 1
+tail:0
+isSuicide: f2
+_capacity:362
+isSuicide: f0
+tail:60
+isSuicide: f0
+tail:62
+tail:62
+tail:0
+size:1
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+tail:60
+trying to push: 8, 1
+trying to push: 7, 9
+checkpoint 1
+isSuicide: f2
+size:63
+size:63
+size:1
+size:61
+Q size:0
+_capacity:362
+Q size:0
+size:61
+checkpoint 0
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+isSuicide: f0
+checkpoint 1
+tail:0
+tail:0
+checkpoint 0
+tail:60
+checkpoint 1
+_capacity:362
+_capacity:362
+trying to push: 7, 9
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+size:1
+size:1
+Q size:0
+_capacity:362
+trying to push: 8, 1
+trying to push: 8, 1
+trying to push: 7, 8
+tail:63
+tail:60
+Q size:0
+Q size:0
+isSuicide: f2
+Q size:0
+isSuicide: f2
+size:61
+_capacity:362
+_capacity:362
+size:64
+size:61
+checkpoint 0
+tail:0
+checkpoint 1
+checkpoint 1
+tail:0
+tail:0
+tail:0
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+_capacity:362
+_capacity:362
+_capacity:362
+tail:62
+tail:63
+_capacity:362
+size:1
+size:1
+size:1
+_capacity:362
+_capacity:362
+size:1
+trying to push: 7, 8
+isSuicide: f2
+size:63
+size:64
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+isSuicide: f0
+Q size:0
+isSuicide: f0
+checkpoint 0
+isSuicide: f0
+checkpoint 0
+trying to push: 7, 8
+trying to push: 7, 8
+checkpoint 1
+checkpoint 1
+checkpoint 1
+tail:0
+Q size:0
+Q size:0
+_capacity:362
+checkpoint 1
+tail:63
+trying to push: 8, 2
+tail:62
+tail:61
+size:1
+Q size:0
+_capacity:362
+_capacity:362
+tail:0
+tail:0
+tail:63
+isSuicide: f0
+isSuicide: f0
+_capacity:362
+isSuicide: f2
+size:64
+size:63
+_capacity:362
+_capacity:362
+_capacity:362
+size:62
+trying to push: 8, 2
+trying to push: 8, 1
+tail:0
+checkpoint 0
+checkpoint 0
+size:64
+checkpoint 0
+Q size:0
+size:1
+size:1
+_capacity:362
+Q size:0
+checkpoint 1
+size:1
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+tail:0
+tail:0
+tail:61
+isSuicide: f2
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+checkpoint 1
+isSuicide: f0
+size:1
+size:1
+size:62
+isSuicide: f0
+checkpoint 1
+tail:61
+trying to push: 8, 1
+tail:61
+isSuicide: f0
+isSuicide: f2
+checkpoint 0
+isSuicide: f2
+Q size:0
+_capacity:362
+_capacity:362
+isSuicide: f0
+trying to push: 7, 9
+trying to push: 8, 2
+tail:64
+size:62
+size:62
+Q size:0
+Q size:0
+checkpoint 1
+tail:0
+checkpoint 1
+_capacity:362
+trying to push: 8, 2
+checkpoint 0
+checkpoint 0
+_capacity:362
+size:65
+tail:0
+tail:0
+Q size:0
+isSuicide: f0
+tail:63
+size:1
+checkpoint 0
+_capacity:362
+_capacity:362
+tail:64
+tail:0
+trying to push: 7, 9
+_capacity:362
+isSuicide: f2
+size:1
+size:1
+_capacity:362
+_capacity:362
+Q size:0
+size:65
+size:64
+isSuicide: f2
+isSuicide: f2
+size:1
+checkpoint 1
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+isSuicide: f0
+checkpoint 1
+tail:0
+isSuicide: f2
+checkpoint 1
+_capacity:362
+tail:63
+tail:64
+trying to push: 8, 3
+checkpoint 1
+trying to push: 7, 9
+trying to push: 7, 9
+Q size:0
+size:1
+Q size:0
+_capacity:362
+_capacity:362
+Q size:0
+tail:64
+tail:62
+size:64
+isSuicide: f2
+isSuicide: f0
+isSuicide: f0
+size:65
+tail:0
+tail:0
+_capacity:362
+_capacity:362
+checkpoint 0
+checkpoint 0
+_capacity:362
+tail:0
+_capacity:362
+trying to push: 8, 2
+trying to push: 8, 3
+size:65
+size:1
+size:1
+Q size:0
+Q size:0
+_capacity:362
+size:63
+checkpoint 1
+isSuicide: f2
+checkpoint 0
+isSuicide: f2
+checkpoint 0
+size:1
+tail:0
+tail:0
+isSuicide: f2
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+tail:62
+isSuicide: f0
+size:1
+isSuicide: f0
+size:1
+_capacity:362
+checkpoint 1
+isSuicide: f0
+tail:62
+trying to push: 8, 3
+trying to push: 8, 2
+tail:65
+size:63
+isSuicide: f2
+isSuicide: f2
+Q size:0
+_capacity:362
+Q size:0
+trying to push: 8, 3
+trying to push: 8, 1
+tail:62
+_capacity:362
+checkpoint 0
+Q size:0
+size:63
+Q size:0
+checkpoint 1
+tail:0
+tail:0
+checkpoint 1
+_capacity:362
+size:66
+checkpoint 0
+_capacity:362
+_capacity:362
+tail:65
+tail:0
+tail:0
+size:63
+checkpoint 0
+size:1
+size:1
+_capacity:362
+_capacity:362
+_capacity:362
+tail:64
+size:66
+size:1
+isSuicide: f2
+checkpoint 0
+isSuicide: f2
+_capacity:362
+size:1
+size:65
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+checkpoint 1
+checkpoint 1
+isSuicide: f0
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+checkpoint 1
+checkpoint 1
+tail:64
+isSuicide: f0
+tail:65
+trying to push: 8, 1
+trying to push: 8, 1
+trying to push: 8, 1
+_capacity:362
+Q size:0
+Q size:0
+_capacity:362
+Q size:0
+tail:65
+tail:63
+trying to push: 8, 4
+size:66
+size:65
+Q size:0
+_capacity:362
+_capacity:362
+tail:0
+tail:0
+tail:0
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+size:66
+size:64
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+size:1
+size:1
+tail:0
+trying to push: 8, 4
+size:1
+trying to push: 8, 3
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+isSuicide: f2
+Q size:0
+Q size:0
+isSuicide: f0
+size:1
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+checkpoint 1
+tail:0
+tail:0
+isSuicide: f0
+isSuicide: f2
+trying to push: 8, 3
+isSuicide: f0
+_capacity:362
+tail:63
+tail:63
+_capacity:362
+trying to push: 8, 4
+trying to push: 8, 4
+Q size:0
+tail:63
+size:1
+Q size:0
+Q size:0
+_capacity:362
+_capacity:362
+trying to push: 8, 2
+size:1
+checkpoint 1
+_capacity:362
+size:64
+Q size:0
+isSuicide: f2
+isSuicide: f2
+size:64
+tail:0
+tail:0
+size:64
+checkpoint 0
+checkpoint 0
+_capacity:362
+_capacity:362
+tail:0
+checkpoint 1
+checkpoint 1
+tail:66
+tail:0
+size:1
+checkpoint 0
+size:1
+_capacity:362
+_capacity:362
+tail:66
+size:1
+size:67
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+_capacity:362
+tail:65
+isSuicide: f0
+checkpoint 0
+size:67
+size:1
+isSuicide: f2
+_capacity:362
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+trying to push: 8, 2
+checkpoint 0
+isSuicide: f2
+size:66
+Q size:0
+checkpoint 1
+tail:65
+tail:66
+trying to push: 8, 2
+checkpoint 0
+_capacity:362
+_capacity:362
+Q size:0
+isSuicide: f0
+checkpoint 1
+tail:0
+tail:66
+size:67
+size:66
+_capacity:362
+_capacity:362
+isSuicide: f0
+tail:64
+trying to push: 8, 2
+isSuicide: f0
+tail:0
+checkpoint 0
+size:67
+size:1
+checkpoint 0
+Q size:0
+_capacity:362
+_capacity:362
+trying to push: 8, 5
+trying to push: 8, 4
+isSuicide: f0
+checkpoint 0
+isSuicide: f2
+size:65
+size:1
+Q size:0
+Q size:0
+tail:0
+trying to push: 8, 5
+isSuicide: f2
+Q size:0
+checkpoint 0
+_capacity:362
+tail:0
+checkpoint 1
+tail:0
+isSuicide: f0
+isSuicide: f0
+checkpoint 1
+size:1
+tail:0
+_capacity:362
+_capacity:362
+trying to push: 8, 4
+isSuicide: f0
+tail:64
+trying to push: 8, 5
+_capacity:362
+isSuicide: f2
+size:1
+Q size:0
+size:1
+_capacity:362
+trying to push: 8, 5
+Q size:0
+size:1
+Q size:0
+isSuicide: f2
+isSuicide: f2
+size:65
+tail:64
+tail:0
+checkpoint 1
+isSuicide: f2
+_capacity:362
+checkpoint 0
+_capacity:362
+tail:0
+isSuicide: f0
+tail:0
+checkpoint 1
+tail:64
+checkpoint 1
+size:65
+size:1
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 1
+tail:67
+trying to push: 8, 3
+isSuicide: f2
+size:1
+size:1
+size:65
+checkpoint 0
+_capacity:362
+Q size:0
+tail:66
+size:68
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+tail:67
+checkpoint 1
+tail:0
+checkpoint 0
+size:67
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+tail:66
+isSuicide: f0
+checkpoint 0
+size:68
+_capacity:362
+size:1
+trying to push: 8, 3
+tail:67
+tail:67
+checkpoint 0
+size:67
+isSuicide: f2
+Q size:0
+_capacity:362
+_capacity:362
+trying to push: 8, 3
+isSuicide: f0
+size:68
+Q size:0
+checkpoint 0
+size:68
+trying to push: 8, 3
+checkpoint 1
+isSuicide: f0
+tail:0
+isSuicide: f0
+checkpoint 0
+Q size:0
+checkpoint 0
+_capacity:362
+trying to push: 8, 6
+tail:0
+tail:65
+size:1
+Q size:0
+trying to push: 8, 5
+isSuicide: f0
+isSuicide: f0
+_capacity:362
+_capacity:362
+isSuicide: f2
+isSuicide: f0
+Q size:0
+tail:0
+tail:0
+size:66
+size:1
+_capacity:362
+_capacity:362
+trying to push: 8, 6
+trying to push: 8, 5
+trying to push: 8, 6
+tail:0
+checkpoint 1
+checkpoint 0
+size:1
+isSuicide: f2
+Q size:0
+Q size:0
+size:1
+Q size:0
+_capacity:362
+tail:65
+isSuicide: f2
+isSuicide: f2
+size:1
+isSuicide: f0
+tail:0
+tail:0
+tail:0
+checkpoint 1
+_capacity:362
+_capacity:362
+_capacity:362
+isSuicide: f2
+_capacity:362
+trying to push: 8, 6
+checkpoint 1
+tail:65
+size:66
+Q size:0
+size:1
+size:1
+size:1
+checkpoint 1
+checkpoint 1
+tail:68
+_capacity:362
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+isSuicide: f2
+size:66
+tail:0
+isSuicide: f0
+tail:67
+tail:65
+size:69
+_capacity:362
+checkpoint 0
+_capacity:362
+trying to push: 8, 4
+checkpoint 1
+checkpoint 1
+checkpoint 1
+_capacity:362
+checkpoint 0
+size:1
+size:68
+Q size:0
+size:66
+isSuicide: f2
+tail:68
+tail:68
+tail:67
+checkpoint 0
+_capacity:362
+checkpoint 0
+_capacity:362
+_capacity:362
+isSuicide: f0
+checkpoint 1
+tail:0
+isSuicide: f0
+size:69
+size:68
+size:69
+_capacity:362
+isSuicide: f0
+tail:68
+trying to push: 8, 4
+trying to push: 8, 4
+checkpoint 0
+checkpoint 0
+checkpoint 0
+size:1
+Q size:0
+_capacity:362
+Q size:0
+trying to push: 8, 7
+isSuicide: f2
+size:69
+Q size:0
+tail:0
+tail:0
+isSuicide: f0
+isSuicide: f0
+checkpoint 0
+_capacity:362
+_capacity:362
+tail:0
+checkpoint 1
+isSuicide: f0
+isSuicide: f0
+trying to push: 8, 6
+trying to push: 8, 4
+size:1
+size:1
+_capacity:362
+isSuicide: f0
+Q size:0
+tail:66
+Q size:0
+trying to push: 8, 6
+trying to push: 8, 7
+size:1
+isSuicide: f2
+isSuicide: f2
+Q size:0
+_capacity:362
+Q size:0
+trying to push: 8, 7
+tail:0
+tail:0
+isSuicide: f2
+size:67
+checkpoint 1
+checkpoint 1
+isSuicide: f0
+tail:0
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+checkpoint 0
+tail:0
+tail:66
+checkpoint 1
+tail:0
+trying to push: 8, 7
+tail:66
+size:1
+size:1
+size:1
+_capacity:362
+_capacity:362
+Q size:0
+_capacity:362
+tail:69
+_capacity:362
+size:1
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+size:1
+size:67
+_capacity:362
+size:67
+size:70
+isSuicide: f2
+checkpoint 0
+isSuicide: f2
+checkpoint 0
+tail:0
+checkpoint 1
+checkpoint 1
+checkpoint 1
+checkpoint 0
+_capacity:362
+checkpoint 1
+isSuicide: f0
+checkpoint 1
+tail:69
+tail:68
+tail:66
+isSuicide: f0
+_capacity:362
+_capacity:362
+size:1
+_capacity:362
+trying to push: 8, 5
+tail:68
+isSuicide: f0
+tail:69
+trying to push: 8, 5
+Q size:0
+size:70
+isSuicide: f2
+size:69
+size:67
+_capacity:362
+_capacity:362
+trying to push: 8, 5
+Q size:0
+size:70
+size:69
+checkpoint 0
+checkpoint 0
+checkpoint 0
+Q size:0
+checkpoint 1
+tail:0
+checkpoint 0
+checkpoint 0
+tail:0
+tail:0
+isSuicide: f0
+isSuicide: f0
+tail:69
+isSuicide: f0
+_capacity:362
+isSuicide: f0
+_capacity:362
+_capacity:362
+_capacity:362
+trying to push: 8, 8
+trying to push: 8, 8
+size:70
+size:1
+size:1
+size:1
+Q size:0
+trying to push: 8, 7
+trying to push: 8, 5
+Q size:0
+isSuicide: f2
+Q size:0
+checkpoint 0
+isSuicide: f2
+isSuicide: f2
+Q size:0
+tail:0
+isSuicide: f0
+isSuicide: f0
+_capacity:362
+trying to push: 8, 7
+trying to push: 8, 8
+tail:0
+checkpoint 1
+checkpoint 1
+checkpoint 1
+tail:0
+tail:0
+size:1
+Q size:0
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+tail:67
+tail:67
+tail:67
+isSuicide: f0
+isSuicide: f2
+tail:0
+size:1
+size:1
+size:1
+tail:0
+_capacity:362
+_capacity:362
+_capacity:362
+_capacity:362
+trying to push: 8, 8
+isSuicide: f2
+isSuicide: f2
+isSuicide: f2
+_capacity:362
+size:68
+size:68
+size:1
+Q size:0
+size:68
+checkpoint 1
+checkpoint 1
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+checkpoint 0
+size:1
+checkpoint 1
+checkpoint 1
+isSuicide: f2
+tail:0
+tail:69
+checkpoint 1
+tail:70
+tail:70
+isSuicide: f0
+isSuicide: f0
+_capacity:362
+tail:67
+checkpoint 1
+_capacity:362
+_capacity:362
+_capacity:362
+size:1
+size:71
+size:71
+_capacity:362
+tail:70
+trying to push: 8, 6
+trying to push: 8, 6
+size:70
+tail:69
+checkpoint 0
+checkpoint 0
+isSuicide: f2
+size:68
+_capacity:362
+Q size:0
+Q size:0
+checkpoint 0
+_capacity:362
+size:71
+checkpoint 0
+size:70
+tail:0
+checkpoint 1
+tail:0
+isSuicide: f0
+checkpoint 0
+checkpoint 0
+_capacity:362
+_capacity:362
+trying to push: 8, 6
+tail:70
+tail:0
+isSuicide: f0
+tail:0
+size:1
+size:1
+Q size:0
+_capacity:362
+_capacity:362
+_capacity:362
+trying to push: 8, 8
+isSuicide: f2
+isSuicide: f2
+size:1
+size:1
+size:71
+Q size:0
+tail:0
+checkpoint 0
+_capacity:362
+isSuicide: f0
+checkpoint 1
+checkpoint 1
+tail:0
+tail:0
+isSuicide: f0
+size:1
+_capacity:362
+_capacity:362
+tail:68
+tail:68
+trying to push: 8, 6
+trying to push: 8, 8
+tail:0
+size:1
+size:1
+_capacity:362
+Q size:0
+_capacity:362
+_capacity:362
+isSuicide: f2
+Q size:0
+time: 0.000000
+win: 0
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.......B.
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17988048
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+......B..
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17986448
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.....B...
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17987792
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+....B....
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17992080
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+...B.....
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17990480
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+..B......
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17991824
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.B.......
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17996112
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+B........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17994512
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+........B
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17995856
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.......B.
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18000144
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+......B..
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17998544
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.....B...
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 17999888
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+....B....
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18004176
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+...B.....
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18002576
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+..B......
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18003920
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.B.......
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18008208
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+B........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18006608
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+........B
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18007952
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.......B.
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18012240
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+......B..
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18010640
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.....B...
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18011984
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+....B....
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18016272
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+...B.....
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18014672
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+..B......
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18016016
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+.B.......
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18020304
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.........
+B........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18018704
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+........B
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18020048
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.......B.
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18024336
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+......B..
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18022736
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.....B...
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18024080
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+....B....
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18028368
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+...B.....
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18026768
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+..B......
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18028112
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+.B.......
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18032400
+Cuda malloc done
+.........
+.........
+.........
+.........
+.........
+B........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18030800
+Cuda malloc done
+.........
+.........
+.........
+.........
+........B
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18032144
+Cuda malloc done
+.........
+.........
+.........
+.........
+.......B.
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18036432
+Cuda malloc done
+.........
+.........
+.........
+.........
+......B..
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18034832
+Cuda malloc done
+.........
+.........
+.........
+.........
+.....B...
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18036176
+Cuda malloc done
+.........
+.........
+.........
+.........
+....B....
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18040464
+Cuda malloc done
+.........
+.........
+.........
+.........
+...B.....
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18038864
+Cuda malloc done
+.........
+.........
+.........
+.........
+..B......
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18040208
+Cuda malloc done
+.........
+.........
+.........
+.........
+.B.......
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18044496
+Cuda malloc done
+.........
+.........
+.........
+.........
+B........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18042896
+Cuda malloc done
+.........
+.........
+.........
+........B
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18044240
+Cuda malloc done
+.........
+.........
+.........
+.......B.
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18048528
+Cuda malloc done
+.........
+.........
+.........
+......B..
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18046928
+Cuda malloc done
+.........
+.........
+.........
+.....B...
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18048272
+Cuda malloc done
+.........
+.........
+.........
+....B....
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18052560
+Cuda malloc done
+.........
+.........
+.........
+...B.....
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18050960
+Cuda malloc done
+.........
+.........
+.........
+..B......
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18052304
+Cuda malloc done
+.........
+.........
+.........
+.B.......
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18056592
+Cuda malloc done
+.........
+.........
+.........
+B........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18054992
+Cuda malloc done
+.........
+.........
+........B
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18056336
+Cuda malloc done
+.........
+.........
+.......B.
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18060624
+Cuda malloc done
+.........
+.........
+......B..
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18059024
+Cuda malloc done
+.........
+.........
+.....B...
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18060368
+Cuda malloc done
+.........
+.........
+....B....
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18064656
+Cuda malloc done
+.........
+.........
+...B.....
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18063056
+Cuda malloc done
+.........
+.........
+..B......
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18064400
+Cuda malloc done
+.........
+.........
+.B.......
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18068688
+Cuda malloc done
+.........
+.........
+B........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18067088
+Cuda malloc done
+.........
+........B
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18068432
+Cuda malloc done
+.........
+.......B.
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18072720
+Cuda malloc done
+.........
+......B..
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18071120
+Cuda malloc done
+.........
+.....B...
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18072464
+Cuda malloc done
+.........
+....B....
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18076752
+Cuda malloc done
+.........
+...B.....
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18075152
+Cuda malloc done
+.........
+..B......
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18076496
+Cuda malloc done
+.........
+.B.......
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18080784
+Cuda malloc done
+.........
+B........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18079184
+Cuda malloc done
+........B
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18080528
+Cuda malloc done
+.......B.
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18084816
+Cuda malloc done
+......B..
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18083216
+Cuda malloc done
+.....B...
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18084560
+Cuda malloc done
+....B....
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18088848
+Cuda malloc done
+...B.....
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18087248
+Cuda malloc done
+..B......
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18088592
+Cuda malloc done
+.B.......
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18092880
+Cuda malloc done
+B........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+ready to run cuda code run_simulation()
+time: 0.000000
+win: 18091280
+run_iteration end:
+selection begin
+selection end
+expand begin
+tail:0
+_capacity:362
+size:1

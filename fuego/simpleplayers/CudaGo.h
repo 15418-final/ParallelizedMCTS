@@ -77,6 +77,7 @@ public:
 	__device__ __host__ int update_board(Point* pos);
 	__device__  int score();
 	__device__  bool EndOfGame();
+	__device__ __host__ void cleanQueue(Deque<Point*>* queue);
 
 	__device__ __host__ COLOR ToPlay() {
 		return currentPlayer;
