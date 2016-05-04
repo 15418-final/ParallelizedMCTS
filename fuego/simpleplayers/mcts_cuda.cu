@@ -25,14 +25,14 @@ double EPSILON = 10e-6;
 
 __constant__ int MAX_TRIAL = 5;
 __constant__ int THREAD_NUM = 32;
-int MAX_TRIAL_H = 5;
+int MAX_TRIAL_H = MAX_TRIAL;
 
 
 __device__ bool checkAbortCuda(double timeLeft, clock_t start);
 __device__ bool checkAbort();
 __device__ Deque<Point*>* generateAllMoves(CudaBoard* cur_board);
 __device__ void deleteAllMoves(Deque<Point*>* moves);
-__global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd_size);
+__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, int bd_size);
 __device__ CudaBoard* get_board(KernelArray<Point> seq, int bd_size);
 
 void getMemoryInfo();
@@ -85,6 +85,7 @@ TreeNode* Mcts::selection(TreeNode* node) {
 // Typical Monte Carlo Simulation
 
 __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, int bd_size) {
+
 	CudaBoard* board = new CudaBoard(bd_size);
 	for (int i = 0; i < len; i++) {
 		Point* p = new Point(iarray[i], jarray[i]);
@@ -115,13 +116,13 @@ __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_incre
 			delete moves_vec;
 			time++;
 			printf("time in while:%d\n",time);
+			if(time > 100)break;
 		}
 		
 		int score = cur_board->score(); // Komi set to 0
 		if ((score > 0 && cur_player == BLACK)
 		        || (score < 0 && cur_player == WHITE)) {
 			(*win_increase)++;
-
 		}
 		// totalSimu ++;
 		
@@ -167,7 +168,7 @@ void Mcts::expand(TreeNode* node) {
 void Mcts::run_iteration(TreeNode* node) {
 	std::stack<TreeNode*> S;
 	S.push(node);
-
+	printf("run iteration begin\n");
 	while (!S.empty()) {
 		TreeNode* f = S.top();
 		S.pop();
@@ -178,19 +179,18 @@ void Mcts::run_iteration(TreeNode* node) {
 			// expand current node, run expansion and simulation
 			f->set_expandable(false);
 			expand(f);
-			std::cout<<"expand f end:"<<f<<std::endl;
 
 			std::vector<TreeNode*> children = f->get_children();
 			for (size_t i = 0; i < children.size(); i++) {
-
+				printf("flag 1\n");
 				cudaEvent_t start, stop;
 				cudaEventCreate(&start);
 				cudaEventCreate(&stop);
-
+				printf("flag 2\n");
 				int* cuda_win_increase = NULL;
 				cudaMalloc((void **)&cuda_win_increase, sizeof(int));
 
-				// std::cout<<"Cuda malloc done"<<std::endl;
+				std::cout<<"Cuda malloc done"<<std::endl;
 
 				std::vector<Point> sequence = children[i]->get_sequence();
 				int len = sequence.size();

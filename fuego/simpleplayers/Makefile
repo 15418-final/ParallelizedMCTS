@@ -901,7 +901,7 @@ dlink.o: CudaGo.o mcts_cuda.o
 	$(NVCC) —dlink CudaGo.o mcts_cuda.o -o dlink.o
 
 CudaGo.o:
-	$(NVCC) -O3 -m64 -arch compute_20 -dc CudaGo.cu -DNDEBUG ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go  -L../smartgame  $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -dc -c
+	$(NVCC) -O3 -m64 -arch compute_20 -dc CudaGo.cu -DNDEBUG ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go  -L../smartgame  $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -c
 	$(NVCC) -dlink CudaGo.o mcts_cuda.o -o dlink.o
 
 mcts_cuda.o:
