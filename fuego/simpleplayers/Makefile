@@ -124,6 +124,7 @@ am_libfuego_simpleplayers_a_OBJECTS =  \
 	libfuego_simpleplayers_a-SpSafePlayer.$(OBJEXT) \
 	libfuego_simpleplayers_a-SpSimplePlayer.$(OBJEXT) \
 	libfuego_simpleplayers_a-MCTSPlayer.$(OBJEXT) \
+	mcts_cuda.$(OBJEXT) CudaGo.$(OBJEXT) \
 	libfuego_simpleplayers_a-SpUtil.$(OBJEXT)
 libfuego_simpleplayers_a_OBJECTS =  \
 	$(am_libfuego_simpleplayers_a_OBJECTS)
@@ -201,10 +202,10 @@ AUTOCONF = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/f
 AUTOHEADER = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing autoheader
 AUTOMAKE = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/missing automake-1.13
 AWK = gawk
-BOOST_CPPFLAGS = -pthread -I/afs/andrew.cmu.edu/usr18/qzhuang/private/boost/include
+BOOST_CPPFLAGS = -pthread -I/Users/patrick/Downloads/igo/boost/include
 BOOST_DATE_TIME_LIB = -lboost_date_time
 BOOST_FILESYSTEM_LIB = -lboost_filesystem
-BOOST_LDFLAGS = -L/afs/andrew.cmu.edu/usr18/qzhuang/private/boost/lib
+BOOST_LDFLAGS = -L/Users/patrick/Downloads/igo/boost/lib
 BOOST_PROGRAM_OPTIONS_LIB = -lboost_program_options
 BOOST_SYSTEM_LIB = -lboost_system
 BOOST_THREAD_LIB = -lboost_thread
@@ -254,7 +255,7 @@ MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
 NMEDIT = 
 NVCC = nvcc
-NVCCFLAGS =   -I/usr/local/depot/cuda-6.5/C/common/inc/ -I/usr/local/depot/cuda-6.5/include -L/usr/local/depot/cuda-6.5/lib64 -lcuda -lcudart -lcufft
+NVCCFLAGS = -I/usr/local/depot/cuda-6.5/include -L/usr/local/depot/cuda-6.5/lib64 -lGL -lglut -lcudart
 OBJDUMP = objdump
 OBJEXT = o
 OPENMP_CFLAGS = -fopenmp
@@ -274,10 +275,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 VERSION = 1.1.SVN
-abs_builddir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/simpleplayers
-abs_srcdir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/simpleplayers
-abs_top_builddir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego
-abs_top_srcdir = /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego
+abs_builddir = /Users/patrick/Downloads/igo/fuego/fuego/simpleplayers
+abs_srcdir = /Users/patrick/Downloads/igo/fuego/fuego/simpleplayers
+abs_top_builddir = /Users/patrick/Downloads/igo/fuego/fuego
+abs_top_srcdir = /Users/patrick/Downloads/igo/fuego/fuego
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -307,7 +308,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /afs/andrew.cmu.edu/usr18/qzhuang/private/ParallelizedMCTS/fuego/install-sh
+install_sh = ${SHELL} /Users/patrick/Downloads/igo/fuego/fuego/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -343,8 +344,8 @@ SpRandomPlayer.cpp \
 SpSafePlayer.cpp \
 SpSimplePlayer.cpp \
 MCTSPlayer.cpp \
-mcts_simulation.cu \
-go_cuda_helper.cu \
+mcts_cuda.cu \
+CudaGo.cu \
 SpUtil.cpp
 
 noinst_HEADERS = \
@@ -363,6 +364,10 @@ SpSafePlayer.h \
 SpSimplePlayer.h \
 MCTSPlayer.h \
 mcts.h \
+CudaGo.h \
+point.h \
+deque.h \
+CudaDequeue.h \
 SpUtil.h
 
 AM_CXXFLAGS = -fopenmp
@@ -376,7 +381,7 @@ DISTCLEANFILES = *~
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cpp .lo .o .obj
+.SUFFIXES: .cpp .cu .lo .o .obj
 $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -413,8 +418,9 @@ clean-noinstLIBRARIES:
 
 libfuego_simpleplayers.a: $(libfuego_simpleplayers_a_OBJECTS) $(libfuego_simpleplayers_a_DEPENDENCIES) $(EXTRA_libfuego_simpleplayers_a_DEPENDENCIES) 
 	$(AM_V_at)-rm -f libfuego_simpleplayers.a
-	$(AM_V_AR)$(libfuego_simpleplayers_a_AR) libfuego_simpleplayers.a $(libfuego_simpleplayers_a_OBJECTS) $(libfuego_simpleplayers_a_LIBADD)
-	$(AM_V_at)$(RANLIB) libfuego_simpleplayers.a
+	$(AM_V_AR)$(libfuego_simpleplayers_a_AR) libfuego_simpleplayers.a $(libfuego_simpleplayers_a_OBJECTS) $(libfuego_simpleplayers_a_LIBADD) dlink.o
+	$(AM_V_at)$(RANLIB) libfuego_simpleplayers.a 
+	
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -642,14 +648,14 @@ libfuego_simpleplayers_a-SpSimplePlayer.obj: SpSimplePlayer.cpp
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-SpSimplePlayer.obj `if test -f 'SpSimplePlayer.cpp'; then $(CYGPATH_W) 'SpSimplePlayer.cpp'; else $(CYGPATH_W) '$(srcdir)/SpSimplePlayer.cpp'; fi`
 
 libfuego_simpleplayers_a-MCTSPlayer.o: MCTSPlayer.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-MCTSPlayer.o -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo -c -o libfuego_simpleplayers_a-MCTSPlayer.o `test -f 'MCTSPlayer.cpp' || echo '$(srcdir)/'`MCTSPlayer.cpp
+	$(AM_V_CXX)$(CXX)  $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-MCTSPlayer.o -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo $(NVCCFLAGS) -c -o libfuego_simpleplayers_a-MCTSPlayer.o `test -f 'MCTSPlayer.cpp' || echo '$(srcdir)/'`MCTSPlayer.cpp
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Po
 #	$(AM_V_CXX)source='MCTSPlayer.cpp' object='libfuego_simpleplayers_a-MCTSPlayer.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libfuego_simpleplayers_a-MCTSPlayer.o `test -f 'MCTSPlayer.cpp' || echo '$(srcdir)/'`MCTSPlayer.cpp
 
 libfuego_simpleplayers_a-MCTSPlayer.obj: MCTSPlayer.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-MCTSPlayer.obj -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo -c -o libfuego_simpleplayers_a-MCTSPlayer.obj `if test -f 'MCTSPlayer.cpp'; then $(CYGPATH_W) 'MCTSPlayer.cpp'; else $(CYGPATH_W) '$(srcdir)/MCTSPlayer.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfuego_simpleplayers_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libfuego_simpleplayers_a-MCTSPlayer.obj -MD -MP -MF $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo $(NVCCFLAGS) -c -o libfuego_simpleplayers_a-MCTSPlayer.obj `if test -f 'MCTSPlayer.cpp'; then $(CYGPATH_W) 'MCTSPlayer.cpp'; else $(CYGPATH_W) '$(srcdir)/MCTSPlayer.cpp'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Tpo $(DEPDIR)/libfuego_simpleplayers_a-MCTSPlayer.Po
 #	$(AM_V_CXX)source='MCTSPlayer.cpp' object='libfuego_simpleplayers_a-MCTSPlayer.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
@@ -879,6 +885,28 @@ uninstall-am:
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags tags-am uninstall uninstall-am
 
+#BOOST_CPPFLAGS = -pthread -I/afs/andrew.cmu.edu/usr18/qzhuang/private/boost/include
+#BOOST_DATE_TIME_LIB = -lboost_date_time
+#BOOST_FILESYSTEM_LIB = -lboost_filesystem
+#BOOST_LDFLAGS = -L/afs/andrew.cmu.edu/usr18/qzhuang/private/boost/lib
+#BOOST_PROGRAM_OPTIONS_LIB = -lboost_program_options
+#BOOST_SYSTEM_LIB = -lboost_system
+#BOOST_THREAD_LIB = -lboost_thread
+#BOOST_UNIT_TEST_FRAMEWORK_LIB = -lboost_unit_test_framework
+
+
+
+.cu.o: dlink.o
+
+dlink.o: CudaGo.o mcts_cuda.o
+	$(NVCC) —dlink CudaGo.o mcts_cuda.o -o dlink.o
+
+CudaGo.o:
+	$(NVCC) -O3 -m64 -arch compute_20 -dc CudaGo.cu -DNDEBUG ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go  -L../smartgame  $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -dc -c
+	$(NVCC) -dlink CudaGo.o mcts_cuda.o -o dlink.o
+
+mcts_cuda.o:
+	$(NVCC) -O3 -m64 -arch compute_20 -dc mcts_cuda.cu -DNDEBUG ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go   -L../smartgame  $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -c
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
