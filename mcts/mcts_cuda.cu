@@ -21,7 +21,7 @@ int MAX_TRIAL_H = 50;
 __device__ bool checkAbort();
 __device__ Deque<Point*>* generateAllMoves(CudaBoard* cur_board);
 __device__ void deleteAllMoves(Deque<Point*>* moves);
-__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, int bd_size);
+__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, int bd_size, int seed);
 
 void memoryUsage();
 
