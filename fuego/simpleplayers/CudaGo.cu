@@ -10,6 +10,7 @@ __device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color) {
 	COLOR op_color = static_cast<COLOR>(color ^ 3);
 	Deque<Point*>* Q = new Deque<Point*>();
 	clearVisited();
+
 	for (int d = 0 ; d < 4; d++) {
 		int ni = i + dir[d][0];
 		int nj = j + dir[d][1];
@@ -64,43 +65,38 @@ __device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color) {
 __device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color) {
 	int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
 
+//	printf("isSuicide\n");
 	Deque<Point*>* Q = new Deque<Point*>();
-	// printf("isSuicide: f0\n");
 	clearVisited();
-	// printf("trying to push: %d, %d\n", i, j);
-	// printf("Q size:%d\n",Q->size());
+	//printf("isSuicide start\n");
 	Q->push_back(new Point(i, j));
-
 //	printf("before loop\n");
 	while (Q->size() != 0)  {
 		Point* f = Q->pop_front();
-		// printf("isSuicide: f2\n");
 		visited[f->i][f->j] = true;
-
 		for (int d = 0 ; d < 4; d++) {
 			int ni = f->i + dir[d][0];
-			int nj = f->j + dir[d][1];		
-			// printf("isSuicide: f4\n");
+			int nj = f->j + dir[d][1];			
 			if (visited[ni][nj] == true)continue;
 			if (board[ni][nj] == color) {
 				Q->push_back(new Point(ni, nj));
-				// printf("isSuicide: f5\n");
 			} else if (board[ni][nj] == EMPTY) {
-
 				cleanQueue(Q);
 				delete Q;
-		//		printf("isSuicide done\n");
+	//			printf("isSuicide done\n");
 				return false;
 			}
 		}
 		delete f;
 	}
+	//		printf("isSuicide done\n");
 	delete Q;
 	return true;
 }
 
 __device__  Deque<Point*>* CudaBoard::get_next_moves_device() {
 
+//	printf("get_next_moves_device\n");
     COLOR color = currentPlayer;
 	Deque<Point*>* moves = new Deque<Point*>();
 	for (int i = 1; i < BSIZE + 1; i++) {
@@ -109,16 +105,17 @@ __device__  Deque<Point*>* CudaBoard::get_next_moves_device() {
 				//TODO: Check whether it can eat other stones
 				//If not, check whether it's a suicide, which is forbidden.
 
-				// printf("checkpoint 0\n");
+			//	std::cout << "check" << i << ", " << j <<std::endl;
+
 				if (!canEat(i, j, color) && isSuicide(i, j, color)) {
 				//	if (!canEat(i, j, color))std::cout << "can not eat" << std::endl;
 				//	if (isSuicide(i, j, color)) std::cout << "is suicide" << std::endl;
 					continue;
 				}
-				// printf("checkpoint 1\n");
+
+	//			printf("get_next_moves_device push\n");
 				moves->push_back(new Point(i, j));
-				// printf("checkpoint 2\n");
-				// printf("next move size:%d\n",moves->size());
+	//			printf("get_next_moves_device push end\n");
 			}
 		}
 	}
@@ -126,7 +123,6 @@ __device__  Deque<Point*>* CudaBoard::get_next_moves_device() {
 }
 
 std::vector<Point*> CudaBoard::get_next_moves_host() {
-
     COLOR color = currentPlayer;
 	std::vector<Point*> moves;
 	for (int i = 1; i < BSIZE + 1; i++) {
@@ -155,7 +151,6 @@ __device__  __host__ int CudaBoard::update_board(Point* pos) {
 	Deque<Point*>* temp_stone = new Deque<Point*>();
 
 	clearVisited();
-
 //	printf("ready to play\n");
 	int total = 0;
 	for (int d = 0 ; d < 4; d++) {

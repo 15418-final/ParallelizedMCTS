@@ -36,6 +36,7 @@ public:
 		}
 		__device__  __host__ bool operator==(const iterator rhs) { return _ptr == rhs._ptr; }
 		__device__  __host__ bool operator!=(const iterator rhs) { return _ptr != rhs._ptr; }
+
 	};
 
 	__device__ __host__ Deque() {

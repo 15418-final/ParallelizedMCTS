@@ -417,7 +417,7 @@ clean-noinstLIBRARIES:
 
 libfuego_simpleplayers.a: $(libfuego_simpleplayers_a_OBJECTS) $(libfuego_simpleplayers_a_DEPENDENCIES) $(EXTRA_libfuego_simpleplayers_a_DEPENDENCIES) 
 	$(AM_V_at)-rm -f libfuego_simpleplayers.a
-	$(AM_V_AR)$(libfuego_simpleplayers_a_AR) libfuego_simpleplayers.a $(libfuego_simpleplayers_a_OBJECTS) $(libfuego_simpleplayers_a_LIBADD) dlink.o
+	$(AM_V_AR)$(libfuego_simpleplayers_a_AR) libfuego_simpleplayers.a $(libfuego_simpleplayers_a_OBJECTS) $(libfuego_simpleplayers_a_LIBADD) 
 	$(AM_V_at)$(RANLIB) libfuego_simpleplayers.a 
 	
 
@@ -901,11 +901,11 @@ dlink.o: CudaGo.o mcts_cuda.o
 	$(NVCC) —dlink CudaGo.o mcts_cuda.o -o dlink.o
 
 CudaGo.o:
-	$(NVCC) -O3 -m64 -arch compute_20 -dc CudaGo.cu -DNDEBUG ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go  -L../smartgame  $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -dc -c
-	$(NVCC) -dlink CudaGo.o mcts_cuda.o -o dlink.o
+	$(NVCC) -O3 -m64 -arch compute_20 CudaGo.cu -DNDEBUG ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go  -L../smartgame  $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -c
+	#$(NVCC) -dlink CudaGo.o mcts_cuda.o -o dlink.o
 
 mcts_cuda.o:
-	$(NVCC) -O3 -m64 -arch compute_20 -dc mcts_cuda.cu -DNDEBUG ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go   -L../smartgame  $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -c
+	$(NVCC) -O3 -m64 -arch compute_20 mcts_cuda.cu -DNDEBUG ../smartgame/*.o ../gtpengine/*.o -I../smartgame -I../go   -L../smartgame  $(NVCCFLAGS) $(BOOST_FILESYSTEM_LIB) $(BOOST_SYSTEM_LIB)  $(BOOST_THREAD_LIB) -c
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

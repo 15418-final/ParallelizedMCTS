@@ -23,25 +23,25 @@ struct KernelArray
 double C = 1.4;
 double EPSILON = 10e-6;
 
-__constant__ int MAX_TRIAL = 5;
+__constant__ int MAX_TRIAL = 1;
 __constant__ int THREAD_NUM = 32;
-int MAX_TRIAL_H = 5;
+
+int MAX_TRIAL_H = 50;
 
 
-__device__ bool checkAbortCuda(double timeLeft, clock_t start);
 __device__ bool checkAbort();
 __device__ Deque<Point*>* generateAllMoves(CudaBoard* cur_board);
 __device__ void deleteAllMoves(Deque<Point*>* moves);
-__global__ void run_simulation(KernelArray<Point> seq, int* win_increase, int bd_size);
+__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, int bd_size);
 __device__ CudaBoard* get_board(KernelArray<Point> seq, int bd_size);
 
-void getMemoryInfo();
+void memoryUsage();
 
 template <typename T>
 KernelArray<T> convertToKernel(thrust::device_vector<T>& dVec);
 
 SgPoint Mcts::run() {
-	mcts_timer.Start();
+	// mcts_timer.Start();
 	while (true) {
 		run_iteration(root);
 		if (checkAbort()) break;
@@ -83,7 +83,6 @@ TreeNode* Mcts::selection(TreeNode* node) {
 }
 
 // Typical Monte Carlo Simulation
-
 __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, int bd_size) {
 	CudaBoard* board = new CudaBoard(bd_size);
 	for (int i = 0; i < len; i++) {
@@ -91,39 +90,37 @@ __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_incre
 		board->update_board(p);
 		delete p;
 	}
-	COLOR cur_player = board->ToPlay();
+	*win_increase = 0;
 	int index = blockIdx.x * blockDim.x + threadIdx.x;
-	(*win_increase) = 0;
+	clock_t start = clock();
 
+	COLOR cur_player = board->ToPlay();
 	for (int i = 0; i < MAX_TRIAL; i++) {
+		// bool timeout = false;
 		CudaBoard* cur_board = new CudaBoard(*board);
-
 		if (index == 0)
-			printf("Start a simulation\n");
+		printf("Start a simulation\n");
 		int time = 0;
 		while (true) {
 			Deque<Point*>* moves_vec = generateAllMoves(cur_board);
-			// printf("generate moves done:%d\n",moves_vec->size());
 			if (cur_board->EndOfGame() || moves_vec->size() == 0) {
-				printf("game end normally\n");
 				break;
 			}
 			//why nxt_move length can be zero? what does endofgame do above?
-			Point* nxt_move = moves_vec->front();
+			// std::cout << "moves_vec length:" << moves_vec->Length() << std::endl;
+			Point* nxt_move = *(moves_vec->begin());
 			cur_board->update_board(nxt_move);
 			deleteAllMoves(moves_vec);
 			delete moves_vec;
 			time++;
-			printf("time in while:%d\n",time);
 		}
 		
-		int score = cur_board->score(); // Komi set to 0
-		if ((score > 0 && cur_player == BLACK)
-		        || (score < 0 && cur_player == WHITE)) {
-			(*win_increase)++;
-
-		}
-		// totalSimu ++;
+			int score = cur_board->score(); // Komi set to 0
+			if ((score > 0 && cur_player == BLACK)
+			        || (score < 0 && cur_player == WHITE)) {
+				(*win_increase)++;
+			}
+			// totalSimu ++;
 		
 		if (index == 0)
 			printf("%d win\n", score > 0 ? 1: 2);
@@ -131,7 +128,7 @@ __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_incre
 		delete cur_board;
 	}
 	if (index == 0)
-		printf("run_simulation done\n");
+	printf("run_simulation done\n");
 }
 
 void Mcts::back_propagation(TreeNode* node, int win_increase, int sim_increase) {
@@ -146,11 +143,10 @@ void Mcts::back_propagation(TreeNode* node, int win_increase, int sim_increase) 
 
 void Mcts::expand(TreeNode* node) {
 	std::cout << "expand begin" << std::endl;
-	// std::cout<< "node->sims:"<< node->sims <<std::endl;
 	CudaBoard* cur_board = get_board(node->get_sequence(),bd_size);
 
 	std::vector<Point*> moves_vec = generateAllMoves(cur_board);
-	// std::cout<<"moves generated:"<< moves_vec.size() <<std::endl;
+	std::cout<<"moves generated:"<< moves_vec.size() <<std::endl;
 	while (moves_vec.size() > 0) {
 		Point* nxt_move = moves_vec.back();
 		node->add_children(new TreeNode(node->get_sequence(), *nxt_move));
@@ -190,7 +186,7 @@ void Mcts::run_iteration(TreeNode* node) {
 				int* cuda_win_increase = NULL;
 				cudaMalloc((void **)&cuda_win_increase, sizeof(int));
 
-				// std::cout<<"Cuda malloc done"<<std::endl;
+				std::cout<<"Cuda malloc done"<<std::endl;
 
 				std::vector<Point> sequence = children[i]->get_sequence();
 				int len = sequence.size();
@@ -208,28 +204,30 @@ void Mcts::run_iteration(TreeNode* node) {
     			cudaMemcpy(c_i_d, c_i, sizeof(int)*len, cudaMemcpyHostToDevice); 
     			cudaMemcpy(c_j_d, c_j, sizeof(int)*len, cudaMemcpyHostToDevice); 
 				
-
 				CudaBoard* board = get_board(sequence, bd_size);
 				// board->print_board();
 
 				std::cout<<"ready to run cuda code run_simulation()"<<std::endl;
 				cudaEventRecord(start);
-				run_simulation<<<1,1>>>(c_i_d, c_j_d, len, cuda_win_increase, bd_size);
+				run_simulation<<<10,10>>>(c_i_d, c_j_d, len, cuda_win_increase, bd_size);
 				cudaEventRecord(stop);
-				printf("return : %s\n",cudaGetErrorString(cudaDeviceSynchronize()));
-				//cudaFree(cudaDeviceNode);
+				
+				memoryUsage();
 
-				getMemoryInfo();
+				//cudaFree(cudaDeviceNode);
 				cudaDeviceSynchronize();
 				int* win_increase = new int[1];
+					printf("done\n");
 				cudaMemcpy(win_increase, cuda_win_increase, sizeof(int), cudaMemcpyDeviceToHost);
+				
 				cudaEventSynchronize(stop);
 				float milliseconds = 0;
 				cudaEventElapsedTime(&milliseconds, start, stop);
+				printf("return : %s\n", cudaGetErrorString(cudaDeviceSynchronize()));
 
 				printf("time: %f\n", milliseconds);
 				printf("win: %d\n", *win_increase);
-
+			
 				cudaFree(c_i_d);
 				cudaFree(c_j_d);
 
@@ -249,16 +247,9 @@ void Mcts::run_iteration(TreeNode* node) {
 
 bool Mcts::checkAbort() {
 	if (!abort) {
-		abort = mcts_timer.GetTime() > maxTime;
+		// abort = mcts_timer.GetTime() > maxTime;
 	}
 	return abort;
-}
-
-__device__ bool checkAbortCuda(double timeLeft, clock_t start){
-	if(timeLeft < clock64() - start){
-		return true;
-	}
-	return false;
 }
 
 __device__ Deque<Point*>* generateAllMoves(CudaBoard* cur_board) {
@@ -316,22 +307,6 @@ __device__ void deleteAllMoves(Deque<Point*>* moves) {
 	} 
 }
 
-void getMemoryInfo(){
-	size_t free_byte ;
-
-	size_t total_byte ;
-
-	cudaError cuda_status = cudaMemGetInfo( &free_byte, &total_byte ) ;
-
-	if ( cudaSuccess != cuda_status ) {
-
-		printf("Error: cudaMemGetInfo fails, %s \n", cudaGetErrorString(cuda_status) );
-
-		exit(1);
-
-	}
-}
-
 void Mcts::deleteAllMoves(std::vector<Point*> moves) {
 	for (std::vector<Point*>::iterator it = moves.begin(); it != moves.end(); it++) {
 		delete *it;
@@ -346,5 +321,26 @@ KernelArray<T> convertToKernel(thrust::device_vector<T>& dVec)
     kArray._size  = (int) dVec.size();
  
     return kArray;
+}
+
+void memoryUsage() {
+	size_t free_byte ;
+
+        size_t total_byte ;
+
+          cudaMemGetInfo( &free_byte, &total_byte ) ;
+
+  
+
+
+        double free_db = (double)free_byte ;
+
+        double total_db = (double)total_byte ;
+
+        double used_db = total_db - free_db ;
+
+        printf("GPU memory usage: used = %f, free = %f MB, total = %f MB\n",
+
+            used_db/1024.0/1024.0, free_db/1024.0/1024.0, total_db/1024.0/1024.0);
 }
 
