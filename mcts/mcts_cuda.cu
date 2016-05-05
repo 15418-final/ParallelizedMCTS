@@ -20,6 +20,7 @@ double EPSILON = 10e-6;
 __constant__ int MAX_TRIAL_H = 1;
 int MAX_TRIAL = 1;
 
+
 static int grid_dim = 1;
 static int block_dim = 1;
 static int THREADS_NUM = grid_dim * block_dim;
@@ -33,7 +34,7 @@ void memoryUsage();
 
 Point Mcts::run() {
 	// mcts_timer.Start();
-	size_t heapszie = 32 * 1024 * 1024;
+	size_t heapszie = 512 * 1024 * 1024;
 	cudaDeviceSetLimit(cudaLimitMallocHeapSize, heapszie);
 
 	while (true) {
@@ -235,14 +236,11 @@ void Mcts::run_iteration(TreeNode* node) {
 				cudaEventElapsedTime(&milliseconds, start, stop);
 
 				printf("time measured in CPU: %lf\n", milliseconds);
-				
-
-				printf("time: %f\n", milliseconds);
-				printf("win: %d\n", *win_increase);
+				printf("win: %d\n", win_increase[0]);
 
 				cudaDeviceReset();
 
-				children[i]->wins += *win_increase;
+				children[i]->wins += win_increase[0];
 				children[i]->sims += MAX_TRIAL*THREADS_NUM;
 
 				back_propagation(children[i], *win_increase, MAX_TRIAL);
@@ -286,7 +284,6 @@ CudaBoard Mcts::get_board(std::vector<Point> sequence, int bd_sizem, Point* poin
 	}
 	return bd;
 }
-
 
 __device__ __host__ Point* createPoints(int bd_size) {
 	int len = bd_size + 2;
