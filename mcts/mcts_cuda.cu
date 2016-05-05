@@ -20,7 +20,7 @@ double EPSILON = 10e-6;
 __constant__ int MAX_TRIAL_H = 1;
 int MAX_TRIAL = 1;
 
-static int grid_dim = 16;
+static int grid_dim = 8;
 static int block_dim = 1;
 static int THREADS_NUM = grid_dim * block_dim;
 
@@ -28,14 +28,12 @@ bool checkAbort();
 __device__ bool checkAbortCuda(bool* abort, clock_t startTime, double timeLeft);
 __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, Point* parray, int bd_size, unsigned int seed);
 __device__ __host__ Point* createPoints(int bd_size);
-__device__ __host__ void deletePoints(Point*** point, int bd_size);
-__device__ void deleteAllMoves(Deque<Point*>* moves);
 
 void memoryUsage();
 
 Point Mcts::run() {
 	// mcts_timer.Start();
-	size_t heapszie = 32 * 1024 * 1024;
+	size_t heapszie = 512 * 1024 * 1024;
 	cudaDeviceSetLimit(cudaLimitMallocHeapSize, heapszie);
 
 	while (true) {
@@ -240,17 +238,14 @@ void Mcts::run_iteration(TreeNode* node) {
 				cudaEventElapsedTime(&milliseconds, start, stop);
 
 				printf("time measured in CPU: %lf\n", milliseconds);
-				
-
-				printf("time: %f\n", milliseconds);
-				printf("win: %d\n", *win_increase);
+				printf("win: %d\n", win_increase[0]);
 
 				cudaDeviceReset();
 
-				children[i]->wins += *win_increase;
+				children[i]->wins += win_increase[0];
 				children[i]->sims += MAX_TRIAL*THREADS_NUM;
 
-				back_propagation(children[i], *win_increase, MAX_TRIAL_H);
+				back_propagation(children[i], children[i]->wins, children[i]->sims);
 				delete [] win_increase;
 				if (checkAbort())break;
 			}
@@ -302,13 +297,6 @@ CudaBoard* Mcts::get_board(std::vector<Point> sequence, int bd_size) {
 }
 
 
-__device__ void deleteAllMoves(Deque<Point*>* moves) {
-	Deque<Point*>::iterator it = moves->begin();
-	for (; it != moves->end(); it++) {
-		Point* p = *it;
-		delete p;
-	}
-}
 
 void Mcts::deleteAllMoves(std::vector<Point*> moves) {
 	for (std::vector<Point*>::iterator it = moves.begin(); it != moves.end(); it++) {
