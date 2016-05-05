@@ -8,6 +8,7 @@
 #include <cmath>
 #include <algorithm>
 #include <stdlib.h>
+#include <ctime>
 
 #include "point.h"
 #include "CudaGo.h"
@@ -66,6 +67,7 @@ public:
 class Mcts {
 private:
 	TreeNode* root;
+	clock_t startTime;
 	double maxTime;
 	bool abort;
 
@@ -78,6 +80,8 @@ public:
 		bd_size = size;
 		std::vector<Point> seq;
 		root = new TreeNode(seq);
+		startTime = clock();
+		maxTime = 20000; //milliseconds
 	}
 
 	~Mcts() {
