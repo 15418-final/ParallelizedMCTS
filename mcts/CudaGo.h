@@ -84,8 +84,8 @@ public:
 	}
 
 	__device__ __host__ ~CudaBoard() {
-		delete []board;
-		delete []visited;
+		delete[] board;
+		delete[] visited;
 	}
 
 	void print_board();
@@ -123,7 +123,7 @@ public:
 
 	__device__ __host__ Point getPoint(Point* point, int i, int j) {
 		Point p = point[i*(BSIZE+2) + j];
-		printf("get point (%d, %d)\n", p.i, p.j);
+	//	printf("get point (%d, %d)\n", p.i, p.j);
 		return p;
 	}
 

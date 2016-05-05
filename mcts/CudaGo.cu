@@ -8,7 +8,7 @@ __device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color, Point* poi
 	COLOR op_color = static_cast<COLOR>(color ^ 3);
 	q1.clear();
 	clearVisited();
-	printf("canEat start\n");
+	//printf("canEat start\n");
 	for (int d = 0 ; d < 4; d++) {
 		int ni = i + dir[d][0];
 		int nj = j + dir[d][1];
@@ -36,7 +36,7 @@ __device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color, Point* poi
 		}
 		if (result) break;
 	}
-	printf("canEat end\n");
+	//printf("canEat end\n");
 	setBoard(i, j, EMPTY);
 	return result;
 }
@@ -46,13 +46,13 @@ __device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color, Point*
 //	printf("isSuicide\n");
 	q1.clear();
 	clearVisited();
-	printf("isSuicide start\n");
+//	printf("isSuicide start\n");
 	Point p = getPoint(point, i, j);
 	q1.push_back(p);
 
 	while (q1.size() != 0)  {
 		Point f = q1.pop_front();
-		printf("f: %d, %d\n",f.i, f.j );
+	//	printf("f: %d, %d\n",f.i, f.j );
 		setVisited(f.i, f.j, true);
 		for (int d = 0 ; d < 4; d++) {
 			int ni = f.i + dir[d][0];
@@ -61,7 +61,7 @@ __device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color, Point*
 			if (getBoard(ni, nj) == color) {
 				q1.push_back(getPoint(point, ni, nj));
 			} else if (getBoard(ni, nj) == EMPTY) {
-				printf("isSuicide done\n");
+		//		printf("isSuicide done\n");
 				return false;
 			}
 		}
@@ -100,11 +100,11 @@ std::vector<Point> CudaBoard::get_next_moves_host(Point* point) {
 				if (!canEat(i, j, color, point) && isSuicide(i, j, color, point)) {
 					continue;
 				}
-				printf("push :%d, %d\n",i,j );
+			//	printf("push :%d, %d\n",i,j );
 				Point p = getPoint(point, i, j);
-				printf("push to vector:%d, %d\n",p.i,p.j );
+			//	printf("push to vector:%d, %d\n",p.i,p.j );
 				moves.push_back(p);
-				printf("push done\n");
+			//	printf("push done\n");
 			}
 		}
 	}

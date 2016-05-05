@@ -98,7 +98,7 @@ public:
 	void expand(TreeNode* node);
 	void back_propagation(TreeNode* node, int win_increase, int sim_increase);
 
-	CudaBoard get_board(std::vector<Point> sequence, int bd_size, Point* point);
+	CudaBoard* get_board(std::vector<Point> sequence, int bd_size, Point* point);
 	bool checkAbort();
 };
 

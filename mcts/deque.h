@@ -58,14 +58,9 @@ public:
 	__device__ __host__ void push_back(Point e) {
 		// Make sure head and tail won't point to same position. Good for implementing iterator
 		if (_size < BDSIZE * BDSIZE - 1) {
-			printf("e:%d, %d\n",e.i, e.j );
 			int tail = (head + _size) % _capacity;
-			printf("pushback tail:%d\n",tail );
-			printf("push_back 1\n");
 			data[tail] = e;
-			printf("push_back 2\n");
 			_size++;
-			printf("%d, %d\n", data[tail].i, data[tail].j);
 		}
 	}
 
@@ -78,11 +73,9 @@ public:
 
 	__device__ __host__  Point pop_front() {
 		if (_size > 0) {
-			printf("popfront head:%d\n", head);
 			Point e = data[head];
 			head = (head + 1) % _capacity;
 			_size--;
-			printf("pop: %d, %d\n", e.i, e.j);
 			return e;
 		}
 		return Point();
