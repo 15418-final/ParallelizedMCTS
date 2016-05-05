@@ -66,28 +66,30 @@ __device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color, Point*
 			}
 		}
 	}
-			printf("isSuicide done\n");
+		//	printf("isSuicide done\n");
 	return true;
 }
 
-__device__  Point CudaBoard::get_next_moves_device(Point* point, int seed) {
+__device__  Point CudaBoard::get_next_moves_device(Point* point, float seed) {
 	COLOR color = player;
-
-	seed = seed % remain;
+	int move = seed * remain;
 	int current = 0;
-
+	Point inital;
 	for (int i = 1; i < BSIZE + 1; i++) {
 		for (int j = 1; j < BSIZE + 1; j++) {
 			if (getBoard(i, j) == EMPTY) { //This is position is empty
 				if (!canEat(i, j, color, point) && isSuicide(i, j, color, point)) {
 					continue;
 				}
+				if (current == 0) inital = getPoint(point, i, j);
+				if (current == move) return getPoint(point, i, j);
 				current++;
-				if (current == seed) return getPoint(point, i, j);
 			}
 		}
 	}
-
+	if (current != 0) {
+		return inital;
+	}
 	return Point(-1,-1);
 }
 
@@ -153,6 +155,7 @@ __device__  __host__ int CudaBoard::update_board(Point pos, Point* point) {
 				for (Deque::iterator it = q2.begin(); it != q2.end(); it++) {
 					Point p = *it;
 					setBoard(p.i, p.j, EMPTY);
+					remain++;
 				}
 			}
 			q2.clear();

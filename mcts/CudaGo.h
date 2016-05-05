@@ -89,7 +89,7 @@ public:
 	}
 
 	void print_board();
-	__device__  Point get_next_moves_device(Point* point, int seed);
+	__device__  Point get_next_moves_device(Point* point, float seed);
 	std::vector<Point> get_next_moves_host(Point* point);
 	__device__ __host__ int update_board(Point pos, Point* point);
 	__device__  int score();

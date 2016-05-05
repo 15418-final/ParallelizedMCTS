@@ -99,12 +99,13 @@ __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_incre
 		int step = 0;
 		COLOR player = board->ToPlay();
 		curandState_t state;
-		curand_init(seed + index, 0, 0, &state);
+		curand_init(cudaStartTime + index, blockIdx.x, 0, &state);
 		for (int i = 0; i < len; i++) {
 			board->update_board(point[iarray[i]*(bd_size+2)+ jarray[i]], point);
 		}
-		while (true && step < 300) {
-			Point move = board->get_next_moves_device(point, curand(&state));
+
+		while (step < 300) {
+			Point move = board->get_next_moves_device(point, curand_uniform (&state));
 			if (move.i < 0) {
 				break;
 			}
@@ -124,7 +125,9 @@ __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_incre
 			win_increase[index]++;
 		}
 		board->clear();
+		printf("step: %d\n",step);
 	}
+
 	// if(index == 0) 
 	// 	printf("num of trial done:%d\n",times);
 	// if(index == 0) 	printf("time cp7:%ld\n", (std::clock()) / CLOCKS_PER_SEC);
