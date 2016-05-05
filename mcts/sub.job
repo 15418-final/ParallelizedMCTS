@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Merge stdout and stderr into one output file
+#PBS -j oe
+
+#PBS -q titanx 
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/
+# Move to my $SCRATCH directory.
+cd $SCRATCH
+
+# Set this to the important directory.
+exe=a.out
+execdir=/home/yepengy/ParallelizedMCTS/mcts
+
+# Copy executable to $SCRATCH.
+cp $execdir/$exe $exe
+
+# Run my executable
+time ./$exe 
+

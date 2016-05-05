@@ -8,8 +8,10 @@ class Point{
 public:
 	int i,j;
 	__device__ __host__ Point(int a, int b):i(a),j(b){}
+
+	__device__ __host__ Point():i(0),j(0){}
 	
-	Point(const Point& p){
+	__device__ __host__ Point(const Point& p){
 		i = p.i;
 		j = p.j;
 	}
