@@ -21,7 +21,7 @@ int MAX_TRIAL_H = 50;
 
 __device__ bool checkAbort();
 __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, Point* parray, int bd_size, unsigned int seed);
-Point* createPoints(int bd_size);
+__device__ __host__ Point* createPoints(int bd_size);
 __device__ __host__ void deletePoints(Point*** point, int bd_size);
 __device__ void deleteAllMoves(Deque<Point*>* moves);
 
@@ -76,14 +76,14 @@ TreeNode* Mcts::selection(TreeNode* node) {
 // Typical Monte Carlo Simulation
 __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, Point* parray, int bd_size, unsigned int seed) {
 	// TODO: use shared memory for point
-	__shared__ Point* point;
+	// __shared__ Point* point;
 	
-	if (threadIdx.x == 0) {
-		memcpy(point, parray, sizeof(Point)*(bd_size+2)*(bd_size+2));
-	}
-	__syncthreads();
+	// if (threadIdx.x == 0) {
+	// 	memcpy(point, parray, sizeof(Point)*(bd_size+2)*(bd_size+2));
+	// }
+	// __syncthreads();
 
-
+	Point* point = createPoints(bd_size);
 	CudaBoard* board = new CudaBoard(bd_size);
 	for (int i = 0; i < len; i++) {
 		board->update_board(point[iarray[i]*(bd_size+2)+ jarray[i]], point);
@@ -279,7 +279,7 @@ void Mcts::deleteAllMoves(std::vector<Point*> moves) {
 	}
 }
 
-Point* createPoints(int bd_size) {
+__device__ __host__ Point* createPoints(int bd_size) {
 	int len = bd_size + 2;
 	Point* point = static_cast<Point*> (malloc(sizeof(Point) * len * len));
 	for (int i = 0; i < len; i++) {

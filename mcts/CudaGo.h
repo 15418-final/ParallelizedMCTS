@@ -5,6 +5,7 @@
 #include "point.h"
 #include "deque.h"
 #include <vector>
+#include <string.h>
 
 enum COLOR {WHITE = 1, BLACK = 2, EMPTY = 0, OUT = 3};
 
