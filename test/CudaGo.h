@@ -10,18 +10,14 @@ enum COLOR {WHITE = 1, BLACK = 2, EMPTY = 0, OUT = 3};
 
 class CudaBoard {
 private:
-	int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
 	int *board;  	// 1-d array to represent 2d board
 	bool *visited;  // same as board
-	__device__ __host__ bool canEat(int i, int j, COLOR color, Point*** point);
-	__device__ __host__ bool isSuicide(int i, int j, COLOR color, Point*** point);
+	bool canEat(int i, int j, COLOR color);
+	bool isSuicide(int i, int j, COLOR color);
 	int BSIZE;
-	COLOR player;	// current player
-
-	Deque<Point*>* q1;
-	Deque<Point*>* q2;
+	COLOR player;
 public:
-	__device__ __host__ CudaBoard(int size) {
+	CudaBoard(int size) {
 		BSIZE = size;
 
 		int total = (BSIZE + 2) * (BSIZE + 2);
@@ -32,7 +28,7 @@ public:
 		memset(visited, 0, sizeof(bool) * total);
 
 		//set the border
-		for (int i = 0; i < BSIZE + 2; i++) {n
+		for (int i = 0; i < BSIZE + 2; i++) {
 			board[i * (BSIZE + 2)] = 3;
 			board[i * (BSIZE + 2) + BSIZE + 1] = 3;
 			board[i] = 3;
@@ -40,69 +36,63 @@ public:
 		}
 
 		player = BLACK; // black play first
-
-		q1 = new Deque<Point*>();
-		q2 = new Deque<Point*>();
 	}
 
 	//copy constructor
-	__device__ __host__ CudaBoard(CudaBoard& b) {
+	CudaBoard(CudaBoard& b) {
 		BSIZE = b.get_size();
-
+		
 		int total = (BSIZE + 2) * (BSIZE + 2);
 		board = new int[total];
 		visited = new bool[total];
 
 		for (int i = 0; i < BSIZE + 2; i++) {
 			for (int j = 0; j < BSIZE + 2; j++) {
-				board[i * (BSIZE + 2) + j] = b.getBoard(i, j);
-				visited[i * (BSIZE + 2) + j] = false;
+				board[i*(BSIZE+2) + j] = b.getBoard(i, j);
+				visited[i*(BSIZE+2) + j] = false;
 			}
 		}
 
 		player = b.ToPlay();
-
-		q1 = new Deque<Point*>();
-		q2 = new Deque<Point*>();
 	}
 
-	__device__ __host__ ~CudaBoard() {
+	~CudaBoard() {
 		delete []board;
 		delete []visited;
-		delete q1;
-		delete q2;
 	}
 
 	void print_board();
-	__device__  Deque<Point*>* get_next_moves_device(Point*** point);
-	std::vector<Point*> get_next_moves_host(Point*** point);
-	__device__ __host__ int update_board(Point* pos, Point*** point);
-	__device__  int score();
-	__device__ __host__ COLOR ToPlay() {
+	 Deque<Point*>* get_next_moves();
+	 int update_board(Point* pos);
+	 int score();
+	 bool EndOfGame();
+	void cleanQueue(Deque<Point*>* queue);
+
+	COLOR ToPlay() {
 		return player;
 	}
 
-	__device__ __host__  int get_size() {
+	 int get_size() {
 		return BSIZE;
 	}
 
-	__device__ __host__ int getBoard(int i, int j) {
+	int getBoard(int i, int j) {
 		return board[i * (BSIZE + 2) + j];
 	}
 
-	__device__ __host__ void setBoard(int i, int j, COLOR c) {
+	void setBoard(int i, int j, COLOR c) {
 		board[i * (BSIZE + 2) + j] = c;
 	}
 
-	__device__ __host__ bool isVisited(int i, int j) {
+	bool isVisited(int i, int j) {
 		return visited[i * (BSIZE + 2) + j];
 	}
 
-	__device__ __host__ void setVisited(int i, int j, bool b) {
+	void setVisited(int i, int j, bool b) {
 		visited[i * (BSIZE + 2) + j] = b;
 	}
 
-	__device__ __host__ void clearVisited() {
+	void clearVisited() {
 		memset(visited, 0, sizeof(bool) * (BSIZE + 2) * (BSIZE + 2));
 	}
 };
