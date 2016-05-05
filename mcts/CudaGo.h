@@ -7,6 +7,8 @@
 #include "string.h"
 #include <vector>
 #include <string.h>
+#include <cuda.h>
+#include <cuda_runtime.h>
 
 enum COLOR {WHITE = 1, BLACK = 2, EMPTY = 0, OUT = 3};
 
@@ -19,9 +21,10 @@ private:
 	__device__ __host__ bool isSuicide(int i, int j, COLOR color, Point* point);
 	int BSIZE;
 	COLOR player;	// current player
+	int remain;
 
-	Deque<Point>* q1;
-	Deque<Point>* q2;
+	Deque q1;
+	Deque q2;
 public:
 	__device__ __host__ CudaBoard(int size) {
 		BSIZE = size;
@@ -43,12 +46,14 @@ public:
 
 		player = BLACK; // black play first
 
-		q1 = new Deque<Point>();
-		q2 = new Deque<Point>();
+		q1 = Deque();
+		q2 = Deque();
+
+		remain = BSIZE * BSIZE;
 	}
 
 	//copy constructor
-	__device__ __host__ CudaBoard(CudaBoard& b) {
+	__device__ __host__ CudaBoard(const CudaBoard& b) {
 		BSIZE = b.get_size();
 
 		int total = (BSIZE + 2) * (BSIZE + 2);
@@ -64,31 +69,39 @@ public:
 
 		player = b.ToPlay();
 
-		q1 = new Deque<Point>();
-		q2 = new Deque<Point>();
+		q1 = Deque();
+		q2 = Deque();
+
+		remain = b.getRemain();
+	}
+
+	__device__ __host__ void clear() {
+		memset(board, 0, sizeof(int) * (BSIZE + 2) * (BSIZE + 2));
+		memset(visited, 0, sizeof(bool) * (BSIZE + 2) * (BSIZE + 2));
+		q1.clear();
+		q2.clear();
+		remain = BSIZE * BSIZE;
 	}
 
 	__device__ __host__ ~CudaBoard() {
 		delete []board;
 		delete []visited;
-		delete q1;
-		delete q2;
 	}
 
 	void print_board();
-	__device__  Deque<Point>* get_next_moves_device(Point* point);
+	__device__  Point get_next_moves_device(Point* point, int seed);
 	std::vector<Point> get_next_moves_host(Point* point);
 	__device__ __host__ int update_board(Point pos, Point* point);
 	__device__  int score();
-	__device__ __host__ COLOR ToPlay() {
+	__device__ __host__ COLOR ToPlay() const {
 		return player;
 	}
 
-	__device__ __host__  int get_size() {
+	__device__ __host__  int get_size() const {
 		return BSIZE;
 	}
 
-	__device__ __host__ int getBoard(int i, int j) {
+	__device__ __host__ int getBoard(int i, int j) const {
 		return board[i * (BSIZE + 2) + j];
 	}
 
@@ -109,7 +122,13 @@ public:
 	}
 
 	__device__ __host__ Point getPoint(Point* point, int i, int j) {
-		return *(point + i*(BSIZE+2) + j);
+		Point p = point[i*(BSIZE+2) + j];
+		printf("get point (%d, %d)\n", p.i, p.j);
+		return p;
+	}
+
+	__device__ __host__ int getRemain() const {
+		return remain;
 	}
 };
 

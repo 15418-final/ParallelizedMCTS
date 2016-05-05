@@ -20,7 +20,7 @@ double EPSILON = 10e-6;
 __constant__ int MAX_TRIAL_H = 1;
 int MAX_TRIAL = 1;
 
-static int grid_dim = 16;
+static int grid_dim = 1;
 static int block_dim = 1;
 static int THREADS_NUM = grid_dim * block_dim;
 
@@ -28,8 +28,6 @@ bool checkAbort();
 __device__ bool checkAbortCuda(bool* abort, clock_t startTime, double timeLeft);
 __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, Point* parray, int bd_size, unsigned int seed);
 __device__ __host__ Point* createPoints(int bd_size);
-__device__ __host__ void deletePoints(Point*** point, int bd_size);
-__device__ void deleteAllMoves(Deque<Point*>* moves);
 
 void memoryUsage();
 
@@ -94,37 +92,37 @@ __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_incre
 	bool abort = false;;
 	win_increase[index] = 0;
 	int times = 0;
+	CudaBoard board(bd_size);
+
 	for(int t = 0; t < MAX_TRIAL_H; t++){
 		int step = 0;
-		CudaBoard* board = new CudaBoard(bd_size);
-		COLOR player = board->ToPlay();
+		COLOR player = board.ToPlay();
 		curandState_t state;
 		curand_init(seed + index, 0, 0, &state);
 		for (int i = 0; i < len; i++) {
-			board->update_board(point[iarray[i]*(bd_size+2)+ jarray[i]], point);
+			board.update_board(point[iarray[i]*(bd_size+2)+ jarray[i]], point);
 		}
 		while (true && step < 300) {
-			Deque<Point>* moves = board->get_next_moves_device(point);
-			if (moves->size() == 0) {
+			Point move = board.get_next_moves_device(point, curand(&state));
+			if (move.i < 0) {
 				break;
 			}
 
-			Point nxt_move = (*moves)[curand(&state) % moves->size()];
-			board->update_board(nxt_move, point);
+			board.update_board(move, point);
 			step++;
 			// if(checkAbortCuda(&abort, cudaStartTime, timeLeft))break;
 		}
 		times++;
 		// printf("time used for one game:%lf\n", 1000.0 * (std::clock() - ttime) / CLOCKS_PER_SEC);
 		// if(checkAbortCuda(&abort, cudaStartTime, timeLeft))break;
-		int score = board->score(); // Komi set to 0
+		int score = board.score(); // Komi set to 0
 		if(index == 0)
 			// printf("time cp6:%ld\n", (std::clock()) / CLOCKS_PER_SEC);
 		if ((score > 0 && player == BLACK)
 		        || (score < 0 && player == WHITE)) {
 			win_increase[index]++;
 		}
-		delete board;
+		board.clear();
 	}
 	// if(index == 0) 
 	// 	printf("num of trial done:%d\n",times);
@@ -142,17 +140,18 @@ void Mcts::back_propagation(TreeNode* node, int win_increase, int sim_increase) 
 }
 
 void Mcts::expand(TreeNode* node) {
+	Point* point = createPoints(bd_size);
 	std::cout << "expand begin" << std::endl;
-	CudaBoard* cur_board = get_board(node->get_sequence(), bd_size);
-
-	std::vector<Point> moves_vec = generateAllMoves(cur_board);
+	CudaBoard cur_board = get_board(node->get_sequence(), bd_size, point);
+	printf("get board done\n");
+	std::vector<Point> moves_vec = cur_board.get_next_moves_host(point);
+	printf("get move done\n");
 	while (moves_vec.size() > 0) {
 		Point nxt_move = moves_vec.back();
 		node->add_children(new TreeNode(node->get_sequence(), nxt_move));
 		moves_vec.pop_back();
 	}
-	delete cur_board;
-
+	
 	std::cout << "expand end with children num:" << node->get_children().size() << std::endl;
 }
 
@@ -206,18 +205,14 @@ void Mcts::run_iteration(TreeNode* node) {
 				cudaMemcpy(c_j_d, c_j, sizeof(int)*len, cudaMemcpyHostToDevice);
 				cudaMemcpy(cuda_points, points, sizeof(Point) * (bd_size + 2) * (bd_size + 2), cudaMemcpyHostToDevice);
 
-				CudaBoard* board = get_board(sequence, bd_size);
-				board->print_board();
+				CudaBoard board = get_board(sequence, bd_size, points);
+				board.print_board();
 
 				double timeLeft = maxTime - 1000.0*(std::clock() - startTime)/double(CLOCKS_PER_SEC);
-				// printf("startTime before kernel:%ld\n",startTime);
-				// printf("current clock time:%ld\n",clock());
-				// printf("CLOCKS_PER_SEC:%ld\n",CLOCKS_PER_SEC);
-				// printf("timeLeft before kernel:%lf\n", timeLeft);
-				// std::cout << "ready to run cuda code run_simulation()" << std::endl;
+
 				cudaEventRecord(start);
 
-				run_simulation <<<grid_dim, block_dim, sizeof(Point)*(bd_size + 2)*(bd_size + 2) >>> (c_i_d, c_j_d, len, cuda_win_increase.get(), cuda_points, timeLeft, bd_size, time(NULL));
+				run_simulation <<<grid_dim, block_dim>>> (c_i_d, c_j_d, len, cuda_win_increase.get(), cuda_points, timeLeft, bd_size, time(NULL));
 
 				cudaEventRecord(stop);
 				printf("return : %s\n", cudaGetErrorString(cudaDeviceSynchronize()));
@@ -250,7 +245,7 @@ void Mcts::run_iteration(TreeNode* node) {
 				children[i]->wins += *win_increase;
 				children[i]->sims += MAX_TRIAL*THREADS_NUM;
 
-				back_propagation(children[i], *win_increase, MAX_TRIAL_H);
+				back_propagation(children[i], *win_increase, MAX_TRIAL);
 				delete [] win_increase;
 				if (checkAbort())break;
 			}
@@ -282,39 +277,16 @@ bool Mcts::checkAbort() {
 	return abort;
 }
 
-std::vector<Point> Mcts::generateAllMoves(CudaBoard* cur_board) {
-	Point* point = createPoints(bd_size);
-	std::vector<Point> moves_vec = cur_board->get_next_moves_host(point);
-	int len = moves_vec.size();
 
-	/* NOTE: point has not been freed yet !!!!!*/
+CudaBoard Mcts::get_board(std::vector<Point> sequence, int bd_sizem, Point* point) {
+	CudaBoard bd(bd_size);
 
-	return moves_vec;
-}
-
-CudaBoard* Mcts::get_board(std::vector<Point> sequence, int bd_size) {
-	Point* point = createPoints(bd_size);
-	CudaBoard* bd = new CudaBoard(bd_size);
 	for (std::vector<Point>::iterator it = sequence.begin(); it != sequence.end(); it++) {
-		bd->update_board((*it), point);
+		bd.update_board((*it), point);
 	}
 	return bd;
 }
 
-
-__device__ void deleteAllMoves(Deque<Point*>* moves) {
-	Deque<Point*>::iterator it = moves->begin();
-	for (; it != moves->end(); it++) {
-		Point* p = *it;
-		delete p;
-	}
-}
-
-void Mcts::deleteAllMoves(std::vector<Point*> moves) {
-	for (std::vector<Point*>::iterator it = moves.begin(); it != moves.end(); it++) {
-		delete *it;
-	}
-}
 
 __device__ __host__ Point* createPoints(int bd_size) {
 	int len = bd_size + 2;

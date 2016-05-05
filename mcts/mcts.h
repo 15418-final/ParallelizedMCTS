@@ -98,11 +98,8 @@ public:
 	void expand(TreeNode* node);
 	void back_propagation(TreeNode* node, int win_increase, int sim_increase);
 
-	CudaBoard* get_board(std::vector<Point> sequence, int bd_size);
+	CudaBoard get_board(std::vector<Point> sequence, int bd_size, Point* point);
 	bool checkAbort();
-	std::vector<Point> generateAllMoves(CudaBoard* cur_board);
-	void deleteAllMoves(std::vector<Point*> moves);
-	// __device__ GoBoard* get_board(std::vector<SgPoint> sequence);
 };
 
 #endif
