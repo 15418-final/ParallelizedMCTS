@@ -96,7 +96,7 @@ public:
 
 	CudaBoard* get_board(std::vector<Point> sequence, int bd_size);
 	bool checkAbort();
-	std::vector<Point*> generateAllMoves(CudaBoard* cur_board);
+	std::vector<Point> generateAllMoves(CudaBoard* cur_board);
 	void deleteAllMoves(std::vector<Point*> moves);
 	// __device__ GoBoard* get_board(std::vector<SgPoint> sequence);
 };

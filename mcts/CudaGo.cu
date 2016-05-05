@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "CudaGo.h"
 
-__device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color, Point*** point) {
+__device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color, Point* point) {
 	setBoard(i, j, color);
 	bool result = false;
 	COLOR op_color = static_cast<COLOR>(color ^ 3);
@@ -13,17 +13,17 @@ __device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color, Point*** p
 		int ni = i + dir[d][0];
 		int nj = j + dir[d][1];
 		if (getBoard(ni, nj) == op_color && !isVisited(ni, nj)) {
-			q1->push_back(point[ni][nj]);
+			q1->push_back(getPoint(point, ni, nj));
 			int liberty = 0;
 			while (q1->size() != 0) {
-				Point* f = q1->pop_front();
-				setVisited(f->i, f->j, true);
+				Point f = q1->pop_front();
+				setVisited(f.i, f.j, true);
 				for (int dd = 0; dd < 4; dd++) {
-					ni = f->i + dir[dd][0];
-					nj = f->j + dir[dd][1];
+					ni = f.i + dir[dd][0];
+					nj = f.j + dir[dd][1];
 					if (isVisited(ni, nj))continue;
 					if (getBoard(ni, nj) == op_color) {
-						q1->push_back(point[ni][nj]);
+						q1->push_back(getPoint(point, ni, nj));
 					} else if (getBoard(ni, nj) == EMPTY) {
 						liberty++;
 					} 
@@ -41,22 +41,22 @@ __device__ __host__ bool CudaBoard::canEat(int i, int j, COLOR color, Point*** p
 	return result;
 }
 
-__device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color, Point*** point) {
+__device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color, Point* point) {
 	
 //	printf("isSuicide\n");
 	q1->clear();
 	clearVisited();
 	//printf("isSuicide start\n");
-	q1->push_back(point[i][j]);
+	q1->push_back(getPoint(point, i, j));
 	while (q1->size() != 0)  {
-		Point* f = q1->pop_front();
-		setVisited(f->i, f->j, true);
+		Point f = q1->pop_front();
+		setVisited(f.i, f.j, true);
 		for (int d = 0 ; d < 4; d++) {
-			int ni = f->i + dir[d][0];
-			int nj = f->j + dir[d][1];			
+			int ni = f.i + dir[d][0];
+			int nj = f.j + dir[d][1];			
 			if (isVisited(ni, nj))continue;
 			if (getBoard(ni, nj) == color) {
-				q1->push_back(point[ni][nj]);
+				q1->push_back(getPoint(point, ni, nj));
 			} else if (getBoard(ni, nj) == EMPTY) {
 				return false;
 			}
@@ -66,7 +66,7 @@ __device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color, Point*
 	return true;
 }
 
-__device__  Deque<Point*>* CudaBoard::get_next_moves_device(Point*** point) {
+__device__  Deque<Point>* CudaBoard::get_next_moves_device(Point* point) {
 	COLOR color = player;
 	q2->clear();
 	for (int i = 1; i < BSIZE + 1; i++) {
@@ -75,23 +75,23 @@ __device__  Deque<Point*>* CudaBoard::get_next_moves_device(Point*** point) {
 				if (!canEat(i, j, color, point) && isSuicide(i, j, color, point)) {
 					continue;
 				}
-				q2->push_back(point[i][j]);
+				q2->push_back(getPoint(point, i, j));
 			}
 		}
 	}
 	return q2;
 }
 
-std::vector<Point*> CudaBoard::get_next_moves_host(Point*** point) {
+std::vector<Point> CudaBoard::get_next_moves_host(Point* point) {
 	COLOR color = player;
-	std::vector<Point*> moves;
+	std::vector<Point> moves;
 	for (int i = 1; i < BSIZE + 1; i++) {
 		for (int j = 1; j < BSIZE + 1; j++) {
 			if (getBoard(i, j) == EMPTY) {
 				if (!canEat(i, j, color, point) && isSuicide(i, j, color, point)) {
 					continue;
 				}
-				moves.push_back(point[i][j]);
+				moves.push_back(getPoint(point, i, j));
 			}
 		}
 	}
@@ -99,11 +99,10 @@ std::vector<Point*> CudaBoard::get_next_moves_host(Point*** point) {
 }
 
 //return the number of stones that are killed.
-__device__  __host__ int CudaBoard::update_board(Point* pos, Point*** point) {
-int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
+__device__  __host__ int CudaBoard::update_board(Point pos, Point* point) {
 //printf("update_board\n");
 	COLOR color = player;
-	setBoard(pos->i, pos->j, color);
+	setBoard(pos.i, pos.j, color);
 	//TODO: Remove stones if necessary
 	COLOR op_color = static_cast<COLOR>(color ^ 3);
 
@@ -115,24 +114,24 @@ int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
 	int total = 0;
 	for (int d = 0 ; d < 4; d++) {
 	//	printf("direction:%d\n", d);
-		int ni = pos->i + dir[d][0];
-		int nj = pos->j + dir[d][1];
+		int ni = pos.i + dir[d][0];
+		int nj = pos.j + dir[d][1];
 		if (getBoard(ni, nj) == op_color && !isVisited(ni, nj)) {
 			int liberty = 0;
-			q1->push_back(point[ni][nj]);
+			q1->push_back(getPoint(point, ni, nj));
 			q2->push_back(q1->front());
 	//		printf("Q size:%d, temp_stone size:%d\n",Q->size(), temp_stone->size());
 			while (q1->size() != 0) {
 	//			printf("Q size:%d, temp_stone size:%d\n",Q->size(), temp_stone->size());
-				Point* f = q1->pop_front();
-				setVisited(f->i, f->j, true);
+				Point f = q1->pop_front();
+				setVisited(f.i, f.j, true);
 				for (int dd = 0; dd < 4; dd++) {
-					ni = f->i + dir[dd][0];
-					nj = f->j + dir[dd][1];
+					ni = f.i + dir[dd][0];
+					nj = f.j + dir[dd][1];
 					if (isVisited(ni, nj))continue;
 					if (getBoard(ni, nj) == op_color) {
 	//					printf("f3\n");
-						Point* tp = point[ni][nj];
+						Point tp = getPoint(point, ni, nj);
 						q1->push_back(tp);
 						q2->push_back(tp);
 	//					printf("f4\n");
@@ -144,9 +143,9 @@ int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
 	//		printf("f5\n");
 			if (liberty == 0) {
 				total += q2->size();
-				for (Deque<Point*>::iterator it = q2->begin(); it != q2->end(); it++) {
-					Point* p = *it;
-					setBoard(p->i, p->j, EMPTY);
+				for (Deque<Point>::iterator it = q2->begin(); it != q2->end(); it++) {
+					Point p = *it;
+					setBoard(p.i, p.j, EMPTY);
 				}
 			}
 			q2->clear();

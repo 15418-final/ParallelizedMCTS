@@ -13,13 +13,13 @@ private:
 	int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
 	int *board;  	// 1-d array to represent 2d board
 	bool *visited;  // same as board
-	__device__ __host__ bool canEat(int i, int j, COLOR color, Point*** point);
-	__device__ __host__ bool isSuicide(int i, int j, COLOR color, Point*** point);
+	__device__ __host__ bool canEat(int i, int j, COLOR color, Point* point);
+	__device__ __host__ bool isSuicide(int i, int j, COLOR color, Point* point);
 	int BSIZE;
 	COLOR player;	// current player
 
-	Deque<Point*>* q1;
-	Deque<Point*>* q2;
+	Deque<Point>* q1;
+	Deque<Point>* q2;
 public:
 	__device__ __host__ CudaBoard(int size) {
 		BSIZE = size;
@@ -32,7 +32,7 @@ public:
 		memset(visited, 0, sizeof(bool) * total);
 
 		//set the border
-		for (int i = 0; i < BSIZE + 2; i++) {n
+		for (int i = 0; i < BSIZE + 2; i++) {
 			board[i * (BSIZE + 2)] = 3;
 			board[i * (BSIZE + 2) + BSIZE + 1] = 3;
 			board[i] = 3;
@@ -41,8 +41,8 @@ public:
 
 		player = BLACK; // black play first
 
-		q1 = new Deque<Point*>();
-		q2 = new Deque<Point*>();
+		q1 = new Deque<Point>();
+		q2 = new Deque<Point>();
 	}
 
 	//copy constructor
@@ -62,8 +62,8 @@ public:
 
 		player = b.ToPlay();
 
-		q1 = new Deque<Point*>();
-		q2 = new Deque<Point*>();
+		q1 = new Deque<Point>();
+		q2 = new Deque<Point>();
 	}
 
 	__device__ __host__ ~CudaBoard() {
@@ -74,9 +74,9 @@ public:
 	}
 
 	void print_board();
-	__device__  Deque<Point*>* get_next_moves_device(Point*** point);
-	std::vector<Point*> get_next_moves_host(Point*** point);
-	__device__ __host__ int update_board(Point* pos, Point*** point);
+	__device__  Deque<Point>* get_next_moves_device(Point* point);
+	std::vector<Point> get_next_moves_host(Point* point);
+	__device__ __host__ int update_board(Point pos, Point* point);
 	__device__  int score();
 	__device__ __host__ COLOR ToPlay() {
 		return player;
@@ -104,6 +104,10 @@ public:
 
 	__device__ __host__ void clearVisited() {
 		memset(visited, 0, sizeof(bool) * (BSIZE + 2) * (BSIZE + 2));
+	}
+
+	__device__ __host__ Point getPoint(Point* point, int i, int j) {
+		return *(point + i*(BSIZE+2) + j);
 	}
 };
 

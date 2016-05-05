@@ -10,6 +10,7 @@
 #include "mcts.h"
 #include "CudaGo.h"
 #include "deque.h"
+#include "point.h"
 
 //Exploration parameter
 double C = 1.4;
@@ -19,8 +20,8 @@ int MAX_TRIAL_H = 50;
 
 
 __device__ bool checkAbort();
-__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, int bd_size, unsigned int seed);
-__device__ __host__ Point*** createPoints(int bd_size);
+__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, Point* parray, int bd_size, unsigned int seed);
+Point* createPoints(int bd_size);
 __device__ __host__ void deletePoints(Point*** point, int bd_size);
 __device__ void deleteAllMoves(Deque<Point*>* moves);
 
@@ -28,11 +29,15 @@ void memoryUsage();
 
 Point Mcts::run() {
 	// mcts_timer.Start();
-	int iter = 0;
-	while (iter < 1) {
+	size_t heapszie = 32 * 1024 * 1024;
+	cudaDeviceSetLimit(cudaLimitMallocHeapSize, heapszie);
+
+	clock_t start = clock();
+	while (true) {
 		run_iteration(root);
 		//	if (checkAbort()) break;
-		iter++;
+		clock_t end = clock();
+		if ( ((end - start) / (double)(CLOCKS_PER_SEC / 1000)) > 10 * 1000) break;
 	}
 	double maxv = -1.0;
 	TreeNode* best = NULL;
@@ -69,19 +74,21 @@ TreeNode* Mcts::selection(TreeNode* node) {
 }
 
 // Typical Monte Carlo Simulation
-__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, int bd_size, unsigned int seed) {
+__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, Point* parray, int bd_size, unsigned int seed) {
 	// TODO: use shared memory for point
-	Point*** point = createPoints(bd_size);
+	__shared__ Point* point;
+	
+	if (threadIdx.x == 0) {
+		memcpy(point, parray, sizeof(Point)*(bd_size+2)*(bd_size+2));
+	}
+	__syncthreads();
+
 
 	CudaBoard* board = new CudaBoard(bd_size);
 	for (int i = 0; i < len; i++) {
-		board->update_board(point[iarray[i]][jarray[i]], point);
+		board->update_board(point[iarray[i]*(bd_size+2)+ jarray[i]], point);
 	}
 
-	// for (int i = 0; i < 100; i++) {
-	// 	Deque<Point*>* moves = board->get_next_moves_device(point);
-	// 	board->update_board(moves->front(), point);
-	// }
 	int index = blockIdx.x * blockDim.x + threadIdx.x;
 
 	COLOR player = board->ToPlay();
@@ -91,13 +98,13 @@ __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_incre
 	// bool timeout = false;
 	*win_increase = 0;
 	int step = 0;
-	while (true) {
-		Deque<Point*>* moves = board->get_next_moves_device(point);
+	while (true && step < 300) {
+		Deque<Point>* moves = board->get_next_moves_device(point);
 		if (moves->size() == 0) {
 			break;
 		}
-		
-		Point* nxt_move = (*moves)[curand(&state) % moves->size()];
+
+		Point nxt_move = (*moves)[curand(&state) % moves->size()];
 		//Point* nxt_move = moves->front();
 		board->update_board(nxt_move, point);
 		step++;
@@ -109,7 +116,7 @@ __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_incre
 		(*win_increase)++;
 	}
 
-	printf("id:%d, step:%d\n", index, step);
+	//printf("id:%d, step:%d\n", index, step);
 }
 
 void Mcts::back_propagation(TreeNode* node, int win_increase, int sim_increase) {
@@ -126,16 +133,14 @@ void Mcts::expand(TreeNode* node) {
 	std::cout << "expand begin" << std::endl;
 	CudaBoard* cur_board = get_board(node->get_sequence(), bd_size);
 
-	std::vector<Point*> moves_vec = generateAllMoves(cur_board);
+	std::vector<Point> moves_vec = generateAllMoves(cur_board);
 	std::cout << "moves generated:" << moves_vec.size() << std::endl;
 	while (moves_vec.size() > 0) {
-		Point* nxt_move = moves_vec.back();
-		node->add_children(new TreeNode(node->get_sequence(), *nxt_move));
+		Point nxt_move = moves_vec.back();
+		node->add_children(new TreeNode(node->get_sequence(), nxt_move));
 		moves_vec.pop_back();
-		delete nxt_move;
 	}
 	std::cout << "children add done" << std::endl;
-	deleteAllMoves(moves_vec);
 	delete cur_board;
 
 	std::cout << "expand end with children num:" << node->get_children().size() << std::endl;
@@ -150,6 +155,8 @@ void Mcts::run_iteration(TreeNode* node) {
 	int* c_j = new int[total];
 	int* c_i_d; // device
 	int* c_j_d; // device
+
+	Point* points = createPoints(bd_size);
 
 	std::cout << "run_iteration start:" << std::endl;
 
@@ -166,16 +173,6 @@ void Mcts::run_iteration(TreeNode* node) {
 
 			std::vector<TreeNode*> children = f->get_children();
 			for (size_t i = 0; i < children.size(); i++) {
-				cudaEvent_t start, stop;
-				cudaEventCreate(&start);
-				cudaEventCreate(&stop);
-
-				int* cuda_win_increase = NULL;
-				cudaMalloc((void **)&cuda_win_increase, sizeof(int));
-				cudaMalloc(&c_i_d, sizeof(int)*total);
-				cudaMalloc(&c_j_d, sizeof(int)*total);
-				std::cout << "Cuda malloc done" << std::endl;
-
 				std::vector<Point> sequence = children[i]->get_sequence();
 				int len = sequence.size();
 
@@ -184,15 +181,31 @@ void Mcts::run_iteration(TreeNode* node) {
 					c_j[it] = sequence[it].j;
 				}
 
+				cudaEvent_t start, stop;
+				cudaEventCreate(&start);
+				cudaEventCreate(&stop);
+
+				int* cuda_win_increase = NULL;
+				Point* cuda_points = NULL;
+
+				cudaMalloc(&cuda_win_increase, sizeof(int));
+				cudaMalloc(&c_i_d, sizeof(int)*len);
+				cudaMalloc(&c_j_d, sizeof(int)*len);
+				cudaMalloc(&cuda_points, sizeof(Point) * (bd_size + 2) * (bd_size + 2));
+				std::cout << "Cuda malloc done" << std::endl;
+
+
+
 				cudaMemcpy(c_i_d, c_i, sizeof(int)*len, cudaMemcpyHostToDevice);
 				cudaMemcpy(c_j_d, c_j, sizeof(int)*len, cudaMemcpyHostToDevice);
+				cudaMemcpy(cuda_points, points, sizeof(Point) * (bd_size + 2) * (bd_size + 2), cudaMemcpyHostToDevice);
 
 				CudaBoard* board = get_board(sequence, bd_size);
 				board->print_board();
 
 				std::cout << "ready to run cuda code run_simulation()" << std::endl;
 				cudaEventRecord(start);
-				run_simulation <<<2, 2>>>(c_i_d, c_j_d, len, cuda_win_increase, bd_size, time(NULL));
+				run_simulation <<< 1, 1, sizeof(Point)*(bd_size + 2)*(bd_size + 2) >>> (c_i_d, c_j_d, len, cuda_win_increase, cuda_points, bd_size, time(NULL));
 				cudaEventRecord(stop);
 				printf("return : %s\n", cudaGetErrorString(cudaDeviceSynchronize()));
 
@@ -205,11 +218,10 @@ void Mcts::run_iteration(TreeNode* node) {
 				float milliseconds = 0;
 				cudaEventElapsedTime(&milliseconds, start, stop);
 
-
 				printf("time: %f\n", milliseconds);
 				printf("win: %d\n", *win_increase);
-
 				cudaDeviceReset();
+
 				children[i]->wins += *win_increase;
 				children[i]->sims += MAX_TRIAL_H;
 				//printf("win:%d, sims:%d\n", children[i]->wins, children[i]->sims);
@@ -222,6 +234,8 @@ void Mcts::run_iteration(TreeNode* node) {
 		if (checkAbort()) break;
 	}
 	std::cout << "run_iteration end:" << std::endl;
+	delete [] c_i;
+	delete [] c_j;
 }
 
 bool Mcts::checkAbort() {
@@ -231,10 +245,9 @@ bool Mcts::checkAbort() {
 	return abort;
 }
 
-std::vector<Point*> Mcts::generateAllMoves(CudaBoard* cur_board) {
-	Point*** point = createPoints(bd_size);
-
-	std::vector<Point*> moves_vec = cur_board->get_next_moves_host(point);
+std::vector<Point> Mcts::generateAllMoves(CudaBoard* cur_board) {
+	Point* point = createPoints(bd_size);
+	std::vector<Point> moves_vec = cur_board->get_next_moves_host(point);
 	int len = moves_vec.size();
 
 	/* NOTE: point has not been freed yet !!!!!*/
@@ -243,12 +256,11 @@ std::vector<Point*> Mcts::generateAllMoves(CudaBoard* cur_board) {
 }
 
 CudaBoard* Mcts::get_board(std::vector<Point> sequence, int bd_size) {
-	Point*** point = createPoints(bd_size);
+	Point* point = createPoints(bd_size);
 	CudaBoard* bd = new CudaBoard(bd_size);
 	for (std::vector<Point>::iterator it = sequence.begin(); it != sequence.end(); it++) {
-		bd->update_board(&(*it), point);
+		bd->update_board((*it), point);
 	}
-	deletePoints(point, bd_size);
 	return bd;
 }
 
@@ -267,26 +279,15 @@ void Mcts::deleteAllMoves(std::vector<Point*> moves) {
 	}
 }
 
-__device__ __host__ Point*** createPoints(int bd_size) {
+Point* createPoints(int bd_size) {
 	int len = bd_size + 2;
-	Point*** point = static_cast<Point***> (malloc(sizeof(Point*) * len));
+	Point* point = static_cast<Point*> (malloc(sizeof(Point) * len * len));
 	for (int i = 0; i < len; i++) {
-		point[i] = static_cast<Point**> (malloc(sizeof(Point*) * len));
 		for (int j = 0; j < len; j++) {
-			point[i][j] = new Point(i, j);
+			point[i * len + j] = Point(i, j);
 		}
 	}
 	return point;
-}
-
-__device__ __host__ void deletePoints(Point*** point, int bd_size) {
-	for (int i = 0; i < bd_size + 2; i++) {
-		for (int j = 0; j < bd_size + 2; j++) {
-			delete point[i][j];
-		}
-		free(point[i]);
-	}
-	free(point);
 }
 
 void memoryUsage() {

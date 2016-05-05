@@ -13,8 +13,8 @@ int main() {
 	Deque<Point*>* moves = board->get_next_moves();
 	int step = 0;
 	while (moves->size() > 0) {
-		//Point* p = (*moves)[rand() % moves->size()];
-		Point* p = moves->front();
+		Point* p = (*moves)[rand() % moves->size()];
+//		Point* p = moves->front();
 		board->update_board(p);
 		board->print_board();
 		moves = board->get_next_moves();

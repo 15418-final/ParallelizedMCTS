@@ -67,7 +67,7 @@ public:
 		if (_size > 0) {
 			return data[head];
 		}
-		return NULL;
+		return T();
 	}
 
 	__device__ __host__  T pop_front() {
@@ -77,7 +77,7 @@ public:
 			_size--;
 			return e;
 		}
-		return NULL;
+		return T();
 	}
 
 	__device__ __host__  T back() {
@@ -85,7 +85,7 @@ public:
 			int tail = (head + _size) % _capacity;
 			return data[tail];
 		}
-		return NULL;
+		return T();
 	}
 
 	__device__ __host__  T pop_back() {
@@ -95,7 +95,7 @@ public:
 			_size--;
 			return e;
 		}
-		return NULL;
+		return T();
 	}
 
 	__device__ __host__  int size() {
