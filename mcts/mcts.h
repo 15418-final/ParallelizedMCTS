@@ -81,7 +81,7 @@ public:
 		std::vector<Point> seq;
 		root = new TreeNode(seq);
 		startTime = clock();
-		maxTime = 20000; //milliseconds
+		maxTime = 200000; //milliseconds
 	}
 
 	~Mcts() {
