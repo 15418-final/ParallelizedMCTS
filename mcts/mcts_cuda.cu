@@ -17,23 +17,25 @@
 double C = 1.4;
 double EPSILON = 10e-6;
 
-__constant__ int MAX_TRIAL_H = 1;
-int MAX_TRIAL = 1;
+__constant__ int MAX_TRIAL_H = 5;
+int MAX_TRIAL = 5;
 
 static int grid_dim = 8;
-static int block_dim = 1;
+static int block_dim = 8;
 static int THREADS_NUM = grid_dim * block_dim;
 
+
+int wrapSequence(std::vector<TreeNode*> children, Point* &existingPath, Point* &allNxtMoves);
 bool checkAbort();
 __device__ bool checkAbortCuda(bool* abort, clock_t startTime, double timeLeft);
-__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, Point* parray, int bd_size, unsigned int seed);
+__global__ void run_simulation(Point* existingPath, int pathLen, Point* allNxtMoves, int len, int* win_increase, Point* parray, int bd_size, unsigned int seed);
 __device__ __host__ Point* createPoints(int bd_size);
 
 void memoryUsage();
 
 Point Mcts::run() {
 	// mcts_timer.Start();
-	size_t heapszie = 512 * 1024 * 1024;
+	size_t heapszie = 128 * 1024 * 1024;
 	cudaDeviceSetLimit(cudaLimitMallocHeapSize, heapszie);
 
 	while (true) {
@@ -76,7 +78,7 @@ TreeNode* Mcts::selection(TreeNode* node) {
 
 // Typical Monte Carlo Simulation
 
-__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, Point* parray, double timeLeft, int bd_size, unsigned int seed) {
+__global__ void run_simulation(Point* existingPath, int pathLen, Point* allNxtMoves, int len, int* win_increase, Point* parray, double timeLeft, int bd_size, unsigned int seed) {
 	// TODO: use shared memory for point
 	// __shared__ Point* point;
 	
@@ -84,46 +86,58 @@ __global__ void run_simulation(int* iarray, int* jarray, int len, int* win_incre
 	// 	memcpy(point, parray, sizeof(Point)*(bd_size+2)*(bd_size+2));
 	// }
 	// __syncthreads();
-	clock_t cudaStartTime = clock();
-	Point* point = createPoints(bd_size);
-	
-	int index = blockIdx.x * blockDim.x + threadIdx.x;
 
-	bool abort = false;;
-	win_increase[index] = 0;
-	int times = 0;
-	for(int t = 0; t < MAX_TRIAL_H; t++){
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+	// __shared__ Point* sequence;
+	// if(blockIdx.x < len && threadIdx.x == 0){
+	// 	printf("children size:%d\n", len);
+	// 	printf("blockIdx:%d\n", blockIdx.x);
+	// 	printf("in global: %d,%d\n", allNxtMoves[blockIdx.x].i, allNxtMoves[blockIdx.x].j);
+		
+	// 	printf("done\n");
+	// }
+	win_increase[blockIdx.x] = 0;
+	// __syncthreads();
+
+	clock_t cudaStartTime = clock();
+	CudaBoard* initBoard = new CudaBoard(bd_size);
+	COLOR player = initBoard->ToPlay();
+	curandState_t state;
+	curand_init(seed + index, 0, 0, &state);
+	for (int i = 0; i < pathLen; i++) {
+		initBoard->update_board(parray[existingPath[i].i*(bd_size+2) + existingPath[i].j], parray);
+	}
+	for(int i = 0; i < MAX_TRIAL_H; i++){
+		CudaBoard board = *initBoard;
+		bool abort = false;
+		int times = 0;
 		int step = 0;
-		CudaBoard* board = new CudaBoard(bd_size);
-		COLOR player = board->ToPlay();
-		curandState_t state;
-		curand_init(seed + index, 0, 0, &state);
-		for (int i = 0; i < len; i++) {
-			board->update_board(point[iarray[i]*(bd_size+2)+ jarray[i]], point);
-		}
+		
+		board.update_board(parray[allNxtMoves[blockIdx.x].i * (bd_size+2) + allNxtMoves[blockIdx.x].j], parray);
+	
 		while (true && step < 300) {
-			Deque<Point>* moves = board->get_next_moves_device(point);
+			Deque<Point>* moves = board.get_next_moves_device(parray);
 			if (moves->size() == 0) {
 				break;
 			}
-
 			Point nxt_move = (*moves)[curand(&state) % moves->size()];
-			board->update_board(nxt_move, point);
+			board.update_board(nxt_move, parray);
 			step++;
 			// if(checkAbortCuda(&abort, cudaStartTime, timeLeft))break;
 		}
 		times++;
-		// printf("time used for one game:%lf\n", 1000.0 * (std::clock() - ttime) / CLOCKS_PER_SEC);
-		// if(checkAbortCuda(&abort, cudaStartTime, timeLeft))break;
-		int score = board->score(); // Komi set to 0
-		if(index == 0)
-			// printf("time cp6:%ld\n", (std::clock()) / CLOCKS_PER_SEC);
+			// printf("time used for one game:%lf\n", 1000.0 * (std::clock() - ttime) / CLOCKS_PER_SEC);
+			// if(checkAbortCuda(&abort, cudaStartTime, timeLeft))break;
+		int score = board.score(); // Komi set to 0
+
 		if ((score > 0 && player == BLACK)
 		        || (score < 0 && player == WHITE)) {
-			win_increase[index]++;
+			atomicInc((unsigned int*)&(win_increase[blockIdx.x]), 10000000);
 		}
-		delete board;
+		printf("win in block %d: %d\n", blockIdx.x, win_increase[blockIdx.x]);
+	
 	}
+	delete initBoard;
 	// if(index == 0) 
 	// 	printf("num of trial done:%d\n",times);
 	// if(index == 0) 	printf("time cp7:%ld\n", (std::clock()) / CLOCKS_PER_SEC);
@@ -159,10 +173,6 @@ void Mcts::run_iteration(TreeNode* node) {
 	S.push(node);
 
 	int total = bd_size * bd_size;
-	int* c_i = new int[total];
-	int* c_j = new int[total];
-	int* c_i_d; // device
-	int* c_j_d; // device
 
 	Point* points = createPoints(bd_size);
 
@@ -177,84 +187,67 @@ void Mcts::run_iteration(TreeNode* node) {
 			// expand current node, run expansion and simulation
 			f->set_expandable(false);
 			expand(f);
+			int len = f->get_children().size();
+			cudaEvent_t start, stop;
+			cudaEventCreate(&start);
+			cudaEventCreate(&stop);
+			Point* cuda_points = NULL;
+			thrust::device_ptr<int> cuda_win_increase = thrust::device_malloc<int>(grid_dim);
 
-			std::vector<TreeNode*> children = f->get_children();
-			for (size_t i = 0; i < children.size(); i++) {
-				std::vector<Point> sequence = children[i]->get_sequence();
-				int len = sequence.size();
+			cudaMalloc(&cuda_points, sizeof(Point) * (bd_size + 2) * (bd_size + 2));
+			// std::cout << "Cuda malloc done" << std::endl;
 
-				for (int it = 0; it < len; it++) {
-					c_i[it] = sequence[it].i;
-					c_j[it] = sequence[it].j;
-				}
-
-				cudaEvent_t start, stop;
-				cudaEventCreate(&start);
-				cudaEventCreate(&stop);
-
-				Point* cuda_points = NULL;
-				thrust::device_ptr<int> cuda_win_increase = thrust::device_malloc<int>(THREADS_NUM);
-
-				cudaMalloc(&c_i_d, sizeof(int)*len);
-				cudaMalloc(&c_j_d, sizeof(int)*len);
-				cudaMalloc(&cuda_points, sizeof(Point) * (bd_size + 2) * (bd_size + 2));
-				std::cout << "Cuda malloc done" << std::endl;
-
-				cudaMemcpy(c_i_d, c_i, sizeof(int)*len, cudaMemcpyHostToDevice);
-				cudaMemcpy(c_j_d, c_j, sizeof(int)*len, cudaMemcpyHostToDevice);
-				cudaMemcpy(cuda_points, points, sizeof(Point) * (bd_size + 2) * (bd_size + 2), cudaMemcpyHostToDevice);
-
-				CudaBoard* board = get_board(sequence, bd_size);
-				board->print_board();
-
-				double timeLeft = maxTime - 1000.0*(std::clock() - startTime)/double(CLOCKS_PER_SEC);
+			cudaMemcpy(cuda_points, points, sizeof(Point) * (bd_size + 2) * (bd_size + 2), cudaMemcpyHostToDevice);
+			
+			double timeLeft = maxTime - 1000.0*(std::clock() - startTime)/double(CLOCKS_PER_SEC);
 				// printf("startTime before kernel:%ld\n",startTime);
 				// printf("current clock time:%ld\n",clock());
 				// printf("CLOCKS_PER_SEC:%ld\n",CLOCKS_PER_SEC);
 				// printf("timeLeft before kernel:%lf\n", timeLeft);
 				// std::cout << "ready to run cuda code run_simulation()" << std::endl;
-				cudaEventRecord(start);
+			cudaEventRecord(start);
 
-				run_simulation <<<grid_dim, block_dim, sizeof(Point)*(bd_size + 2)*(bd_size + 2) >>> (c_i_d, c_j_d, len, cuda_win_increase.get(), cuda_points, timeLeft, bd_size, time(NULL));
+			Point* existingPath = NULL;
+			Point* allNxtMoves = NULL;
+			int pathLen = wrapSequence(f->get_children(), existingPath, allNxtMoves);
 
-				cudaEventRecord(stop);
-				printf("return : %s\n", cudaGetErrorString(cudaDeviceSynchronize()));
+			run_simulation <<< grid_dim, block_dim >>> (existingPath, pathLen, allNxtMoves, len, cuda_win_increase.get(), cuda_points, timeLeft, bd_size, time(NULL));
 
-				cudaDeviceSynchronize();
-				memoryUsage();
+			cudaEventRecord(stop);
+			printf("return : %s\n", cudaGetErrorString(cudaDeviceSynchronize()));
 
-    			thrust::device_ptr<int> d_output = thrust::device_malloc<int>(THREADS_NUM);
-    
-    			thrust::exclusive_scan(cuda_win_increase, cuda_win_increase + THREADS_NUM, d_output);
+			cudaDeviceSynchronize();
+			memoryUsage();
 
-    			cudaDeviceSynchronize();
     			
-				int* win_increase = new int[1];
-    			cudaMemcpy(win_increase, d_output.get()+THREADS_NUM-1, sizeof(int), cudaMemcpyDeviceToHost);
-			    thrust::device_free(d_output);
+			int* win_increase = new int[grid_dim];
+    		cudaMemcpy(win_increase, cuda_win_increase.get(), sizeof(int)*grid_dim, cudaMemcpyDeviceToHost);
 
-				cudaEventSynchronize(stop);
-				float milliseconds = 0;
-				cudaEventElapsedTime(&milliseconds, start, stop);
 
-				printf("time measured in CPU: %lf\n", milliseconds);
-				printf("win: %d\n", win_increase[0]);
+			cudaEventSynchronize(stop);
+			float milliseconds = 0;
+			cudaEventElapsedTime(&milliseconds, start, stop);
 
-				cudaDeviceReset();
+			printf("time measured in CPU: %lf\n", milliseconds);
+			// for(int i = 0; i < grid_dim; i++){
+			// 	printf("win[i]: %d\n", win_increase[i]);
+			// }
+			
 
-				children[i]->wins += win_increase[0];
-				children[i]->sims += MAX_TRIAL*THREADS_NUM;
-
-				back_propagation(children[i], children[i]->wins, children[i]->sims);
-				delete [] win_increase;
-				if (checkAbort())break;
+			cudaDeviceReset();
+			for(int i = 0; i < grid_dim; i++){
+				f->get_children()[i]->wins += win_increase[i];
+				f->get_children()[i]->sims += MAX_TRIAL*grid_dim;
+				back_propagation(f->get_children()[i], f->get_children()[i]->wins, f->get_children()[i]->sims);
 			}
+
+			
+			delete [] win_increase;
+			if (checkAbort())break;
 		}
 		if (checkAbort()) break;
 	}
 	std::cout << "run_iteration end:" << std::endl;
-	delete [] c_i;
-	delete [] c_j;
 }
 
 __device__ bool checkAbortCuda(bool* abort, clock_t cudaStartTime, double timeLeft){
@@ -313,6 +306,36 @@ __device__ __host__ Point* createPoints(int bd_size) {
 		}
 	}
 	return point;
+}
+
+Deque<Point> vec2deq(std::vector<Point> vp){
+	Deque<Point> rst;
+	for(int i = 0; i < vp.size(); i++){
+		rst.push_back(vp[i]);
+	}
+	return rst;
+}
+
+int wrapSequence(std::vector<TreeNode*> children, Point* &existingPath, Point* &allNxtMoves){
+	cudaMalloc((void**)&existingPath, children[0]->get_sequence().size()*sizeof(Point));
+	cudaMalloc((void**)&allNxtMoves, sizeof(Point)*children.size());
+
+	int commonPathLen = children[0]->get_sequence().size()-1;
+	Point* temp = (Point*)malloc(sizeof(Point)*commonPathLen);
+	for(int i = 0; i < commonPathLen; i++){
+		memcpy(temp+i, &(children[0]->get_sequence()[i]), sizeof(Point));
+	}
+	cudaMemcpy(existingPath, temp, sizeof(Point)*commonPathLen, cudaMemcpyHostToDevice);
+
+	temp = (Point*)realloc(temp, sizeof(Point) * children.size());
+
+
+	for(int i = 0; i < children.size(); i++){
+		memcpy(temp+i, &(children[i]->get_sequence().back()), sizeof(Point));
+	}
+	cudaMemcpy(allNxtMoves, temp, sizeof(Point)*children.size(), cudaMemcpyHostToDevice);
+	delete temp;
+	return commonPathLen;
 }
 
 void memoryUsage() {
