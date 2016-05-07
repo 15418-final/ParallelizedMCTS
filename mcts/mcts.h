@@ -69,19 +69,16 @@ private:
 	TreeNode* root;
 	clock_t startTime;
 	double maxTime;
-	bool abort;
-
-	// board related 
+	bool abort; 
 	int bd_size;
 
-	//std::unordered_map<Board*, TreeNode*, BoardHasher> dict;
 public:
-	Mcts(int size) {
+	Mcts(int size, double time) {
 		bd_size = size;
 		std::vector<Point> seq;
 		root = new TreeNode(seq);
 		startTime = clock();
-		maxTime = 200000; //milliseconds
+		maxTime = time;
 	}
 
 	~Mcts() {
@@ -91,9 +88,7 @@ public:
 	//Run MCTS and get 
 	Point run();
 	
-	//Doing selection using UCT(Upper Confidence bound applied to Trees)
 	void run_iteration(TreeNode* node);
-
 	TreeNode *selection(TreeNode* node);
 	void expand(TreeNode* node);
 	void back_propagation(TreeNode* node, int win_increase, int sim_increase);
@@ -102,7 +97,6 @@ public:
 	bool checkAbort();
 	std::vector<Point> generateAllMoves(CudaBoard* cur_board);
 	void deleteAllMoves(std::vector<Point*> moves);
-	// __device__ GoBoard* get_board(std::vector<SgPoint> sequence);
 };
 
 #endif

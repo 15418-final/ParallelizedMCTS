@@ -3,9 +3,10 @@
 # Merge stdout and stderr into one output file
 #PBS -j oe
 
-#PBS -q titanx 
+#PBS -q tesla 
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/
+export PATH=$PATH:/usr/local/cuda/bin
 # Move to my $SCRATCH directory.
 cd $SCRATCH
 
@@ -17,5 +18,5 @@ execdir=/home/yepengy/ParallelizedMCTS/mcts
 cp $execdir/$exe $exe
 
 # Run my executable
-time ./$exe 
+time  ./$exe 
 

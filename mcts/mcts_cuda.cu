@@ -7,6 +7,7 @@
 #include <thrust/device_ptr.h>
 #include <thrust/device_malloc.h>
 #include <thrust/device_free.h>
+#include <thrust/extrema.h>
 
 #include "mcts.h"
 #include "CudaGo.h"
@@ -18,15 +19,19 @@ double C = 1.4;
 double EPSILON = 10e-6;
 
 __constant__ int MAX_TRIAL_H = 1;
-int MAX_TRIAL = 1;
+__constant__ int MAX_STEP = 300; // avoid repeat game
+__constant__ double CLOCK_RATE = 745000.0; // For tesla K40
 
-static int grid_dim = 512;
-static int block_dim = 16;
+int MAX_TRIAL = 1;
+double MAX_GAME_TIME_9_9 = 1500.0;
+
+static int grid_dim = 1024;
+static int block_dim = 1;
 static int THREADS_NUM = grid_dim * block_dim;
 
 bool checkAbort();
-__device__ bool checkAbortCuda(bool* abort, clock_t startTime, double timeLeft);
-__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, Point* parray, int bd_size, unsigned int seed);
+__device__ bool checkAbortCuda(long long int elapse, double timeLeft);
+__global__ void run_simulation(int* iarray, int* jarray, int len, double* win_increase, int* step, double* sim, double* cuda_time, int bd_size, unsigned int seed, double time);
 __device__ __host__ Point* createPoints(int bd_size);
 
 void memoryUsage();
@@ -76,47 +81,73 @@ TreeNode* Mcts::selection(TreeNode* node) {
 
 // Typical Monte Carlo Simulation
 
-__global__ void run_simulation(int* iarray, int* jarray, int len, int* win_increase, Point* parray, double timeLeft, int bd_size, unsigned int seed) {
-        clock_t cudaStartTime = clock();
-	
+__global__ void run_simulation(int* iarray, int* jarray, int len, double* win_increase, int* step, double* sim, double* cuda_time, int bd_size, unsigned int seed, double time) {
 	int index = blockIdx.x * blockDim.x + threadIdx.x;
-	bool abort = false;;
-	win_increase[index] = 0;
-	int times = 0;
-	int step = 0;
-	for (int t = 0; t < MAX_TRIAL_H; t++) {
-		CudaBoard* board = new CudaBoard(bd_size);
-		COLOR player = board->ToPlay();
-		curandState_t state;
-		curand_init(seed + index, 0, 0, &state);
+	win_increase[index] = 0.0;
+	step[index] = 0;
+	cuda_time[index] = 0;
+	sim[index] = 0;
+	double timeLeft = time;
+
+	long long start;
+	long long end;
+	long long start_game;
+	long long end_game;
+	curandState_t state;
+	CudaBoard board(bd_size);
+
+	start_game = clock64();
+	while (true) {
+		curand_init(seed + index + step[index], 0, 0, &state);
+		start = clock64();
 		for (int i = 0; i < len; i++) {
-			board->update_board(Point(iarray[i], jarray[i]));
+			board.update_board(Point(iarray[i], jarray[i]));
 		}
-		while (true && step < 300) {
-			Point move = board->get_next_moves_device(curand_uniform(&state));
+		COLOR player = board.ToPlay();
+
+		end = clock64();
+		timeLeft -= (end - start) / CLOCK_RATE;
+		if (timeLeft <= 0.0) break;
+
+		int cur_step = 0;
+		while (cur_step < MAX_STEP) {
+			start = clock64();
+			Point move = board.get_next_moves_device(curand_uniform(&state));
 			if (move.i < 0) {
 				break;
 			}
-
-			board->update_board(move);
-			step++;
-			// if(checkAbortCuda(&abort, cudaStartTime, timeLeft))break;
+			board.update_board(move);
+			step[index]++;
+			cur_step++;
+			end = clock64();
+			timeLeft -= (end - start) / CLOCK_RATE;
+			if (timeLeft <= 0) break;
 		}
-		times++;
-		// printf("time used for one game:%lf\n", 1000.0 * (std::clock() - ttime) / CLOCKS_PER_SEC);
-		// if(checkAbortCuda(&abort, cudaStartTime, timeLeft))break;
-		int score = board->score(); // Komi set to 0
+
+
+		int score = board.score(); 
 		if ((score > 0 && player == BLACK)
-			       || (score < 0 && player == WHITE)) {
-         		win_increase[index]++;
+		        || (score < 0 && player == WHITE)) {
+			if (timeLeft <= 0) {
+			  win_increase[index] += cur_step / MAX_STEP;
+			} else {
+			  win_increase[index] += 1.0;
+			}
+			
 		}
-		delete board;
+		if (timeLeft <= 0) {
+			sim[index] += cur_step / MAX_STEP;
+		} else {
+			sim[index] += 1.0;
+		}
 
-	 if(index % 100 == 0) 
-		printf("id:%d, step:%d, win:%d, score:%d, player:%d\n", index, step, win_increase[index], score, player);
+		if (timeLeft <= 0) break;
+		board.clear();
 	}
-	// 	printf("num of trial done:%d\n",times);
-	// if(index == 0) 	printf("time cp7:%ld\n", (std::clock()) / CLOCKS_PER_SEC);
+	end_game = clock64();
+	cuda_time[index] = (end_game - start_game) / CLOCK_RATE;
+if (index % 100 == 0)
+	printf("index:%d, win:%f, step:%d, sim:%f, time:%f\n", index, win_increase[index], step[index], sim[index], cuda_time[index]);
 }
 
 void Mcts::back_propagation(TreeNode* node, int win_increase, int sim_increase) {
@@ -151,10 +182,13 @@ void Mcts::run_iteration(TreeNode* node) {
 	int total = bd_size * bd_size;
 	int* c_i = new int[total];
 	int* c_j = new int[total];
+	double* win_increase = new double[1];
+	double* total_sim = new double[1];
+	int* total_step = new int[1];
 	int* c_i_d; // device
 	int* c_j_d; // device
-
-	Point* points = createPoints(bd_size);
+	
+	double* cpu_time = new double[THREADS_NUM];
 
 	std::cout << "run_iteration start:" << std::endl;
 
@@ -182,54 +216,58 @@ void Mcts::run_iteration(TreeNode* node) {
 				cudaEventCreate(&start);
 				cudaEventCreate(&stop);
 
-				Point* cuda_points = NULL;
-				thrust::device_ptr<int> cuda_win_increase = thrust::device_malloc<int>(THREADS_NUM);
-
 				cudaMalloc(&c_i_d, sizeof(int)*len);
 				cudaMalloc(&c_j_d, sizeof(int)*len);
-				cudaMalloc(&cuda_points, sizeof(Point) * (bd_size + 2) * (bd_size + 2));
-				std::cout << "Cuda malloc done" << std::endl;
+				thrust::device_ptr<double> cuda_win_increase = thrust::device_malloc<double>(THREADS_NUM);
+				thrust::device_ptr<double> cuda_sim = thrust::device_malloc<double>(THREADS_NUM);
+				thrust::device_ptr<int> cuda_step = thrust::device_malloc<int>(THREADS_NUM);
+				thrust::device_ptr<double> cuda_time = thrust::device_malloc<double>(THREADS_NUM);
 
 				cudaMemcpy(c_i_d, c_i, sizeof(int)*len, cudaMemcpyHostToDevice);
 				cudaMemcpy(c_j_d, c_j, sizeof(int)*len, cudaMemcpyHostToDevice);
-				cudaMemcpy(cuda_points, points, sizeof(Point) * (bd_size + 2) * (bd_size + 2), cudaMemcpyHostToDevice);
 
 				CudaBoard* board = get_board(sequence, bd_size);
 				board->print_board();
 
 				double timeLeft = maxTime - 1000.0 * (std::clock() - startTime) / double(CLOCKS_PER_SEC);
-				// printf("startTime before kernel:%ld\n",startTime);
-				// printf("current clock time:%ld\n",clock());
-				// printf("CLOCKS_PER_SEC:%ld\n",CLOCKS_PER_SEC);
-				// printf("timeLeft before kernel:%lf\n", timeLeft);
-				// std::cout << "ready to run cuda code run_simulation()" << std::endl;
+
 				cudaEventRecord(start);
-
-				run_simulation <<< grid_dim, block_dim >>> (c_i_d, c_j_d, len, cuda_win_increase.get(), cuda_points, timeLeft, bd_size, time(NULL));
-
+				run_simulation <<< grid_dim, block_dim >>> (c_i_d, c_j_d, len, cuda_win_increase.get(), cuda_step.get(), cuda_sim.get(), 
+														    cuda_time.get(), bd_size, time(NULL), std::min(timeLeft,MAX_GAME_TIME_9_9));
 				cudaEventRecord(stop);
+
+				cudaEventSynchronize(stop);
 				printf("return : %s\n", cudaGetErrorString(cudaDeviceSynchronize()));
 
-				cudaDeviceSynchronize();
 				memoryUsage();
 				printf("THREADS_NUM:%d\n", THREADS_NUM);
 
-				thrust::device_ptr<int> d_output = thrust::device_malloc<int>(THREADS_NUM);
-
-				thrust::exclusive_scan(cuda_win_increase, cuda_win_increase + THREADS_NUM, d_output);
-
+				thrust::inclusive_scan(cuda_win_increase, cuda_win_increase + THREADS_NUM, cuda_win_increase);
+				thrust::inclusive_scan(cuda_step, cuda_step + THREADS_NUM, cuda_step);
+				thrust::inclusive_scan(cuda_sim, cuda_sim + THREADS_NUM, cuda_sim);
 				cudaDeviceSynchronize();
 
-				int* win_increase = new int[1];
-				cudaMemcpy(win_increase, d_output.get() + THREADS_NUM - 1, sizeof(int), cudaMemcpyDeviceToHost);
-				thrust::device_free(d_output);
 
-				cudaEventSynchronize(stop);
+				cudaMemcpy(win_increase, cuda_win_increase.get() + THREADS_NUM - 1, sizeof(double), cudaMemcpyDeviceToHost);
+				cudaMemcpy(total_step, cuda_step.get() + THREADS_NUM - 1, sizeof(int), cudaMemcpyDeviceToHost);
+				cudaMemcpy(cpu_time, cuda_time.get(), sizeof(double) * THREADS_NUM, cudaMemcpyDeviceToHost);
+				cudaMemcpy(total_sim, cuda_sim.get() + THREADS_NUM - 1, sizeof(double), cudaMemcpyDeviceToHost);
+
 				float milliseconds = 0;
 				cudaEventElapsedTime(&milliseconds, start, stop);
 
+				double max_time = -1.0;
+				double total_time = 0.0;
+				for (int k = 0; k < THREADS_NUM; k++) {
+					if (max_time < cpu_time[k]) max_time = cpu_time[k];
+					total_time += cpu_time[k];
+				}
+
 				printf("time measured in CPU: %lf\n", milliseconds);
-				printf("win: %d\n", win_increase[0]);
+				printf("win: %f\n", win_increase[0]);
+				printf("step: %d\n", total_step[0]);
+				printf("sim: %f\n", total_sim[0]);
+				printf("max time:%f, average:%f\n", max_time, total_time / THREADS_NUM);
 
 				cudaDeviceReset();
 
@@ -237,7 +275,6 @@ void Mcts::run_iteration(TreeNode* node) {
 				children[i]->sims += MAX_TRIAL * THREADS_NUM;
 
 				back_propagation(children[i], children[i]->wins, children[i]->sims);
-				delete [] win_increase;
 				if (checkAbort())break;
 			}
 		}
@@ -246,18 +283,6 @@ void Mcts::run_iteration(TreeNode* node) {
 	std::cout << "run_iteration end:" << std::endl;
 	delete [] c_i;
 	delete [] c_j;
-}
-
-__device__ bool checkAbortCuda(bool* abort, clock_t cudaStartTime, double timeLeft) {
-	if (!(*abort)) {
-		*abort = 1000.0 * (std::clock() - cudaStartTime) / CLOCKS_PER_SEC > timeLeft;
-	}
-
-	// if(*abort) printf("is aborted in device, timeLeft:%lf, startTime:%d\n",timeLeft, cudaStartTime);
-	// else{
-	// 	printf("not aborted yet. lhs:%lf\n", 1000.0 * (std::clock() - cudaStartTime) / CLOCKS_PER_SEC);
-	// }
-	return *abort;
 }
 
 bool Mcts::checkAbort() {

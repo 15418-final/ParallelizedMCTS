@@ -73,6 +73,24 @@ public:
 		remain = b.getRemain();
 	}
 
+	__device__ void clear() {
+		int total = (BSIZE + 2) * (BSIZE + 2);
+		
+		memset(board, 0, sizeof(int) * total);
+		memset(visited, 0, sizeof(bool) * total);
+		remain = BSIZE * BSIZE;
+
+		//set the border
+		for (int i = 0; i < BSIZE + 2; i++) {
+			board[i * (BSIZE + 2)] = 3;
+			board[i * (BSIZE + 2) + BSIZE + 1] = 3;
+			board[i] = 3;
+			board[(BSIZE + 2) * (BSIZE + 1) + i] = 3;
+		}
+
+		player = BLACK; // black play first
+	}
+
 	__device__ __host__ ~CudaBoard() {
 		delete []board;
 		delete []visited;
@@ -81,10 +99,15 @@ public:
 	}
 
 	void print_board();
+
 	__device__  Point get_next_moves_device(float seed);
+
 	std::vector<Point> get_next_moves_host();
+
 	__device__ __host__ int update_board(Point pos);
+
 	__device__  int score();
+	
 	__device__ __host__ COLOR ToPlay() {
 		return player;
 	}
