@@ -14,6 +14,8 @@
 #include "point.h"
 #include "CudaGo.h"
 
+enum MODE {CPU= 1,  GPU = 2};
+
 typedef struct _threadarg
 {
 	Point* seq;
@@ -82,14 +84,22 @@ private:
 	double maxTime;
 	bool abort; 
 	int bd_size;
+	MODE mode;
 
 public:
-	Mcts(int size, double time) {
+	Mcts(MODE m, int size, double time) {
 		bd_size = size;
 		std::vector<Point> seq;
 		root = new TreeNode(seq);
-		clock_gettime(CLOCK_REALTIME, &start);
 		maxTime = time;
+		mode = m;
+	}
+
+	Mcts(MODE m, int size, double time, std::vector<Point> seq) {
+		bd_size = size;
+		root = new TreeNode(seq);
+		maxTime = time;
+		mode = m;
 	}
 
 	~Mcts() {
@@ -99,14 +109,15 @@ public:
 	//Run MCTS and get 
 	Point run();
 	
-	void run_iteration(TreeNode* node);
+	void run_iteration_gpu(TreeNode* node);
+	void run_iteration_cpu(TreeNode* node);
 	TreeNode *selection(TreeNode* node);
 	void expand(TreeNode* node);
 	void back_propagation(TreeNode* node, int win_increase, int sim_increase);
 
 	CudaBoard* get_board(std::vector<Point> sequence, int bd_size);
 	bool checkAbort();
-	void update(TreeNode* node, double* sim, double* win, int incre, int thread_num);
+	void update(TreeNode* node, double* win, double* sim,  int incre, int thread_num);
 };
 
 #endif
