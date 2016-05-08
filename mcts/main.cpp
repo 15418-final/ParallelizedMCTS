@@ -4,6 +4,6 @@
 #include "point.h"
 
 int main(){
-	Mcts* m = new Mcts(9, 200000);
+	Mcts* m = new Mcts(9, 6*20*1000);
 	m->run();
 }

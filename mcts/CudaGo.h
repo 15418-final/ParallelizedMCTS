@@ -51,7 +51,7 @@ public:
 	}
 
 	//copy constructor
-	__device__ __host__ CudaBoard(CudaBoard& b) {
+	__device__ __host__ CudaBoard(const CudaBoard& b) {
 		BSIZE = b.get_size();
 
 		int total = (BSIZE + 2) * (BSIZE + 2);
@@ -98,25 +98,25 @@ public:
 		delete q2;
 	}
 
-	void print_board();
+	__device__ __host__ void print_board();
 
-	__device__  Point get_next_moves_device(float seed);
+	__device__  Point get_next_moves_device(double seed);
 
 	std::vector<Point> get_next_moves_host();
 
 	__device__ __host__ int update_board(Point pos);
 
-	__device__  int score();
+	__device__ __host__  int score();
 	
-	__device__ __host__ COLOR ToPlay() {
+	__device__ __host__ COLOR ToPlay() const {
 		return player;
 	}
 
-	__device__ __host__  int get_size() {
+	__device__ __host__  int get_size() const {
 		return BSIZE;
 	}
 
-	__device__ __host__ int getBoard(int i, int j) {
+	__device__ __host__ int getBoard(int i, int j) const {
 		return board[i * (BSIZE + 2) + j];
 	}
 
@@ -136,7 +136,7 @@ public:
 		memset(visited, 0, sizeof(bool) * (BSIZE + 2) * (BSIZE + 2));
 	}
 
-	__device__ __host__ int getRemain() {
+	__device__ __host__ int getRemain() const {
 		return remain;
 	}
 };

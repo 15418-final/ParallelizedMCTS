@@ -8,11 +8,22 @@
 #include <cmath>
 #include <algorithm>
 #include <stdlib.h>
-#include <ctime>
+#include <time.h>
+#include <pthread.h>
 
 #include "point.h"
 #include "CudaGo.h"
 
+typedef struct _threadarg
+{
+	Point* seq;
+	int len;
+	int bd_size;
+	double win;
+	double sim;
+	double time;
+	int tid;
+} thread_arg;
 
 class TreeNode {
 private:
@@ -67,7 +78,7 @@ public:
 class Mcts {
 private:
 	TreeNode* root;
-	clock_t startTime;
+	struct timespec start, end;
 	double maxTime;
 	bool abort; 
 	int bd_size;
@@ -77,7 +88,7 @@ public:
 		bd_size = size;
 		std::vector<Point> seq;
 		root = new TreeNode(seq);
-		startTime = clock();
+		clock_gettime(CLOCK_REALTIME, &start);
 		maxTime = time;
 	}
 

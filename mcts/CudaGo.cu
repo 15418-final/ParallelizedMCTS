@@ -65,7 +65,7 @@ __device__  __host__ bool CudaBoard::isSuicide(int i, int j, COLOR color) {
 	return true;
 }
 
-__device__  Point CudaBoard::get_next_moves_device(float seed) {
+__device__  Point CudaBoard::get_next_moves_device(double seed) {
 	COLOR color = player;
 	int step = seed * remain;
 	int current = 0;
@@ -155,7 +155,7 @@ __device__  __host__ int CudaBoard::update_board(Point pos) {
 	return total;
 }
 
-void CudaBoard::print_board() {
+__device__ __host__ void CudaBoard::print_board() {
 	for (int i = 0; i < BSIZE + 1; i++) {
 		printf("=");
 	}
@@ -163,14 +163,14 @@ void CudaBoard::print_board() {
 	for (int i = 1; i < BSIZE + 1 ; i++) {
 		for (int j = 1; j < BSIZE + 1; j++) {
 			if (getBoard(i, j) == WHITE) {
-				std::cout << "W";
+				printf("W");
 			} else if (getBoard(i, j) == BLACK) {
-				std::cout << "B";
+				printf("B");
 			} else {
-				std::cout << ".";
+				printf(".");
 			}
 		}
-		std::cout << std::endl;
+		printf("\n");
 	}
 	for (int i = 0; i < BSIZE + 1; i++) {
 		printf("=");
@@ -178,7 +178,7 @@ void CudaBoard::print_board() {
 	printf("\n");
 }
 
-__device__  int CudaBoard::score() {
+__device__  __host__ int CudaBoard::score() {
 	int black = 0;
 	int white = 0;
 
