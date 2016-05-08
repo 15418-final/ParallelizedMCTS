@@ -32,17 +32,17 @@ private:
 	bool expandable;     // unexpaned
 
 public:
-	int wins; // Number of wins so far
-	int sims; // Number of simulations so far
+	double wins; // Number of wins so far
+	double sims; // Number of simulations so far
 	TreeNode* parent;
 	TreeNode(std::vector<Point> parent_sequence, Point move)
-			:  expandable(true), wins(0), sims(0), parent(NULL) {
+			:  expandable(true), wins(0.0), sims(0.0), parent(NULL) {
 		sequence = parent_sequence;
 		sequence.push_back(move);		
 	}
 
 	TreeNode(std::vector<Point> parent_sequence)
-			:  expandable(true), wins(0), sims(0), parent(NULL) {
+			:  expandable(true), wins(0.0), sims(0.0), parent(NULL) {
 		sequence = parent_sequence;
 	}
 
@@ -106,8 +106,7 @@ public:
 
 	CudaBoard* get_board(std::vector<Point> sequence, int bd_size);
 	bool checkAbort();
-	std::vector<Point> generateAllMoves(CudaBoard* cur_board);
-	void deleteAllMoves(std::vector<Point*> moves);
+	void update(TreeNode* node, double* sim, double* win, int incre, int thread_num);
 };
 
 #endif
