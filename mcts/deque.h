@@ -3,7 +3,7 @@
 
 #define BDSIZE 19
 #include <stdio.h>
-#include <cstdlib>
+#include <stdlib.h>
 #include <string.h>
 
 template <class T>
