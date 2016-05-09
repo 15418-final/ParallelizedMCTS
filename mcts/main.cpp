@@ -11,17 +11,21 @@ int main() {
 	int step = 0;
 	std::vector<Point> seq;
 
-	while (step < 80) {
-		cpu = new Mcts(CPU, 9, 15 * 1000, seq);
-		p = cpu->run();
-		step++;
-		printf("cpu : (%d,%d)\n", p.i, p.j);
-		seq.push_back(p);
-		gpu = new Mcts(GPU, 9, 15 * 1000, seq);
+	while (step < 120) {
+		gpu = new Mcts(GPU, 9, 60 * 1000, seq);
 		p = gpu->run();
 		step++;
-		seq.push_back(p);
 		printf("gpu : (%d,%d)\n", p.i, p.j);
+		seq.push_back(p);
+		board.update_board(p);
+		board.print_board();
+		cpu = new Mcts(CPU, 9, 60 * 1000, seq);
+		p = cpu->run();
+		step++;
+		seq.push_back(p);
+		printf("cpu : (%d,%d)\n", p.i, p.j);
+		board.update_board(p);
+		board.print_board();
 		delete cpu;
 		delete gpu;
 	}
