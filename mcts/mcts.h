@@ -8,10 +8,10 @@
 #include <cmath>
 #include <algorithm>
 #include <stdlib.h>
-#include <ctime>
+#include <sys/time.h>
 
 #include "point.h"
-#include "CudaGo.h"
+#include "GoBoard.h"
 
 
 class TreeNode {
@@ -67,7 +67,7 @@ public:
 class Mcts {
 private:
 	TreeNode* root;
-	clock_t startTime;
+	struct timeval startTime;
 	double maxTime;
 	bool abort;
 
@@ -77,10 +77,10 @@ private:
 	//std::unordered_map<Board*, TreeNode*, BoardHasher> dict;
 public:
 	Mcts(int size) {
+		abort = false;
 		bd_size = size;
 		std::vector<Point> seq;
 		root = new TreeNode(seq);
-		startTime = clock();
 		maxTime = 20000; //milliseconds
 	}
 
@@ -93,16 +93,16 @@ public:
 	
 	//Doing selection using UCT(Upper Confidence bound applied to Trees)
 	void run_iteration(TreeNode* node);
-
+	int run_simulation(TreeNode* node);
 	TreeNode *selection(TreeNode* node);
 	void expand(TreeNode* node);
 	void back_propagation(TreeNode* node, int win_increase, int sim_increase);
 
-	CudaBoard* get_board(std::vector<Point> sequence, int bd_size);
+	GoBoard* get_board(std::vector<Point> sequence);
 	bool checkAbort();
-	std::vector<Point> generateAllMoves(CudaBoard* cur_board);
+	Point generateRndNxtMove(GoBoard* cur_board);
+	std::vector<Point> generateAllMoves(GoBoard* cur_board);
 	void deleteAllMoves(std::vector<Point*> moves);
-	// __device__ GoBoard* get_board(std::vector<SgPoint> sequence);
 };
 
 #endif

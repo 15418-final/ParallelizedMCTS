@@ -1,6 +1,6 @@
 
-#ifndef CUDAGO_H
-#define CUDAGO_H
+#ifndef GOBOARD_H
+#define GOBOARD_H
 
 #include "point.h"
 #include "deque.h"
@@ -10,20 +10,20 @@
 
 enum COLOR {WHITE = 1, BLACK = 2, EMPTY = 0, OUT = 3};
 
-class CudaBoard {
+class GoBoard {
 private:
 	int dir[4][2] = {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
 	int *board;  	// 1-d array to represent 2d board
 	bool *visited;  // same as board
-	__device__ __host__ bool canEat(int i, int j, COLOR color, Point* point);
-	__device__ __host__ bool isSuicide(int i, int j, COLOR color, Point* point);
+	bool canEat(int i, int j, COLOR color, Point* point);
+	bool isSuicide(int i, int j, COLOR color, Point* point);
 	int BSIZE;
 	COLOR player;	// current player
 
 	Deque<Point>* q1;
 	Deque<Point>* q2;
 public:
-	__device__ __host__ CudaBoard(int size) {
+	GoBoard(int size) {
 		BSIZE = size;
 
 		int total = (BSIZE + 2) * (BSIZE + 2);
@@ -48,7 +48,7 @@ public:
 	}
 
 	//copy constructor
-	__device__ __host__ CudaBoard(CudaBoard& b) {
+	GoBoard(GoBoard& b) {
 		BSIZE = b.get_size();
 
 		int total = (BSIZE + 2) * (BSIZE + 2);
@@ -68,7 +68,7 @@ public:
 		q2 = new Deque<Point>();
 	}
 
-	__device__ __host__ ~CudaBoard() {
+	~GoBoard() {
 		delete []board;
 		delete []visited;
 		delete q1;
@@ -76,40 +76,39 @@ public:
 	}
 
 	void print_board();
-	__device__  Deque<Point>* get_next_moves_device(Point* point);
-	std::vector<Point> get_next_moves_host(Point* point);
-	__device__ __host__ int update_board(Point pos, Point* point);
-	__device__  int score();
-	__device__ __host__ COLOR ToPlay() {
+	std::vector<Point> get_next_moves(Point* point);
+	int update_board(Point pos, Point* point);
+	int score();
+	COLOR ToPlay() {
 		return player;
 	}
 
-	__device__ __host__  int get_size() {
+	int get_size() {
 		return BSIZE;
 	}
 
-	__device__ __host__ int getBoard(int i, int j) {
+	int getBoard(int i, int j) {
 		return board[i * (BSIZE + 2) + j];
 	}
 
-	__device__ __host__ void setBoard(int i, int j, COLOR c) {
+	void setBoard(int i, int j, COLOR c) {
 		board[i * (BSIZE + 2) + j] = c;
 	}
 
-	__device__ __host__ bool isVisited(int i, int j) {
+	bool isVisited(int i, int j) {
 		return visited[i * (BSIZE + 2) + j];
 	}
 
-	__device__ __host__ void setVisited(int i, int j, bool b) {
+	void setVisited(int i, int j, bool b) {
 		visited[i * (BSIZE + 2) + j] = b;
 	}
 
-	__device__ __host__ void clearVisited() {
+	void clearVisited() {
 		memset(visited, 0, sizeof(bool) * (BSIZE + 2) * (BSIZE + 2));
 	}
 
-	__device__ __host__ Point getPoint(Point* point, int i, int j) {
-		return *(point + i*(BSIZE+2) + j);
+	Point getPoint(Point* point, int i, int j) {
+		return *(point + i * (BSIZE + 2) + j);
 	}
 };
 
