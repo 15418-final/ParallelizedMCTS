@@ -17,22 +17,17 @@
 
 #define BILLION 1000000000L
 #define MILLION 1000000.0
-//Exploration parameter
-double C = 1.4;
-double EPSILON = 10e-6;
-
-__constant__ int MAX_TRIAL_H = 1;
-#define MAX_STEP 300 // avoid repeat game
-__constant__ double CLOCK_RATE = 1215500.0;// titianx  745000.0; // For tesla K40
-
-int MAX_TRIAL = 1;
+#define C 1.4
+#define EPSILON 10e-6
+#define MAX_STEP 300		 // avoid repeat game
+#define CLOCK_RATE 1215500.0 // titianx  745000.0; // For tesla K40
 #define MAX_GAME_TIME_9_9 1000.0
-double MAX_GAME_TIME_11_11 = 4000.0;
+#define MAX_GAME_TIME_11_11 4000.0
+#define CPU_THREADS_NUM 59
 
-static int grid_dim = 1024;
+static int grid_dim = 2048;
 static int block_dim = 1;
 static int THREADS_NUM = grid_dim * block_dim;
-#define CPU_THREADS_NUM 59
 
 bool checkAbort();
 __device__ bool checkAbortCuda(long long int elapse, double timeLeft);
@@ -75,7 +70,6 @@ Point Mcts::run() {
 }
 
 TreeNode* Mcts::selection(TreeNode* node) {
-	//std::cout << "selection begin" << std::endl;
 	double maxv = -1.0;
 	TreeNode* maxn = NULL;
 	double n = node->sims;
@@ -89,12 +83,10 @@ TreeNode* Mcts::selection(TreeNode* node) {
 			maxn = c;
 		}
 	}
-	//std::cout << "selection end" << std::endl;
 	return maxn;
 }
 
 // Typical Monte Carlo Simulation
-
 __global__ void run_simulation(int incre, int total, int* iarray, int* jarray, int* len, double* win_increase,
                                int* step, double* sim, int bd_size, unsigned int seed, double time) {
 	long long int start_game = clock64();
@@ -191,14 +183,14 @@ void* run_simulation_thread(void *arg) {
 			if (abort) {
 				a->win += (double)cur_step / MAX_STEP;
 			} else {
-				a->win++;
+				a->win += 1.0;
 			}
 		}
 
 		if (abort) {
 			a->sim += (double)cur_step / MAX_STEP;
 		} else {
-			a->sim++;
+			a->sim += 1.0;
 		}
 		if ((MAX_GAME_TIME_9_9 * (clock() - start) / CLOCKS_PER_SEC) > timeLeft) break;
 		delete board;
@@ -260,7 +252,6 @@ void Mcts::update(TreeNode* node, double* win, double* sim,  int incre, int thre
 }
 
 void Mcts::expand(TreeNode* node) {
-	//std::cout << "expand begin" << std::endl;
 	CudaBoard* cur_board = get_board(node->get_sequence(), bd_size);
 
 	std::vector<Point> moves_vec = cur_board->get_next_moves_host();
@@ -270,8 +261,6 @@ void Mcts::expand(TreeNode* node) {
 		moves_vec.pop_back();
 	}
 	delete cur_board;
-
-	//std::cout << "expand end with children num:" << node->get_children().size() << std::endl;
 }
 
 void Mcts::run_iteration_gpu(TreeNode* node) {
@@ -289,26 +278,17 @@ void Mcts::run_iteration_gpu(TreeNode* node) {
 	int* c_j_d; // device
 	int* cuda_len;
 
-
-	// cudaEvent_t start_event, stop;
-	// cudaEventCreate(&start_event);
-	// cudaEventCreate(&stop);
-
-//	cudaDeviceProp prop;
-//	cudaGetDeviceProperties(&prop, 0);
-//	printf("clock :%d\n", prop.clockRate);
-
 	cudaMalloc(&cuda_len, sizeof(int) * total);
 	cudaMalloc(&c_i_d, sizeof(int)* total * total);
 	cudaMalloc(&c_j_d, sizeof(int)* total * total);
 
-	// pthread_t* tids = (pthread_t*)malloc(sizeof(pthread_t) * CPU_THREADS_NUM);
-	// thread_arg* args = (thread_arg*)malloc(sizeof(thread_arg) * CPU_THREADS_NUM);
-	// for (int ti = 0; ti < CPU_THREADS_NUM; ti++) {
-	// 	args[ti].seq = (Point*)malloc(sizeof(Point) * 300);
-	// }
+	// hybrid cpu threads info
+	pthread_t* tids = (pthread_t*)malloc(sizeof(pthread_t) * CPU_THREADS_NUM);
+	thread_arg* args = (thread_arg*)malloc(sizeof(thread_arg) * CPU_THREADS_NUM);
+	for (int ti = 0; ti < CPU_THREADS_NUM; ti++) {
+	   args[ti].seq = (Point*)malloc(sizeof(Point) * 300);
+	}
 
-	//std::cout << "gpu run_iteration start:" << std::endl;
 	while (!S.empty()) {
 		TreeNode* f = S.top();
 		S.pop();
@@ -321,19 +301,26 @@ void Mcts::run_iteration_gpu(TreeNode* node) {
 
 			get_sequence(f, cpu_len, c_i, c_j);
 			int csize = f->get_children().size();
+			if (csize == 0) {
+				abort = true;
+				break;
+			}
 			int incre = THREADS_NUM / csize;
 
-			// double thread_sim = 0;
-			// for (int ti = 0; ti < CPU_THREADS_NUM; ti++) {
-			// 	args[ti].len = (children[i]->get_sequence()).size();
-			// 	for (int pi = 0; pi < args[ti].len; pi++) {
-			// 		args[ti].seq[pi] = (children[i]->get_sequence())[pi];
-			// 	}
-			// 	args[ti].time = MAX_GAME_TIME_9_9;
-			// 	args[ti].bd_size = bd_size;
-			// 	args[ti].tid = ti;
-			// 	pthread_create(&tids[ti], NULL, run_simulation_thread, (void *)(&args[ti]));
-			// }
+			// create cpu threads
+			int children_index = 0;
+			std::vector<TreeNode*> children = f->get_children();
+			for (int ti = 0; ti < CPU_THREADS_NUM; ti++) {
+				args[ti].len = (children[children_index]->get_sequence()).size();
+				for (int pi = 0; pi < args[ti].len; pi++) {
+					args[ti].seq[pi] = (children[children_index]->get_sequence())[pi];
+				}
+				args[ti].time = MAX_GAME_TIME_9_9;
+				args[ti].bd_size = bd_size;
+				args[ti].tid = ti;
+				pthread_create(&tids[ti], NULL, run_simulation_thread, (void *)(&args[ti]));
+				children_index = (children_index + 1) % csize;
+			}
 
 			thrust::device_ptr<double> cuda_win_increase = thrust::device_malloc<double>(THREADS_NUM);
 			thrust::device_ptr<double> cuda_sim = thrust::device_malloc<double>(THREADS_NUM);
@@ -348,30 +335,27 @@ void Mcts::run_iteration_gpu(TreeNode* node) {
 			diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
 			double timeLeft = maxTime - diff / MILLION;
 
-			//cudaEventRecord(start_event);
+
 			run_simulation <<< grid_dim, block_dim >>> (incre, csize, c_i_d, c_j_d, cuda_len, cuda_win_increase.get(), cuda_step.get(), cuda_sim.get(),
 			        bd_size, time(NULL), std::min(MAX_GAME_TIME_9_9, timeLeft));
-			//cudaEventRecord(stop);
 
-			//printf("return : %s\n", cudaGetErrorString(cudaDeviceSynchronize()));
 
-			// for (int ti = 0; ti < CPU_THREADS_NUM; ti++) {
-			// 	pthread_join(tids[ti], NULL);
-			// 	thread_sim += args[ti].sim;
-			// }
+			// collect cpu thread data
+			children_index = 0;
+			double thread_sim = 0.0;
+			double thread_win = 0.0;
+			for (int ti = 0; ti < CPU_THREADS_NUM; ti++) {
+				pthread_join(tids[ti], NULL);
+				thread_sim += args[ti].sim;
+				thread_win += args[ti].win;
+				back_propagation(children[children_index], thread_win, thread_sim);
+				children_index = (children_index + 1) % csize;
+			}
 
-			// printf("thread done, sim: %d\n", thread_sim);
-
-			//memoryUsage();
-			//printf("THREADS_NUM:%d\n", THREADS_NUM);
 
 			cudaMemcpy(win_increase, cuda_win_increase.get(), sizeof(double) * THREADS_NUM, cudaMemcpyDeviceToHost);
 			cudaMemcpy(step_increase, cuda_step.get(), sizeof(int) * THREADS_NUM, cudaMemcpyDeviceToHost);
 			cudaMemcpy(sim_increase, cuda_sim.get(), sizeof(double) * THREADS_NUM, cudaMemcpyDeviceToHost);
-
-			//cudaEventSynchronize(stop);
-			//float milliseconds = 0;
-			//cudaEventElapsedTime(&milliseconds, start_event, stop);
 
 			double total_sim = 0.0;
 			double total_win = 0.0;
@@ -381,23 +365,16 @@ void Mcts::run_iteration_gpu(TreeNode* node) {
 				total_win += win_increase[i];
 				total_step += step_increase[i];
 			}
-			//printf("time measured in CPU: %lf\n", milliseconds);
-			//	printf("win: %f\n", total_win);
-			//	printf("step: %d\n", total_step);
-			//	printf("gpu sim: %f\n", total_sim);
-			//printf("gpu sim: %f, totoal:%f\n", total_sim[0], total_sim[0] + thread_sim);
-
 			update(f, win_increase, sim_increase, incre, THREADS_NUM);
 
-//			thrust::device_free(cuda_win_increase);
-//			thrust::device_free(cuda_step);
-//			thrust::device_free(cuda_sim);
+			thrust::device_free(cuda_win_increase);
+			thrust::device_free(cuda_step);
+			thrust::device_free(cuda_sim);
 			if (checkAbort())break;
 		}
 
 		if (checkAbort()) break;
 	}
-	//std::cout << "gpu run_iteration end:" << std::endl;
 	delete [] c_i;
 	delete [] c_j;
 	delete [] cpu_len;
@@ -415,7 +392,6 @@ void Mcts::run_iteration_cpu(TreeNode* node) {
 		args[ti].seq = (Point*)malloc(sizeof(Point) * 300);
 	}
 
-	//std::cout << "cpu run_iteration start:" << std::endl;
 	while (!S.empty()) {
 		TreeNode* f = S.top();
 		S.pop();
@@ -461,7 +437,6 @@ void Mcts::run_iteration_cpu(TreeNode* node) {
 	}
 	free(tids);
 	free(args);
-	//std::cout << "cpu run_iteration end:" << std::endl;
 }
 
 void get_sequence(TreeNode* node, int* len, int* iarray, int*jarray) {
@@ -485,7 +460,6 @@ bool Mcts::checkAbort() {
 		diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
 		abort = diff / MILLION > maxTime;
 	}
-	//if (abort) printf("is aborted in host\n");
 	return abort;
 }
 
